@@ -1,0 +1,318 @@
+[
+  {
+    "ErrorCode": "3",
+    "HttpStatusCode": "400",
+    "Exception": "InvalidArgument"
+  },
+  {
+    "ErrorCode": "215",
+    "HttpStatusCode": "400",
+    "Exception": "AuthenticationError"
+  },
+  {
+    "ErrorCode": "323",
+    "HttpStatusCode": "400",
+    "Exception": "InvalidOperation"
+  },
+  {
+    "ErrorCode": "324",
+    "HttpStatusCode": "400",
+    "Exception": "OperationStopped"
+  },
+  {
+    "ErrorCode": "44",
+    "HttpStatusCode": "400",
+    "Exception": "InvalidArgument"
+  },
+  {
+    "ErrorCode": "325",
+    "HttpStatusCode": "400",
+    "Exception": "ObjectNotFound"
+  },
+  {
+    "ErrorCode": "407",
+    "HttpStatusCode": "400",
+    "Exception": "ResourceUnavailable"
+  },
+  {
+    "ErrorCode": "417",
+    "HttpStatusCode": "401",
+    "Exception": "AuthenticationError"
+  },
+  {
+    "ErrorCode": "135",
+    "HttpStatusCode": "401",
+    "Exception": "AuthenticationError"
+  },
+  {
+    "ErrorCode": "32",
+    "HttpStatusCode": "401",
+    "Exception": "AuthenticationError"
+  },
+  {
+    "ErrorCode": "416",
+    "HttpStatusCode": "401",
+    "Exception": "AuthenticationError"
+  },
+  {
+    "ErrorCode": "386",
+    "HttpStatusCode": "403",
+    "Exception": "QuotaExceeded"
+  },
+  {
+    "ErrorCode": "195",
+    "HttpStatusCode": "403",
+    "Exception": "ConnectionError"
+  },
+  {
+    "ErrorCode": "205",
+    "HttpStatusCode": "403",
+    "Exception": "QuotaExceeded"
+  },
+  {
+    "ErrorCode": "214",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "220",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "226",
+    "HttpStatusCode": "403",
+    "Exception": "QuotaExceeded"
+  },
+  {
+    "ErrorCode": "261",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "272",
+    "HttpStatusCode": "403",
+    "Exception": "InvalidOperation"
+  },
+  {
+    "ErrorCode": "187",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "326",
+    "HttpStatusCode": "403",
+    "Exception": "SecurityError"
+  },
+  {
+    "ErrorCode": "327",
+    "HttpStatusCode": "403",
+    "Exception": "QuotaExceeded"
+  },
+  {
+    "ErrorCode": "349",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "354",
+    "HttpStatusCode": "403",
+    "Exception": "InvalidArgument"
+  },
+  {
+    "ErrorCode": "385",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "415",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "271",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "186",
+    "HttpStatusCode": "403",
+    "Exception": "InvalidArgument"
+  },
+  {
+    "ErrorCode": "185",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "89",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "36",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "38",
+    "HttpStatusCode": "403",
+    "Exception": "InvalidArgument"
+  },
+  {
+    "ErrorCode": "63",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "64",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "87",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "179",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "92",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "93",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "99",
+    "HttpStatusCode": "403",
+    "Exception": "AuthenticationError"
+  },
+  {
+    "ErrorCode": "433",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "139",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "150",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "151",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "120",
+    "HttpStatusCode": "403",
+    "Exception": "InvalidArgument"
+  },
+  {
+    "ErrorCode": "160",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "161",
+    "HttpStatusCode": "403",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "422",
+    "HttpStatusCode": "404",
+    "Exception": "ObjectNotFound"
+  },
+  {
+    "ErrorCode": "421",
+    "HttpStatusCode": "404",
+    "Exception": "ObjectNotFound"
+  },
+  {
+    "ErrorCode": "13",
+    "HttpStatusCode": "404",
+    "Exception": "ObjectNotFound"
+  },
+  {
+    "ErrorCode": "17",
+    "HttpStatusCode": "404",
+    "Exception": "ObjectNotFound"
+  },
+  {
+    "ErrorCode": "144",
+    "HttpStatusCode": "404",
+    "Exception": "ObjectNotFound"
+  },
+  {
+    "ErrorCode": "34",
+    "HttpStatusCode": "404",
+    "Exception": "ObjectNotFound"
+  },
+  {
+    "ErrorCode": "50",
+    "HttpStatusCode": "404",
+    "Exception": "ObjectNotFound"
+  },
+  {
+    "ErrorCode": "355",
+    "HttpStatusCode": "409",
+    "Exception": "PermissionDenied"
+  },
+  {
+    "ErrorCode": "68",
+    "HttpStatusCode": "410",
+    "Exception": "ConnectionError"
+  },
+  {
+    "ErrorCode": "251",
+    "HttpStatusCode": "410",
+    "Exception": "NotImplemented"
+  },
+  {
+    "ErrorCode": "88",
+    "HttpStatusCode": "429",
+    "Exception": "QuotaExceeded"
+  },
+  {
+    "ErrorCode": "131",
+    "HttpStatusCode": "500",
+    "Exception": "ResourceUnavailable"
+  },
+  {
+    "ErrorCode": "130",
+    "HttpStatusCode": "503",
+    "Exception": "ResourceBusy"
+  },
+  {
+    "ErrorCode": null,
+    "HttpStatusCode": "422",
+    "Exception": "InvalidArgument"
+  },
+  {
+    "ErrorCode": null,
+    "HttpStatusCode": "406",
+    "Exception": "InvalidData"
+  },
+  {
+    "ErrorCode": null,
+    "HttpStatusCode": "420",
+    "Exception": "QuotaExceeded"
+  },
+  {
+    "ErrorCode": null,
+    "HttpStatusCode": "415",
+    "Exception": "LimitsExceeded",
+    "Message" : "Message size exceeds limits of 10000 characters."
+  }
+]
