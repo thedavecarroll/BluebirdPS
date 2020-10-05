@@ -1,4 +1,4 @@
-function Send-TwitterDM {
+function Publish-TwitterDM {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory,ValueFromPipelineByPropertyName)]

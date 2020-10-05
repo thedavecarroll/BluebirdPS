@@ -1,4 +1,4 @@
-function Send-Tweet {
+function Publish-Tweet {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)]
