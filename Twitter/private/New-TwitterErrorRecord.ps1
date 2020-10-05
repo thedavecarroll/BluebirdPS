@@ -60,8 +60,8 @@ function New-TwitterErrorRecord {
 
         $TwitterException = [HttpResponseException]::new($ErrorMessage,$Response)
 
-        [ErrorRecord]::new(
-            $TwitterException,$Command,$ErrorCategory,$ResponseData.Uri)
+        [ErrorRecord]::new($TwitterException,$Command,$ErrorCategory,$ResponseData.Uri)
+
     }
     catch {
         $PSCmdlet.ThrowTerminatingError($_)

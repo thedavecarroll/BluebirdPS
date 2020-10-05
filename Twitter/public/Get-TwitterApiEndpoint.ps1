@@ -1,7 +1,7 @@
 function Get-TwitterApiEndpoint {
     [CmdLetBinding()]
     param(
-        [ValildateSet(
+        [ValidateSet(
             'account','blocks','mutes','users','followers',
             'friends','friendships','lists','help'
         )]

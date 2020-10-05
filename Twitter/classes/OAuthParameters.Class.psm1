@@ -62,11 +62,11 @@ class OAuthParameters {
             $SignatureMethod.ComputeHash([System.Text.Encoding]::ASCII.GetBytes($SignatureBaseString))
         )
 
-        # add oauth signature to header
+        # add OAuth signature to header
         $OAuthHeader = $this.GetOAuthHeader($ApiKey,$AccessToken,$Nonce,$Timestamp)
         $OAuthHeader.Add('oauth_signature',$OAuthSignature)
 
-        # escape oauth key
+        # escape OAuth key
         $OAuthHeaderString = $OAuthHeader.GetEnumerator() |
             Sort-Object Name |
             ForEach-Object {
