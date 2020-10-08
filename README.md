@@ -9,14 +9,27 @@ At this point, anything and everything could changed.
 
 Also, expect errors, though I have tried to keep those at minimum.
 
-## PowerShell 7
+## Pre-requisites
 
-I've opted to target only PowerShell 7 and above.
+* Apply for a developer account [here](https://developer.twitter.com/en/apply/user.html)
+  * API Key
+  * API Secret
+  * Access Token
+  * Access Token Secret
+* PowerShell 7
 
-If we chose to support earlier versions, the inconsistencies between the web cmdlets
-Windows Powershell 5.1 and PowerShell 7 would necessitate a version of the `Invoke-TwitterRequest`
-for 5.1 and 7.
-But this would also require duplicate private functions for parsing output and errors.
+## Examples
+
+```PowerShell
+$OAuth = @{
+    ApiKey = '##########################'
+    ApiSecret = '####################################################'
+    AccessToken = '####################################################'
+    AccessTokenSecret = '#############################################'
+}
+
+Search-Tweet -SearchString "(from:rtpsug)" -MaxResults 100
+```
 
 ## Current Capabilities
 
