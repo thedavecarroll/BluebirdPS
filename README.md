@@ -21,14 +21,16 @@ Also, expect errors, though I have tried to keep those at minimum.
 ## Examples
 
 ```PowerShell
-$OAuth = @{
+$SecretStuff = @{
     ApiKey = '##########################'
     ApiSecret = '####################################################'
     AccessToken = '####################################################'
     AccessTokenSecret = '#############################################'
 }
 
-Search-Tweet -SearchString "(from:rtpsug)" -MaxResults 100
+Set-TwitterOAuthToken @SecretStuff
+
+(Search-Tweet -SearchString "(from:rtpsug)" -MaxResults 100).statuses
 ```
 
 ## Current Capabilities
