@@ -14,7 +14,7 @@ function Set-TwitterOAuthToken {
         $AccessTokenSecret = (Read-host -Prompt "Access Token Secret:" -AsSecureString)
     )
     
-    $Global:OAuth = @{
+    $Script:OAuth = @{
         ApiKey            = $ApiKey | ConvertFrom-SecureString -AsPlainText -Force
         ApiSecret         = $ApiSecret | ConvertFrom-SecureString -AsPlainText -Force
         AccessToken       = $AccessToken | ConvertFrom-SecureString -AsPlainText -Force
