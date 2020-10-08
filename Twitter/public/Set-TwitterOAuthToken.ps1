@@ -1,17 +1,17 @@
 function Set-TwitterOAuthToken {
     [CmdletBinding()]
     param (
-        [securestring]
-        $ApiKey,
+        [SecureString]
+        $ApiKey = (Read-host -Prompt "API Key:" -AsSecureString),
 
-        [securestring]
-        $ApiSecret,
+        [SecureString]
+        $ApiSecret = (Read-host -Prompt "API Secret:" -AsSecureString),
 
-        [securestring]
-        $AccessToken,
+        [SecureString]
+        $AccessToken = (Read-host -Prompt "Access Token:" -AsSecureString),
 
-        [securestring]
-        $AccessTokenSecret
+        [SecureString]
+        $AccessTokenSecret = (Read-host -Prompt "Access Token Secret:" -AsSecureString)
     )
     
     $Global:OAuth = @{
@@ -19,6 +19,6 @@ function Set-TwitterOAuthToken {
         ApiSecret         = $ApiSecret | ConvertFrom-SecureString -AsPlainText -Force
         AccessToken       = $AccessToken | ConvertFrom-SecureString -AsPlainText -Force
         AccessTokenSecret = $AccessTokenSecret | ConvertFrom-SecureString -AsPlainText -Force
-    }  
-    
+    }
+
 }
