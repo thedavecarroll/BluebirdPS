@@ -19,13 +19,7 @@ function Set-TwitterAuthentication {
     }
 
     if ($PSBoundParameters.ContainsKey('Persist')) {
-        try {
-            New-Item -Path $OAuthTokenPath -Force -ItemType File | Out-Null
-            $OAuth | ConvertTo-Json | ConvertTo-SecureString -AsPlainText | ConvertFrom-SecureString | Set-Content -Path $OAuthTokenPath -Force
-            'Saved authentication credentials to file: {0}' -f $OAuthTokenPath | Write-Information -InformationAction Continue
-        }
-        catch {
-            $PSCmdlet.ThrowTerminatingError($_)
-        }
+        Export-TwitterAuthentication
     }
+
 }

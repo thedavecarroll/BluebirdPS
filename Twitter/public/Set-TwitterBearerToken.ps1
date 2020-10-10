@@ -23,8 +23,7 @@ function Set-TwitterBearerToken {
         $OAuth['BearerToken'] = $Token.access_token
 
         if ($PSBoundParameters.ContainsKey('Persist')) {
-            $OAuth | ConvertTo-Json | ConvertTo-SecureString -AsPlainText | ConvertFrom-SecureString | Set-Content -Path $OAuthTokenPath -Force
-            'Added bearer token to authentication credentials to file: {0}' -f $OAuthTokenPath | Write-Information -InformationAction Continue
+            Export-TwitterAuthentication
         }
 
         $ResponseData = [PsCustomObject]@{
