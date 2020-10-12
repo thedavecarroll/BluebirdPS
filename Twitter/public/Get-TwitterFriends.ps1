@@ -1,4 +1,4 @@
-function Get-TwitterFriend {
+function Get-TwitterFriends {
     [CmdletBinding(DefaultParameterSetName='Default')]
     param(
         [string]$ScreenName,
@@ -39,48 +39,21 @@ function Get-TwitterFriend {
         }
     }
 
-    $OAuthParameters = [OAuthParameters]::new(
-        'Get',
-        $null,
-        $null
-    )
-
-    $Query = [hashtable]::new()
-    if ($ScreenName) {
-        $Query.Add('screen_name',$ScreenName)
-    }
-    if ($UserId) {
-        $Query.Add('user_id',$UserId)
-    }
-    $Query.Add('count',$ResultsPerPage)
-
     if ($PSCmdlet.ParameterSetName -eq 'List') {
-        $OAuthParameters.BaseUri = 'https://api.twitter.com/1.1/friends/list.json'
-
-        if ($PSBoundParameters.ContainsKey('SkipStatus')) {
-            $Query.Add('skip_status','true')
-        }
-        if ($PSBoundParameters.ContainsKey('ExcludeEntities')) {
-            $Query.Add('include_entities','false')
-        } else {
-            $Query.Add('include_entities','true')
-        }
+        $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
+        $OAuthParameters = [OAuthParameters]::new(
+            'Get',
+            'https://api.twitter.com/1.1/friends/list.json',
+            $Query
+        )
+        Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue users
 
     } else {
-        $OAuthParameters.BaseUri = 'https://api.twitter.com/1.1/friends/ids.json'
+        $OAuthParameters = [OAuthParameters]::new(
+            'Get',
+            'https://api.twitter.com/1.1/friends/ids.json',
+            @{ cursor = -1}
+        )
+        Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue ids
     }
-
-    $OAuthParameters.SetQuery($Query)
-
-    if ($PSCmdlet.ParameterSetName -eq 'List') {
-        $TwitterFriends = Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters
-        @($TwitterFriends.users)
-    } else {
-        $TwitterFriends = Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters
-        @($TwitterFriends.ids)
-    }
-
 }
-
-
-#
