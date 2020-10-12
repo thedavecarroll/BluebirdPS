@@ -28,15 +28,7 @@ function Get-TwitterListByOwner {
         $PSCmdlet.ThrowTerminatingError((New-ValidationErrorRecord @ValidationErrorRecord))
     }
 
-    $Query = [hashtable]::new()
-    if ($ScreenName) {
-        $Query.Add('screen_name',$ScreenName)
-    }
-    if ($UserId) {
-        $Query.Add('user_id',$UserId)
-    }
-    $Query.Add('count',$ResultsPerPage)
-
+    $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
     $OAuthParameters = [OAuthParameters]::new(
         'Get',
         'https://api.twitter.com/1.1/lists/ownerships.json',

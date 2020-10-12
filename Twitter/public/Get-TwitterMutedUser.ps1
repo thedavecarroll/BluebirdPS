@@ -12,16 +12,7 @@ function Get-TwitterMutedUser {
     )
 
     if ($PSCmdlet.ParameterSetName -eq 'List') {
-        $Query = [hashtable]::new()
-        if ($PSBoundParameters.ContainsKey('SkipStatus')) {
-            $Query.Add('skip_status','true')
-        }
-        if ($PSBoundParameters.ContainsKey('ExcludeEntities')) {
-            $Query.Add('include_entities','false')
-        } else {
-            $Query.Add('include_entities','true')
-        }
-
+        $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
         $OAuthParameters = [OAuthParameters]::new(
             'Get',
             'https://api.twitter.com/1.1/mutes/users/list.json',
@@ -30,13 +21,10 @@ function Get-TwitterMutedUser {
         Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue users
 
     } else {
-        $Query = [hashtable]::new()
-        $Query.Add('cursor',-1)
-
         $OAuthParameters = [OAuthParameters]::new(
             'Get',
             'https://api.twitter.com/1.1/mutes/users/ids.json',
-            $Query
+            @{ cursor = -1}
         )
         Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue ids
     }

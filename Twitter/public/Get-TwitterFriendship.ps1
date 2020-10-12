@@ -1,19 +1,23 @@
 function Get-TwitterFriendship {
-    [CmdletBinding(DefaultParameterSetName='Lookup')]
+    [CmdletBinding(DefaultParameterSetName='LookupScreenName')]
     param(
-        [Parameter(ParameterSetName='Lookup')]
+        [Parameter(Mandatory,ValueFromPipeline,ParameterSetName='LookupScreenName')]
         [string[]]$ScreenName,
-        [Parameter(ParameterSetName='Lookup')]
-        [string[]]$UserId,
 
-        [Parameter(ParameterSetName='Show')]
+        [Parameter(Mandatory,ValueFromPipeline,ParameterSetName='LookupUserId')]
+        [int[]]$UserId,
+
+        [Parameter(Mandatory,ParameterSetName='ShowScreenName')]
         [string]$SourceScreenName,
-        [Parameter(ParameterSetName='Show')]
-        [string]$SourceUserId,
-        [Parameter(ParameterSetName='Show')]
+
+        [Parameter(Mandatory,ParameterSetName='ShowUserId')]
+        [int]$SourceUserId,
+
+        [Parameter(Mandatory,ParameterSetName='ShowScreenName')]
         [string]$TargetScreenName,
-        [Parameter(ParameterSetName='Show')]
-        [string]$TargetUserId,
+
+        [Parameter(Mandatory,ParameterSetName='ShowUserId')]
+        [int]$TargetUserId,
 
         [Parameter(ParameterSetName='Incoming')]
         [switch]$Incoming,
@@ -26,30 +30,18 @@ function Get-TwitterFriendship {
 
     )
 
-    switch ($PSCmdlet.ParameterSetName) {
+    switch -Regex ($PSCmdlet.ParameterSetName) {
         'Lookup' {
-            if ($null -eq $ScreenName -and $null -eq $UserId) {
-                'You must provide one or more ScreenNames or one or more UserIds.' | Write-Warning
-                return
-            }
-
             if ($ScreenName.Count -gt 100) {
-                'You must a maximum of 100 ScreenNames.' | Write-Warning
-                return
+                'More than 100 ScreenNames provided. Processing the first 100 only.' | Write-Warning
+                $PSBoundParameters['ScreenName'] = $PSBoundParameters['ScreenName'] | Select-Object -First 100
             }
             if ($UserId.Count -gt 100) {
-                'You must a maximum of 100 UserIds.' | Write-Warning
-                return
+                'More than 100 UserIds provided. Processing the first 100 only.'  | Write-Warning
+                $PSBoundParameters['UserId'] = $PSBoundParameters['UserId'] | Select-Object -First 100
             }
 
-            $Query = [hashtable]::new()
-            if ($ScreenName) {
-                $Query.Add('screen_name',($ScreenName -join ','))
-            }
-            if ($UserId) {
-                $Query.Add('user_id',($UserId -join ','))
-            }
-
+            $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
             $OAuthParameters = [OAuthParameters]::new(
                 'GET',
                 'https://api.twitter.com/1.1/friendships/lookup.json',
@@ -57,74 +49,37 @@ function Get-TwitterFriendship {
             )
             Invoke-TwitterRequest -OAuthParameters $OAuthParameters
         }
-        'Show' { # error??
-            if ($null -eq $SourceScreenName -and $null -eq $SourceUserId) {
-                'You must provide a SourceScreenName or a SourceUserId' | Write-Warning
-                return
-            }
-            if ($SourceScreenName -and $SourceUserId) {
-                'You must provide a SourceScreenName or a SourceUserId, but not both.' | Write-Warning
-                return
-            }
-            if ($null -eq $TargetScreenName -and $null -eq $TargetUserId) {
-                'You must provide a TargetScreenName or a SourceUserId' | Write-Warning
-                return
-            }
-            if ($TargetScreenName -and $TargetUserId) {
-                'You must provide a TargetScreenName or a TargetUserId, but not both.' | Write-Warning
-                return
-            }
-
-            $Query = [hashtable]::new()
-            if ($SourceScreenName) {
-                $Query.Add('source_screen_name',$SourceScreenName)
-            }
-            if ($SourceUserId) {
-                $Query.Add('source_id',$SourceUserId)
-            }
-            if ($TargeteScreenName) {
-                $Query.Add('target_screen_name',$TargeteScreenName)
-            }
-            if ($TargetUserId) {
-                $Query.Add('target_id',$TargetUserId)
-            }
-
+        'Show' {
+            $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
             $OAuthParameters = [OAuthParameters]::new(
                 'GET',
                 'https://api.twitter.com/1.1/friendships/show.json',
                 $Query
             )
-            @(Invoke-TwitterRequest -OAuthParameters $OAuthParameters).relationship
+            Invoke-TwitterRequest -OAuthParameters $OAuthParameters
         }
         'Incoming' {
-            $Query = [hashtable]::new()
-            $Query.Add('cursor',-1)
-
             $OAuthParameters = [OAuthParameters]::new(
                 'GET',
                 'https://api.twitter.com/1.1/friendships/incoming.json',
-                $Query
+                @{ cursor = -1 }
             )
             Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue ids
         }
         'Pending' {
-            $Query = [hashtable]::new()
-            $Query.Add('cursor',-1)
-
             $OAuthParameters = [OAuthParameters]::new(
                 'Get',
                 'https://api.twitter.com/1.1/friendships/outgoing.json',
-                $Query
+                @{ cursor = -1 }
             )
             Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue ids
         }
         'NoRetweets' {
             $OAuthParameters = [OAuthParameters]::new(
                 'Get',
-                'https://api.twitter.com/1.1/friendships/no_retweets/ids.json',
-                $null
+                'https://api.twitter.com/1.1/friendships/no_retweets/ids.json'
             )
-            @(Invoke-TwitterRequest -OAuthParameters $OAuthParameters).ids
+            Invoke-TwitterRequest -OAuthParameters $OAuthParameters
         }
     }
 }

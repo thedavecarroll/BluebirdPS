@@ -7,29 +7,18 @@ function Get-TweetLikes {
         [Parameter(Mandatory,ParameterSetName='UserId')]
         [string]$UserId,
         [ValidateRange(1,200)]
-        [int]$Count=20
+        [int]$Count=20,
+        [int]$SinceId,
+        [int]$MaxId,
+        [switch]$ExcludeEntities
     )
 
-    # add since_id and max_id
-
-    $Query = [hashtable]::new()
-    if ($PSBoundParameters.ContainsKey('ExcludeEntities')) {
-        $Query.Add('include_entities','false')
-    } else {
-        $Query.Add('include_entities','true')
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'ScreenName') {
-        $Query.Add('screen_name',$ScreenName)
-    } else {
-        $Query.Add('user_id',$UserId)
-    }
-    $Query.Add('count',$Count)
+    $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
 
     $OAuthParameters = [OAuthParameters]::new(
         'GET',
         'https://api.twitter.com/1.1/favorites/list.json',
         $Query
     )
-
     Invoke-TwitterRequest -OAuthParameters $OAuthParameters
 }

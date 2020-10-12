@@ -2,8 +2,8 @@ function Set-TweetLike {
     [CmdletBinding(DefaultParameterSetName='Like')]
     param(
         [Parameter(Mandatory)]
-        [Alias('TweetId)')]
-        [long]$Id,
+        [Alias('Id)')]
+        [long]$TweetId,
         [Parameter(ParameterSetName='Like')]
         [switch]$Like,
         [Parameter(ParameterSetName='Unlike')]
@@ -11,29 +11,19 @@ function Set-TweetLike {
         [switch]$ExcludeEntities
     )
 
-    begin {
-        if ($PSBoundParameters.ContainsKey('ExcludeEntities')) {
-            $Entity = 'false'
-        } else {
-            $Entity = 'false'
-        }
-
-        if ($PSCmdlet.ParameterSetName -eq 'Like') {
-            $OAuthParameters = [OAuthParameters]::new(
-                'POST',
-                'https://api.twitter.com/1.1/favorites/create.json',
-                @{id = $Id; include_entities = $Entity}
-            )
-        } else {
-            $OAuthParameters = [OAuthParameters]::new(
-                'POST',
-                'https://api.twitter.com/1.1/favorites/destroy.json',
-                @{id = $Id; include_entities = $Entity}
-            )
-        }
+    $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
+    if ($PSCmdlet.ParameterSetName -eq 'Like') {
+        $OAuthParameters = [OAuthParameters]::new(
+            'POST',
+            'https://api.twitter.com/1.1/favorites/create.json',
+            $Query
+        )
+    } else {
+        $OAuthParameters = [OAuthParameters]::new(
+            'POST',
+            'https://api.twitter.com/1.1/favorites/destroy.json',
+            $Query
+        )
     }
-    process {
-        Invoke-TwitterRequest -OAuthParameters $OAuthParameters
-    }
-
+    Invoke-TwitterRequest -OAuthParameters $OAuthParameters
 }

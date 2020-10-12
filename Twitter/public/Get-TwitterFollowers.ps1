@@ -39,47 +39,21 @@ function Get-TwitterFollowers {
         }
     }
 
-    $OAuthParameters = [OAuthParameters]::new(
-        'Get',
-        $null,
-        $null
-    )
+    if ($PSCmdlet.ParameterSetName -eq 'List') {
+        $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
+        $OAuthParameters = [OAuthParameters]::new(
+            'Get',
+            'https://api.twitter.com/1.1/followers/list.json',
+            $Query
+        )
         Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue users
 
-    $Query = [hashtable]::new()
-    if ($ScreenName) {
-        $Query.Add('screen_name',$ScreenName)
-    }
-    if ($UserId) {
-        $Query.Add('user_id',$UserId)
-    }
-    $Query.Add('count',$ResultsPerPage)
-
-    if ($PSCmdlet.ParameterSetName -eq 'List') {
-        $OAuthParameters.BaseUri = 'https://api.twitter.com/1.1/followers/list.json'
-
-        if ($PSBoundParameters.ContainsKey('SkipStatus')) {
-            $Query.Add('skip_status','true')
-        }
-        if ($PSBoundParameters.ContainsKey('ExcludeEntities')) {
-            $Query.Add('include_entities','false')
-        } else {
+    } else {
+        $OAuthParameters = [OAuthParameters]::new(
+            'Get',
+            'https://api.twitter.com/1.1/followers/ids.json',
+            @{ cursor = -1}
+        )
         Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue ids
-        }
-
-    } else {
-        $OAuthParameters.BaseUri = 'https://api.twitter.com/1.1/followers/ids.json'
     }
-
-    $OAuthParameters.SetQuery($Query)
-
-    if ($PSCmdlet.ParameterSetName -eq 'List') {
-        $TwitterFollowers = Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters
-        @($TwitterFollowers.users)
-    } else {
-        $TwitterFollowers = Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters
-        @($TwitterFollowers.ids)
-    }
-
 }
-
