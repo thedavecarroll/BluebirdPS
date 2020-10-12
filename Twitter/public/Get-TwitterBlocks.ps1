@@ -27,8 +27,7 @@ function Get-TwitterBlocks {
             'https://api.twitter.com/1.1/blocks/list.json',
             $Query
         )
-
-        @(Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters).users
+        Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue users
 
     } else {
         $Query = [hashtable]::new()
@@ -39,7 +38,6 @@ function Get-TwitterBlocks {
             'https://api.twitter.com/1.1/blocks/ids.json',
             $Query
         )
-
-        @(Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters).ids
+        Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue ids
     }
 }

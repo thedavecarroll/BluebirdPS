@@ -2,7 +2,8 @@ function Invoke-TwitterCursorRequest {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory,ValueFromPipeline)]
-        [OAuthParameters]$OAuthParameters
+        [OAuthParameters]$OAuthParameters,
+        [string]$ReturnValue
     )
 
     if ($OAuthParameters.BaseUri -eq 'https://api.twitter.com/1.1/direct_messages/events/list.json') {
@@ -20,10 +21,17 @@ function Invoke-TwitterCursorRequest {
         $OAuthParameters.SetQuery($OAuthParameters.Query)
 
         try {
-            Invoke-TwitterRequest -OAuthParameters $OAuthParameters -OutVariable TwitterRequest
+            $TwitterRequest = Invoke-TwitterRequest -OAuthParameters $OAuthParameters
             if ($TwitterRequest -is [System.Management.Automation.ErrorRecord]) {
                 $PSCmdlet.ThrowTerminatingError($TwitterRequest)
             }
+
+            if ($TwitterRequest.psobject.Properties.Name -contains $ReturnValue) {
+                $TwitterRequest.$ReturnValue
+            } else {
+                $TwitterRequest
+            }
+
             $NextCursor = $TwitterRequest.next_cursor
         }
         catch {

@@ -42,5 +42,5 @@ function Get-TwitterListByOwner {
         'https://api.twitter.com/1.1/lists/ownerships.json',
         $Query
     )
-    @(Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters).lists
+    Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue lists
 }

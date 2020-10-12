@@ -105,7 +105,7 @@ function Get-TwitterFriendship {
                 'https://api.twitter.com/1.1/friendships/incoming.json',
                 $Query
             )
-            @(Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters).ids
+            Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue ids
         }
         'Pending' {
             $Query = [hashtable]::new()
@@ -116,7 +116,7 @@ function Get-TwitterFriendship {
                 'https://api.twitter.com/1.1/friendships/outgoing.json',
                 $Query
             )
-            @(Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters).ids
+            Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue ids
         }
         'NoRetweets' {
             $OAuthParameters = [OAuthParameters]::new(

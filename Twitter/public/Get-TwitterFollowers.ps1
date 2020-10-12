@@ -44,6 +44,7 @@ function Get-TwitterFollowers {
         $null,
         $null
     )
+        Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue users
 
     $Query = [hashtable]::new()
     if ($ScreenName) {
@@ -63,7 +64,7 @@ function Get-TwitterFollowers {
         if ($PSBoundParameters.ContainsKey('ExcludeEntities')) {
             $Query.Add('include_entities','false')
         } else {
-            $Query.Add('include_entities','true')
+        Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue ids
         }
 
     } else {

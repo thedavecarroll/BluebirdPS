@@ -27,8 +27,7 @@ function Get-TwitterMutedUser {
             'https://api.twitter.com/1.1/mutes/users/list.json',
             $Query
         )
-
-        @(Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters).users
+        Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue users
 
     } else {
         $Query = [hashtable]::new()
@@ -39,7 +38,6 @@ function Get-TwitterMutedUser {
             'https://api.twitter.com/1.1/mutes/users/ids.json',
             $Query
         )
-
-        @(Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters).ids
+        Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue ids
     }
 }
