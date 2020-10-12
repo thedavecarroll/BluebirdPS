@@ -1,7 +1,7 @@
 function Get-TwitterRateLimitWarning {
     if ($RateLimitWarning) {
-        'RateLimitWarning is set to Enable'
+        'RateLimitWarning is set to Enabled'
     } else {
-        'RateLimitWarning is set to Disable'
+        'RateLimitWarning is set to Disabled'
     }
 }

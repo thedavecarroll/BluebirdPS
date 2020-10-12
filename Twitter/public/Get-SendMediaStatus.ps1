@@ -6,11 +6,13 @@ function Get-SendMediaStatus {
         [string]$MediaId
     )
 
-    $Query = @{
-        'command' = 'STATUS'
-        'media_id' = $MediaId
-    }
-    $OAuthParameters = [OAuthParameters]::new('GET','https://upload.twitter.com/1.1/media/upload.json',$Query)
-
+    $OAuthParameters = [OAuthParameters]::new(
+        'GET',
+        'https://upload.twitter.com/1.1/media/upload.json',
+        @{
+            'command' = 'STATUS'
+            'media_id' = $MediaId
+        }
+    )
     Invoke-TwitterRequest -OAuthParameters $OAuthParameters
 }

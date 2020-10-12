@@ -14,7 +14,6 @@ function Export-TwitterAuthentication {
             ConvertFrom-SecureString | Set-Content -Path $OAuthTokenPath -Force
 
         'Saved Twitter credentials to {0} file: {1}' -f $Action,$OAuthTokenPath | Write-Verbose
-
     }
     catch {
         $PSCmdlet.ThrowTerminatingError($_)

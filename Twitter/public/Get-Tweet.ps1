@@ -5,7 +5,7 @@ function Get-Tweet {
     $OAuthParameters = [OAuthParameters]::new(
         'GET',
         'https://api.twitter.com/1.1/statuses/show.json',
-        @{ 'id' = $TweetId}
+        @{ 'id' = $TweetId }
     )
     Invoke-TwitterRequest -OAuthParameters $OAuthParameters
 }
