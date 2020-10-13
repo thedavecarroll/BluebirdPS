@@ -14,11 +14,11 @@ function Get-TweetLikes {
     )
 
     $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
-
     $OAuthParameters = [OAuthParameters]::new(
         'GET',
         'https://api.twitter.com/1.1/favorites/list.json',
         $Query
     )
     Invoke-TwitterRequest -OAuthParameters $OAuthParameters
+
 }
