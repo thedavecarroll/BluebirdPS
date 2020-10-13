@@ -6,19 +6,19 @@ function Invoke-TwitterCursorRequest {
         [string]$ReturnValue
     )
 
-    if ($OAuthParameters.BaseUri -eq 'https://api.twitter.com/1.1/direct_messages/events/list.json') {
-        $NextCursor = 0
-    } else {
-        $NextCursor = -1
-    }
-
+    $NextCursor = -1
     do {
 
-        if ($OAuthParameters.Query.Keys -match 'cursor') {
-            $OAuthParameters.Query.Remove('cursor')
+        if ($OAuthParameters.BaseUri -eq 'https://api.twitter.com/1.1/direct_messages/events/list.json' -and $NextCursor -eq -1) {
+            # Get-TwitterDM
+            # do not send a cursor for the first API call
+        } else {
+            if ($OAuthParameters.Query.Keys -match 'cursor') {
+                $OAuthParameters.Query.Remove('cursor')
+            }
+            $OAuthParameters.Query.Add('cursor',$NextCursor)
+            $OAuthParameters.SetQuery($OAuthParameters.Query)
         }
-        $OAuthParameters.Query.Add('cursor',$NextCursor)
-        $OAuthParameters.SetQuery($OAuthParameters.Query)
 
         try {
             $TwitterRequest = Invoke-TwitterRequest -OAuthParameters $OAuthParameters
@@ -33,6 +33,11 @@ function Invoke-TwitterCursorRequest {
             }
 
             $NextCursor = $TwitterRequest.next_cursor
+
+            # Get-TwitterDM
+            if ($null -eq $NextCursor) {
+                break
+            }
         }
         catch {
             $PSCmdlet.WriteError($_)
