@@ -69,6 +69,9 @@ function New-TwitterQuery {
             'OwnedListFirst' {
                 $TwitterQuery.Add('reverse','true')
             }
+            'ExcludeRetweets' {
+                $TwitterQuery.Add('include_rts','false')
+            }
         }
     }
 
