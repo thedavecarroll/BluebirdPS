@@ -98,6 +98,7 @@ Here is list of current public functions.
 
 ### Direct Message
 
+* Get-TwitterDM
 * Publish-TwitterDM
 * Unpublish-TwitterDM
 
