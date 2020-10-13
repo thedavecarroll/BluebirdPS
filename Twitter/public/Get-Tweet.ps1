@@ -1,6 +1,11 @@
 function Get-Tweet {
     [CmdletBinding()]
-    param([long]$TweetId)
+    param(
+        [Parameter(Mandatory,ValueFromPipeline)]
+        [Alias('Id')]
+        [ValidateNotNullOrEmpty()]
+        [long]$TweetId
+    )
 
     $OAuthParameters = [OAuthParameters]::new(
         'GET',
@@ -8,4 +13,5 @@ function Get-Tweet {
         @{ 'id' = $TweetId }
     )
     Invoke-TwitterRequest -OAuthParameters $OAuthParameters
+
 }
