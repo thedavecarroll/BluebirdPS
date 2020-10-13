@@ -54,6 +54,21 @@ function New-TwitterQuery {
             'TargetUserId' {
                 $TwitterQuery.Add('target_id',$ApiParameters[$Parameter])
             }
+            'Slug' {
+                $TwitterQuery.Add('slug',$ApiParameters[$Parameter])
+            }
+            'OwnerScreenName' {
+                $TwitterQuery.Add('owner_screen_name',$ApiParameters[$Parameter])
+            }
+            'OwnerId' {
+                $TwitterQuery.Add('owner_id',$ApiParameters[$Parameter])
+            }
+            'ListId' {
+                $TwitterQuery.Add('list_id',$ApiParameters[$Parameter])
+            }
+            'OwnedListFirst' {
+                $TwitterQuery.Add('reverse','true')
+            }
         }
     }
 
