@@ -2,9 +2,11 @@ function Get-TwitterFriendship {
     [CmdletBinding(DefaultParameterSetName='LookupScreenName')]
     param(
         [Parameter(Mandatory,ValueFromPipeline,ParameterSetName='LookupScreenName')]
+        [ValidateCount(1,100)]
         [string[]]$ScreenName,
 
         [Parameter(Mandatory,ValueFromPipeline,ParameterSetName='LookupUserId')]
+        [ValidateCount(1,100)]
         [int[]]$UserId,
 
         [Parameter(Mandatory,ParameterSetName='ShowScreenName')]
@@ -32,15 +34,6 @@ function Get-TwitterFriendship {
 
     switch -Regex ($PSCmdlet.ParameterSetName) {
         'Lookup' {
-            if ($ScreenName.Count -gt 100) {
-                'More than 100 ScreenNames provided. Processing the first 100 only.' | Write-Warning
-                $PSBoundParameters['ScreenName'] = $PSBoundParameters['ScreenName'] | Select-Object -First 100
-            }
-            if ($UserId.Count -gt 100) {
-                'More than 100 UserIds provided. Processing the first 100 only.'  | Write-Warning
-                $PSBoundParameters['UserId'] = $PSBoundParameters['UserId'] | Select-Object -First 100
-            }
-
             $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
             $OAuthParameters = [OAuthParameters]::new(
                 'GET',

@@ -1,32 +1,16 @@
 function Get-TwitterListByOwner {
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName='ScreenName')]
     param(
+        [Parameter(Mandatory,ParameterSetName='ScreenName')]
         [ValidateNotNullOrEmpty()]
         [string]$ScreenName,
+        [Parameter(Mandatory,ParameterSetName='UserId')]
         [ValidateNotNullOrEmpty()]
         [long]$UserId,
         [ValidateRange(1,1000)]
         [Alias('Count')]
         [int]$ResultsPerPage=20
     )
-
-    $Required = 'You must supply either a ScreenName or UserId'
-    $ValidationErrorRecord = @{
-        Message = [String]::Empty
-        Parameter = 'Required Parameters'
-        ErrorId = 'ScreenNameOrUserId'
-    }
-
-    if (-Not ($PSBoundParameters.ContainsKey('ScreenName')) -and (-Not $PSBoundParameters.ContainsKey('UserId'))) {
-        $ValidationErrorRecord.Message = '{0}.' -f $Required
-    }
-    if ($PSBoundParameters.ContainsKey('ScreenName') -and $PSBoundParameters.ContainsKey('UserId')) {
-        $ValidationErrorRecord.Message = '{0}, but not both.' -f $Required
-    }
-
-    if ($ValidationErrorRecord.Message.Length -gt 0) {
-        $PSCmdlet.ThrowTerminatingError((New-ValidationErrorRecord @ValidationErrorRecord))
-    }
 
     $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
     $OAuthParameters = [OAuthParameters]::new(
