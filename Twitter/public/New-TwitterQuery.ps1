@@ -48,7 +48,7 @@ function New-TwitterQuery {
             'SourceUserId' {
                 $TwitterQuery.Add('source_id',$ApiParameters[$Parameter])
             }
-            'TargeteScreenName' {
+            'TargetScreenName' {
                 $TwitterQuery.Add('target_screen_name',$ApiParameters[$Parameter])
             }
             'TargetUserId' {
