@@ -21,7 +21,7 @@ function Get-TwitterListMember {
         [switch]$ExcludeEntities
     )
 
-    $Query = New-TwitterQuery -ApiParameters $PSBoundParameters -Verbose
+    $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
     $OAuthParameters = [OAuthParameters]::new(
         'Get',
         'https://api.twitter.com/1.1/lists/members.json',
