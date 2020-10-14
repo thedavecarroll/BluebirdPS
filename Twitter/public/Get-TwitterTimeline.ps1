@@ -12,7 +12,7 @@ function Get-TwitterTimeline {
         [Parameter(ParameterSetName='User')]
         [string]$UserId,
         [Parameter(ParameterSetName='User')]
-        [string]$IncludeRetweets
+        [switch]$ExcludeRetweets
     )
 
     # since_id
