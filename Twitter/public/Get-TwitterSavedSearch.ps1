@@ -1,7 +1,9 @@
 function  Get-TwitterSavedSearch {
     [CmdletBinding()]
     param(
-        [long]$Id
+        [ValidateNotNullOrEmpty()]
+        [Alias('Id')]
+        [long]$SearchId
     )
 
     if ($PSBoundParameters.ContainsKey('Id')) {
@@ -12,4 +14,5 @@ function  Get-TwitterSavedSearch {
 
     $OAuthParameters = [OAuthParameters]::new('GET',$Url)
     Invoke-TwitterRequest -OAuthParameters $OAuthParameters
+
 }
