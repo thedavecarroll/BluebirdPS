@@ -5,13 +5,13 @@ function Get-TwitterListMember {
         [string]$ListId,
 
         [Parameter(Mandatory,ParameterSetName='ShowSlugOwnerScreenName')]
-        [Parameter(Mandatory,ParameterSetName='ShowSlugOwernId')]
+        [Parameter(Mandatory,ParameterSetName='ShowSlugOwnerId')]
         [ValidateNotNullOrEmpty()]
         [string]$Slug,
         [Parameter(Mandatory,ParameterSetName='ShowSlugOwnerScreenName')]
         [ValidateNotNullOrEmpty()]
         [string]$OwnerScreenName,
-        [Parameter(Mandatory,ParameterSetName='ShowSlugOwernId')]
+        [Parameter(Mandatory,ParameterSetName='ShowSlugOwnerId')]
         [ValidateNotNullOrEmpty()]
         [long]$OwnerId,
 
