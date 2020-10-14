@@ -69,20 +69,21 @@ PowerShellVersion = '7.0'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = 'Export-TwitterAuthentication', 'Get-SendMediaStatus', 'Get-Tweet', 
-               'Get-TweetLikes', 'Get-TwitterAccountSettings', 
-               'Get-TwitterApiEndpoint', 'Get-TwitterBlocks', 
-               'Get-TwitterConfiguration', 'Get-TwitterDM', 'Get-TwitterFollowers', 
-               'Get-TwitterFriends', 'Get-TwitterFriendship', 'Get-TwitterLanguages', 
-               'Get-TwitterList', 'Get-TwitterListByOwner', 'Get-TwitterListMember', 
-               'Get-TwitterListSubscriber', 'Get-TwitterListSubscription', 
-               'Get-TwitterListTweets', 'Get-TwitterMutedUser', 
-               'Get-TwitterRateLimitStatus', 'Get-TwitterRateLimitWarning', 
-               'Get-TwitterSavedSearch', 'Get-TwitterTimeline', 'Get-TwitterUser', 
-               'Get-TwitterUserList', 'Get-TwitterUserProfileBanner', 
-               'Import-TwitterAuthentication', 'New-TwitterQuery', 
-               'Publish-ReplyTweet', 'Publish-Tweet', 'Publish-TwitterDM', 
-               'Search-Tweet', 'Send-TwitterMedia', 'Set-Retweet', 'Set-TweetLike', 
+FunctionsToExport = 'Add-TwitterSavedSearch', 'Export-TwitterAuthentication', 
+               'Get-SendMediaStatus', 'Get-Tweet', 'Get-TweetLikes', 
+               'Get-TwitterAccountSettings', 'Get-TwitterApiEndpoint', 
+               'Get-TwitterBlocks', 'Get-TwitterConfiguration', 'Get-TwitterDM', 
+               'Get-TwitterFollowers', 'Get-TwitterFriends', 'Get-TwitterFriendship', 
+               'Get-TwitterLanguages', 'Get-TwitterList', 'Get-TwitterListByOwner', 
+               'Get-TwitterListMember', 'Get-TwitterListSubscriber', 
+               'Get-TwitterListSubscription', 'Get-TwitterListTweets', 
+               'Get-TwitterMutedUser', 'Get-TwitterRateLimitStatus', 
+               'Get-TwitterRateLimitWarning', 'Get-TwitterSavedSearch', 
+               'Get-TwitterTimeline', 'Get-TwitterUser', 'Get-TwitterUserList', 
+               'Get-TwitterUserProfileBanner', 'Import-TwitterAuthentication', 
+               'New-TwitterQuery', 'Publish-ReplyTweet', 'Publish-Tweet', 
+               'Publish-TwitterDM', 'Remove-TwitterSavedSearch', 'Search-Tweet', 
+               'Send-TwitterMedia', 'Set-Retweet', 'Set-TweetLike', 
                'Set-TwitterAuthentication', 'Set-TwitterBearerToken', 
                'Set-TwitterRateLimitWarning', 'Test-TwitterAuthentication', 
                'Unpublish-TwitterDM'
@@ -110,6 +111,7 @@ FileList = 'classes\OAuthParameters.Class.psm1',
                'private\New-TwitterErrorRecord.ps1', 
                'private\New-ValidationErrorRecord.ps1', 
                'private\Write-TwitterResponseData.ps1', 
+               'public\Add-TwitterSavedSearch.ps1', 
                'public\Export-TwitterAuthentication.ps1', 
                'public\Get-SendMediaStatus.ps1', 'public\Get-Tweet.ps1', 
                'public\Get-TweetLikes.ps1', 
@@ -134,9 +136,9 @@ FileList = 'classes\OAuthParameters.Class.psm1',
                'public\Import-TwitterAuthentication.ps1', 
                'public\New-TwitterQuery.ps1', 'public\Publish-ReplyTweet.ps1', 
                'public\Publish-Tweet.ps1', 'public\Publish-TwitterDM.ps1', 
-               'public\Search-Tweet.ps1', 'public\Send-TwitterMedia.ps1', 
-               'public\Set-Retweet.ps1', 'public\Set-TweetLike.ps1', 
-               'public\Set-TwitterAuthentication.ps1', 
+               'public\Remove-TwitterSavedSearch.ps1', 'public\Search-Tweet.ps1', 
+               'public\Send-TwitterMedia.ps1', 'public\Set-Retweet.ps1', 
+               'public\Set-TweetLike.ps1', 'public\Set-TwitterAuthentication.ps1', 
                'public\Set-TwitterBearerToken.ps1', 
                'public\Set-TwitterRateLimitWarning.ps1', 
                'public\Test-TwitterAuthentication.ps1', 
@@ -165,7 +167,7 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        # ReleaseNotes = ''
+        ReleaseNotes = ''''''
 
         # Prerelease string of this module
         # Prerelease = ''
