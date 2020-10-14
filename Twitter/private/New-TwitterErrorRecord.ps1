@@ -30,6 +30,7 @@ function New-TwitterErrorRecord {
                 $TwitterError = ($ErrorRecord.ErrorDetails.Message | ConvertFrom-Json).errors
                 $ErrorCategory = $ErrorMapping.Where{$_.ErrorCode -eq $TwitterError.code}.Exception
                 $ErrorMessage = $TwitterError.message
+                $ErrorCode = $TwitterError.code
             } else {
                 $MappedError = $ErrorMapping.Where{$_.HttpStatusCode -eq $Response.StatusCode.Value__}
                 $ErrorCategory = $MappedError.Exception
@@ -38,11 +39,13 @@ function New-TwitterErrorRecord {
                 } else {
                     $ErrorMessage = $TwitterError.ReasonPhrase
                 }
+                $ErrorCode = $null
             }
         }
         catch {
             $ErrorCategory = $ErrorRecord.CategoryInfo.Category
             $ErrorMessage = $Response.StatusCode
+            $ErrorCode = $null
         }
 
         $ResponseData = [PsCustomObject]@{
@@ -55,6 +58,7 @@ function New-TwitterErrorRecord {
             Server = $Server
             ResponseTime = $ResponseTime
             Response = $Response
+            ErrorCode = $ErrorCode
         }
         Write-Information -MessageData $ResponseData
 
