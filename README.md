@@ -56,6 +56,52 @@ Get-TwitterListByOwner -ScreenName thedavecarroll
 Publish-Tweet -TweetText "Continuing work on the #PowerShell Twitter module. Check it out! http://bit.ly/PwshTwitterModule"
 ```
 
+### More Than Meets the Eye
+
+This module includes output to the Information stream containing details on the call (or calls) made to Twitter.
+
+Here is an example of how to access it and what it contains.
+
+```powershell
+$ListMember = Get-TwitterListMember -Slug mylist -OwnerScreenName myscreenname -ResutsPerPage 100 -InformationVariable MyListMemberInfo
+$MyListMemberInfo.MessageData
+```
+
+Output:
+
+```console
+Command            : Get-TwitterListMember
+HttpMethod         : GET
+Uri                : https://api.twitter.com/1.1/lists/members.json
+QueryString        : ?count=100&cursor=-1&include_entities=true&owner_screen_name=ossia&slug=devafter30
+Status             : 200 OK
+Server             : tsa_b
+ResponseTime       : 801
+RateLimit          : 900
+RateLimitRemaining : 819
+RateLimitReset     : 10/13/2020 12:50:37 PM
+Response           : {[Cache-Control, System.String[]], [Date, System.String[]], [Pragma, System.String[]], [Server, System.String[]]…}
+
+Command            : Get-TwitterListMember
+HttpMethod         : GET
+Uri                : https://api.twitter.com/1.1/lists/members.json
+QueryString        : ?count=100&cursor=4611686020715031288&include_entities=true&owner_screen_name=ossia&slug=devafter30
+Status             : 200 OK
+Server             : tsa_b
+ResponseTime       : 849
+RateLimit          : 900
+RateLimitRemaining : 818
+RateLimitReset     : 10/13/2020 12:50:37 PM
+Response           : {[Cache-Control, System.String[]], [Date, System.String[]], [Pragma, System.String[]], [Server, System.String[]]…}
+
+<truncated>
+```
+
+The `Response` property contains the raw response from Twitter.
+This function uses `Invoke-TwitterCursorRequest`, which takes the next cursor from the returned payload and appends the query appropriately.
+
+You can see the `ResponseTime` (in milliseconds) along with *RateLimit* specifics.
+
 ## Public functions
 
 Here is list of current public functions.
@@ -72,8 +118,6 @@ Here is list of current public functions.
 
 ### Tweets, Users, Followers, Friends, Lists, and Blocks
 
-* Search-Tweet
-* Get-TwitterSavedSearch
 * Publish-Tweet
 * Get-Tweet
 * Publish-ReplyTweet
@@ -88,8 +132,19 @@ Here is list of current public functions.
 * Get-TwitterFriendship
 * Get-TwitterList
 * Get-TwitterListByOwner
+* Get-TwitterListMember
+* Get-TwitterListSubscriber
+* Get-TwitterListSubscription
+* Get-TwitterListTweets
 * Get-TwitterMutedUser
 * Get-TwitterBlocks
+
+### Searches
+
+* Search-Tweet
+* Get-TwitterSavedSearch
+* Add-TwitterSavedSearch
+* Remove-TwitterSavedSearch
 
 ### Media
 
