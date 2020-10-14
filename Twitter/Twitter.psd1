@@ -75,16 +75,17 @@ FunctionsToExport = 'Export-TwitterAuthentication', 'Get-SendMediaStatus', 'Get-
                'Get-TwitterConfiguration', 'Get-TwitterDM', 'Get-TwitterFollowers', 
                'Get-TwitterFriends', 'Get-TwitterFriendship', 'Get-TwitterLanguages', 
                'Get-TwitterList', 'Get-TwitterListByOwner', 'Get-TwitterListMember', 
-               'Get-TwitterListSubscriber', 'Get-TwitterListTweets', 
-               'Get-TwitterMutedUser', 'Get-TwitterRateLimitStatus', 
-               'Get-TwitterRateLimitWarning', 'Get-TwitterSavedSearch', 
-               'Get-TwitterTimeline', 'Get-TwitterUser', 'Get-TwitterUserList', 
-               'Get-TwitterUserProfileBanner', 'Import-TwitterAuthentication', 
-               'New-TwitterQuery', 'Publish-ReplyTweet', 'Publish-Tweet', 
-               'Publish-TwitterDM', 'Search-Tweet', 'Send-TwitterMedia', 'Set-Retweet', 
-               'Set-TweetLike', 'Set-TwitterAuthentication', 
-               'Set-TwitterBearerToken', 'Set-TwitterRateLimitWarning', 
-               'Test-TwitterAuthentication', 'Unpublish-TwitterDM'
+               'Get-TwitterListSubscriber', 'Get-TwitterListSubscription', 
+               'Get-TwitterListTweets', 'Get-TwitterMutedUser', 
+               'Get-TwitterRateLimitStatus', 'Get-TwitterRateLimitWarning', 
+               'Get-TwitterSavedSearch', 'Get-TwitterTimeline', 'Get-TwitterUser', 
+               'Get-TwitterUserList', 'Get-TwitterUserProfileBanner', 
+               'Import-TwitterAuthentication', 'New-TwitterQuery', 
+               'Publish-ReplyTweet', 'Publish-Tweet', 'Publish-TwitterDM', 
+               'Search-Tweet', 'Send-TwitterMedia', 'Set-Retweet', 'Set-TweetLike', 
+               'Set-TwitterAuthentication', 'Set-TwitterBearerToken', 
+               'Set-TwitterRateLimitWarning', 'Test-TwitterAuthentication', 
+               'Unpublish-TwitterDM'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = '*'
@@ -121,6 +122,7 @@ FileList = 'classes\OAuthParameters.Class.psm1',
                'public\Get-TwitterListByOwner.ps1', 
                'public\Get-TwitterListMember.ps1', 
                'public\Get-TwitterListSubscriber.ps1', 
+               'public\Get-TwitterListSubscription.ps1', 
                'public\Get-TwitterListTweets.ps1', 
                'public\Get-TwitterMutedUser.ps1', 
                'public\Get-TwitterRateLimitStatus.ps1', 
@@ -163,7 +165,7 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = ''''''
+        # ReleaseNotes = ''
 
         # Prerelease string of this module
         # Prerelease = ''
