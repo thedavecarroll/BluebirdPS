@@ -1,7 +1,3 @@
-using namespace System.Management.Automation
-using namespace Collections.ObjectModel
-using namespace System.Collections
-
 function Send-TwitterMedia {
     [CmdletBinding()]
     [Alias('Send-Media')]

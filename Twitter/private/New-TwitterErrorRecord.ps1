@@ -1,5 +1,3 @@
-using namespace Microsoft.PowerShell.Commands
-using namespace System.Management.Automation
 function New-TwitterErrorRecord {
     [CmdletBinding()]
     param(

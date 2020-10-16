@@ -69,33 +69,16 @@ PowerShellVersion = '7.0'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = 'Add-TwitterSavedSearch', 'Export-TwitterAuthentication', 
-               'Get-SendMediaStatus', 'Get-Tweet', 'Get-TweetLikes', 
-               'Get-TwitterAccountSettings', 'Get-TwitterApiEndpoint', 
-               'Get-TwitterBlocks', 'Get-TwitterConfiguration', 'Get-TwitterDM', 
-               'Get-TwitterFollowers', 'Get-TwitterFriends', 'Get-TwitterFriendship', 
-               'Get-TwitterLanguages', 'Get-TwitterList', 'Get-TwitterListByOwner', 
-               'Get-TwitterListMember', 'Get-TwitterListSubscriber', 
-               'Get-TwitterListSubscription', 'Get-TwitterListTweets', 
-               'Get-TwitterMutedUser', 'Get-TwitterRateLimitStatus', 
-               'Get-TwitterRateLimitWarning', 'Get-TwitterSavedSearch', 
-               'Get-TwitterTimeline', 'Get-TwitterUser', 'Get-TwitterUserList', 
-               'Get-TwitterUserProfileBanner', 'Import-TwitterAuthentication', 
-               'New-TwitterQuery', 'Publish-ReplyTweet', 'Publish-Tweet', 
-               'Publish-TwitterDM', 'Remove-TwitterSavedSearch', 'Search-Tweet', 
-               'Send-TwitterMedia', 'Set-Retweet', 'Set-TweetLike', 
-               'Set-TwitterAuthentication', 'Set-TwitterBearerToken', 
-               'Set-TwitterRateLimitWarning', 'Test-TwitterAuthentication', 
-               'Unpublish-TwitterDM'
+FunctionsToExport = @()
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-CmdletsToExport = '*'
+CmdletsToExport = @()
 
 # Variables to export from this module
-VariablesToExport = '*'
+VariablesToExport = @()
 
 # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-AliasesToExport = '*'
+AliasesToExport = @()
 
 # DSC resources to export from this module
 # DscResourcesToExport = @()
@@ -104,50 +87,7 @@ AliasesToExport = '*'
 # ModuleList = @()
 
 # List of all files packaged with this module
-FileList = 'classes\OAuthParameters.Class.psm1', 
-               'private\Invoke-TwitterCursorRequest.ps1', 
-               'private\Invoke-TwitterPageRequest.ps1', 
-               'private\Invoke-TwitterRequest.ps1', 
-               'private\New-TwitterErrorRecord.ps1', 
-               'private\New-ValidationErrorRecord.ps1', 
-               'private\Write-TwitterResponseData.ps1', 
-               'public\Add-TwitterSavedSearch.ps1', 
-               'public\Export-TwitterAuthentication.ps1', 
-               'public\Get-SendMediaStatus.ps1', 'public\Get-Tweet.ps1', 
-               'public\Get-TweetLikes.ps1', 
-               'public\Get-TwitterAccountSettings.ps1', 
-               'public\Get-TwitterApiEndpoint.ps1', 'public\Get-TwitterBlocks.ps1', 
-               'public\Get-TwitterConfiguration.ps1', 'public\Get-TwitterDM.ps1', 
-               'public\Get-TwitterFollowers.ps1', 'public\Get-TwitterFriends.ps1', 
-               'public\Get-TwitterFriendship.ps1', 
-               'public\Get-TwitterLanguages.ps1', 'public\Get-TwitterList.ps1', 
-               'public\Get-TwitterListByOwner.ps1', 
-               'public\Get-TwitterListMember.ps1', 
-               'public\Get-TwitterListSubscriber.ps1', 
-               'public\Get-TwitterListSubscription.ps1', 
-               'public\Get-TwitterListTweets.ps1', 
-               'public\Get-TwitterMutedUser.ps1', 
-               'public\Get-TwitterRateLimitStatus.ps1', 
-               'public\Get-TwitterRateLimitWarning.ps1', 
-               'public\Get-TwitterSavedSearch.ps1', 
-               'public\Get-TwitterTimeline.ps1', 'public\Get-TwitterUser.ps1', 
-               'public\Get-TwitterUserList.ps1', 
-               'public\Get-TwitterUserProfileBanner.ps1', 
-               'public\Import-TwitterAuthentication.ps1', 
-               'public\New-TwitterQuery.ps1', 'public\Publish-ReplyTweet.ps1', 
-               'public\Publish-Tweet.ps1', 'public\Publish-TwitterDM.ps1', 
-               'public\Remove-TwitterSavedSearch.ps1', 'public\Search-Tweet.ps1', 
-               'public\Send-TwitterMedia.ps1', 'public\Set-Retweet.ps1', 
-               'public\Set-TweetLike.ps1', 'public\Set-TwitterAuthentication.ps1', 
-               'public\Set-TwitterBearerToken.ps1', 
-               'public\Set-TwitterRateLimitWarning.ps1', 
-               'public\Test-TwitterAuthentication.ps1', 
-               'public\Unpublish-TwitterDM.ps1', 
-               'resources\EndpointDefinition.json', 
-               'resources\EndpointSchema.json', 
-               'resources\TwitterApiEndpoints.json', 
-               'resources\TwitterErrorCodeExceptions.json', 'Twitter.psd1', 
-               'Twitter.psm1'
+FileList = @()
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
 PrivateData = @{
@@ -167,7 +107,7 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = ''''''
+        ReleaseNotes = ''
 
         # Prerelease string of this module
         # Prerelease = ''

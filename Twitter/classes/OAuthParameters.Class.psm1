@@ -1,5 +1,3 @@
-#requires -version 7.0
-
 class OAuthParameters {
     [string]$HttpMethod
     [String]$BaseUri

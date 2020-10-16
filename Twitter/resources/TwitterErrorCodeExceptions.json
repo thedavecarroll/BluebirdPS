@@ -5,6 +5,25 @@
     "Exception": "InvalidArgument"
   },
   {
+    "ErrorCode": "34",
+    "HttpStatusCode": "404",
+    "Exception": "ObjectNotFound"
+  },
+  {
+    "ErrorCode": "108",
+    "HttpStatusCode": "404",
+    "Exception": "ObjectNotFound"
+  },{
+    "ErrorCode": "109",
+    "HttpStatusCode": "404",
+    "Exception": "ObjectNotFound"
+  },
+  {
+    "ErrorCode": "200",
+    "HttpStatusCode": "403",
+    "Exception": "InvalidOperation"
+  },
+  {
     "ErrorCode": "215",
     "HttpStatusCode": "400",
     "Exception": "AuthenticationError"
