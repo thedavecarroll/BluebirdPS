@@ -1,6 +1,6 @@
 ---
-external help file: Twitter-help.xml
-Module Name: Twitter
+external help file: BluebirdPS-help.xml
+Module Name: BluebirdPS
 online version:
 schema: 2.0.0
 ---
