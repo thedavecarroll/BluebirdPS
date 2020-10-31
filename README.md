@@ -2,6 +2,16 @@
 
 This repo was created to discuss and write a new PowerShell Twitter module.
 
+## Renamed and Rehomed
+
+In order to better support the module, including setting up a external documentation,
+the module was renamed from `Twitter` to `BluebirdPS` and moved to my personal account.
+Originally, it was created in the PowerShellModules organization and it was the only recent activity.
+
+This module is still very much developed for the community and will gladly accept feedback from the
+community to make this module do what you need it to do, while adhering to the Twitter API design and
+PowerShell best practices.
+
 ## Work in Progress
 
 Please consider this a work in progress.
