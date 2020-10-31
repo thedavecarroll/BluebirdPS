@@ -28,7 +28,7 @@ Register-EngineEvent -SourceIdentifier ([System.Management.Automation.PsEngineEv
 
 #region set base path variables
 $ResourcesPath = Join-Path -Path $PSScriptRoot -ChildPath 'resources'
-$DefaultSavePath = Join-Path -Path $env:HOME -ChildPath '.TwitterPowerShell'
+$DefaultSavePath = Join-Path -Path $env:HOME -ChildPath '.BluebirdPS'
 #endregion
 
 #region Authentication variables and setup
