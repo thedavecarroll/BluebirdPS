@@ -30,7 +30,7 @@ CompanyName = 'thedavecarroll'
 Copyright = '2020'
 
 # Description of the functionality provided by this module
-Description = 'Tweet, Retweet, Send Direct Messages, and more.'
+Description = 'Tweet, retweet, send direct messages, manage lists, and more.'
 
 # Minimum version of the PowerShell engine required by this module
 PowerShellVersion = '7.0'
