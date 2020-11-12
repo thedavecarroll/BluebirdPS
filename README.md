@@ -1,16 +1,6 @@
-# Repo for Discussion and writing of new PowerShell Twitter module
+# BluebirdPS: A Twitter Automation Client for PowerShell 7
 
-This repo was created to discuss and write a new PowerShell Twitter module.
-
-## Renamed and Rehomed
-
-In order to better support the module, including setting up a external documentation,
-the module was renamed from `Twitter` to `BluebirdPS` and moved to my personal account.
-Originally, it was created in the PowerShellModules organization and it was the only recent activity.
-
-This module is still very much developed for the community and will gladly accept feedback from the
-community to make this module do what you need it to do, while adhering to the Twitter API design and
-PowerShell best practices.
+This is the project repo for BluebirdPS, a Twitter automation client.
 
 ## Work in Progress
 
@@ -21,6 +11,16 @@ Also, expect errors, though I have tried to keep those at minimum.
 
 >This module is nearing readiness to be published to the PowerShell Gallery.
 >If you want to be notified when it is published, please use the GitHub Watch feature for the repo.
+
+## Renamed and Rehomed
+
+In order to better support the module, including setting up a external documentation,
+the module was renamed from `Twitter` to `BluebirdPS` and moved to my personal account.
+Originally, it was created in the PowerShellModules organization and it was the only recent activity.
+
+This module is still very much developed for the community and will gladly accept feedback from the
+community to make this module do what you need it to do, while adhering to the Twitter API design and
+PowerShell best practices.
 
 ## Prerequisites
 
@@ -68,7 +68,7 @@ Additionally, the module will be published to the PowerShell Gallery soon.
 1. Clone repo to a folder of your choice.
 2. Change into the local repo folder.
 3. Run the `build.ps1` script.
-4. `Import-Module -Path .\BuildOutput\0.1.0\Twitter.psd1`
+4. `Import-Module -Path .\BuildOutput\0.1.0\BluebirdPS.psd1`
 
 ## Examples
 
@@ -140,7 +140,7 @@ Here is list of current public functions.
 
 `Set-TwitterBearerToken` will be used to set the OAuth v2 bearer token used for some Twitter API v2 endpoints.
 
-### Tweets, Users, Followers, Friends, Lists, and Blocks
+### Tweets
 
 * Publish-Tweet
 * Get-Tweet
@@ -148,6 +148,9 @@ Here is list of current public functions.
 * Set-Retweet
 * Set-TweetLike
 * Get-TweetLikes
+
+### Users, Followers, Friends, Lists, and Blocks
+
 * Get-TwitterTimeline
 * Get-TwitterUser
 * Get-TwitterUserList
@@ -197,6 +200,9 @@ These functions do not connect to Twitter directly.
 * Set-TwitterRateLimitWarning
 * Get-TwitterRateLimitWarning
 * Get-TwitterApiEndpoint
+* Get-TwitterHistory
+* Export-TwitterResource
+* Test-SearchString
 
 ## Command Verbs
 
@@ -252,3 +258,4 @@ There is still a considerable amount of work to be done before this can get to t
 * Exploration of PIN-OAuth
   * This will entail a security discussion on key storage
 * Additional commands
+* Twitter API V2 Endpoints
