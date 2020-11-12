@@ -14,6 +14,9 @@ $BuildManifest = Join-Path -Path $VersionFolder -ChildPath $ModulePsd1
 $BuildModule = Join-Path -Path $VersionFolder -ChildPath $ModulePsm1
 $ExternalHelpSourceMarkdown = Join-Path -Path $PSScriptRoot -ChildPath 'docs'
 $ExternalHelpPath = Join-Path -Path $VersionFolder -ChildPath 'en-US'
+$BuildHelperPath = Join-Path -Path $PSScriptRoot -ChildPath 'build'
+$ApiEndpointSourcePath = Join-Path -Path $PSScriptRoot -ChildPath 'Endpoints'
+$ApiEndpointJsonPath = Join-Path -Path $VersionFolder -ChildPath 'resources' -AdditionalChildPath 'TwitterApiEndpoints.json'
 
 # verify that platyPS is available
 if (Get-Module -ListAvailable -Name platyPS -Verbose:$false) {
@@ -43,20 +46,19 @@ Copy-Item -Path $RootModule -Destination $BuildModule
 
 # add class, private, public source files to output module
 # get name of functions to export
-$SourceFolderToRootModule = 'Classes','Private','Public'
+$SourceFolderToRootModule = 'classes','private','public','append'
 foreach ($SourceFolder in $SourceFolderToRootModule ) {
 
-    if ($SourceFolder -eq 'Classes') {
+    #if ($SourceFolder -eq 'classes') {
         $TargetFile = $BuildModule
-    } else {
-        $TargetFile = Join-Path -Path $VersionFolder -ChildPath "$SourceFolder.ps1"
-    }
+    #} else {
+    #    $TargetFile = Join-Path -Path $VersionFolder -ChildPath "$SourceFolder.ps1"
+    #}
 
     'Adding ps1 files in folder {0} to {1}' -f $SourceFolder, $TargetFile
     $SourceFiles = Get-ChildItem -Path (Join-Path -Path $ModulePath -ChildPath $SourceFolder) -Include '*.ps1','*.psm1' -Recurse
     $SourceFiles | ForEach-Object {
-
-        '#region source: {0}\{1}' -f $SourceFolder,$_.Name
+        '#region source: {0}' -f $_.FullName.Replace($ModulePath,'')
         $_ | Get-Content -Raw
         '#endregion'
         ''
@@ -67,19 +69,21 @@ foreach ($SourceFolder in $SourceFolderToRootModule ) {
     }
 }
 
-# copy TypeData
+# get TypesToProcess, FormatsToProcess
 $TypeDataSourceFolder = Join-Path -Path $ModulePath -ChildPath 'TypeData'
 if (Test-Path -Path $TypeDataSourceFolder) {
-    'Copying format and typedata to target folder'
-    $TypeDataTargetFolder = Join-Path -Path $VersionFolder -ChildPath 'TypeData'
-
     $Formats = Get-ChildItem -Path $TypeDataSourceFolder -Filter '*.Format.ps1xml'
-    $Formats | ForEach-Object { Copy-Item -Path $_ -Destination $TypeDataTargetFolder }
     $FormatsToProcess = $Formats | ForEach-Object { 'TypeData{0}{1}' -f [IO.Path]::DirectorySeparatorChar,$_.Name }
 
     $Types = Get-ChildItem -Path $TypeDataSourceFolder -Filter '*.Types.ps1xml'
-    $Types | ForEach-Object { Copy-Item -Path $_ -Destination $TypeDataTargetFolder }
     $TypesToProcess = $Types | ForEach-Object { 'TypeData{0}{1}' -f [IO.Path]::DirectorySeparatorChar,$_.Name }
+}
+
+# copy scripts to process
+$ScriptsSourceFolder = Join-Path -Path $ModulePath -ChildPath 'scripts'
+if (Test-Path -Path $ScriptsSourceFolder) {
+    $Scripts = Get-ChildItem -Path $ScriptsSourceFolder -Filter '*.ps1'
+    $ScriptsToProcess = $Scripts | ForEach-Object { 'scripts{0}{1}' -f [IO.Path]::DirectorySeparatorChar,$_.Name }
 }
 
 # copy the contents of other folders
@@ -90,9 +94,14 @@ foreach ($SupportingFolder in $SupportingFolders) {
     Copy-Item -Path $SupportingFolder -Destination $TargetFolder -Recurse
 }
 
-# copy manifest
-#'Copying module manifest'
-#Copy-Item -Path $ManifestPath -Destination $VersionFolder
+# create API endpoint JSON
+'Compiling API JSON'
+Import-Module (Join-Path -Path $BuildHelperPath -ChildPath 'BuildFunctions.psm1')
+Import-TwitterApiEndpoints -Path $ApiEndpointSourcePath | ConvertTo-Json -Depth 10 | Add-Content -Path $ApiEndpointJsonPath
+
+# create external help XML
+'Creating new external help'
+New-ExternalHelp -Path "$ExternalHelpSourceMarkdown\*-*.md" -OutputPath $ExternalHelpPath -Force | Out-Null
 
 # get new file list
 'Generating full file list for module manifest'
@@ -109,10 +118,7 @@ if ($FileList)          { $ModuleManifest['FileList'] = $FileList }
 if ($FunctionsToExport) { $ModuleManifest['FunctionsToExport'] = $FunctionsToExport }
 if ($FormatsToProcess)  { $ModuleManifest['FormatsToProcess'] = $FormatsToProcess }
 if ($TypesToProcess)    { $ModuleManifest['TypesToProcess'] = $TypesToProcess }
+#if ($ScriptsToProcess)  { $ModuleManifest['ScriptsToProcess'] = $ScriptsToProcess }
 
 New-ModuleManifest -Path $BuildManifest @ModuleManifest
 Update-ModuleManifest -Path $BuildManifest -PrivateData $PrivateData
-
-# Creating external help XML
-'Creating new external help'
-New-ExternalHelp -Path "$ExternalHelpSourceMarkdown\*-*.md" -OutputPath $ExternalHelpPath -Force | Out-Null

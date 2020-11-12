@@ -3,27 +3,6 @@ using namespace Collections.ObjectModel
 using namespace System.Collections
 using namespace Microsoft.PowerShell.Commands
 
-#region dot source public and private function definition files
-$ScriptPath = Split-Path $MyInvocation.MyCommand.Path
-try {
-    'Public','Private' | ForEach-Object {
-        $ImportFile = Get-ChildItem -Path (Join-Path -Path $ScriptPath -ChildPath "$_.ps1")
-        . $ImportFile.FullName
-    }
-}
-catch {
-    $PSCmdlet.ThrowTerminatingError($_)
-}
-#endregion
-
-#region handle module removal
-$OnRemoveScript = {
-#
-}
-$ExecutionContext.SessionState.Module.OnRemove += $OnRemoveScript
-Register-EngineEvent -SourceIdentifier ([System.Management.Automation.PsEngineEvent]::Exiting) -Action $OnRemoveScript
-#endregion
-
 # --------------------------------------------------------------------------------------------------
 
 #region set base path variables
@@ -43,8 +22,6 @@ $OAuth =  @{
     AccessTokenSecret = $null
     BearerToken = $null
 }
-
-Import-TwitterAuthentication
 #endregion
 
 #region Configuration variables and setup
@@ -56,8 +33,6 @@ $TwitterConfiguration = $null
 
 [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
 $TwitterConfigurationRefreshDate = $null
-
-Import-TwitterResource -Configuration
 #endregion
 
 #region
@@ -66,8 +41,6 @@ $LanguagesSavePath = Join-Path -Path $DefaultSavePath -ChildPath 'TwitterLanguag
 
 [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
 $TwitterLanguages = $null
-
-Import-TwitterResource -Languages
 #endregion
 
 #region ErrorMapping variables and setup
@@ -76,13 +49,11 @@ $ErrorMappingPath = Join-Path -Path $ResourcesPath -ChildPath 'TwitterErrorCodeE
 
 [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
 $TwitterErrorMapping = $null
-
-Import-TwitterResource -ErrorMapping
 #endregion
 
 #region other variables
 [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
-$ApiEndpointsPath = Join-Path -Path $ResourcesPath -ChildPath 'Endpoints'
+$ApiEndpointsPath = Join-Path -Path $ResourcesPath -ChildPath 'TwitterApiEndpoints.json'
 
 [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
 $RateLimitWarning = $false
