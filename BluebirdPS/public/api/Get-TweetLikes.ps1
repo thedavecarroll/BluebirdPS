@@ -8,8 +8,8 @@ function Get-TweetLikes {
         [string]$UserId,
         [ValidateRange(1,200)]
         [int]$Count=20,
-        [int]$SinceId,
-        [int]$MaxId,
+        [long]$SinceId,
+        [long]$MaxId,
         [switch]$ExcludeEntities
     )
 

@@ -1,7 +1,8 @@
-function Get-TwitterListMember {
-    [CmdletBinding(DefaultParameterSetName='ListId')]
+function Get-TwitterListSubscriber {
+    [CmdletBinding()]
     param(
-        [Parameter(Mandatory,ParameterSetName='ListId')]
+        [Parameter(Mandatory,ParameterSetName='ShowId')]
+        [ValidateNotNullOrEmpty()]
         [string]$ListId,
 
         [Parameter(Mandatory,ParameterSetName='ShowSlugOwnerScreenName')]
@@ -23,8 +24,8 @@ function Get-TwitterListMember {
 
     $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
     $OAuthParameters = [OAuthParameters]::new(
-        'Get',
-        'https://api.twitter.com/1.1/lists/members.json',
+        'GET',
+        'https://api.twitter.com/1.1/lists/subscribers.json',
         $Query
     )
     Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue users

@@ -6,8 +6,8 @@ function  Get-TwitterSavedSearch {
         [long]$SearchId
     )
 
-    if ($PSBoundParameters.ContainsKey('Id')) {
-        $Url = 'https://api.twitter.com/1.1/saved_searches/show/{0}.json' -f $Id
+    if ($PSBoundParameters.ContainsKey('SearchId')) {
+        $Url = 'https://api.twitter.com/1.1/saved_searches/show/{0}.json' -f $SearchId
     } else {
         $Url = 'https://api.twitter.com/1.1/saved_searches/list.json'
     }

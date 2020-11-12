@@ -61,7 +61,7 @@ function Get-TwitterFriendship {
         }
         'Pending' {
             $OAuthParameters = [OAuthParameters]::new(
-                'Get',
+                'GET',
                 'https://api.twitter.com/1.1/friendships/outgoing.json',
                 @{ cursor = -1 }
             )
@@ -69,7 +69,7 @@ function Get-TwitterFriendship {
         }
         'NoRetweets' {
             $OAuthParameters = [OAuthParameters]::new(
-                'Get',
+                'GET',
                 'https://api.twitter.com/1.1/friendships/no_retweets/ids.json'
             )
             Invoke-TwitterRequest -OAuthParameters $OAuthParameters

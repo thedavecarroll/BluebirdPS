@@ -8,18 +8,7 @@ function Get-TwitterUser {
         [switch]$ExcludeEntities
     )
 
-    $Query = [hashtable]::new()
-    if ($PSBoundParameters.ContainsKey('ExcludeEntities')) {
-        $Query.Add('include_entities','false')
-    } else {
-        $Query.Add('include_entities','true')
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'ScreenName') {
-        $Query.Add('screen_name',$ScreenName)
-    } else {
-        $Query.Add('user_id',$UserId)
-    }
-
+    $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
     $OAuthParameters = [OAuthParameters]::new(
         'GET',
         'https://api.twitter.com/1.1/users/show.json',

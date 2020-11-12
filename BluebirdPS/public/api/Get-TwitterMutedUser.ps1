@@ -14,7 +14,7 @@ function Get-TwitterMutedUser {
     if ($PSCmdlet.ParameterSetName -eq 'List') {
         $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
         $OAuthParameters = [OAuthParameters]::new(
-            'Get',
+            'GET',
             'https://api.twitter.com/1.1/mutes/users/list.json',
             $Query
         )
@@ -22,7 +22,7 @@ function Get-TwitterMutedUser {
 
     } else {
         $OAuthParameters = [OAuthParameters]::new(
-            'Get',
+            'GET',
             'https://api.twitter.com/1.1/mutes/users/ids.json',
             @{ cursor = -1}
         )

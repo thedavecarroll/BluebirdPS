@@ -1,21 +1,17 @@
 function Search-Tweet {
     [CmdletBinding()]
     param(
+        [Parameter(Mandatory)]
+        [ValidateNotNullOrEmpty()]
         [string]$SearchString,
         [ValidateRange(1,100)]
-        [int]$MaxResults=20,
+        [int]$MaxResults=15,
         [switch]$ExcludeEntities
     )
 
-    $Query = [hashtable]::new()
-    if ($PSBoundParameters.ContainsKey('ExcludeEntities')) {
-        $Query.Add('include_entities','false')
-    } else {
-        $Query.Add('include_entities','true')
-    }
-    $Query.Add('count', $MaxResults)
-    $Query.Add('q',[System.Uri]::EscapeDataString($SearchString))
+    Test-SearchString -SearchString $SearchString | Out-Null
 
+    $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
     $OAuthParameters = [OAuthParameters]::new(
         'GET',
         'https://api.twitter.com/1.1/search/tweets.json',

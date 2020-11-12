@@ -72,6 +72,16 @@ function New-TwitterQuery {
             'ExcludeRetweets' {
                 $TwitterQuery.Add('include_rts','false')
             }
+            'SearchString' {
+                $TwitterQuery.Add('q',[System.Uri]::EscapeDataString($ApiParameters[$Parameter]))
+            }
+            'MaxResults' {
+                $TwitterQuery.Add('count',$ApiParameters[$Parameter])
+            }
+            'TweetMode' {
+                $TweetModeValue = $ApiParameters[$Parameter] -eq 'Compatibility' ? 'compat' : 'extended'
+                $TwitterQuery.Add('tweet_mode',$TweetModeValue)
+            }
         }
     }
 

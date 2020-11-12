@@ -31,7 +31,7 @@ function Get-TwitterList {
 
         $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
         $OAuthParameters = [OAuthParameters]::new(
-            'Get',
+            'GET',
             'https://api.twitter.com/1.1/lists/list.json',
             $Query
         )

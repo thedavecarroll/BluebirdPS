@@ -14,7 +14,7 @@ function Get-TwitterListByOwner {
 
     $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
     $OAuthParameters = [OAuthParameters]::new(
-        'Get',
+        'GET',
         'https://api.twitter.com/1.1/lists/ownerships.json',
         $Query
     )

@@ -1,10 +1,7 @@
-function Get-TwitterListTweets {
-    [Alias('Get-TwitterListStatus')]
+function Get-TwitterListMember {
     [CmdletBinding(DefaultParameterSetName='ListId')]
     param(
-
         [Parameter(Mandatory,ParameterSetName='ListId')]
-        [Alias('Id')]
         [string]$ListId,
 
         [Parameter(Mandatory,ParameterSetName='ShowSlugOwnerScreenName')]
@@ -18,22 +15,18 @@ function Get-TwitterListTweets {
         [ValidateNotNullOrEmpty()]
         [long]$OwnerId,
 
-        [long]$SinceId,
-        [long]$MaxId,
-
-        [ValidateRange(1,200)] # max 200 returned
-        [long]$ResultsPerPage = 20, #assumption - API doc for this does not specify
+        [ValidateRange(1,5000)]
+        [int]$ResultsPerPage = 20,
         [switch]$SkipStatus,
-        [switch]$ExcludeEntities,
-        [switch]$ExcludeRetweets
+        [switch]$ExcludeEntities
     )
 
     $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
     $OAuthParameters = [OAuthParameters]::new(
-        'Get',
-        'https://api.twitter.com/1.1/lists/statuses.json',
+        'GET',
+        'https://api.twitter.com/1.1/lists/members.json',
         $Query
     )
-    Invoke-TwitterRequest -OAuthParameters $OAuthParameters
+    Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue users
 
 }
