@@ -8,34 +8,37 @@ schema: 2.0.0
 # Get-TwitterListTweets
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Returns a timeline of tweets authored by members of the specified list.
 
 ## SYNTAX
 
 ### ListId (Default)
-```
-Get-TwitterListTweets -ListId <String> [-SinceId <Int64>] [-MaxId <Int64>] [-ResultsPerPage <Int64>]
- [-SkipStatus] [-ExcludeEntities] [-ExcludeRetweets] [<CommonParameters>]
+
+```powershell
+Get-TwitterListTweets -ListId <String> [-SinceId <Int64>] [-MaxId <Int64>] [-ResultsPerPage <Int64>] [-ExcludeEntities] [-ExcludeRetweets] [<CommonParameters>]
 ```
 
 ### ShowSlugOwnerId
-```
-Get-TwitterListTweets -Slug <String> -OwnerId <Int64> [-SinceId <Int64>] [-MaxId <Int64>]
- [-ResultsPerPage <Int64>] [-SkipStatus] [-ExcludeEntities] [-ExcludeRetweets] [<CommonParameters>]
+
+```powershell
+Get-TwitterListTweets -Slug <String> -OwnerId <Int64> [-SinceId <Int64>] [-MaxId <Int64>] [-ResultsPerPage <Int64>] [-ExcludeEntities] [-ExcludeRetweets] [<CommonParameters>]
 ```
 
 ### ShowSlugOwnerScreenName
-```
-Get-TwitterListTweets -Slug <String> -OwnerScreenName <String> [-SinceId <Int64>] [-MaxId <Int64>]
- [-ResultsPerPage <Int64>] [-SkipStatus] [-ExcludeEntities] [-ExcludeRetweets] [<CommonParameters>]
+
+```powershell
+Get-TwitterListTweets -Slug <String> -OwnerScreenName <String> [-SinceId <Int64>] [-MaxId <Int64>] [-ResultsPerPage <Int64>] [-ExcludeEntities] [-ExcludeRetweets] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+Returns a timeline of tweets authored by members of the specified list.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
 PS C:\> {{ Add example code here }}
 ```
@@ -45,7 +48,10 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -ExcludeEntities
-{{ Fill ExcludeEntities Description }}
+
+Exclude the entities node.
+
+This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags.
 
 ```yaml
 Type: SwitchParameter
@@ -60,7 +66,8 @@ Accept wildcard characters: False
 ```
 
 ### -ExcludeRetweets
-{{ Fill ExcludeRetweets Description }}
+
+By default, retweets are included. Use the ExcludeRetweets switch to omit retweets from the results.
 
 ```yaml
 Type: SwitchParameter
@@ -80,7 +87,7 @@ Accept wildcard characters: False
 ```yaml
 Type: String
 Parameter Sets: ListId
-Aliases: Id
+Aliases:
 
 Required: True
 Position: Named
@@ -90,7 +97,8 @@ Accept wildcard characters: False
 ```
 
 ### -MaxId
-{{ Fill MaxId Description }}
+
+Returns tweets with an id less than the value provided. Tweet id values roughly correlate to a date time.
 
 ```yaml
 Type: Int64
@@ -105,7 +113,8 @@ Accept wildcard characters: False
 ```
 
 ### -OwnerId
-{{ Fill OwnerId Description }}
+
+The ID of the list owner for whom to return results.
 
 ```yaml
 Type: Int64
@@ -120,7 +129,8 @@ Accept wildcard characters: False
 ```
 
 ### -OwnerScreenName
-{{ Fill OwnerScreenName Description }}
+
+The screen name of the user for whom to return results.
 
 ```yaml
 Type: String
@@ -135,7 +145,8 @@ Accept wildcard characters: False
 ```
 
 ### -ResultsPerPage
-{{ Fill ResultsPerPage Description }}
+
+Specifies the number of results to retrieve per page.
 
 ```yaml
 Type: Int64
@@ -150,25 +161,11 @@ Accept wildcard characters: False
 ```
 
 ### -SinceId
-{{ Fill SinceId Description }}
+
+Returns tweets with an id equal or greater than the value provided. Tweet id values roughly correlate to a date time.
 
 ```yaml
 Type: Int64
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SkipStatus
-{{ Fill SkipStatus Description }}
-
-```yaml
-Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
 

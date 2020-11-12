@@ -45,7 +45,10 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -ExcludeEntities
-{{ Fill ExcludeEntities Description }}
+
+Exclude the entities node.
+
+This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags.
 
 ```yaml
 Type: SwitchParameter
@@ -75,7 +78,8 @@ Accept wildcard characters: False
 ```
 
 ### -OwnerId
-{{ Fill OwnerId Description }}
+
+The ID of the list owner for whom to return results.
 
 ```yaml
 Type: Int64
@@ -90,7 +94,8 @@ Accept wildcard characters: False
 ```
 
 ### -OwnerScreenName
-{{ Fill OwnerScreenName Description }}
+
+The screen name of the user for whom to return results.
 
 ```yaml
 Type: String
@@ -105,7 +110,8 @@ Accept wildcard characters: False
 ```
 
 ### -ResultsPerPage
-{{ Fill ResultsPerPage Description }}
+
+Specifies the number of results to retrieve per page.
 
 ```yaml
 Type: Int32
@@ -120,7 +126,8 @@ Accept wildcard characters: False
 ```
 
 ### -SkipStatus
-{{ Fill SkipStatus Description }}
+
+Exclude the user statuses from the returned user objects.
 
 ```yaml
 Type: SwitchParameter

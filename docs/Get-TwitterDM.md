@@ -8,45 +8,52 @@ schema: 2.0.0
 # Get-TwitterDM
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Returns one or more direct messages.
 
 ## SYNTAX
 
-```
+```powershell
 Get-TwitterDM [[-DirectMessageId] <String>] [[-Count] <Int32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+Returns one or more direct messages.
+
+If the DirectMessageId is omitted, all DMs from the last 30 days will be returned in reverse chronological order.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS C:\> {{ Add example code here }}
+PS > Get-TwitterDM
 ```
 
-{{ Add example description here }}
+Returns a list of all DMs from the last 30 days.
+
+### Example 2
+
+```powershell
+PS > $Message = Get-TwitterDM -DirectMessageId 1326381283837157381
+PS > $Message.event.message_create
+```
+
+```console
+target                   sender_id source_app_id message_data
+------                   --------- ------------- ------------
+@{recipient_id=00000000} 000000000 129032        @{text=Yeah. Let me write an update. I'll do that now.; entities=}
+
+```
+
+Returns the direct message specified.
 
 ## PARAMETERS
 
-### -Count
-{{ Fill Count Description }}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -DirectMessageId
-{{ Fill DirectMessageId Description }}
+
+The id of the Direct Message event that should be returned.
 
 ```yaml
 Type: String
@@ -60,7 +67,24 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Count
+
+Specifies the number of records to retrieve.
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -70,6 +94,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### System.Object
+
 ## NOTES
 
 ## RELATED LINKS
+
+[Api Reference - GET blocks/list](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-blocks-list)

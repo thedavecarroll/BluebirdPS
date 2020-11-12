@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Search-Tweet [[-SearchString] <String>] [[-MaxResults] <Int32>] [-ExcludeEntities] [<CommonParameters>]
+Search-Tweet [-SearchString] <String> [[-MaxResults] <Int32>] [-ExcludeEntities] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,7 +31,10 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -ExcludeEntities
-{{ Fill ExcludeEntities Description }}
+
+Exclude the entities node.
+
+This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags.
 
 ```yaml
 Type: SwitchParameter
@@ -68,7 +71,7 @@ Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 0
 Default value: None
 Accept pipeline input: False

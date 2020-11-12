@@ -14,12 +14,12 @@ schema: 2.0.0
 
 ### ScreenName
 ```
-Get-TwitterUserProfileBanner -ScreenName <String> [-ExcludeEntities] [<CommonParameters>]
+Get-TwitterUserProfileBanner -ScreenName <String> [<CommonParameters>]
 ```
 
 ### UserId
 ```
-Get-TwitterUserProfileBanner -UserId <String> [-ExcludeEntities] [<CommonParameters>]
+Get-TwitterUserProfileBanner -UserId <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -36,23 +36,9 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -ExcludeEntities
-{{ Fill ExcludeEntities Description }}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -ScreenName
-{{ Fill ScreenName Description }}
+
+The screen name of the user for whom to return results.
 
 ```yaml
 Type: String
@@ -67,7 +53,8 @@ Accept wildcard characters: False
 ```
 
 ### -UserId
-{{ Fill UserId Description }}
+
+The ID of the user for whom to return results.
 
 ```yaml
 Type: String

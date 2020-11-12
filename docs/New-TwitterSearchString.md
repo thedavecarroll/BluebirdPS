@@ -12,7 +12,7 @@ schema: 2.0.0
 
 ## SYNTAX
 
-```
+```powershell
 New-TwitterSearchString [[-Hashtag] <String[]>] [[-Words] <String[]>] [[-Phrase] <String>] [[-From] <String[]>]
  [[-To] <String[]>] [[-Mention] <String[]>] [[-Url] <String>] [[-Language] <String>] [[-MinLikes] <Int32>]
  [[-MinReplies] <Int32>] [[-MinRetweets] <Int32>] [[-WithFilter] <TwitterSearchFilter>]

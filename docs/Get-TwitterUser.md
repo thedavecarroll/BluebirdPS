@@ -37,7 +37,10 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -ExcludeEntities
-{{ Fill ExcludeEntities Description }}
+
+Exclude the entities node.
+
+This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags.
 
 ```yaml
 Type: SwitchParameter
@@ -52,7 +55,8 @@ Accept wildcard characters: False
 ```
 
 ### -ScreenName
-{{ Fill ScreenName Description }}
+
+The screen name of the user for whom to return results.
 
 ```yaml
 Type: String
@@ -67,7 +71,8 @@ Accept wildcard characters: False
 ```
 
 ### -UserId
-{{ Fill UserId Description }}
+
+The ID of the user for whom to return results.
 
 ```yaml
 Type: String

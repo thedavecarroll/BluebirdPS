@@ -8,6 +8,7 @@ schema: 2.0.0
 # Get-Tweet
 
 ## SYNOPSIS
+
 Returns a single Tweet, specified by the TweetId parameter. The Tweet's author will also be embedded within the Tweet.
 
 ## SYNTAX
@@ -17,11 +18,13 @@ Get-Tweet [-TweetId] <Int64> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
 Returns a single Tweet, specified by the TweetId parameter. The Tweet's author will also be embedded within the Tweet.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
 PS > Get-Tweet -TweetId 1306447142052155394
 
@@ -58,6 +61,7 @@ Return the tweet with TweetId 1306447142052155394.
 ## PARAMETERS
 
 ### -TweetId
+
 The numerical ID of the desired Tweet.
 
 ```yaml
@@ -73,6 +77,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -85,10 +90,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-API Version: v1.1
-Endpoint: GET statuses/show/:id
-Resource URL: https://api.twitter.com/1.1/statuses/show.json
-
 ## RELATED LINKS
 
+[Set-TweetLike]()
 [API Documentation](https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-show-id)

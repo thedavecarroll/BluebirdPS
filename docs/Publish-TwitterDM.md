@@ -31,7 +31,8 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -MediaId
-{{ Fill MediaId Description }}
+
+The MediaId returned from the Send-TwitterMedia command.
 
 ```yaml
 Type: String
@@ -61,7 +62,8 @@ Accept wildcard characters: False
 ```
 
 ### -UserId
-{{ Fill UserId Description }}
+
+The ID of the user to which you want to send a direct message.
 
 ```yaml
 Type: String

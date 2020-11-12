@@ -8,29 +8,37 @@ schema: 2.0.0
 # Export-TwitterAuthentication
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Export the current user's authentication credentials to an encrypted file.
 
 ## SYNTAX
 
-```
+```powershell
 Export-TwitterAuthentication [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+Export the current user's authentication credentials to an encrypted file.
+
+The encrypted credentials file will be stored in the folder $env:HOME/.BluebirdPS.
+
+The credentials are the API Key, API Key Secret, Access Token, Access Token Secret, and, if present, the bearer token for OAuth v2 endpoints.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS C:\> {{ Add example code here }}
+PS > Export-TwitterAuthentication
 ```
 
-{{ Add example description here }}
+Exports the sessions current credentials to an encrypted file.
 
 ## PARAMETERS
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -40,6 +48,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### System.Object
+
 ## NOTES
 
 ## RELATED LINKS
+
+[Set-TwitterAuthentication]()
+[Api Reference - Authentication](https://developer.twitter.com/en/docs/authentication/oauth-1-0a)

@@ -37,7 +37,10 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -ExcludeEntities
-{{ Fill ExcludeEntities Description }}
+
+Exclude the entities node.
+
+This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags.
 
 ```yaml
 Type: SwitchParameter
@@ -67,7 +70,8 @@ Accept wildcard characters: False
 ```
 
 ### -SkipStatus
-{{ Fill SkipStatus Description }}
+
+Exclude the user statuses from the returned user objects.
 
 ```yaml
 Type: SwitchParameter

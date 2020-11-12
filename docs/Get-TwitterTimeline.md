@@ -87,7 +87,8 @@ Accept wildcard characters: False
 ```
 
 ### -ScreenName
-{{ Fill ScreenName Description }}
+
+The screen name of the user for whom to return results.
 
 ```yaml
 Type: String
@@ -102,7 +103,8 @@ Accept wildcard characters: False
 ```
 
 ### -UserId
-{{ Fill UserId Description }}
+
+The ID of the user for whom to return results.
 
 ```yaml
 Type: String

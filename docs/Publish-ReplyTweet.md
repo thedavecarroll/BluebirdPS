@@ -32,7 +32,8 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -MediaId
-{{ Fill MediaId Description }}
+
+The MediaId returned from the Send-TwitterMedia command.
 
 ```yaml
 Type: Object[]

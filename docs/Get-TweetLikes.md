@@ -8,38 +8,94 @@ schema: 2.0.0
 # Get-TweetLikes
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Returns recent Tweets liked by the specified user.
 
 ## SYNTAX
 
 ### ScreenName (Default)
-```
-Get-TweetLikes -ScreenName <String> [-Count <Int32>] [-SinceId <Int32>] [-MaxId <Int32>] [-ExcludeEntities]
+
+```powershell
+Get-TweetLikes -ScreenName <String> [-Count <Int32>] [-SinceId <Int64>] [-MaxId <Int64>] [-ExcludeEntities]
  [<CommonParameters>]
 ```
 
 ### UserId
-```
-Get-TweetLikes -UserId <String> [-Count <Int32>] [-SinceId <Int32>] [-MaxId <Int32>] [-ExcludeEntities]
+
+```powershell
+Get-TweetLikes -UserId <String> [-Count <Int32>] [-SinceId <Int64>] [-MaxId <Int64>] [-ExcludeEntities]
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+Returns recent Tweets liked by the specified user.
+
+Likes were previously called favorites.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS C:\> {{ Add example code here }}
+PS > Get-TweetLikes -ScreenName thedavecarroll
 ```
 
-{{ Add example description here }}
+Return the last 20 tweets that the user, with the specified screen name, liked.
+
+### Example 2
+
+```powershell
+PS > Get-TweetLikes -ScreenName thedavecarroll -Count 15 -ExcludeEntities
+```
+
+Return the last 15 tweets that the user, with the specified screen name, liked excluding the entities in the results.
+
+### Example 3
+
+```powershell
+PS > Get-TweetLikes -UserId 292670084
+```
+
+Return the last 20 tweets that the user, with the specified id, liked.
 
 ## PARAMETERS
 
+### -ScreenName
+
+The screen name of the user for whom to return results.
+
+```yaml
+Type: String
+Parameter Sets: ScreenName
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UserId
+
+The ID of the user for whom to return results.
+
+```yaml
+Type: String
+Parameter Sets: UserId
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Count
-{{ Fill Count Description }}
+
+Specifies the number of records to retrieve.
 
 ```yaml
 Type: Int32
@@ -54,7 +110,10 @@ Accept wildcard characters: False
 ```
 
 ### -ExcludeEntities
-{{ Fill ExcludeEntities Description }}
+
+Exclude the entities node.
+
+This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags.
 
 ```yaml
 Type: SwitchParameter
@@ -69,29 +128,15 @@ Accept wildcard characters: False
 ```
 
 ### -MaxId
-{{ Fill MaxId Description }}
+
+Returns tweets with an id less than the value provided. Tweet id values roughly correlate to a date time.
 
 ```yaml
-Type: Int32
+Type: Int64
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ScreenName
-{{ Fill ScreenName Description }}
-
-```yaml
-Type: String
-Parameter Sets: ScreenName
-Aliases:
-
-Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -99,10 +144,11 @@ Accept wildcard characters: False
 ```
 
 ### -SinceId
-{{ Fill SinceId Description }}
+
+Returns tweets with an id equal or greater than the value provided. Tweet id values roughly correlate to a date time.
 
 ```yaml
-Type: Int32
+Type: Int64
 Parameter Sets: (All)
 Aliases:
 
@@ -113,22 +159,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -UserId
-{{ Fill UserId Description }}
-
-```yaml
-Type: String
-Parameter Sets: UserId
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -138,6 +170,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### System.Object
+
 ## NOTES
 
 ## RELATED LINKS
+
+[Set-TweetLike]()
+[Api Reference - GET favorites/list](https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-favorites-list)

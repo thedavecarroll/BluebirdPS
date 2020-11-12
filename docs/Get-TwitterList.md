@@ -82,7 +82,8 @@ Accept wildcard characters: False
 ```
 
 ### -OwnerId
-{{ Fill OwnerId Description }}
+
+The ID of the list owner for whom to return results.
 
 ```yaml
 Type: Int64
@@ -97,7 +98,8 @@ Accept wildcard characters: False
 ```
 
 ### -OwnerScreenName
-{{ Fill OwnerScreenName Description }}
+
+The screen name of the user for whom to return results.
 
 ```yaml
 Type: String
@@ -112,7 +114,8 @@ Accept wildcard characters: False
 ```
 
 ### -ScreenName
-{{ Fill ScreenName Description }}
+
+The screen name of the user for whom to return results.
 
 ```yaml
 Type: String
@@ -142,7 +145,8 @@ Accept wildcard characters: False
 ```
 
 ### -UserId
-{{ Fill UserId Description }}
+
+The ID of the user for whom to return results.
 
 ```yaml
 Type: String

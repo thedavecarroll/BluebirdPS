@@ -8,37 +8,50 @@ schema: 2.0.0
 # Get-TwitterFollowers
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Returns a collection of user objects or user id that the specified user is following.
 
 ## SYNTAX
 
 ### Default (Default)
-```
+
+```powershell
 Get-TwitterFollowers [-ScreenName <String>] [-UserId <String>] [-ResultsPerPage <Int32>] [<CommonParameters>]
 ```
 
 ### List
-```
-Get-TwitterFollowers [-ScreenName <String>] [-UserId <String>] [-ResultsPerPage <Int32>] [-List] [-SkipStatus]
- [-ExcludeEntities] [<CommonParameters>]
+
+```powershell
+Get-TwitterFollowers [-ScreenName <String>] [-UserId <String>] [-ResultsPerPage <Int32>] [-List] [-SkipStatus] [-ExcludeEntities] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+Returns a collection of user objects or user id that the specified user is following.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS C:\> {{ Add example code here }}
+PS > Get-TwitterFollowers -ScreenName thedavecarroll
 ```
 
-{{ Add example description here }}
+Returns an array of user ids that the specified user is following.
+
+### Example 2
+
+```powershell
+PS > Get-TwitterFollowers -List -ScreenName thedavecarroll -SkipStatus -ExcludeEntities
+```
+
+Returns a collection of user objects that the specified user is following, excluding the user's last status and the entities.
 
 ## PARAMETERS
 
-### -ExcludeEntities
-{{ Fill ExcludeEntities Description }}
+### -List
+
+By using this switch, this command will return user objects instead of an array of user ids.
 
 ```yaml
 Type: SwitchParameter
@@ -52,8 +65,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -List
-{{ Fill List Description }}
+### -ExcludeEntities
+
+Exclude the entities node.
+
+This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags.
 
 ```yaml
 Type: SwitchParameter
@@ -68,7 +84,8 @@ Accept wildcard characters: False
 ```
 
 ### -ResultsPerPage
-{{ Fill ResultsPerPage Description }}
+
+Specifies the number of results to retrieve per page.
 
 ```yaml
 Type: Int32
@@ -83,7 +100,8 @@ Accept wildcard characters: False
 ```
 
 ### -ScreenName
-{{ Fill ScreenName Description }}
+
+The screen name of the user for whom to return results.
 
 ```yaml
 Type: String
@@ -98,7 +116,8 @@ Accept wildcard characters: False
 ```
 
 ### -SkipStatus
-{{ Fill SkipStatus Description }}
+
+Exclude the user statuses from the returned user objects.
 
 ```yaml
 Type: SwitchParameter
@@ -113,7 +132,8 @@ Accept wildcard characters: False
 ```
 
 ### -UserId
-{{ Fill UserId Description }}
+
+The ID of the user for whom to return results.
 
 ```yaml
 Type: String
@@ -128,6 +148,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -140,3 +161,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Api Reference - GET followers/ids](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-followers-ids)
+[Api Reference - GET followers/list](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-followers-list)

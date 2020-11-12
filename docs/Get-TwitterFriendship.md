@@ -107,7 +107,8 @@ Accept wildcard characters: False
 ```
 
 ### -ScreenName
-{{ Fill ScreenName Description }}
+
+The screen name of the user for whom to return results.
 
 ```yaml
 Type: String[]
@@ -122,7 +123,8 @@ Accept wildcard characters: False
 ```
 
 ### -SourceScreenName
-{{ Fill SourceScreenName Description }}
+
+The screen name of the source user for whom to return results.
 
 ```yaml
 Type: String
@@ -137,7 +139,8 @@ Accept wildcard characters: False
 ```
 
 ### -SourceUserId
-{{ Fill SourceUserId Description }}
+
+The ID of the taget user for whom to return results.
 
 ```yaml
 Type: Int32
@@ -152,7 +155,8 @@ Accept wildcard characters: False
 ```
 
 ### -TargetScreenName
-{{ Fill TargetScreenName Description }}
+
+The screen name of the target user for whom to return results.
 
 ```yaml
 Type: String
@@ -167,7 +171,8 @@ Accept wildcard characters: False
 ```
 
 ### -TargetUserId
-{{ Fill TargetUserId Description }}
+
+The ID of the target user for whom to return results.
 
 ```yaml
 Type: Int32
@@ -182,7 +187,8 @@ Accept wildcard characters: False
 ```
 
 ### -UserId
-{{ Fill UserId Description }}
+
+The ID of the user for whom to return results.
 
 ```yaml
 Type: Int32[]

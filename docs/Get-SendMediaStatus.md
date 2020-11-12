@@ -8,30 +8,36 @@ schema: 2.0.0
 # Get-SendMediaStatus
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+The Get-SendMediaStatus command is used to periodically poll for updates of media processing operation.
 
 ## SYNTAX
 
-```
+```powershell
 Get-SendMediaStatus [-MediaId] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+The Get-SendMediaStatus command is used to periodically poll for updates of media processing operation.
+
+After the response returns succeeded, you can move on to the next step which would typically be either Publish-Tweet or Publish-TwitterDM with the MediaId.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS C:\> {{ Add example code here }}
+PS > Get-SendMediaStatus -MediaId 123456789
 ```
 
-{{ Add example description here }}
+Get the status of the media operation for the media with the specified id.
 
 ## PARAMETERS
 
 ### -MediaId
-{{ Fill MediaId Description }}
+
+The MediaId returned from the Send-TwitterMedia command.
 
 ```yaml
 Type: String
@@ -46,6 +52,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -55,6 +62,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### System.Object
+
 ## NOTES
 
 ## RELATED LINKS
+
+[Send-TwitterMedia]()
+[Api Reference - GET media/upload](https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/get-media-upload-status)

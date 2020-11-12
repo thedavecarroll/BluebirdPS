@@ -1,20 +1,25 @@
 ---
 external help file: BluebirdPS-help.xml
-Module Name: BluebirdPS
+Module Name:
 online version:
 schema: 2.0.0
 ---
 
-# Get-TwitterUserList
+# Get-TwitterUser
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
 
 ## SYNTAX
 
+### ScreenName
 ```
-Get-TwitterUserList [[-ScreenName] <String[]>] [[-UserId] <String[]>] [[-TweetMode] <String>]
- [-ExcludeEntities] [<CommonParameters>]
+Get-TwitterUser -ScreenName <String> [-ExcludeEntities] [<CommonParameters>]
+```
+
+### UserId
+```
+Get-TwitterUser -UserId <String> [-ExcludeEntities] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,7 +37,10 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -ExcludeEntities
-{{ Fill ExcludeEntities Description }}
+
+Exclude the entities node.
+
+This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags.
 
 ```yaml
 Type: SwitchParameter
@@ -47,46 +55,32 @@ Accept wildcard characters: False
 ```
 
 ### -ScreenName
-{{ Fill ScreenName Description }}
 
-```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -TweetMode
-{{ Fill TweetMode Description }}
+The screen name of the user for whom to return results.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: ScreenName
 Aliases:
-Accepted values: Compatibility, Extended
 
-Required: False
-Position: 2
+Required: True
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -UserId
-{{ Fill UserId Description }}
+
+The ID of the user for whom to return results.
 
 ```yaml
-Type: String[]
-Parameter Sets: (All)
+Type: String
+Parameter Sets: UserId
 Aliases:
 
-Required: False
-Position: 1
+Required: True
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

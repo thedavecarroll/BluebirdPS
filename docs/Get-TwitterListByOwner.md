@@ -37,7 +37,8 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -ResultsPerPage
-{{ Fill ResultsPerPage Description }}
+
+Specifies the number of results to retrieve per page.
 
 ```yaml
 Type: Int32
@@ -52,7 +53,8 @@ Accept wildcard characters: False
 ```
 
 ### -ScreenName
-{{ Fill ScreenName Description }}
+
+The screen name of the user for whom to return results.
 
 ```yaml
 Type: String
@@ -67,7 +69,8 @@ Accept wildcard characters: False
 ```
 
 ### -UserId
-{{ Fill UserId Description }}
+
+The ID of the user for whom to return results.
 
 ```yaml
 Type: Int64

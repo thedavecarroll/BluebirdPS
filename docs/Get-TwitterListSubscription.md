@@ -23,11 +23,13 @@ Get-TwitterListSubscription -UserId <String> [-ResultsPerPage <Int32>] [<CommonP
 ```
 
 ## DESCRIPTION
+
 {{ Fill in the Description }}
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
 PS C:\> {{ Add example code here }}
 ```
@@ -37,7 +39,8 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -ResultsPerPage
-{{ Fill ResultsPerPage Description }}
+
+Specifies the number of results to retrieve per page.
 
 ```yaml
 Type: Int32
@@ -52,7 +55,8 @@ Accept wildcard characters: False
 ```
 
 ### -ScreenName
-{{ Fill ScreenName Description }}
+
+The screen name of the user for whom to return results.
 
 ```yaml
 Type: String
@@ -67,7 +71,8 @@ Accept wildcard characters: False
 ```
 
 ### -UserId
-{{ Fill UserId Description }}
+
+The ID of the user for whom to return results.
 
 ```yaml
 Type: String
