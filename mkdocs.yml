@@ -51,4 +51,49 @@ nav:
     - Home: README.md
     # - Change Log: CHANGELOG.md
     - Functions:
+        - Export-TwitterAuthentication: Export-TwitterAuthentication.md
+        - Import-TwitterAuthentication: Import-TwitterAuthentication.md
+        - Set-TwitterAuthentication: Set-TwitterAuthentication.md
+        - Set-TwitterBearerToken: Set-TwitterBearerToken.md
+        - Test-TwitterAuthentication: Test-TwitterAuthentication.md
+        - Get-TwitterDM: Get-TwitterDM.md
+        - Publish-TwitterDM: Publish-TwitterDM.md
+        - Unpublish-TwitterDM: Unpublish-TwitterDM.md
+        - Get-SendMediaStatus: Get-SendMediaStatus.md
+        - Send-TwitterMedia: Send-TwitterMedia.md
+        - Add-TwitterSavedSearch: Add-TwitterSavedSearch.md
+        - Get-TwitterSavedSearch: Get-TwitterSavedSearch.md
+        - Remove-TwitterSavedSearch: Remove-TwitterSavedSearch.md
+        - Search-Tweet: Search-Tweet.md
+        - Get-TwitterAccountSettings: Get-TwitterAccountSettings.md
         - Get-TwitterConfiguration: Get-TwitterConfiguration.md
+        - Get-TwitterLanguages: Get-TwitterLanguages.md
+        - Get-TwitterRateLimitStatus: Get-TwitterRateLimitStatus.md
+        - Get-TwitterUserProfileBanner: Get-TwitterUserProfileBanner.md
+        - Get-Tweet: Get-Tweet.md
+        - Get-TweetLike: Get-TweetLike.md
+        - Publish-ReplyTweet: Publish-ReplyTweet.md
+        - Publish-Tweet: Publish-Tweet.md
+        - Set-Retweet: Set-Retweet.md
+        - Set-TweetLike: Set-TweetLike.md
+        - Get-TwitterBlocks: Get-TwitterBlocks.md
+        - Get-TwitterFollowers: Get-TwitterFollowers.md
+        - Get-TwitterFriends: Get-TwitterFriends.md
+        - Get-TwitterFriendship: Get-TwitterFriendship.md
+        - Get-TwitterList: Get-TwitterList.md
+        - Get-TwitterListByOwner: Get-TwitterListByOwner.md
+        - Get-TwitterListMember: Get-TwitterListMember.md
+        - Get-TwitterListSubscriber: Get-TwitterListSubscriber.md
+        - Get-TwitterListSubscription: Get-TwitterListSubscription.md
+        - Get-TwitterListTweets: Get-TwitterListTweets.md
+        - Get-TwitterMutedUser: Get-TwitterMutedUser.md
+        - Get-TwitterTimeline: Get-TwitterTimeline.md
+        - Get-TwitterUser: Get-TwitterUser.md
+        - Get-TwitterUserList: Get-TwitterUserList.md
+        - Export-TwitterResource: Export-TwitterResource.md
+        - Get-TwitterApiEndpoint: Get-TwitterApiEndpoint.md
+        - Get-TwitterHistory: Get-TwitterHistory.md
+        - Get-TwitterRateLimitWarning: Get-TwitterRateLimitWarning.md
+        - New-TwitterQuery: New-TwitterQuery.md
+        - Set-TwitterRateLimitWarning: Set-TwitterRateLimitWarning.md
+        - Test-SearchString: Test-SearchString.md
