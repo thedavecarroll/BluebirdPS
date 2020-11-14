@@ -1,35 +1,42 @@
 # Project Info
-site_name: BluebirdPS
-site_description: Online Help for BluebirdPS PowerShell Module
-site_author: Dave Carroll
-site_url: https://bluebirdps.anovelidea.org
+site_name: 'BluebirdPS'
+site_description: 'Online Help for BluebirdPS PowerShell Module'
+site_author: 'Dave Carroll'
+site_url: 'https://bluebirdps.anovelidea.org'
 
 # Repo Info
-repo_name: thedavecarroll/BluebirdPS
-repo_url: https://github.com/thedavecarroll/BluebirdPS
+repo_name: 'thedavecarroll/BluebirdPS'
+repo_url: 'https://github.com/thedavecarroll/BluebirdPS'
+edit_uri: 'edit/master/docs/'
 
 # Copyright
 copyright: "Copyright &copy; 2020 Dave Carroll<br/>BluebirdPS is licensed under the <a href='https://github.com/thedavecarroll/BluebirdPS/raw/main/LICENSE'>MIT license."
 
 # Analytics
 google_analytics:
-    - UA-122236350-3
-    - auto
+    - 'UA-122236350-3'
+    - 'auto'
 
 # Configuration
 theme:
-    name: material
-edit_uri: edit/master/docs/
+    name: 'material'
+    language: 'en'
+    palette:
+        primary: 'light blue'
+        accent: 'indigo'
+    font:
+        text: 'Roboto'
+        code: 'Roboto Mono'
 
 # Customization
 extra:
     social:
-        - type: github
-          link: https://github.com/thedavecarroll/
-        - type: twitter
-          link: https://twitter.com/thedavecarroll
-        - type: linkedin
-          link: https://www.linkedin.com/in/thedavecarroll/
+        - type: 'github'
+          link: 'https://github.com/thedavecarroll/'
+        - type: 'twitter'
+          link: 'https://twitter.com/thedavecarroll'
+        - type: 'linkedin'
+          link: 'https://www.linkedin.com/in/thedavecarroll/'
 
 # Extensions
 markdown_extensions:
