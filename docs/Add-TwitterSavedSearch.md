@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version:
+online version: https://bluebirdps.anovelidea.org/en/latest/Add-TwitterSavedSearch
 schema: 2.0.0
 ---
 
@@ -76,6 +76,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Get-TwitterSavedSearch]()
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Add-TwitterSavedSearch)
+[Get-TwitterSavedSearch](https://bluebirdps.anovelidea.org/en/latest/Get-TwitterSavedSearch)
+[Remove-TwitterSavedSearch](https://bluebirdps.anovelidea.org/en/latest/Remove-TwitterSavedSearch)
+[New-TwitterSearchString](https://bluebirdps.anovelidea.org/en/latest/New-TwitterSearchString)
 [Search Standard Operators](https://developer.twitter.com/en/docs/twitter-api/v1/rules-and-filtering/overview/standard-operators)
 [Api Reference - POST saved_searches/create](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-create)

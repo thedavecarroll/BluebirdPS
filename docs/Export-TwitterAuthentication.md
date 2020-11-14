@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version:
+online version: https://bluebirdps.anovelidea.org/en/latest/Export-TwitterAuthentication
 schema: 2.0.0
 ---
 
@@ -53,5 +53,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Set-TwitterAuthentication]()
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Export-TwitterAuthentication)
+[Import-TwitterAuthentication](https://bluebirdps.anovelidea.org/en/latest/Import-TwitterAuthentication)
+[Set-TwitterAuthentication](https://bluebirdps.anovelidea.org/en/latest/Set-TwitterAuthentication)
+[Test-TwitterAuthentication](https://bluebirdps.anovelidea.org/en/latest/Test-TwitterAuthentication)
 [Api Reference - Authentication](https://developer.twitter.com/en/docs/authentication/oauth-1-0a)

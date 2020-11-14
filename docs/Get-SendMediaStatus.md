@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version:
+online version: https://bluebirdps.anovelidea.org/en/latest/Get-SendMediaStatus
 schema: 2.0.0
 ---
 
@@ -67,5 +67,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Send-TwitterMedia]()
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Get-SendMediaStatus)
+[Send-TwitterMedia](https://bluebirdps.anovelidea.org/en/latest/Send-TwitterMedia)
 [Api Reference - GET media/upload](https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/get-media-upload-status)

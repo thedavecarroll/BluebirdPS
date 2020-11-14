@@ -1,48 +1,56 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version:
+online version: https://bluebirdps.anovelidea.org/en/latest/Get-TwitterList
 schema: 2.0.0
 ---
 
 # Get-TwitterList
 
 ## SYNOPSIS
+
 {{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ### ListScreenName (Default)
-```
+
+```powershell
 Get-TwitterList -ScreenName <String> [-OwnedListFirst] [<CommonParameters>]
 ```
 
 ### ListUserId
-```
+
+```powershell
 Get-TwitterList -UserId <String> [-OwnedListFirst] [<CommonParameters>]
 ```
 
 ### ShowId
-```
+
+```powershell
 Get-TwitterList -ListId <String> [<CommonParameters>]
 ```
 
 ### ShowSlugOwnerId
-```
+
+```powershell
 Get-TwitterList -Slug <String> -OwnerId <Int64> [<CommonParameters>]
 ```
 
 ### ShowSlugOwnerScreenName
-```
+
+```powershell
 Get-TwitterList -Slug <String> -OwnerScreenName <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
 {{ Fill in the Description }}
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
 PS C:\> {{ Add example code here }}
 ```
@@ -52,6 +60,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -ListId
+
 {{ Fill ListId Description }}
 
 ```yaml
@@ -67,6 +76,7 @@ Accept wildcard characters: False
 ```
 
 ### -OwnedListFirst
+
 {{ Fill OwnedListFirst Description }}
 
 ```yaml
@@ -130,6 +140,7 @@ Accept wildcard characters: False
 ```
 
 ### -Slug
+
 {{ Fill Slug Description }}
 
 ```yaml
@@ -161,6 +172,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -170,6 +182,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### System.Object
+
 ## NOTES
 
 ## RELATED LINKS
+
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Get-TwitterList)

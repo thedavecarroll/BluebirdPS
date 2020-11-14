@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version:
+online version: https://bluebirdps.anovelidea.org/en/latest/Get-TwitterFollowers
 schema: 2.0.0
 ---
 
@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Returns a collection of user objects or user id that the specified user is following.
+Returns a collection of user objects or array of user ids that is following the specified user.
 
 ## SYNTAX
 
@@ -27,7 +27,7 @@ Get-TwitterFollowers [-ScreenName <String>] [-UserId <String>] [-ResultsPerPage 
 
 ## DESCRIPTION
 
-Returns a collection of user objects or user id that the specified user is following.
+Returns a collection of user objects or array of user ids that is following the specified user.
 
 ## EXAMPLES
 
@@ -158,9 +158,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### System.Object
+
 ## NOTES
 
 ## RELATED LINKS
 
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Get-TwitterFollowers)
+[Get-TwitterFriends](https://bluebirdps.anovelidea.org/en/latest/Get-TwitterFriends)
+[Get-TwitterFollowers](https://bluebirdps.anovelidea.org/en/latest/Get-TwitterFollowers)
 [Api Reference - GET followers/ids](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-followers-ids)
 [Api Reference - GET followers/list](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-followers-list)

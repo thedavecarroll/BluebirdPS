@@ -1,11 +1,11 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version:
+online version: https://bluebirdps.anovelidea.org/en/latest/Get-TweetLike
 schema: 2.0.0
 ---
 
-# Get-TweetLikes
+# Get-TweetLike
 
 ## SYNOPSIS
 
@@ -16,15 +16,13 @@ Returns recent Tweets liked by the specified user.
 ### ScreenName (Default)
 
 ```powershell
-Get-TweetLikes -ScreenName <String> [-Count <Int32>] [-SinceId <Int64>] [-MaxId <Int64>] [-ExcludeEntities]
- [<CommonParameters>]
+Get-TweetLike -ScreenName <String> [-Count <Int32>] [-SinceId <Int64>] [-MaxId <Int64>] [-ExcludeEntities] [<CommonParameters>]
 ```
 
 ### UserId
 
 ```powershell
-Get-TweetLikes -UserId <String> [-Count <Int32>] [-SinceId <Int64>] [-MaxId <Int64>] [-ExcludeEntities]
- [<CommonParameters>]
+Get-TweetLike -UserId <String> [-Count <Int32>] [-SinceId <Int64>] [-MaxId <Int64>] [-ExcludeEntities] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,7 +36,7 @@ Likes were previously called favorites.
 ### Example 1
 
 ```powershell
-PS > Get-TweetLikes -ScreenName thedavecarroll
+PS > Get-TweetLike -ScreenName thedavecarroll
 ```
 
 Return the last 20 tweets that the user, with the specified screen name, liked.
@@ -46,7 +44,7 @@ Return the last 20 tweets that the user, with the specified screen name, liked.
 ### Example 2
 
 ```powershell
-PS > Get-TweetLikes -ScreenName thedavecarroll -Count 15 -ExcludeEntities
+PS > Get-TweetLike -ScreenName thedavecarroll -Count 15 -ExcludeEntities
 ```
 
 Return the last 15 tweets that the user, with the specified screen name, liked excluding the entities in the results.
@@ -54,7 +52,7 @@ Return the last 15 tweets that the user, with the specified screen name, liked e
 ### Example 3
 
 ```powershell
-PS > Get-TweetLikes -UserId 292670084
+PS > Get-TweetLike -UserId 292670084
 ```
 
 Return the last 20 tweets that the user, with the specified id, liked.
@@ -175,5 +173,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Set-TweetLike]()
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Get-TweetLike)
+[Set-TweetLike](https://bluebirdps.anovelidea.org/en/latest/Set-TweetLike)
 [Api Reference - GET favorites/list](https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-favorites-list)

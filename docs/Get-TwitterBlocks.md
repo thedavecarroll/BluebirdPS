@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version:
+online version: https://bluebirdps.anovelidea.org/en/latest/Get-TwitterBlocks
 schema: 2.0.0
 ---
 
@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Returns a collection of user objects or user id that the authenticating user is blocking.
+Returns a collection of user objects or array of user ids that the authenticating user is blocking.
 
 ## SYNTAX
 
@@ -27,7 +27,7 @@ Get-TwitterBlocks [-List] [-SkipStatus] [-ExcludeEntities] [<CommonParameters>]
 
 ## DESCRIPTION
 
-Returns a collection of user objects or user id that the authenticating user is blocking.
+Returns a collection of user objects or array of user ids that the authenticating user is blocking.
 
 ## EXAMPLES
 
@@ -115,5 +115,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Get-TwitterBlocks)
 [Api Reference - GET blocks/ids](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-blocks-ids)
 [Api Reference - GET blocks/list](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-blocks-list)

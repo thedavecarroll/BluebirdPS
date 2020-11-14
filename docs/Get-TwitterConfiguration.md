@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version:
+online version: https://bluebirdps.anovelidea.org/en/latest/Get-TwitterConfiguration
 schema: 2.0.0
 ---
 
@@ -60,4 +60,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Get-TwitterConfiguration)
 [Api Reference - GET help/configuration](https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/configuration/api-reference/get-help-configuration)
