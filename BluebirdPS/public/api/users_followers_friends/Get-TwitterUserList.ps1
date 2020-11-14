@@ -1,9 +1,9 @@
 function Get-TwitterUserList {
     [CmdletBinding()]
     param(
-        [ValidateCount(100)]
+        [ValidateCount(1,100)]
         [string[]]$ScreenName,
-        [ValidateCount(100)]
+        [ValidateCount(1,100)]
         [string[]]$UserId,
         [ValidateSet('Compatibility','Extended')]
         [string]$TweetMode='Extended',

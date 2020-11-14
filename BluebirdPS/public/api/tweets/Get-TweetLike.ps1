@@ -1,5 +1,4 @@
-function Get-TweetLikes {
-    [Alias('Get-TwitterFavorites')]
+function Get-TweetLike {
     [CmdLetBinding(DefaultParameterSetName='ScreenName')]
     param(
         [Parameter(Mandatory,ParameterSetName='ScreenName')]
