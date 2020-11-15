@@ -9,4 +9,3 @@ formats:
 
 python:
   version: 3.7
-    - requirements: 'docs/requirements.txt'
