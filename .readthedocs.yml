@@ -1,12 +1,12 @@
 version: 2
 
 mkdocs:
-  configuration: docs/mkdocs.yml
+  configuration: 'docs/mkdocs.yml'
 
 formats:
-  - epub
-  - pdf
+  - 'epub'
+  - 'pdf'
 
 python:
   version: 3.7
-    - requirements: docs/requirements.txt
+    - requirements: 'docs/requirements.txt'
