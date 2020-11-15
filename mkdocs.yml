@@ -52,8 +52,3 @@ markdown_extensions:
         guess_lang: true
     - toc:
         permalink: true
-
-# Navigation
-nav:
-    - Home: 'README.md'
-    # - Change Log: CHANGELOG.md
