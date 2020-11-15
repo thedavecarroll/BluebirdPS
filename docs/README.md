@@ -149,7 +149,7 @@ Here is list of current public functions.
 * Set-TweetLike
 * Get-TweetLikes
 
-### Users, Followers, Friends, Lists, and Blocks
+### Users, Followers, Friends, and Blocks
 
 * Get-TwitterTimeline
 * Get-TwitterUser
@@ -157,14 +157,17 @@ Here is list of current public functions.
 * Get-TwitterFollowers
 * Get-TwitterFriends
 * Get-TwitterFriendship
+* Get-TwitterMutedUser
+* Get-TwitterBlocks
+
+### Lists
+
 * Get-TwitterList
 * Get-TwitterListByOwner
 * Get-TwitterListMember
 * Get-TwitterListSubscriber
 * Get-TwitterListSubscription
 * Get-TwitterListTweets
-* Get-TwitterMutedUser
-* Get-TwitterBlocks
 
 ### Searches
 
@@ -184,15 +187,18 @@ Here is list of current public functions.
 * Publish-TwitterDM
 * Unpublish-TwitterDM
 
+### User Profile
+
+* Get-TwitterUserProfileBanner
+
 ### Supporting Commands
 
 * Get-TwitterAccountSettings
-* Get-TwitterUserProfileBanner
 * Get-TwitterConfiguration
 * Get-TwitterLanguages
 * Get-TwitterRateLimitStatus
 
-### Ancillary Commands
+### Helper Commands
 
 These functions do not connect to Twitter directly.
 
