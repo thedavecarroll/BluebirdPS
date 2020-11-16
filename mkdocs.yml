@@ -41,3 +41,9 @@ extra:
       link: https://twitter.com/thedavecarroll
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/thedavecarroll/
+
+nav:
+  - Home: README.md
+  - Getting Started: GettingStarted.md
+  - Changelog: CHANGELOG.md
+  - License: LICENSE.md
