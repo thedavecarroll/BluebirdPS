@@ -7,26 +7,25 @@ site_url: 'https://bluebirdps.anovelidea.org'
 # Repo Info
 repo_name: 'thedavecarroll/BluebirdPS'
 repo_url: 'https://github.com/thedavecarroll/BluebirdPS'
-#edit_uri: 'edit/master/docs/'
 
 # Copyright
 copyright: "Copyright &copy; 2020 Dave Carroll<br/>BluebirdPS is licensed under the <a href=https://github.com/thedavecarroll/BluebirdPS/raw/main/LICENSE>MIT license."
 
 # Analytics
 google_analytics:
-  - 'UA-122236350-3'
-  - 'auto'
+  - UA-122236350-3
+  - auto
 
 # Configuration
 theme:
   name: mkdocs
-  language: 'en'
+  language: en
   palette:
-      primary: 'light blue'
-      accent: 'indigo'
+      primary: light blue
+      accent: indigo
   font:
-      text: 'Roboto'
-      code: 'Roboto Mono'
+      text: Roboto
+      code: Roboto Mono
   features:
     - navigation.tabs
 
