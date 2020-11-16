@@ -12,14 +12,19 @@ repo_url: 'https://github.com/thedavecarroll/BluebirdPS'
 copyright: "Copyright &copy; 2020 Dave Carroll<br/>BluebirdPS is licensed under the <a href=https://github.com/thedavecarroll/BluebirdPS/raw/main/LICENSE>MIT license."
 
 # Analytics
-google_analytics: ['UA-122236350-3', 'bluebirdps.anovelidea.org']
+google_analytics:
+  - !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]
+  - auto
 
 # Configuration
 theme:
-  name: mkdocs
+  name: material
   language: en
+  icon:
+    logo: fontawesome/regular/comments
   palette:
-      primary: light blue
+      scheme: preference
+      primary: blue
       accent: indigo
   font:
       text: Roboto

@@ -1,6 +1,6 @@
-# BluebirdPS: A Twitter Automation Client for PowerShell 7
+# BluebirdPS
 
-This is the project repo for BluebirdPS, a Twitter automation client.
+This is the project repo for BluebirdPS, a Twitter automation client for PowerShell 7.
 
 ## Work in Progress
 
