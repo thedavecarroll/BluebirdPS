@@ -3,7 +3,6 @@ site_name: 'BluebirdPS'
 site_description: 'Online Help for BluebirdPS PowerShell Module'
 site_author: 'Dave Carroll'
 site_url: 'https://bluebirdps.anovelidea.org'
-site_dir: site/
 
 # Repo Info
 repo_name: 'thedavecarroll/BluebirdPS'
@@ -17,7 +16,7 @@ google_analytics: ['UA-122236350-3', 'bluebirdps.anovelidea.org']
 
 # Configuration
 theme:
-  name: material
+  name: mkdocs
   language: en
   palette:
       primary: light blue
