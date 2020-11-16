@@ -19,7 +19,7 @@ google_analytics:
 
 # Configuration
 theme:
-  name: mkdocs-material
+  name: material
   language: 'en'
   palette:
       primary: 'light blue'
