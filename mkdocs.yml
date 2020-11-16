@@ -44,6 +44,9 @@ extra:
 
 nav:
   - Home: README.md
-  - Getting Started: GettingStarted.md
+  - Getting Started:
+    - Pre-requisites: prerequisites.md
+    - How to Install: how-to-install.md
   - Changelog: CHANGELOG.md
   - License: LICENSE.md
+  - Commands:
