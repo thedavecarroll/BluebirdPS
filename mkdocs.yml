@@ -3,6 +3,7 @@ site_name: 'BluebirdPS'
 site_description: 'Online Help for BluebirdPS PowerShell Module'
 site_author: 'Dave Carroll'
 site_url: 'https://bluebirdps.anovelidea.org'
+site_dir: site/
 
 # Repo Info
 repo_name: 'thedavecarroll/BluebirdPS'
@@ -12,9 +13,7 @@ repo_url: 'https://github.com/thedavecarroll/BluebirdPS'
 copyright: "Copyright &copy; 2020 Dave Carroll<br/>BluebirdPS is licensed under the <a href=https://github.com/thedavecarroll/BluebirdPS/raw/main/LICENSE>MIT license."
 
 # Analytics
-google_analytics:
-  - UA-122236350-3
-  - auto
+google_analytics: ['UA-122236350-3', 'bluebirdps.anovelidea.org']
 
 # Configuration
 theme:
