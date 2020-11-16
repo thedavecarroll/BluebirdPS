@@ -4,4 +4,5 @@ python:
   install:
     - requirements: docs/requirements.txt
 
-configuration: docs/mkdocs.yml
+mkdocs:
+  configuration: docs/mkdocs.yml
