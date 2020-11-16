@@ -35,9 +35,9 @@ theme:
 # Customization
 extra:
   social:
-    - type: github
+    - icon: fontawesome/brands/github
       link: https://github.com/thedavecarroll/
-    - type: twitter
+    - icon: fontawesome/brands/twitter
       link: https://twitter.com/thedavecarroll
-    - type: linkedin
+    - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/thedavecarroll/
