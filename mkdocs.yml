@@ -43,9 +43,13 @@ extra:
       link: https://www.linkedin.com/in/thedavecarroll/
 
 nav:
-  - Home: README.md
+  - Home:
+    - README.md
   - Getting Started:
     - Pre-requisites: prerequisites.md
     - How to Install: how-to-install.md
-  - Changelog: CHANGELOG.md
-  - License: LICENSE.md
+  - Changelog:
+    - CHANGELOG.md
+  - License:
+    - LICENSE.md
+  - Commands:
