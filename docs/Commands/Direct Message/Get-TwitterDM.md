@@ -100,7 +100,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online Version](https://bluebirdps.anovelidea.org/en/latest/Get-TwitterDM)
+
 [Publish-TwitterDM](https://bluebirdps.anovelidea.org/en/latest/Publish-TwitterDM)
+
 [Unpublish-TwitterDM](https://bluebirdps.anovelidea.org/en/latest/Unpublish-TwitterDM)
+
 [Api Reference - GET direct_messages/events/list](https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/list-events)
+
 [Api Reference - GET direct_messages/events/show](https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/get-event)
