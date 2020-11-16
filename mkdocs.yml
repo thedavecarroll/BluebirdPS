@@ -19,7 +19,7 @@ google_analytics:
 
 # Configuration
 theme:
-  name: material
+  name: mkdocs-material
   language: 'en'
   palette:
       primary: 'light blue'
@@ -27,8 +27,8 @@ theme:
   font:
       text: 'Roboto'
       code: 'Roboto Mono'
-  feature:
-    tabs: true
+  features:
+    - navigation.tabs
 
 # Customization
 extra:
