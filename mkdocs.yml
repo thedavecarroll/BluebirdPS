@@ -53,5 +53,6 @@ nav:
     - How to Install: how-to-install.md
     - Pre-requisites: prerequisites.md
   - Change Log: CHANGELOG.md
+  - License: LICENSE.md
   - Commands:
       - ...
