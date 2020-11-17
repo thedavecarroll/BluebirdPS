@@ -50,7 +50,7 @@ extra:
 nav:
   - Home: README.md
   - Getting Started:
-    - How to Install: how-to-install.md
+    - How to Install: install.md
     - Pre-requisites: prerequisites.md
   - Change Log: CHANGELOG.md
   - License: LICENSE.md
