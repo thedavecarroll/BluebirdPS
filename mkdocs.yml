@@ -32,6 +32,10 @@ theme:
   features:
     - navigation.tabs
 
+plugins:
+  - search
+  - awesome-pages
+
 # Customization
 extra:
   social:
@@ -41,3 +45,13 @@ extra:
       link: https://twitter.com/thedavecarroll
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/thedavecarroll/
+
+# Navigation
+nav:
+  - Home: README.md
+  - Getting Started:
+    - How to Install: how-to-install.md
+    - Pre-requisites: prerequisites.md
+  - Commands:
+      - ...
+  - Change Log: CHANGELOG.md
