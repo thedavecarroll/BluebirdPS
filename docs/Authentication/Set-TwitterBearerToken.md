@@ -1,37 +1,45 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Set-TwitterBearerToken
+online version: https://bluebirdps.anovelidea.org/en/latest/Authentication/Set-TwitterBearerToken
 schema: 2.0.0
 ---
 
 # Set-TwitterBearerToken
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+The Set-TwitterBearerToken command receives and sets the user's bearer token credential.
 
 ## SYNTAX
 
-```
+```powershell
 Set-TwitterBearerToken [-Persist] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+The Set-TwitterBearerToken command receives and sets the user's bearer token credential.
+
+The command sends the user's API key and API key secret to the Twitter and receives the bearer token which is saved in the session variable.
+
+If using the Persist switch, the encrypted credentials file will be stored in the folder $env:HOME/.BluebirdPS.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS C:\> {{ Add example code here }}
+PS > Set-TwitterBearerToken -Persist
 ```
 
-{{ Add example description here }}
+Set the user's bearer token and save the session credentials in the folder $env:HOME/.BluebirdPS.
 
 ## PARAMETERS
 
 ### -Persist
-{{ Fill Persist Description }}
+
+Use this switch to save the tested credentials to an encrypted credentials file located in $env:HOME/.BluebirdPS.
 
 ```yaml
 Type: SwitchParameter
@@ -61,4 +69,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Set-TwitterBearerToken)
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Authentication/Set-TwitterBearerToken)
+
+[Export-TwitterAuthentication](https://bluebirdps.anovelidea.org/en/latest/Authentication/Export-TwitterAuthentication)
+
+[Api Reference - Authentication](https://developer.twitter.com/en/docs/authentication/api-reference/token)

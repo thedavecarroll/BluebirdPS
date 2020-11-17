@@ -1,32 +1,35 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Test-TwitterAuthentication
+online version: https://bluebirdps.anovelidea.org/en/latest/Authentication/Test-TwitterAuthentication
 schema: 2.0.0
 ---
 
 # Test-TwitterAuthentication
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+The command Test-TwitterAuthentication is used to validate the user's credentials.
 
 ## SYNTAX
 
-```
+```powershell
 Test-TwitterAuthentication [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+The command Test-TwitterAuthentication is used to validate the user's credentials.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS C:\> {{ Add example code here }}
+PS > Test-TwitterAuthentication
 ```
 
-{{ Add example description here }}
+Returns true if the user's credentials are valid, otherwise it will return false.
 
 ## PARAMETERS
 
@@ -46,4 +49,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Test-TwitterAuthentication)
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Authentication/Test-TwitterAuthentication)
+
+[Api Reference - GET account/verify_credentials](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-account-verify_credentials)
