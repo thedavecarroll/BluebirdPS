@@ -12,7 +12,7 @@ $ModuleManifest = Import-PowerShellDataFile -Path $ManifestPath
 $VersionFolder = Join-Path -Path $PSScriptRoot -ChildPath 'BuildOutput' -AdditionalChildPath $Projectname,$ModuleManifest.ModuleVersion
 $BuildManifest = Join-Path -Path $VersionFolder -ChildPath $ModulePsd1
 $BuildModule = Join-Path -Path $VersionFolder -ChildPath $ModulePsm1
-$ExternalHelpSourceMarkdown = Join-Path -Path $PSScriptRoot -ChildPath 'docs' -AdditionalChildPath 'Commands'
+$ExternalHelpSourceMarkdown = Join-Path -Path $PSScriptRoot -ChildPath 'docs'
 $ExternalHelpPath = Join-Path -Path $VersionFolder -ChildPath 'en-US'
 $BuildHelperPath = Join-Path -Path $PSScriptRoot -ChildPath 'build'
 $ApiEndpointSourcePath = Join-Path -Path $PSScriptRoot -ChildPath 'Endpoints'
@@ -101,7 +101,7 @@ Import-TwitterApiEndpoints -Path $ApiEndpointSourcePath | ConvertTo-Json -Depth 
 
 # create external help XML
 'Creating new external help'
-$MarkdownHelp = Get-ChildItem -Path $ExternalHelpSourceMarkdown -Include '*.md' -Recurse
+$MarkdownHelp = Get-ChildItem -Path $ExternalHelpSourceMarkdown -Include '*-*.md' -Recurse
 New-ExternalHelp -Path $MarkdownHelp -OutputPath $ExternalHelpPath -Force | Out-Null
 
 # get new file list
