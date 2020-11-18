@@ -1,37 +1,45 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Unpublish-TwitterDM
+online version: https://bluebirdps.anovelidea.org/en/latest/Direct+Message/Unpublish-TwitterDM
 schema: 2.0.0
 ---
 
 # Unpublish-TwitterDM
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Deletes the direct message specified by the DirectMessageId parameter.
 
 ## SYNTAX
 
-```
+```powershell
 Unpublish-TwitterDM [-DirectMessageId] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+Deletes the direct message specified by the DirectMessageId parameter.
+
+The authenticating user must be the recipient of the specified direct message.
+Direct Messages are only removed from the interface of the user context provided.
+Other members of the conversation can still access the Direct Messages.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS C:\> {{ Add example code here }}
+PS > Unpublish-TwitterDM -DirectMessageId 9876543210123
 ```
 
-{{ Add example description here }}
+Deletes the direct message specified by the DirectMessageId parameter.
 
 ## PARAMETERS
 
 ### -DirectMessageId
-{{ Fill DirectMessageId Description }}
+
+The id of the Direct Message event that should be deleted.
 
 ```yaml
 Type: String
@@ -61,4 +69,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Unpublish-TwitterDM)
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Direct+Message/Unpublish-TwitterDM)
+
+[Get-TwitterDM](https://bluebirdps.anovelidea.org/en/latest/Direct+Message/Get-TwitterDM)
+
+[Publish-TwitterDM](https://bluebirdps.anovelidea.org/en/latest/Direct+Message/Publish-TwitterDM)
+
+[Api Reference - DELETE direct_messages/events/destroy](https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/delete-message-event)

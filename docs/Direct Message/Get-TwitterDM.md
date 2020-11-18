@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Get-TwitterDM
+online version: https://bluebirdps.anovelidea.org/en/latest/Direct+Message/Get-TwitterDM
 schema: 2.0.0
 ---
 
@@ -99,11 +99,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Get-TwitterDM)
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Direct+Message/Get-TwitterDM)
 
-[Publish-TwitterDM](https://bluebirdps.anovelidea.org/en/latest/Publish-TwitterDM)
+[Publish-TwitterDM](https://bluebirdps.anovelidea.org/en/latest/Direct+Message/Publish-TwitterDM)
 
-[Unpublish-TwitterDM](https://bluebirdps.anovelidea.org/en/latest/Unpublish-TwitterDM)
+[Unpublish-TwitterDM](https://bluebirdps.anovelidea.org/en/latest/Direct+Message/Unpublish-TwitterDM)
 
 [Api Reference - GET direct_messages/events/list](https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/list-events)
 

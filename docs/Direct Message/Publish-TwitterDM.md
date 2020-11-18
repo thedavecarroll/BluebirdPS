@@ -1,53 +1,57 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Publish-TwitterDM
+online version: https://bluebirdps.anovelidea.org/en/latest/Direct+Message/Publish-TwitterDM
 schema: 2.0.0
 ---
 
 # Publish-TwitterDM
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Publishes a new direct message to a specified user from the authenticating user.
 
 ## SYNTAX
 
-```
+```powershell
 Publish-TwitterDM [-UserId] <String> [-Message] <String> [[-MediaId] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+Publishes a new direct message to a specified user from the authenticating user.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS C:\> {{ Add example code here }}
+PS > Publish-TwitterDM -UserId 123456789 -Message "Did you hear about the release of #PowerShell 7.1?"
 ```
 
-{{ Add example description here }}
+Send the string message to the specified user as a direct message.
 
 ## PARAMETERS
 
-### -MediaId
+### -UserId
 
-The MediaId returned from the Send-TwitterMedia command.
+The ID of the user to which you want to send a direct message.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: media_id
+Aliases: id
 
-Required: False
-Position: 2
+Required: True
+Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
 ### -Message
-{{ Fill Message Description }}
+
+The text of your Direct Message.
 
 ```yaml
 Type: String
@@ -61,17 +65,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -UserId
+### -MediaId
 
-The ID of the user to which you want to send a direct message.
+The MediaId returned from the Send-TwitterMedia command.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: id
+Aliases: media_id
 
-Required: True
-Position: 0
+Required: False
+Position: 2
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
@@ -93,4 +97,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Publish-TwitterDM)
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Direct+Message/Publish-TwitterDM)
+
+[Get-TwitterDM](https://bluebirdps.anovelidea.org/en/latest/Direct+Message/Get-TwitterDM)
+
+[Unpublish-TwitterDM](https://bluebirdps.anovelidea.org/en/latest/Direct+Message/Unpublish-TwitterDM)
+
+[Api Reference - GET direct_messages/events/list](https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/new-event)
