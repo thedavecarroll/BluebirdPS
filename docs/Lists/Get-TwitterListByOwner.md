@@ -1,38 +1,45 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Get-TwitterListByOwner
+online version: https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListByOwner
 schema: 2.0.0
 ---
 
 # Get-TwitterListByOwner
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Returns the lists owned by the specified user.
 
 ## SYNTAX
 
 ### ScreenName (Default)
-```
+
+```powershell
 Get-TwitterListByOwner -ScreenName <String> [-ResultsPerPage <Int32>] [<CommonParameters>]
 ```
 
 ### UserId
-```
+
+```powershell
 Get-TwitterListByOwner -UserId <Int64> [-ResultsPerPage <Int32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+Returns the lists owned by the specified user.
+
+Private lists will only be shown if the authenticated user is also the owner of the lists.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS C:\> {{ Add example code here }}
+PS > Get-TwitterListByOwner -ScreenName thedavecarroll
 ```
 
-{{ Add example description here }}
+Returns the list owned by the specified user.
 
 ## PARAMETERS
 
@@ -100,4 +107,16 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Get-TwitterListByOwner)
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListByOwner)
+
+[Get-TwitterList](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterList)
+
+[Get-TwitterListMember](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListMember)
+
+[Get-TwitterListSubscriber](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListSubscriber)
+
+[Get-TwitterListSubscription](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListSubscription)
+
+[Get-TwitterListTweets](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListTweets)
+
+[Api Reference - GET lists/ownerships](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-ownerships)
