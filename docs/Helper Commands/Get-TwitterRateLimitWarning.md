@@ -1,32 +1,45 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Get-TwitterRateLimitWarning
+online version: https://bluebirdps.anovelidea.org/en/latest/Helper+Commands/Get-TwitterRateLimitWarning
 schema: 2.0.0
 ---
 
 # Get-TwitterRateLimitWarning
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Returns the session setting for the Rate Limit Warning.
 
 ## SYNTAX
 
-```
+```powershell
 Get-TwitterRateLimitWarning [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+Returns the session setting for the Rate Limit Warning.
+
+If this setting is enabled, a warning message will be displayed for each rate limited API call.
+
+Notes:
+The warning will be always displayed when the remaining available API calls are five (5) or less.
+This setting is disabled at the beginning of the session.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS C:\> {{ Add example code here }}
+PS > Get-TwitterRateLimitWarning
 ```
 
-{{ Add example description here }}
+```console
+RateLimitWarning is set to Enabled
+```
+
+Returns the session setting for the Rate Limit Warning.
 
 ## PARAMETERS
 
@@ -46,4 +59,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Get-TwitterRateLimitWarning)
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Helper+Commands/Get-TwitterRateLimitWarning)
+
+[Set-TwitterRateLimitWarning](https://bluebirdps.anovelidea.org/en/latest/Helper+Commands/Set-TwitterRateLimitWarning)

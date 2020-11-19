@@ -1,47 +1,67 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Set-TwitterRateLimitWarning
+online version: https://bluebirdps.anovelidea.org/en/latest/Helper+Commands/Set-TwitterRateLimitWarning
 schema: 2.0.0
 ---
 
 # Set-TwitterRateLimitWarning
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Sets the session setting for the Rate Limit Warning.
 
 ## SYNTAX
 
 ### Enable
-```
+
+```powershell
 Set-TwitterRateLimitWarning [-Enable] [<CommonParameters>]
 ```
 
 ### Disable
-```
+
+```powershell
 Set-TwitterRateLimitWarning [-Disable] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+Sets the session setting for the Rate Limit Warning.
+
+If this setting is enabled, a warning message will be displayed for each rate limited API call.
+
+Notes:
+The warning will be always displayed when the remaining available API calls are five (5) or less.
+This setting is disabled at the beginning of the session.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS C:\> {{ Add example code here }}
+PS > Set-TwitterRateLimitWarning -Enable
 ```
 
-{{ Add example description here }}
+Enable the rate limit warning.
+
+### Example 2
+
+```powershell
+PS > Set-TwitterRateLimitWarning -Disable
+```
+
+Disable the rate limit warning.
 
 ## PARAMETERS
 
-### -Disable
-{{ Fill Disable Description }}
+### -Enable
+
+Enable the rate limit warning.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: Disable
+Parameter Sets: Enable
 Aliases:
 
 Required: True
@@ -51,12 +71,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Enable
-{{ Fill Enable Description }}
+### -Disable
+
+Disable the rate limit warning.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: Enable
+Parameter Sets: Disable
 Aliases:
 
 Required: True
@@ -82,4 +103,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Set-TwitterRateLimitWarning)
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Helper+Commands/Set-TwitterRateLimitWarning)
+
+[Get-TwitterRateLimitWarning](https://bluebirdps.anovelidea.org/en/latest/Helper+Commands/Get-TwitterRateLimitWarning)

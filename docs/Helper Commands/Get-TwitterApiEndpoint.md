@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Get-TwitterApiEndpoint
+online version: https://bluebirdps.anovelidea.org/en/latest/Helper+Commands/Get-TwitterApiEndpoint
 schema: 2.0.0
 ---
 
@@ -34,10 +34,18 @@ Displays the Twitter Api endpoint metadata for endpoints supported by this modul
 ### Example 1
 
 ```powershell
-PS > Get-TwitterApiEndpoint -Command Get-TwitterAccountSettings)
+PS > Get-TwitterApiEndpoint -Endpoint friends,followers,friendships
 ```
 
-Display the metadata for the command Get-TwitterAccountSettings
+Display the endpoint metadata for the command Get-TwitterAccountSettings.
+
+### Example 2
+
+Display the endpoint metadata for the specified endpoints.
+
+```powershell
+PS > Get-TwitterApiEndpoint -Command Get-TwitterAccountSettings
+```
 
 ## PARAMETERS
 
@@ -50,7 +58,6 @@ Type: String[]
 Parameter Sets: Endpoint
 Aliases:
 Accepted values: account, blocks, mutes, users, followers, friends, friendships, lists, help
-
 Required: False
 Position: 0
 Default value: None
@@ -90,4 +97,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Get-TwitterApiEndpoint)
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Helper+Commands/Get-TwitterApiEndpoint)
