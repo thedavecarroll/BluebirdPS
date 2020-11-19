@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Direct+Message/Unpublish-TwitterDM
+online version: https://bluebirdps.anovelidea.org/en/latest/Direct%20Message/Unpublish-TwitterDM
 schema: 2.0.0
 ---
 
@@ -69,10 +69,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Direct+Message/Unpublish-TwitterDM)
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Direct%20Message/Unpublish-TwitterDM)
 
-[Get-TwitterDM](https://bluebirdps.anovelidea.org/en/latest/Direct+Message/Get-TwitterDM)
+[Get-TwitterDM](https://bluebirdps.anovelidea.org/en/latest/Direct%20Message/Get-TwitterDM)
 
-[Publish-TwitterDM](https://bluebirdps.anovelidea.org/en/latest/Direct+Message/Publish-TwitterDM)
+[Publish-TwitterDM](https://bluebirdps.anovelidea.org/en/latest/Direct%20Message/Publish-TwitterDM)
 
 [Api Reference - DELETE direct_messages/events/destroy](https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/delete-message-event)

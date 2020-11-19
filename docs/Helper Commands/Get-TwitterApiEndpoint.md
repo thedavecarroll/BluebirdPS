@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Helper+Commands/Get-TwitterApiEndpoint
+online version: https://bluebirdps.anovelidea.org/en/latest/Helper%20Commands/Get-TwitterApiEndpoint
 schema: 2.0.0
 ---
 
@@ -97,4 +97,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Helper+Commands/Get-TwitterApiEndpoint)
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Helper%20Commands/Get-TwitterApiEndpoint)

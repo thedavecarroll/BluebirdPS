@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Helper+Commands/Get-TwitterRateLimitWarning
+online version: https://bluebirdps.anovelidea.org/en/latest/Helper%20Commands/Get-TwitterRateLimitWarning
 schema: 2.0.0
 ---
 
@@ -59,6 +59,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Helper+Commands/Get-TwitterRateLimitWarning)
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Helper%20Commands/Get-TwitterRateLimitWarning)
 
-[Set-TwitterRateLimitWarning](https://bluebirdps.anovelidea.org/en/latest/Helper+Commands/Set-TwitterRateLimitWarning)
+[Set-TwitterRateLimitWarning](https://bluebirdps.anovelidea.org/en/latest/Helper%20Commands/Set-TwitterRateLimitWarning)
