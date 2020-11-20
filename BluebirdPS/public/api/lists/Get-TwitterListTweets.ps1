@@ -21,7 +21,7 @@ function Get-TwitterListTweets {
         [long]$MaxId,
 
         [ValidateRange(1,200)]
-        [long]$ResultsPerPage = 20,
+        [long]$Count = 20,
         [switch]$ExcludeEntities,
         [switch]$ExcludeRetweets
     )
@@ -32,6 +32,6 @@ function Get-TwitterListTweets {
         'https://api.twitter.com/1.1/lists/statuses.json',
         $Query
     )
-    Invoke-TwitterRequest -OAuthParameters $OAuthParameters
+    Invoke-TwitterRequest -OAuthParameters $OAuthParameters | ConvertTo-Json -Depth 10 | ConvertFrom-Json
 
 }
