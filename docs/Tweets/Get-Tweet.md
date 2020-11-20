@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Get-Tweet
+online version: https://bluebirdps.anovelidea.org/en/latest/Tweets/Get-Tweet
 schema: 2.0.0
 ---
 
@@ -92,7 +92,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Get-Tweet)
-[Publish-Tweet](https://bluebirdps.anovelidea.org/en/latest/Publish-Tweet)
-[Set-TweetLike](https://bluebirdps.anovelidea.org/en/latest/Set-TweetLike)
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Tweets/Get-Tweet)
+
+[Publish-Tweet](https://bluebirdps.anovelidea.org/en/latest/Tweets/Publish-Tweet)
+
+[Set-TweetLike](https://bluebirdps.anovelidea.org/en/latest/Tweets/Set-TweetLike)
+
 [API Documentation](https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-show-id)

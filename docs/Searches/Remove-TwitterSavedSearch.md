@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Remove-TwitterSavedSearch
+online version: https://bluebirdps.anovelidea.org/en/latest/Searches/Remove-TwitterSavedSearch
 schema: 2.0.0
 ---
 
@@ -23,7 +23,7 @@ Remove-TwitterSavedSearch [-SearchId] <Int64[]> [-WhatIf] [-Confirm] [<CommonPar
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS > {{ Add example code here }}
 ```
 
 {{ Add example description here }}
@@ -92,4 +92,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Remove-TwitterSavedSearch)
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Searches/Remove-TwitterSavedSearch)

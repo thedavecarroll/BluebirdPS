@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Get-TwitterFriendship
+online version: https://bluebirdps.anovelidea.org/en/latest/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFriendship
 schema: 2.0.0
 ---
 
@@ -66,7 +66,7 @@ The information returned depends on the parameters used.
 ### Example 1
 
 ```powershell
-PS C:\> Get-TwitterFriendship -Pending | ForEach-Object {Get-TwitterUser -UserId $_ | Select-Object -Property screen_name,verified,statuses_count,follow_request_sent,followers_count}
+PS > Get-TwitterFriendship -Pending | ForEach-Object {Get-TwitterUser -UserId $_ | Select-Object -Property screen_name,verified,statuses_count,follow_request_sent,followers_count}
 ```
 
 ```console
@@ -243,9 +243,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Get-TwitterFriendship)
-[Get-TwitterFriends](https://bluebirdps.anovelidea.org/en/latest/Get-TwitterFriends)
-[Get-TwitterFollowers](https://bluebirdps.anovelidea.org/en/latest/Get-TwitterFollowers)
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFriendship)
+[Get-TwitterFriends](https://bluebirdps.anovelidea.org/en/latest/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFriends)
+[Get-TwitterFollowers](https://bluebirdps.anovelidea.org/en/latest/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFollowers)
 
 [Api Reference - GET friendships/incoming](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-incoming)
 [Api Reference - GET friendships/no_retweets/ids](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-no_retweets-ids)

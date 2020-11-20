@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Get-TwitterTimeline
+online version: https://bluebirdps.anovelidea.org/en/latest/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterTimeline
 schema: 2.0.0
 ---
 
@@ -34,7 +34,7 @@ Get-TwitterTimeline [-ScreenName <String>] [-UserId <String>] [-ExcludeRetweets]
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS > {{ Add example code here }}
 ```
 
 {{ Add example description here }}
@@ -134,4 +134,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Get-TwitterTimeline)
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterTimeline)

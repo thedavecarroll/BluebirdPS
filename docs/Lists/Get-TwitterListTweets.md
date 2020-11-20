@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Get-TwitterListTweets
+online version: https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListTweets
 schema: 2.0.0
 ---
 
@@ -40,49 +40,24 @@ Returns a timeline of tweets authored by members of the specified list.
 ### Example 1
 
 ```powershell
-PS C:\> {{ Add example code here }}
+PS > Get-TwitterListTweets -ListId 79064151 -Count 50
 ```
 
-{{ Add example description here }}
+Return the last 50 tweets from members of the specified list.
+
+### Example 2
+
+```powershell
+PS > Get-TwitterListTweets -Slug psconfbook -OwnerScreenName mikefrobbins -Count 10 -ExcludeEntities -ExcludeRetweets
+```
+
+Return the last 10 tweets from members of the specified list, excluding retweets and the entities node.
 
 ## PARAMETERS
 
-### -ExcludeEntities
-
-Exclude the entities node.
-
-This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ExcludeRetweets
-
-By default, retweets are included. Use the ExcludeRetweets switch to omit retweets from the results.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -ListId
-{{ Fill ListId Description }}
+
+The numerical id of the list.
 
 ```yaml
 Type: String
@@ -96,16 +71,18 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -MaxId
+### -Slug
 
-Returns tweets with an id less than the value provided. Tweet id values roughly correlate to a date time.
+Returns the specified list based on the slug which is derived from the name of the list.
+
+Note: Provide the list owner when returning a list based on the slug.
 
 ```yaml
-Type: Int64
-Parameter Sets: (All)
+Type: String
+Parameter Sets: ShowSlugOwnerId, ShowSlugOwnerScreenName
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -144,22 +121,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ResultsPerPage
-
-Specifies the number of results to retrieve per page.
-
-```yaml
-Type: Int64
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -SinceId
 
 Returns tweets with an id equal or greater than the value provided. Tweet id values roughly correlate to a date time.
@@ -176,15 +137,66 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Slug
-{{ Fill Slug Description }}
+### -MaxId
+
+Returns tweets with an id less than the value provided. Tweet id values roughly correlate to a date time.
 
 ```yaml
-Type: String
-Parameter Sets: ShowSlugOwnerId, ShowSlugOwnerScreenName
+Type: Int64
+Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ExcludeRetweets
+
+By default, retweets are included. Use the ExcludeRetweets switch to omit retweets from the results.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ExcludeEntities
+
+Exclude the entities node.
+
+This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Count
+
+Specifies the number of results to retrieve.
+
+```yaml
+Type: Int64
+Parameter Sets: (All)
+Aliases:
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -207,4 +219,16 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Get-TwitterListTweets)
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListTweets)
+
+[Get-TwitterListMember](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListMember)
+
+[Get-TwitterList](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterList)
+
+[Get-TwitterListSubscription](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListSubscription)
+
+[Get-TwitterListSubscriber](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListSubscriber)
+
+[Get-TwitterListByOwner](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListByOwner)
+
+[Api Reference - GET lists/statuses](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-statuses)

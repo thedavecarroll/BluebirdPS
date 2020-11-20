@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Set-Retweet
+online version: https://bluebirdps.anovelidea.org/en/latest/Tweets/Set-Retweet
 schema: 2.0.0
 ---
 
@@ -29,7 +29,7 @@ Set-Retweet -Id <Int64> [-Unretweet] [<CommonParameters>]
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS > {{ Add example code here }}
 ```
 
 {{ Add example description here }}
@@ -97,4 +97,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Set-Retweet)
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Tweets/Set-Retweet)

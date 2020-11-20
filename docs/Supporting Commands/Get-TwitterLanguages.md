@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Get-TwitterLanguages
+online version: https://bluebirdps.anovelidea.org/en/latest/Supporting%20Commands/Get-TwitterLanguages
 schema: 2.0.0
 ---
 
@@ -71,5 +71,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Get-TwitterLanguages)
+[Online Version](https://bluebirdps.anovelidea.org/en/latest/Supporting%20Commands/Get-TwitterLanguages)
+
 [Api Reference - GET help/languages](https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/supported-languages/api-reference/get-help-languages)

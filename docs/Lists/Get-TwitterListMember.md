@@ -191,7 +191,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 [Online Version](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListMember)
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListByOwner)
+[Get-TwitterListByOwner](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListByOwner)
 
 [Get-TwitterList](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterList)
 
