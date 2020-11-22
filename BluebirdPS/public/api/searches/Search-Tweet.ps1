@@ -5,11 +5,13 @@ function Search-Tweet {
         [ValidateNotNullOrEmpty()]
         [string]$SearchString,
         [ValidateRange(1,100)]
-        [int]$MaxResults=15,
+        [int]$Count=15,
         [switch]$ExcludeEntities
     )
 
-    Test-SearchString -SearchString $SearchString | Out-Null
+    if (-Not (Test-SearchString -SearchString $SearchString)) {
+        'Search string {0} is not valid. Please try again.' -f $SearchString | Write-Error -ErrorAction Stop
+    }
 
     $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
     $OAuthParameters = [OAuthParameters]::new(
@@ -18,5 +20,8 @@ function Search-Tweet {
         $Query
     )
 
-    Invoke-TwitterRequest -OAuthParameters $OAuthParameters
+    $SearchTweet = Invoke-TwitterRequest -OAuthParameters $OAuthParameters
+
+    Write-Information -MessageData $SearchTweet.search_metadata
+    $SearchTweet.statuses
 }
