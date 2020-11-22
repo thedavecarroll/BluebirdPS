@@ -136,8 +136,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 [Online Version](https://bluebirdps.anovelidea.org/en/latest/Media/Send-TwitterMedia)
 
-[Set-TwitterMediaAltImageText](https://bluebirdps.anovelidea.org/en/latest/Media/Set-TwitterMediaAltImageText)
-
 [Api Reference - POST media/upload (INIT)](https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-init)
 
 [Api Reference - POST media/upload (APPEND)](https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-append)
