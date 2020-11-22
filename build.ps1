@@ -97,7 +97,7 @@ foreach ($SupportingFolder in $SupportingFolders) {
 # create API endpoint JSON
 'Compiling API JSON'
 Import-Module (Join-Path -Path $BuildHelperPath -ChildPath 'BuildFunctions.psm1')
-Import-TwitterApiEndpoints -Path $ApiEndpointSourcePath | ConvertTo-Json -Depth 10 | Add-Content -Path $ApiEndpointJsonPath
+Import-TwitterApiEndpoints -Path $ApiEndpointSourcePath | ConvertTo-Json -Depth 20 | Add-Content -Path $ApiEndpointJsonPath
 
 # create external help XML
 'Creating new external help'
