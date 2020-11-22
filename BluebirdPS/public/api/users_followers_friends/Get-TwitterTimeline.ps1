@@ -12,7 +12,10 @@ function Get-TwitterTimeline {
         [Parameter(ParameterSetName='User')]
         [string]$UserId,
         [Parameter(ParameterSetName='User')]
-        [switch]$ExcludeRetweets
+        [switch]$ExcludeRetweets,
+
+        [ValidateRange(1,200)]
+        [int]$Count = 20
     )
 
     # since_id
@@ -26,14 +29,14 @@ function Get-TwitterTimeline {
             $OAuthParameters = [OAuthParameters]::new(
                 'GET',
                 'https://api.twitter.com/1.1/statuses/mentions_timeline.json',
-                @{'count' = 200}
+                @{'count' = $Count}
             )
         }
         'User' {
             if ($PSCmdlet.ParameterSetName -eq 'ScreenName') {
-                $Query = @{'count' = 200; 'screen_name' = $ScreenName}
+                $Query = @{'count' = $Count; 'screen_name' = $ScreenName}
             } else {
-                $Query = @{'count' = 200; 'user_id' = $UserId}
+                $Query = @{'count' = $Count; 'user_id' = $UserId}
             }
 
             $OAuthParameters = [OAuthParameters]::new(
@@ -46,10 +49,10 @@ function Get-TwitterTimeline {
             $OAuthParameters = [OAuthParameters]::new(
                 'GET',
                 'https://api.twitter.com/1.1/statuses/home_timeline.json',
-                @{'count' = 200}
+                @{'count' = $Count}
             )
         }
     }
 
-    @(Invoke-TwitterRequest -OAuthParameters $OAuthParameters)
+    Invoke-TwitterRequest -OAuthParameters $OAuthParameters | ConvertTo-Json -Depth 20 | ConvertFrom-Json
 }
