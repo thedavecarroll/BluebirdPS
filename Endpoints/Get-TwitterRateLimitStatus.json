@@ -1,0 +1,26 @@
+{
+    "Resource": "application",
+    "Endpoints": {
+        "GET application/rate_limit_status": {
+            "Function": "Get-TwitterRateLimitStatus",
+            "ApiVersion": "v1.1",
+            "Resource": "application/rate_limit_status",
+            "Method": "GET",
+            "Uri": "https://api.twitter.com/1.1/application/rate_limit_status.json",
+            "ApiReference": "https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/rate-limit-status/api-reference/get-application-rate_limit_status",
+            "Description": "Returns the current rate limits for methods belonging to the specified resource families.",
+            "Iteration": "None",
+            "Parameters": [
+                {
+                    "Name": "resources",
+                    "PSParameter": "Resources",
+                    "Implemented": true,
+                    "Required": "optional",
+                    "Description": "A comma-separated list of resource families you want to know the current rate limit disposition for. For best performance, only specify the resource families pertinent to your application. See API Rate Limiting for more information.",
+                    "DefaultValue": null,
+                    "Example": "statuses,friends,trends,help"
+                }
+            ]
+        }
+    }
+}

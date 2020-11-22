@@ -1,0 +1,16 @@
+{
+    "Resource": "media",
+    "Endpoints": {
+        "POST media/metadata/create": {
+            "Function": "Set-TwitterMediaAltImageText",
+            "ApiVersion": "v1.1",
+            "Resource": "media/metadata/create",
+            "Method": "POST",
+            "Uri": "https://upload.twitter.com/1.1/media/metadata/create.json",
+            "ApiReference": "https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-metadata-create",
+            "Description": "This endpoint can be used to provide additional information about the uploaded media_id. This feature is currently only supported for images and GIFs.",
+            "Iteration": "None",
+            "Parameters": null
+        }
+    }
+}
