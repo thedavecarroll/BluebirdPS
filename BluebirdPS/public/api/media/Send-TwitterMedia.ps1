@@ -10,27 +10,12 @@ function Send-TwitterMedia {
         [ValidateSet('TweetImage','TweetVideo','TweetGif','DMImage','DMVideo','DMGif')]
         [string]$Category,
 
+        [ValidateLength(1,1000)]
+        [string]$AltImageText,
+
+        [ValidateCount(1,100)]
         [int[]]$AddOwners
     )
-
-    # my first dynamic parameter, wooot!
-    # it works, but intellisense is wacked - see https://github.com/PowerShell/PowerShell/issues/3984 for details
-    <#
-    DynamicParam {
-        if ($Category -notmatch 'Video') {
-            $AttribCollection = [Collection[Attribute]]::new()
-            $AttribCollection.Add([ParameterAttribute]::new())
-            $AttribCollection.Add([ValidateLengthAttribute]::new(1,1000))
-
-            $Parameter = [RuntimeDefinedParameter]::new('AltImageText',[string],$AttribCollection)
-
-            $Dictionary = [RuntimeDefinedParameterDictionary]::new()
-            $Dictionary.add('AltImageText',$Parameter)
-
-            return $Dictionary
-        }
-    }
-    #>
 
     begin {
 
@@ -53,6 +38,7 @@ function Send-TwitterMedia {
         # validate if detected mimetype matches category
         $SizeLimitExceededMessage = 'The size of media {0} exceeded the limit of {2} bytes. Please try again.'
         $CategoryMimeTypeMismatch = 'Category {0} does not match the media mimetype of {1}. Please try again.'
+        $CategoryAltImgText = 'Category {0} does not allow the AltImageText. Please try again.'
         $ValidationErrorRecord = @{
             Message = [String]::Empty
             Target = $MediaFileInfo.Name
@@ -64,12 +50,12 @@ function Send-TwitterMedia {
                 if ($MediaFileInfo.Length -gt 5MB) {
                     $ValidationErrorRecord.Message = $SizeLimitExceededMessage -f $Category,$MediaFileInfo.Name,5MB
                     $ValidationErrorRecord.ErrorId = 'SizeLimitExceeded'
-                    New-ValidationErrorRecord @ValidationErrorRecord
+                    $PSCmdlet.ThrowTerminatingError((New-ValidationErrorRecord @ValidationErrorRecord))
                 }
                 if ($MimeType -notmatch 'image') {
                     $ValidationErrorRecord.Message = $CategoryMimeTypeMismatch -f $Category,$MimeType
                     $ValidationErrorRecord.ErrorId = 'MediaCategoryMimeTypeMismatch'
-                    New-ValidationErrorRecord @ValidationErrorRecord
+                    $PSCmdlet.ThrowTerminatingError((New-ValidationErrorRecord @ValidationErrorRecord))
                 }
                 break
             }
@@ -77,12 +63,12 @@ function Send-TwitterMedia {
                 if ($MediaFileInfo.Length -gt 512MB) {
                     $ValidationErrorRecord.Message = $SizeLimitExceededMessage -f $Category,$MediaFileInfo.Name,512MB
                     $ValidationErrorRecord.ErrorId = 'SizeLimitExceeded'
-                    New-ValidationErrorRecord @ValidationErrorRecord
+                    $PSCmdlet.ThrowTerminatingError((New-ValidationErrorRecord @ValidationErrorRecord))
                 }
                 if ($MimeType -notmatch 'video') {
                     $ValidationErrorRecord.Message = $CategoryMimeTypeMismatch -f $Category,$MimeType
                     $ValidationErrorRecord.ErrorId = 'MediaCategoryMimeTypeMismatch'
-                    New-ValidationErrorRecord @ValidationErrorRecord
+                    $PSCmdlet.ThrowTerminatingError((New-ValidationErrorRecord @ValidationErrorRecord))
                 }
                 break
             }
@@ -90,21 +76,20 @@ function Send-TwitterMedia {
                 if ($MediaFileInfo.Length -gt 15MB) {
                     $ValidationErrorRecord.Message = $SizeLimitExceededMessage -f $Category,$MediaFileInfo.Name,15MB
                     $ValidationErrorRecord.ErrorId = 'SizeLimitExceeded'
-                    New-ValidationErrorRecord @ValidationErrorRecord
+                    $PSCmdlet.ThrowTerminatingError((New-ValidationErrorRecord @ValidationErrorRecord))
                 }
                 if ($MimeType -ne 'image/gif') {
                     $ValidationErrorRecord.Message = $CategoryMimeTypeMismatch -f $Category,$MimeType
                     $ValidationErrorRecord.ErrorId = 'MediaCategoryMimeTypeMismatch'
-                    New-ValidationErrorRecord @ValidationErrorRecord
+                    $PSCmdlet.ThrowTerminatingError((New-ValidationErrorRecord @ValidationErrorRecord))
                 }
                 break
             }
         }
 
-        if ($AddOwners.Count -gt 100) {
-            $ValidationErrorRecord.Message ='You can only add up to 100 owners to media. Please try again with less owners.'
-            $ValidationErrorRecord.ErrorId = 'TooManyOwnersProvided'
-            $ValidationErrorRecord.Target = 'AddOwners Parameter'
+        if ($PSBoundParameters.ContainsKey('AltImageText') -and $MimeType -match 'video') {
+            $ValidationErrorRecord.Message = $CategoryAltImgText -f $Category,$MimeType
+            $ValidationErrorRecord.ErrorId = 'MediaCategoryNoSupportForAltImgText'
             $PSCmdlet.ThrowTerminatingError((New-ValidationErrorRecord @ValidationErrorRecord))
         }
 
@@ -117,13 +102,12 @@ function Send-TwitterMedia {
             'DMGif'      { 'dm_gif' }
         }
         $MediaUploadUrl = 'https://upload.twitter.com/1.1/media/upload.json'
-        $AltImageTextUrl = 'https://upload.twitter.com/1.1/media/metadata/create.json'
         $TotalBytes = $MediaFileInfo.Length
-        $AltImageTextBody = '{{"media_id":"{0}}}","alt_text":{{"text":"{1}"}}}}'
     }
 
     process {
 
+        'Reading file {0}' -f $MediaFileInfo.FullName | Write-Verbose
         # read the image into memory
         $BufferSize = 900000
         $Buffer = [Byte[]]::new($BufferSize)
@@ -137,6 +121,7 @@ function Send-TwitterMedia {
 
         # ------------------------------------------------------------------------------------------
         # INIT phase
+        'Beginning INIT phase - media size {0}, category {1}, type {2}' -f $TotalBytes,$MediaCategory,$MimeType | Write-Verbose
         $OAuthParameters = [OAuthParameters]::new('POST',$MediaUploadUrl)
         $OAuthParameters.Form = @{
             command = 'INIT'
@@ -144,21 +129,30 @@ function Send-TwitterMedia {
             media_category = $MediaCategory
             media_type = $MimeType
         }
-        if ($AddOwners.Count -gt 0) {
+        if ($PSBoundParameters.ContainsKey('AddOwners')) {
             $OAuthParameters.Form.Add(($AddOwners -join ','))
         }
 
-        $SendMediaInitResult = Invoke-TwitterRequest -OAuthParameters $OAuthParameters
+        $SendMediaInitResult = Invoke-TwitterRequest -OAuthParameters $OAuthParameters -Verbose:$false
         if ($SendMediaInitResult-is [ErrorRecord]) {
             $PSCmdlet.ThrowTerminatingError($SendMediaInitResult)
         }
 
         $MediaId = $SendMediaInitResult.'media_id'
+        'Upload for media id {0} successfully initiated' -f $MediaId | Write-Verbose
 
         # ------------------------------------------------------------------------------------------
         # APPEND phase
+        'Beginning APPEND phase' | Write-Verbose
         $Index = 0
         foreach ($Chunk in $Media) {
+
+            $PercentComplete = (($Index + 1) / $Media.Count) * 100
+            $Activity = "Uploading media file '{0}' with id {1}" -f $MediaFileInfo.Name,$MediaId
+            $CurrentOperation = "Media chunk #{0}" -f $Index
+            $Status = "{0}% Complete:" -f $PercentComplete
+            Write-Progress -Activity $Activity -CurrentOperation $CurrentOperation -Status $Status -PercentComplete $PercentComplete
+
             $OAuthParameters = [OAuthParameters]::new('POST',$MediaUploadUrl)
             $OAuthParameters.Form = @{
                 command = 'APPEND'
@@ -166,52 +160,43 @@ function Send-TwitterMedia {
                 media_data = $Media[$Index]
                 segment_index = $Index
             }
-            $SendMediaAppendResult = Invoke-TwitterRequest -OAuthParameters $OAuthParameters
+
+            $SendMediaAppendResultParam = @{
+                OAuthParameters = $OAuthParameters
+                Verbose = $false
+            }
+            if ($Index -eq 0) {
+                $SendMediaAppendResultParam.Add('SkipHistory',$true)
+            }
+            $SendMediaAppendResult = Invoke-TwitterRequest @SendMediaAppendResultParam
+
             if ($SendMediaAppendResult -is [ErrorRecord]) {
                 $PSCmdlet.ThrowTerminatingError($SendMediaAppendResult)
             }
             $Index++
         }
+        Write-Progress -Activity 'Media upload append phase completed' -Completed
 
         # ------------------------------------------------------------------------------------------
         # FINALIZE phase
+        'Beginning FINALIZE phase' | Write-Verbose
         $OAuthParameters = [OAuthParameters]::new('POST',$MediaUploadUrl)
         $OAuthParameters.Form = @{
             command = 'FINALIZE'
             media_id = $MediaId
         }
-        $SendMediaFinalizeResult = Invoke-TwitterRequest -OAuthParameters $OAuthParameters
+        $SendMediaFinalizeResult = Invoke-TwitterRequest -OAuthParameters $OAuthParameters -Verbose:$false
         if ($SendMediaFinalizeResult -is [ErrorRecord]) {
             $PSCmdlet.ThrowTerminatingError($SendMediaFinalizeResult)
         }
 
         # ------------------------------------------------------------------------------------------
         # STATUS phase
-        if ($SendMediaFinalizeResult.'processing_info') {
-            $WaitSeconds = $SendMediaFinalizeResult.'processing_info'.'check_after_secs'
-
-            do {
-                'Still processing, waiting {0} seconds before refreshing status.' -f $WaitSeconds | Write-Warning
-
-                Start-Sleep -Seconds $WaitSeconds
-
-                $Query = [hashtable]::new()
-                $Query.Add('command','STATUS')
-                $Query.Add('media_id',$MediaId)
-                $OAuthParameters = [OAuthParameters]::new('GET',$MediaUploadUrl,$Query)
-
-                $SendMediaStatus = Invoke-TwitterRequest -OAuthParameters $OAuthParameters
-                if ($SendMediaStatus -is [ErrorRecord]) {
-                    $PSCmdlet.ThrowTerminatingError($SendMediaStatus)
-                }
-
-                $WaitSeconds = $SendMediaStatus.'processing_info'.'check_after_secs'
-                $SendMediaStatus | Format-List | Out-String | Write-Verbose
-
-            } while ($SendMediaStatus.'processing_info'.'state' -eq 'in_progress')
-
+        if ($SendMediaFinalizeResult.'processing_info'.'check_after_secs') {
+            'Beginning STATUS phase' | Write-Verbose
+            $WaitSeconds = $SendMediaFinalizeResult.'processing_info'.'check_after_secs' -as [int]
+            $SendMediaStatus = Get-SendMediaStatus -MediaId $MediaId -WaitSeconds $WaitSeconds -Verbose:$false
             $SendMediaCompletionResults = $SendMediaStatus
-
         } else {
             $SendMediaCompletionResults = $SendMediaFinalizeResult
         }
@@ -219,16 +204,15 @@ function Send-TwitterMedia {
         # ------------------------------------------------------------------------------------------
         # Add AltImageText phase
         if ($AltImageText.Length -gt 0) {
-            $OAuthParameters = [OAuthParameters]::new('POST',$AltImageTextUrl)
-            $OAuthParameters.Body = $AltImageTextBody -f $MediaId,$AltImageText
-
-            $AddAltImageText = Invoke-TwitterRequest -OAuthParameters $OAuthParameters
-            if ($AddAltImageText -is [ErrorRecord]) {
-                $PSCmdlet.ThrowTerminatingError($AddAltImageText)
+            'Adding AltImageText to media {0}' -f $MediaId | Write-Verbose
+            Set-TwitterMediaAltImageText -MediaId $MediaId -AltImageText $AltImageText -Verbose:$false | Out-Null
+            $LastTwitterCommand = Get-TwitterHistory -Last 1
+            if ($LastTwitterCommand.Status -match '200') {
+                'Alt image text successfully added to media' | Write-Verbose
             }
-            $AddAltImageText | Format-List | Out-StringWrite-Verbose
         }
 
+        'Media upload complete' | Write-Verbose
         $SendMediaCompletionResults
     }
 
