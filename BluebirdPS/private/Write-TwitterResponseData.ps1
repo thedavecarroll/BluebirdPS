@@ -10,13 +10,16 @@ function Write-TwitterResponseData {
         [Parameter(ValueFromPipelineByPropertyName)]
         [string]$HttpMethod,
         [Parameter(ValueFromPipelineByPropertyName)]
-        [string]$QueryString
+        [string]$QueryString,
+        [switch]$SkipHistory
     )
 
     try {
 
         $Command = (Get-PSCallStack).Where{$_.Command -notmatch 'TwitterResource|ErrorRecord|ResponseData|Request|ScriptBlock'}.Command
-
+        if ($Command -is [array]) {
+            $Command = $Command[0]
+        }
         if ($TwitterResponse.Status) {
             $Status = $TwitterResponse.Status[0]
         }
@@ -62,7 +65,9 @@ function Write-TwitterResponseData {
             $RateWarningMessage | Write-Warning
         }
 
-        $TwitterHistoryList.Add($ResponseData)
+        if (-Not $PSBoundParameters.ContainsKey('SkipHistory')) {
+            $TwitterHistoryList.Add($ResponseData)
+        }
         Write-Information -MessageData $ResponseData
     }
     catch {
