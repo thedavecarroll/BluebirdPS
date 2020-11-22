@@ -3,11 +3,11 @@ function Get-TwitterRateLimitStatus {
     [CmdletBinding()]
     param(
         [ValidateSet(
-            'lists','application','mutes','live_video_stream','friendships','guide','auth','blocks','geo','users','teams',
-            'followers','collections','statuses','custom_profiles','webhooks','contacts','labs','i','tweet_prompts',
-            'moments','limiter_scalding_report_creation','fleets','help','feedback','business_experience','graphql&POST',
-            'friends','sandbox','drafts','direct_messages','media','traffic','account_activity','account','safety',
-            'favorites','device','tweets','saved_searches','oauth','search','trends','live_pipeline','graphql'
+            'account','account_activity','admin_users','application','auth','blocks','business_experience','collections',
+            'contacts','custom_profiles','device','direct_messages','drafts','favorites','feedback','fleets','followers',
+            'friends','friendships','geo','graphql','graphql&POST','guide','help','i','labs','limiter_scalding_report_creation',
+            'lists','live_pipeline','live_video_stream','media','moments','mutes','oauth','safety','sandbox','saved_searches',
+            'search','statuses','strato','teams','traffic','trends','tweets','tweet_prompts','users','webhooks'
         )]
         [string[]]$Resources
     )
