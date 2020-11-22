@@ -8,36 +8,52 @@ schema: 2.0.0
 # Set-Retweet
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Retweet or unretweet an existing tweet.
 
 ## SYNTAX
 
 ### Retweet (Default)
-```
+
+```powershell
 Set-Retweet -Id <Int64> [-Retweet] [<CommonParameters>]
 ```
 
 ### Unretweet
-```
+
+```powershell
 Set-Retweet -Id <Int64> [-Unretweet] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+Retweet or unretweet an existing tweet.
+
+Returns the original Tweet with Retweet details embedded.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS > {{ Add example code here }}
+PS > Set-Retweet -Id 1330354141055643648
 ```
 
-{{ Add example description here }}
+Retweets the specified tweet.
+
+### Example 2
+
+```powershell
+PS > Set-Retweet -Id 1330354141055643648 -Unretweet
+```
+
+Unretweets the specified tweet.
 
 ## PARAMETERS
 
 ### -Id
-{{ Fill Id Description }}
+
+The id of the tweet.
 
 ```yaml
 Type: Int64
@@ -52,7 +68,8 @@ Accept wildcard characters: False
 ```
 
 ### -Retweet
-{{ Fill Retweet Description }}
+
+Instructs the command to retweet the specified tweet.
 
 ```yaml
 Type: SwitchParameter
@@ -67,7 +84,8 @@ Accept wildcard characters: False
 ```
 
 ### -Unretweet
-{{ Fill Unretweet Description }}
+
+Instructs the command to unretweet the specified tweet.
 
 ```yaml
 Type: SwitchParameter
@@ -98,3 +116,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online Version](https://bluebirdps.anovelidea.org/en/latest/Tweets/Set-Retweet)
+
+[Get-Tweet](https://bluebirdps.anovelidea.org/en/latest/Tweets/Get-Tweet)
+
+[API Documentation - POST statuses/retweet/:id](https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-retweet-id)
+
+[API Documentation - POST statuses/unretweet/:id](https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-unretweet-id)
