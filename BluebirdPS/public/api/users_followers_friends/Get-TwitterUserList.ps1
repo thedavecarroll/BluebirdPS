@@ -5,8 +5,6 @@ function Get-TwitterUserList {
         [string[]]$ScreenName,
         [ValidateCount(1,100)]
         [string[]]$UserId,
-        [ValidateSet('Compatibility','Extended')]
-        [string]$TweetMode='Extended',
         [switch]$ExcludeEntities
     )
 
@@ -18,5 +16,5 @@ function Get-TwitterUserList {
         $Query
     )
 
-    Invoke-TwitterRequest -OAuthParameters $OAuthParameters
+    Invoke-TwitterRequest -OAuthParameters $OAuthParameters | ConvertTo-Json -Depth 20 | ConvertFrom-Json
 }
