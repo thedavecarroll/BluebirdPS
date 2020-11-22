@@ -13,10 +13,10 @@ Displays the Twitter Api endpoint metadata for endpoints supported by this modul
 
 ## SYNTAX
 
-### Endpoint (Default)
+### Resource (Default)
 
 ```powershell
-Get-TwitterApiEndpoint [[-Endpoint] <String[]>] [<CommonParameters>]
+Get-TwitterApiEndpoint [[-Resource] <String[]>] [<CommonParameters>]
 ```
 
 ### Command
@@ -34,30 +34,30 @@ Displays the Twitter Api endpoint metadata for endpoints supported by this modul
 ### Example 1
 
 ```powershell
-PS > Get-TwitterApiEndpoint -Endpoint friends,followers,friendships
+PS > Get-TwitterApiEndpoint -Resource friends,followers,friendships
 ```
-
-Display the endpoint metadata for the command Get-TwitterAccountSettings.
-
-### Example 2
 
 Display the endpoint metadata for the specified endpoints.
 
+### Example 2
+
 ```powershell
-PS > Get-TwitterApiEndpoint -Command Get-TwitterAccountSettings
+PS > Get-TwitterApiEndpoint -Command Send-TwitterMedia
 ```
+
+Display the endpoint metadata for the command `Send-TwitterMedia`.
 
 ## PARAMETERS
 
-### -Endpoint
+### -Resource
 
-Specifies the category of API endpoint that will be displayed.
+Specifies the resource category of API endpoint that will be displayed.
 
 ```yaml
 Type: String[]
-Parameter Sets: Endpoint
+Parameter Sets: Resource
 Aliases:
-Accepted values: account, blocks, mutes, users, followers, friends, friendships, lists, help
+Accepted values: account, application, blocks, direct_messages, favorites, followers, friends, friendships, help, lists, media, mutes, oauth2, saved_searches, search, statuses, users
 Required: False
 Position: 0
 Default value: None
