@@ -2,7 +2,8 @@ function Invoke-TwitterRequest {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory,ValueFromPipeline)]
-        [OAuthParameters]$OAuthParameters
+        [OAuthParameters]$OAuthParameters,
+        [switch]$SkipHistory
     )
 
     try {
@@ -38,7 +39,11 @@ function Invoke-TwitterRequest {
             QueryString = $OAuthParameters.UriBuilder.Uri.Query
             HttpMethod = $OAuthParameters.HttpMethod
         }
-        $ResponseData | Write-TwitterResponseData
+        if ($PSBoundParameters.ContainsKey('SkipHistory')) {
+            $ResponseData | Write-TwitterResponseData -SkipHistory
+        } else {
+            $ResponseData | Write-TwitterResponseData
+        }
 
     }
     catch [Microsoft.PowerShell.Commands.HttpResponseException] {
