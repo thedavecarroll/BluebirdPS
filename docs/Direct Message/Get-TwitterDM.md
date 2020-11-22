@@ -69,7 +69,7 @@ Accept wildcard characters: False
 
 ### -Count
 
-Specifies the number of records to retrieve.
+Specifies the number of results to retrieve.
 
 ```yaml
 Type: Int32

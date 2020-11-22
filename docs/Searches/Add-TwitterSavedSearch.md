@@ -82,8 +82,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 [Remove-TwitterSavedSearch](https://bluebirdps.anovelidea.org/en/latest/Searches/Remove-TwitterSavedSearch)
 
-[New-TwitterSearchString](https://bluebirdps.anovelidea.org/en/latest/Searches/New-TwitterSearchString)
-
 [Search Standard Operators](https://developer.twitter.com/en/docs/twitter-api/v1/rules-and-filtering/overview/standard-operators)
 
 [Api Reference - POST saved_searches/create](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-create)
