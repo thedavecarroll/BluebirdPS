@@ -8,30 +8,75 @@ schema: 2.0.0
 # Get-TwitterRateLimitStatus
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Returns the current rate limits for methods belonging to the specified resource families.
 
 ## SYNTAX
 
-```
+```powershell
 Get-TwitterRateLimitStatus [[-Resources] <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+Returns the current rate limits for methods belonging to the specified resource families.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS > {{ Add example code here }}
+PS > Get-TwitterRateLimitStatus
 ```
 
-{{ Add example description here }}
+Returns the current rate limits for all resources.
+
+### Example 2
+
+```powershell
+PS > Get-TwitterRateLimitStatus -Resources friends | ConvertTo-Json
+```
+
+```console
+{
+  "friends": {
+    "/friends/following/ids": {
+      "limit": 15,
+      "remaining": 15,
+      "reset": 1606013805
+    },
+    "/friends/following/list": {
+      "limit": 15,
+      "remaining": 15,
+      "reset": 1606013805
+    },
+    "/friends/list": {
+      "limit": 15,
+      "remaining": 15,
+      "reset": 1606013805
+    },
+    "/friends/ids": {
+      "limit": 15,
+      "remaining": 15,
+      "reset": 1606013805
+    }
+  }
+}
+```
+
+Returns the current rate limits for the friends resource.
+
+The output was converted to JSON for easier readability.
 
 ## PARAMETERS
 
 ### -Resources
-{{ Fill Resources Description }}
+
+A comma-separated list of resource families you want to know the current rate limit disposition for.
+
+For best performance, only specify the resource families pertinent to your application.
+
+See API Rate Limiting for more information.
 
 ```yaml
 Type: String[]
@@ -63,3 +108,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online Version](https://bluebirdps.anovelidea.org/en/latest/Supporting%20Commands/Get-TwitterRateLimitStatus)
+
+[Api Reference - GET application/rate_limit_status](https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/rate-limit-status/api-reference/get-application-rate_limit_status)
