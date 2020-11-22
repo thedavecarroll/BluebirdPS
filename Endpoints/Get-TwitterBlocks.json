@@ -1,0 +1,74 @@
+{
+    "Resource": "blocks",
+    "Endpoints": {
+        "GET blocks/list": {
+            "Function": "Get-TwitterBlocks",
+            "ApiVersion": "v1.1",
+            "Resource": "blocks/list",
+            "Method": "GET",
+            "Uri": "https://api.twitter.com/1.1/blocks/list.json",
+            "ApiReference": "https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-blocks-list",
+            "Description": "Returns a collection of user objects that the authenticating user is blocking.\nImportant This method is cursored, meaning your app must make multiple requests in order to receive all blocks correctly. See Using cursors to navigate collections for more details on how cursoring works.",
+            "Iteration": "Cursor",
+            "Parameters": [
+                {
+                    "Name": "include_entities",
+                    "PSParameter": "ExcludeEntities",
+                    "Implemented": true,
+                    "Required": "optional",
+                    "Description": "The entities node will not be included when set to false.",
+                    "DefaultValue": null,
+                    "Example": "false"
+                },
+                {
+                    "Name": "skip_status",
+                    "PSParameter": "SkipStatus",
+                    "Implemented": true,
+                    "Required": "optional",
+                    "Description": "When set to either true , t or 1 statuses will not be included in the returned user objects.",
+                    "DefaultValue": null,
+                    "Example": "false"
+                },
+                {
+                    "Name": "cursor",
+                    "PSParameter": null,
+                    "Implemented": true,
+                    "Required": "semi-optional",
+                    "Description": "Causes the list of blocked users to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first page.\nThe response from the API will include a previous_cursor and next_cursor to allow paging back and forth. See Using cursors to navigate collections for more information.",
+                    "DefaultValue": null,
+                    "Example": 12893764510938
+                }
+            ]
+        },
+        "GET blocks/ids": {
+            "Function": "Get-TwitterBlocks",
+            "ApiVersion": "v1.1",
+            "Resource": "GET blocks/ids",
+            "Method": "GET",
+            "Uri": "https://api.twitter.com/1.1/blocks/ids.json",
+            "ApiReference": "https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-blocks-ids",
+            "Description": "Returns an array of numeric user ids the authenticating user is blocking.\nImportant This method is cursored, meaning your app must make multiple requests in order to receive all blocks correctly. See Using cursors to navigate collections for more details on how cursoring works.",
+            "Iteration": "Cursor",
+            "Parameters": [
+                {
+                    "Name": "stringify_ids",
+                    "PSParameter": null,
+                    "Implemented": false,
+                    "Required": "optional",
+                    "Description": "Many programming environments will not consume Twitter IDs due to their size. Provide this option to have IDs returned as strings instead. Read more about Twitter IDs.",
+                    "DefaultValue": null,
+                    "Example": "true"
+                },
+                {
+                    "Name": "cursor",
+                    "PSParameter": null,
+                    "Implemented": true,
+                    "Required": "semi-optional",
+                    "Description": "Causes the list of blocked users to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first page.\nThe response from the API will include a previous_cursor and next_cursor to allow paging back and forth. See Using cursors to navigate collections for more information.",
+                    "DefaultValue": -1,
+                    "Example": 12893764510938
+                }
+            ]
+        }
+    }
+}

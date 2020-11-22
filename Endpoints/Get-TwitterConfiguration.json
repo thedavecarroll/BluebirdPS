@@ -1,0 +1,16 @@
+{
+    "Resource": "help",
+    "Endpoints": {
+        "GET help/configuration": {
+            "Function": "Get-TwitterConfiguration",
+            "ApiVersion": "v1.1",
+            "Resource": "help/configuration",
+            "Method": "GET",
+            "Uri": "https://api.twitter.com/1.1/help/configuration.json",
+            "ApiReference": "https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/configuration/api-reference/get-help-configuration",
+            "Description": "Returns the current configuration used by Twitter including twitter.com slugs which are not usernames, maximum photo resolutions, and t.co shortened URL length.\nIt is recommended applications request this endpoint when they are loaded, but no more than once a day.",
+            "Iteration": "None",
+            "Parameters": null
+        }
+    }
+}

@@ -1,0 +1,71 @@
+{
+    "Resource": "statuses",
+    "Endpoints": {
+        "GET statuses/show/:id": {
+            "Function": "Get-Tweet",
+            "ApiVersion": "v1.1",
+            "Resource": "statuses/show/:id",
+            "Method": "GET",
+            "Uri": "https://api.twitter.com/1.1/statuses/show.json",
+            "ApiReference": "https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-show-id",
+            "Description": "Returns a single Tweet, specified by the id parameter. The Tweet's author will also be embedded within the Tweet.\nSee GET statuses / lookup for getting Tweets in bulk (up to 100 per call).",
+            "Iteration": "None",
+            "Parameters": [
+                {
+                    "Name": "id",
+                    "PSParameter": "TweetId",
+                    "Implemented": true,
+                    "Required": "required",
+                    "Description": "The numerical ID of the desired Tweet.",
+                    "DefaultValue": null,
+                    "Example": "123456789"
+                },
+                {
+                    "Name": "trim_user",
+                    "PSParameter": null,
+                    "Implemented": false,
+                    "Required": "optional",
+                    "Description": "When set to either true , t or 1 , each Tweet returned in a timeline will include a user object including only the status authors numerical ID. Omit this parameter to receive the complete user object.",
+                    "DefaultValue": null,
+                    "Example": "true"
+                },
+                {
+                    "Name": "include_my_retweet",
+                    "PSParameter": null,
+                    "Implemented": false,
+                    "Required": "optional",
+                    "Description": "When set to either true , t or 1 , any Tweets returned that have been retweeted by the authenticating user will include an additional current_user_retweet node, containing the ID of the source status for the retweet.",
+                    "DefaultValue": null,
+                    "Example": "true"
+                },
+                {
+                    "Name": "include_entities",
+                    "PSParameter": null,
+                    "Implemented": false,
+                    "Required": "optional",
+                    "Description": "The entities node will not be included when set to false.",
+                    "DefaultValue": null,
+                    "Example": "false"
+                },
+                {
+                    "Name": "include_ext_alt_text",
+                    "PSParameter": null,
+                    "Implemented": false,
+                    "Required": "optional",
+                    "Description": "If alt text has been added to any attached media entities, this parameter will return an ext_alt_text value in the top-level key for the media entity. If no value has been set, this will be returned as null.",
+                    "DefaultValue": null,
+                    "Example": "true"
+                },
+                {
+                    "Name": "include_card_uri",
+                    "PSParameter": null,
+                    "Implemented": false,
+                    "Required": "optional",
+                    "Description": "When set to either true , t or 1 , the retrieved Tweet will include a card_uri attribute when there is an ads card attached to the Tweet and when that card was attached using the card_uri value.",
+                    "DefaultValue": null,
+                    "Example": "true"
+                }
+            ]
+        }
+    }
+}

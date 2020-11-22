@@ -1,0 +1,90 @@
+{
+    "Resource": "lists",
+    "Endpoints": {
+        "GET lists/subscribers": {
+            "Function": "Get-TwitterListSubscriber",
+            "ApiVersion": "v1.1",
+            "Resource": "lists/subscribers",
+            "Method": "GET",
+            "Uri": "https://api.twitter.com/1.1/lists/subscribers.json",
+            "ApiReference": "https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-subscribers",
+            "Description": "Returns the subscribers of the specified list. Private list subscribers will only be shown if the authenticated user owns the specified list.",
+            "Iteration": "Cursor",
+            "Parameters": [
+                {
+                    "Name": "list_id",
+                    "PSParameter": "ListId",
+                    "Implemented": true,
+                    "Required": "required",
+                    "Description": "The numerical id of the list.",
+                    "DefaultValue": null,
+                    "Example": null
+                },
+                {
+                    "Name": "slug",
+                    "PSParameter": "Slug",
+                    "Implemented": true,
+                    "Required": "required",
+                    "Description": "You can identify a list by its slug instead of its numerical id. If you decide to do so, note that you'll also have to specify the list owner using the owner_id or owner_screen_name parameters.",
+                    "DefaultValue": null,
+                    "Example": null
+                },
+                {
+                    "Name": "owner_screen_name",
+                    "PSParameter": "OwnerScreenName",
+                    "Implemented": true,
+                    "Required": "optional",
+                    "Description": "The screen name of the user who owns the list being requested by a slug.",
+                    "DefaultValue": null,
+                    "Example": null
+                },
+                {
+                    "Name": "owner_id",
+                    "PSParameter": "OwnerId",
+                    "Implemented": true,
+                    "Required": "optional",
+                    "Description": "The user ID of the user who owns the list being requested by a slug.",
+                    "DefaultValue": null,
+                    "Example": null
+                },
+                {
+                    "Name": "count",
+                    "PSParameter": "ResultsPerPage",
+                    "Implemented": true,
+                    "Required": "optional",
+                    "Description": "Specifies the number of results to return per page (see cursor below). The default is 20, with a maximum of 5,000.",
+                    "DefaultValue": 20,
+                    "MinValue": 1,
+                    "MaxValue": 5000,
+                    "Example": null
+                },{
+                    "Name": "cursor",
+                    "PSParameter": null,
+                    "Implemented": true,
+                    "Required": "semi-optional",
+                    "Description": "Breaks the results into pages. A single page contains 20 lists. Provide a value of -1 to begin paging. Provide values as returned in the response body's next_cursor and previous_cursor attributes to page back and forth in the list. See Using cursors to navigate collections for more information.",
+                    "DefaultValue": -1,
+                    "Example": null
+                },
+                {
+                    "Name": "include_entities",
+                    "PSParameter": "ExcludeEntities",
+                    "Implemented": true,
+                    "Required": "optional",
+                    "Description": "When set to either true , t or 1 , each tweet will include a node called entities. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags. While entities are opt-in on timelines at present, they will be made a default component of output in the future. See Tweet Entities for more details.",
+                    "DefaultValue": true,
+                    "Example": false
+                },
+                {
+                    "Name": "skip_status",
+                    "PSParameter": "SkipStatus",
+                    "Implemented": true,
+                    "Required": "optional",
+                    "Description": "When set to either true, t or 1 statuses will not be included in the returned user objects.",
+                    "DefaultValue": false,
+                    "Example": null
+                }
+            ]
+        }
+    }
+}

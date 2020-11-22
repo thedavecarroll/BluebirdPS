@@ -1,0 +1,26 @@
+{
+    "Resource": "saved_searches",
+    "Endpoints": {
+        "POST saved_searches/create": {
+            "Function": "Add-TwitterSavedSearch",
+            "ApiVersion": "v1.1",
+            "Resource": "saved_searches/create",
+            "Method": "POST",
+            "Uri": "https://api.twitter.com/1.1/saved_searches/create.json",
+            "ApiReference": "https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-create",
+            "Description": "Create a new saved search for the authenticated user. A user may only have 25 saved searches.",
+            "Iteration": "None",
+            "Parameters": [
+                {
+                    "Name": "query",
+                    "PSParameter": "SearchString",
+                    "Implemented": true,
+                    "Required": "required",
+                    "Description": "The query of the search the user would like to save",
+                    "DefaultValue": null,
+                    "Example": null
+                }
+            ]
+        }
+    }
+}
