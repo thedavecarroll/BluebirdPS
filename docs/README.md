@@ -1,4 +1,4 @@
-# BluebirdPS
+# BluebirdPS: A Twitter Automation Client for PowerShell 7
 
 Welcome to the online documentation for BluebirdPS, a Twitter automation client for PowerShell 7.
 
@@ -9,14 +9,7 @@ At this point, anything and everything could changed.
 
 Also, expect errors, though I have tried to keep those at minimum.
 
->This module is nearing readiness to be published to the PowerShell Gallery.
->If you want to be notified when it is published, please use the GitHub Watch feature for the repo.
-
-## Renamed and Rehomed
-
-In order to better support the module, including setting up a external documentation,
-the module was renamed from `Twitter` to `BluebirdPS` and moved to my personal account.
-Originally, it was created in the PowerShellModules organization and it was the only recent activity.
+## Community Module
 
 This module is still very much developed for the community and will gladly accept feedback from the
 community to make this module do what you need it to do, while adhering to the Twitter API design and
@@ -82,6 +75,22 @@ You can see the `ResponseTime` (in milliseconds) along with *RateLimit* specific
 
 Here is list of current public functions.
 
+Currently, there are 43 public functions and 10 private functions.
+
+| Count     | Name |
+| --------- | ---- |
+| Get       | 26   |
+| Set       | 5    |
+| Export    | 2    |
+| Publish   | 2    |
+| Test      | 2    |
+| Add       | 1    |
+| Import    | 1    |
+| Remove    | 1    |
+| Search    | 1    |
+| Send      | 1    |
+| Unpublish | 1    |
+
 ### Authentication
 
 * Set-TwitterAuthentication
@@ -96,10 +105,9 @@ Here is list of current public functions.
 
 * Publish-Tweet
 * Get-Tweet
-* Publish-ReplyTweet
 * Set-Retweet
 * Set-TweetLike
-* Get-TweetLikes
+* Get-TweetLike
 
 ### Users, Followers, Friends, and Blocks
 
@@ -131,7 +139,6 @@ Here is list of current public functions.
 ### Media
 
 * Send-TwitterMedia
-* Get-SendMediaStatus
 
 ### Direct Message
 
@@ -149,29 +156,28 @@ Here is list of current public functions.
 * Get-TwitterConfiguration
 * Get-TwitterLanguages
 * Get-TwitterRateLimitStatus
+* Export-TwitterResource
 
 ### Helper Commands
 
 These functions do not connect to Twitter directly.
 
-* New-TwitterQuery
-* Set-TwitterRateLimitWarning
-* Get-TwitterRateLimitWarning
 * Get-TwitterApiEndpoint
 * Get-TwitterHistory
-* Export-TwitterResource
+* Get-TwitterRateLimitWarning
+* Set-TwitterRateLimitWarning
 * Test-SearchString
 
 ## Command Verbs
 
-|Verb|Usage|Example|
-|-|-|-|
-|Get|Get a resource|`Get-TwitterTimeLine -Home`|
-|Publish|Tweet or Direct Message|`Publish-Tweet -TweetText 'Check out this pic of #Snoopy' -MediaId $UploadedPic.media_id`|
-|Unpublish|Delete Tweet or Direct Message|`Unpublish-TwitterDM -DirectMessageId 1239876543210147852`|
-|Set|Like, Unlink, Retweet, Unretweet|`Set-Tweet -Id 12345567896321478 -Like`|
-|Search|Text search for a user or tweet|`Search-Tweet -SearchString '#PSTweetChat'`|
-|Send|Send media|`Send-TwitterMedia -Path $PathToImage -Category TweetImage -AltImageText 'A bowl of froot loops'`|
+| Verb      | Usage                            | Example                                                                                           |
+| --------- | -------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Get       | Get a resource                   | `Get-TwitterTimeLine -Home`                                                                       |
+| Publish   | Tweet or Direct Message          | `Publish-Tweet -TweetText 'Check out this pic of #Snoopy' -MediaId $UploadedPic.media_id`         |
+| Unpublish | Delete Tweet or Direct Message   | `Unpublish-TwitterDM -DirectMessageId 1239876543210147852`                                        |
+| Set       | Like, Unlink, Retweet, Unretweet | `Set-Tweet -Id 12345567896321478 -Like`                                                           |
+| Search    | Text search for a user or tweet  | `Search-Tweet -SearchString '#PSTweetChat'`                                                       |
+| Send      | Send media                       | `Send-TwitterMedia -Path $PathToImage -Category TweetImage -AltImageText 'A bowl of froot loops'` |
 
 ## Private Functions
 
@@ -206,12 +212,8 @@ It's primary function (method, actually) is to generate the OAuth signature stri
 
 ## Things to Do
 
-There is still a considerable amount of work to be done before this can get to the PSGallery.
-
-* Proper module scaffolding
+* Expand build scripts
 * Pester tests
-* Help
-  * Possibly external-based XML using PlatyPS with docs on ReadTheDocs
 * TweetText processor (currently there no check for length)
 * Exploration of PIN-OAuth
   * This will entail a security discussion on key storage
