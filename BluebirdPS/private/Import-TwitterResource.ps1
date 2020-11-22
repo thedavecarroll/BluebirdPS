@@ -40,15 +40,15 @@ function Import-TwitterResource {
     switch ($PSCmdlet.ParameterSetName) {
         'Configuration' {
             [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
-            $TwitterConfiguration = $Resource
+            $script:TwitterConfiguration = $Resource
         }
         'Languages' {
             [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
-            $TwitterLanguages = $Resource
+            $script:TwitterLanguages = $Resource
         }
         'ErrorMapping' {
             [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
-            $TwitterErrorMapping = $Resource
+            $script:TwitterErrorMapping = $Resource
         }
     }
 
