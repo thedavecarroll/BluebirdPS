@@ -6,7 +6,7 @@
     Author = 'Dave Carroll'
     CompanyName = 'thedavecarroll'
     Copyright = '2020'
-    Description = 'Tweet, retweet, send direct messages, manage lists, and more.'
+    Description = 'A Twitter Automation Client for PowerShell 7. Tweet, retweet, send direct messages, manage lists, and more.'
     PowerShellVersion = '7.0'
     FunctionsToExport = @()
     CmdletsToExport = @()
@@ -28,7 +28,7 @@
     # ModuleList = @()
     PrivateData = @{
         PSData = @{
-            Tags = 'TwitterClient','Twitter','REST_API','SocialMedia'
+            Tags = 'Twitter-Client','Twitter-API','Twitter','Tweet','Automation','Social-Media'
             ReleaseNotes = '## 0.1.0 - 2020-11-22
 
 Feature; Update Strongly Recommended
