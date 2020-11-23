@@ -1,6 +1,6 @@
 @{
     RootModule = 'BluebirdPS.psm1'
-    ModuleVersion = '0.1.0'
+    ModuleVersion = '0.1.1'
     CompatiblePSEditions = 'Core'
     GUID = 'b46904d8-98f5-430e-893a-5ad77ceed8bd'
     Author = 'Dave Carroll'
