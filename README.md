@@ -57,17 +57,35 @@ VERBOSE: Saved Twitter credentials to existing file: C:\Users\Dave\.TwitterPower
 
 ## How to Install
 
-Currently, you can only use this module by cloning the repo and running the build script.
-This will most likely change soon.
+### From the PowerShell Gallery
 
-Additionally, the module will be published to the PowerShell Gallery soon.
+Start PowerShell 7 and run the following command:
 
-### Clone Repo
+```powershell
+Install-Module -Name BluebirdPS -Scope CurrentUser
+```
+
+For more information, please visit the [BluebirdPS page] on the Powershell Gallery.
+
+[BluebirdPS page]: https://bit.ly/BluebirdPS
+
+### From the GitHub Release Page
+
+1. Click [here] to go to the latest releases, then download the BluebirdPS.zip file attached to the release.
+2. Right-click the downloaded zip, select Properties, then unblock the file.
+  *This is to prevent having to unblock each file individually after unzipping.*
+3. Unzip the archive.
+4. *(Optional)* Place the module somewhere in your PSModulePath.
+    * You can view the paths listed by running the environment variable `$env:PSModulePath`
+
+[here]: https://github.com/thedavecarroll/BluebirdPS/tags
+
+### Building from the GitHub Repo
 
 1. Clone repo to a folder of your choice.
 2. Change into the local repo folder.
 3. Run the `build.ps1` script.
-4. `Import-Module -Path .\BuildOutput\0.1.0\BluebirdPS.psd1`
+4. `Import-Module -Path .\BuildOutput\BluebirdPS\0.1.0\BluebirdPS.psd1`
 
 ## Examples
 
@@ -79,7 +97,7 @@ Get-TwitterListByOwner -ScreenName thedavecarroll
 Publish-Tweet -TweetText "Continuing work on the #PowerShell Twitter module. Check it out! http://bit.ly/PwshTwitterModule"
 ```
 
-### More Than Meets the Eye
+## More Than Meets the Eye
 
 This module includes output to the Information stream containing details on the call (or calls) made to Twitter.
 
