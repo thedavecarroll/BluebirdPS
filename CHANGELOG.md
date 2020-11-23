@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.1.0] - 2020-11-22
 
-Feature; Update Strongly Recommended
+Initial release
 
 ### Fixed
 
@@ -31,3 +31,5 @@ Feature; Update Strongly Recommended
 - [Issue #7](https://github.com/thedavecarroll/BluebirdPS/issues/7) - Add module scaffolding and build script
 - [Issue #8](https://github.com/thedavecarroll/BluebirdPS/issues/8) - Add ReturnValue parameter to Invoke-TwitterCursorRequest
 - [Issue #3](https://github.com/thedavecarroll/BluebirdPS/pull/3) - Add example and pre-reqs
+
+[0.1.0]: https://github.com/thedavecarroll/BluebirdPS/tree/27d2d3251bc76558d0b7b91a5db6b967da85b269
