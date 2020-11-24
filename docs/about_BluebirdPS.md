@@ -12,7 +12,7 @@ With BluebirdPS, you can publish a tweet, reply to a tweet, publish a direct mes
 
 # DEVELOPER ACCOUNT TOKENS
 
-Currently, any user of the module would need to apply for a Twitter Developer account at https://developer.twitter.com/en/apply/user.html and create an application in the portal. Once you have created the application, generate your API key/secret and access token/secret. Then use the following command to add your key, token and secrets. Omit the `-Persist` if you do not want to save your credentials to disk.
+Currently, any user of the module would need to apply for a Twitter Developer account at https://developer.twitter.com/en/apply/user.html and create an application in the portal. The application must be given access permissions of Read, Write, and Direct Message. At minimum, the application needs Read access for any Get- commands. Set-, Send-, and Publish-Tweet require Write access, while Publish-TwitterDM requires Direct Message. Once you have created the application, generate your API key/secret and access token/secret. Then use the following command to add your key, token and secrets. Omit the `-Persist` if you do not want to save your credentials to disk.
 
 ### Example
 
