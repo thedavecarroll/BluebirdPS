@@ -1,5 +1,5 @@
 function Get-TwitterTimeline {
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName='Mentions')]
     param(
         [Parameter(ParameterSetName='Mentions')]
         [switch]$MentionsTimeline,

@@ -1,5 +1,5 @@
 function Export-TwitterResource {
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName='Configuration')]
     param(
         [Parameter(Mandatory,ParameterSetName='Configuration')]
         [switch]$Configuration,

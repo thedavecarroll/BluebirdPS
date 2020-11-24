@@ -1,5 +1,5 @@
 function Get-TwitterListSubscriber {
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName='ShowId')]
     param(
         [Parameter(Mandatory,ParameterSetName='ShowId')]
         [ValidateNotNullOrEmpty()]

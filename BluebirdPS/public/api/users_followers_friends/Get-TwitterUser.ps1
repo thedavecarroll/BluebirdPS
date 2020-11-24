@@ -1,5 +1,5 @@
 function Get-TwitterUser {
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName='ScreenName')]
     param(
         [Parameter(Mandatory,ParameterSetName='ScreenName')]
         [string]$ScreenName,

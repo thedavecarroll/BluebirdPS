@@ -1,5 +1,5 @@
 function Set-TwitterRateLimitWarning {
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName='Enable')]
     param(
         [Parameter(Mandatory,ParameterSetName='Enable')]
         [switch]$Enable,
