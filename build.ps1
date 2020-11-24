@@ -103,6 +103,8 @@ Import-TwitterApiEndpoints -Path $ApiEndpointSourcePath | ConvertTo-Json -Depth 
 'Creating new external help'
 $MarkdownHelp = Get-ChildItem -Path $ExternalHelpSourceMarkdown -Include '*-*.md' -Recurse
 New-ExternalHelp -Path $MarkdownHelp -OutputPath $ExternalHelpPath -Force | Out-Null
+$AboutHelp = Get-ChildItem -Path (Join-Path -Path $ExternalHelpSourceMarkdown -ChildPath "about_$ProjectName.md")
+New-ExternalHelp -Path $AboutHelp -OutputPath $ExternalHelpPath -Force | Out-Null
 
 # get new file list
 'Generating full file list for module manifest'

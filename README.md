@@ -35,6 +35,11 @@ You can install it on virtually any modern operating system - Windows, MacOS, or
 
 Currently, any user of the module would need to [apply for a Twitter Developer account](https://developer.twitter.com/en/apply/user.html) and create an application in the portal.
 
+> **Note**
+> The application must be given the appropriate access permissions.
+> At minimum, the application needs Read access for any `Get-` commands. `Set-`, `Send-`, and `Publish-Tweet` require Write access.
+> Publish-TwitterDM requires Direct Message.
+
 1. Once you have created the application, generate your API key/secret and access token/secret.
 2. Next, clone this repo to a location of your choosing. This will change once the module is in the PowerShell Gallery.
 3. Then use the `Set-TwitterAuthentication -Persist` to add your key, token and secrets. (Omit the `-Persist` if you do not want to save your credentials to disk.)

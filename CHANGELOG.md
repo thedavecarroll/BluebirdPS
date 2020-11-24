@@ -1,11 +1,13 @@
 # Changelog
 
-## Keep a Changelog
+## [0.1.1] - 2020-11-23
 
-All notable changes to this project will be documented in this file.
+Bugfix; Update Strongly Recommended
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
-and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+### Fixed
+
+- [Issue #27](https://github.com/thedavecarroll/BluebirdPS/issues/27) - Errors on Import-Module
+- [Issue #28](https://github.com/thedavecarroll/BluebirdPS/issues/28) - Add an About help topic
 
 ## [0.1.0] - 2020-11-22
 
@@ -33,3 +35,11 @@ Initial release
 - [Issue #3](https://github.com/thedavecarroll/BluebirdPS/pull/3) - Add example and pre-reqs
 
 [0.1.0]: https://github.com/thedavecarroll/BluebirdPS/tree/27d2d3251bc76558d0b7b91a5db6b967da85b269
+[0.1.1]: https://github.com/thedavecarroll/BluebirdPS/tree/962d11e2f6d3d6de68671fc495dd2693e717b4b8
+
+## Keep a Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
+and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).

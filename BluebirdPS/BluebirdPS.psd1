@@ -1,12 +1,12 @@
 @{
     RootModule = 'BluebirdPS.psm1'
-    ModuleVersion = '0.1.0'
+    ModuleVersion = '0.1.1'
     CompatiblePSEditions = 'Core'
     GUID = 'b46904d8-98f5-430e-893a-5ad77ceed8bd'
     Author = 'Dave Carroll'
     CompanyName = 'thedavecarroll'
     Copyright = '2020'
-    Description = 'Tweet, retweet, send direct messages, manage lists, and more.'
+    Description = 'A Twitter Automation Client for PowerShell 7. Tweet, retweet, send direct messages, manage lists, and more.'
     PowerShellVersion = '7.0'
     FunctionsToExport = @()
     CmdletsToExport = @()
@@ -28,8 +28,17 @@
     # ModuleList = @()
     PrivateData = @{
         PSData = @{
-            Tags = 'TwitterClient','Twitter','REST_API','SocialMedia'
-            ReleaseNotes = '## 0.1.0 - 2020-11-22
+            Tags = 'Twitter-Client','Twitter-API','Twitter','Tweet','Automation','Social-Media'
+            ReleaseNotes = '## [0.1.1] - 2020-11-23
+
+Bugfix; Update Strongly Recommended
+
+### Fixed
+
+- [Issue #27](https://github.com/thedavecarroll/BluebirdPS/issues/27) - Errors on Import-Module
+- [Issue #28](https://github.com/thedavecarroll/BluebirdPS/issues/28) - Add an About help topic
+
+## 0.1.0 - 2020-11-22
 
 Feature; Update Strongly Recommended
 
