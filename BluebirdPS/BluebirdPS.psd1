@@ -29,7 +29,16 @@
     PrivateData = @{
         PSData = @{
             Tags = 'Twitter-Client','Twitter-API','Twitter','Tweet','Automation','Social-Media'
-            ReleaseNotes = '## 0.1.0 - 2020-11-22
+            ReleaseNotes = '## [0.1.1] - 2020-11-23
+
+Bugfix; Update Strongly Recommended
+
+### Fixed
+
+- [Issue #27](https://github.com/thedavecarroll/BluebirdPS/issues/27) - Errors on Import-Module
+- [Issue #28](https://github.com/thedavecarroll/BluebirdPS/issues/28) - Add an About help topic
+
+## 0.1.0 - 2020-11-22
 
 Feature; Update Strongly Recommended
 
