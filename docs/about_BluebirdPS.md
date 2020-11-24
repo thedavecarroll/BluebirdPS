@@ -2,17 +2,13 @@
 
 ## about_BluebirdPS
 
-# SYNOPSIS
+# Short Description
 
 BluebirdPS is a Twitter automation client written for PowerShell 7 and above.
 
-# DESCRIPTION
+# Long Description
 
 With BluebirdPS, you can publish a tweet, reply to a tweet, publish a direct message, upload media to use in tweets or direct messages, retweet/unretweet, like/unlike, add/delete saved searches, and retrieve many resources such as blocks, followers, timelines, and users. Additionally, you can retrieve lists, list membership, and list subscribers.
-
-### More Features to come
-
-More features are on the way.
 
 # DEVELOPER ACCOUNT TOKENS
 
@@ -41,6 +37,14 @@ While a few commands in this module are helper commands that don't connect to th
 ### Example
 
 Get-TwitterApiEndpoint -Command Get-TwitterTimeline
+
+# New Features
+
+More features are on the way but if you have a use case that the module does not support, please submit a feature request at https://bit.ly/BluebirdPSFeatureRequest.
+
+# Found a bug?
+
+If you find a bug, please report it at https://bit.ly/BluebirdPSBugReport.
 
 # KEYWORDS
 
