@@ -10,8 +10,8 @@ function Export-TwitterAuthentication {
             $Action = 'existing'
         }
 
-        $OAuth | ConvertTo-Json | ConvertTo-SecureString -AsPlainText |
-            ConvertFrom-SecureString | Set-Content -Path $OAuthTokenSavePath -Force
+        [System.Diagnostics.CodeAnalysis.SuppressMessage('PSAvoidUsingConvertToSecureStringWithPlainText', '')]
+        $OAuth | ConvertTo-Json | ConvertTo-SecureString -AsPlainText | ConvertFrom-SecureString | Set-Content -Path $OAuthTokenSavePath -Force
 
         'Saved Twitter credentials to {0} file: {1}' -f $Action,$OAuthTokenSavePath | Write-Verbose
     }
