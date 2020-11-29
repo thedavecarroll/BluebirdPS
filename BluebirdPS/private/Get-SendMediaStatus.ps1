@@ -1,7 +1,7 @@
 function Get-SendMediaStatus {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory,ValueFromPipelineByPropertyName)]
+        [Parameter(Mandatory)]
         [Alias('media_id')]
         [string]$MediaId,
 
