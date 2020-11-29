@@ -1,4 +1,5 @@
 function Set-TweetLike {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseShouldProcessForStateChangingFunctions', '')]
     [CmdletBinding(DefaultParameterSetName='Like')]
     param(
         [Parameter(Mandatory)]

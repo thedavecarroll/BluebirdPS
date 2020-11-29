@@ -1,4 +1,5 @@
 function New-TwitterQuery {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseShouldProcessForStateChangingFunctions', '')]
     [CmdletBinding()]
     param(
         [hashtable]$ApiParameters

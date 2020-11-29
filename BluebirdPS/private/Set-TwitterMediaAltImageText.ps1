@@ -1,4 +1,5 @@
 function Set-TwitterMediaAltImageText {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseShouldProcessForStateChangingFunctions', '')]
     [CmdletBinding()]
     param(
         [Parameter(Mandatory,ValueFromPipelineByPropertyName)]

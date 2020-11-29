@@ -1,4 +1,5 @@
 function Set-Retweet {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseShouldProcessForStateChangingFunctions', '')]
     [CmdletBinding(DefaultParameterSetName='Retweet')]
     param(
         [Parameter(Mandatory)]

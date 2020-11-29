@@ -1,4 +1,5 @@
 function Set-TwitterAuthentication {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseShouldProcessForStateChangingFunctions', '')]
     [CmdletBinding()]
     param (
         [SecureString]$ApiKey = (Read-Host -Prompt 'API Key' -AsSecureString),

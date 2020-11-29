@@ -1,4 +1,5 @@
 function Set-TwitterBearerToken {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseShouldProcessForStateChangingFunctions', '')]
     [CmdletBinding()]
     param(
         [switch]$Persist

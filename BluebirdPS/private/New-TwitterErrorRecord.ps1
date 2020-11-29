@@ -1,4 +1,5 @@
 function New-TwitterErrorRecord {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseShouldProcessForStateChangingFunctions', '')]
     [CmdletBinding()]
     param(
         [Parameter(Mandatory,ValueFromPipeline)]

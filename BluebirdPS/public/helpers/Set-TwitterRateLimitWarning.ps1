@@ -1,4 +1,5 @@
 function Set-TwitterRateLimitWarning {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseShouldProcessForStateChangingFunctions', '')]
     [CmdletBinding(DefaultParameterSetName='Enable')]
     param(
         [Parameter(Mandatory,ParameterSetName='Enable')]
