@@ -1,7 +1,7 @@
 function Invoke-TwitterRequest {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory,ValueFromPipeline)]
+        [Parameter(Mandatory)]
         [OAuthParameters]$OAuthParameters,
         [switch]$SkipHistory
     )

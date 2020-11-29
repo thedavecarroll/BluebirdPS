@@ -1,7 +1,7 @@
 function Invoke-TwitterCursorRequest {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory,ValueFromPipeline)]
+        [Parameter(Mandatory)]
         [OAuthParameters]$OAuthParameters,
         [string]$ReturnValue
     )

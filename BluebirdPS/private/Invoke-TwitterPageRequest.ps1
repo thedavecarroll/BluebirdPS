@@ -1,7 +1,7 @@
 function Invoke-TwitterPageRequest {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory,ValueFromPipeline)]
+        [Parameter(Mandatory)]
         [OAuthParameters]$OAuthParameters,
         [Parameter(Mandatory)]
         [int]$Pages
