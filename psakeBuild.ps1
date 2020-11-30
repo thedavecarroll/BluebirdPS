@@ -1,10 +1,8 @@
 properties {
-    $PSBPreference.Build.OutDir = [IO.Path]::Combine($env:BHProjectPath,'BuildOutput')
     $PSBPreference.Build.CompileModule = $true
     $PSBPreference.Build.CompileDirectories = 'Prepend', 'Classes', 'Private', 'Public', 'Append'
     $PSBPreference.Build.CopyDirectories = 'resources'
     $PSBPreference.Build.CompileScriptHeader = [System.Environment]::NewLine
-    $PSBPreference.Build.CopyDirectories =  [IO.Path]::Combine($env:BHPSModulePath,'resources')
     $PSBPreference.Test.ScriptAnalysis.SettingsPath = [IO.Path]::Combine($env:BHProjectPath,'build','ScriptAnalyzerSettings.psd1')
 }
 
@@ -41,14 +39,26 @@ task AddFileListToManifest {
 
     $UpdateManifestParams = @{
         Path = [IO.Path]::Combine($PSBPreference.Build.ModuleOutDir,"$env:BHProjectName.psd1")
-        PropertyName = 'FileList'
-        Value = Get-ChildItem -Path $PSBPreference.Build.ModuleOutDir -File -Recurse | ForEach-Object {
+        FileList = Get-ChildItem -Path $PSBPreference.Build.ModuleOutDir -File -Recurse | ForEach-Object {
             $_.FullName.Replace($FileListParentFolder,'')
         }
     }
-    Update-Manifest @UpdateManifestParams
+    Update-ModuleManifest @UpdateManifestParams
 
 } -Description 'Add files list to module manifest'
+
+<#
+New Tasks
+
+task UpdateChangeLog
+task UpdateReleaseNotes -Depends UpdateChangeLog
+
+task CreateReleaseAsset
+task PublishReleaseToGitHub -Depends CreateReleaseAsset
+
+https://github.com/microsoft/PowerShellForGitHub
+
+#>
 
 task Build -FromModule PowerShellBuild -depends @('CompileApiEndpoint','GenerateExternalHelp','AddFileListToManifest')
 

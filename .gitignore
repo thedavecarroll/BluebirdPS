@@ -1,4 +1,5 @@
 # skip build output
 BuildOutput/
+Output/
 Pending/
 .vscode
