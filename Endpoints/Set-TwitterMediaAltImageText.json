@@ -4,6 +4,7 @@
         "POST media/metadata/create": {
             "Function": "Set-TwitterMediaAltImageText",
             "ApiVersion": "v1.1",
+            "OAuthVersion": "1.0a",
             "Resource": "media/metadata/create",
             "Method": "POST",
             "Uri": "https://upload.twitter.com/1.1/media/metadata/create.json",

@@ -4,6 +4,7 @@
         "POST oauth2/token": {
             "Function": "Set-TwitterBearerToken",
             "ApiVersion": "v1.1",
+            "OAuthVersion": "1.0a",
             "Resource": "oauth2/token",
             "Method": "POST",
             "Uri": "https://api.twitter.com/oauth2/token",

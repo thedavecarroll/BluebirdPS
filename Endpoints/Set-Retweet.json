@@ -4,6 +4,7 @@
         "POST statuses/retweet/:id": {
             "Function": "Set-Retweet",
             "ApiVersion": "v1.1",
+            "OAuthVersion": "1.0a",
             "Resource": "statuses/retweet/:id",
             "Method": "POST",
             "Uri": "https://api.twitter.com/1.1/statuses/retweet/:id.json",
@@ -34,6 +35,7 @@
         "POST statuses/unretweet/:id": {
             "Function": "Set-Retweet",
             "ApiVersion": "v1.1",
+            "OAuthVersion": "1.0a",
             "Resource": "statuses/unretweet/:id",
             "Method": "POST",
             "Uri": "https://api.twitter.com/1.1/statuses/unretweet/:id.json",

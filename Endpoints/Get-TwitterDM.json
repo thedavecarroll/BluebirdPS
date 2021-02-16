@@ -4,6 +4,7 @@
         "GET direct_messages/events/show": {
             "Function": "Get-TwitterDM",
             "ApiVersion": "v1.1",
+            "OAuthVersion": "1.0a",
             "Resource": "direct_messages/events/show",
             "Method": "GET",
             "Uri": "https://api.twitter.com/1.1/direct_messages/events/show.json",
@@ -25,6 +26,7 @@
         "GET direct_messages/events/list": {
             "Function": "Get-TwitterDM",
             "ApiVersion": "v1.1",
+            "OAuthVersion": "1.0a",
             "Resource": "direct_messages/events/list",
             "Method": "GET",
             "Uri": "https://api.twitter.com/1.1/direct_messages/events/list.json",

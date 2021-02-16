@@ -4,6 +4,7 @@
         "GET users/profile_banner": {
             "Function": "Get-TwitterUserProfileBanner",
             "ApiVersion": "v1.1",
+            "OAuthVersion": "1.0a",
             "Resource": "users/profile_banner",
             "Method": "GET",
             "Uri": "https://api.twitter.com/1.1/users/profile_banner.json",

@@ -4,6 +4,7 @@
         "GET lists/list": {
             "Function": "Get-TwitterList",
             "ApiVersion": "v1.1",
+            "OAuthVersion": "1.0a",
             "Resource": "lists/list",
             "Method": "GET",
             "Uri": "https://api.twitter.com/1.1/lists/list.json",
@@ -43,6 +44,7 @@
         "GET lists/show": {
             "Function": "Get-TwitterList",
             "ApiVersion": "v1.1",
+            "OAuthVersion": "1.0a",
             "Resource": "lists/show",
             "Method": "GET",
             "Uri": "https://api.twitter.com/1.1/lists/show.json",

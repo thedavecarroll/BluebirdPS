@@ -4,6 +4,7 @@
         "GET blocks/list": {
             "Function": "Get-TwitterBlocks",
             "ApiVersion": "v1.1",
+            "OAuthVersion": "1.0a",
             "Resource": "blocks/list",
             "Method": "GET",
             "Uri": "https://api.twitter.com/1.1/blocks/list.json",
@@ -43,6 +44,7 @@
         "GET blocks/ids": {
             "Function": "Get-TwitterBlocks",
             "ApiVersion": "v1.1",
+            "OAuthVersion": "1.0a",
             "Resource": "GET blocks/ids",
             "Method": "GET",
             "Uri": "https://api.twitter.com/1.1/blocks/ids.json",

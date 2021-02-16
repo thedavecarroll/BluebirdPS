@@ -4,6 +4,7 @@
         "METHOD base_resource/resource": {
             "Function": "Verb-Noun",
             "ApiVersion": "v1.1",
+            "OAuthVersion": "1.0a",
             "Resource": "base_resource/resource",
             "Method": "METHOD",
             "Uri": "base_uri/base_resource/resource.json",

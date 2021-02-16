@@ -4,6 +4,7 @@
         "POST media/upload (INIT)": {
             "Function": "Send-TwitterMedia",
             "ApiVersion": "v1.1",
+            "OAuthVersion": "1.0a",
             "Resource": "media/upload",
             "Method": "POST",
             "Uri": "https://upload.twitter.com/1.1/media/upload.json",
@@ -61,6 +62,7 @@
         "POST media/upload (APPEND)": {
             "Function": "Send-TwitterMedia",
             "ApiVersion": "v1.1",
+            "OAuthVersion": "1.0a",
             "Resource": "media/upload",
             "Method": "POST",
             "Uri": "https://upload.twitter.com/1.1/media/upload.json",
@@ -118,6 +120,7 @@
         "POST media/upload (FINALIZE)": {
             "Function": "Send-TwitterMedia",
             "ApiVersion": "v1.1",
+            "OAuthVersion": "1.0a",
             "Resource": "media/upload",
             "Method": "POST",
             "Uri": "https://upload.twitter.com/1.1/media/upload.json",

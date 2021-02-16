@@ -4,6 +4,7 @@
         "GET friendships/lookup": {
             "Function": "Get-TwitterFriendship",
             "ApiVersion": "v1.1",
+            "OAuthVersion": "1.0a",
             "Resource": "friendships/lookup",
             "Method": "GET",
             "Uri": "https://api.twitter.com/1.1/friendships/lookup.json",
@@ -34,6 +35,7 @@
         "GET friendships/show": {
             "Function": "Get-TwitterFriendship",
             "ApiVersion": "v1.1",
+            "OAuthVersion": "1.0a",
             "Resource": "friendships/show",
             "Method": "GET",
             "Uri": "https://api.twitter.com/1.1/friendships/show.json",

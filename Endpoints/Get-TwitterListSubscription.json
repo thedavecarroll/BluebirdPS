@@ -4,6 +4,7 @@
         "GET lists/subscriptions": {
             "Function": "Get-TwitterListSubscription",
             "ApiVersion": "v1.1",
+            "OAuthVersion": "1.0a",
             "Resource": "lists/subscriptions",
             "Method": "GET",
             "Uri": "https://api.twitter.com/1.1/lists/subscriptions.json",

@@ -1,9 +1,10 @@
 {
     "Resource": "account",
     "Endpoints": {
-        "METHOD account/verify_credentials": {
+        "GET account/verify_credentials": {
             "Function": "Test-TwitterAuthentication",
             "ApiVersion": "v1.1",
+            "OAuthVersion": "1.0a",
             "Resource": "account/verify_credentials",
             "Method": "GET",
             "Uri": "https://api.twitter.com/1.1/account/verify_credentials.json",
