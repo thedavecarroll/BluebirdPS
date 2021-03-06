@@ -1,7 +1,13 @@
-using System;
+﻿using System;
 
 namespace BluebirdPS.APIV2.Media
 {
+    public enum MediaType
+    {
+        AnimatedGif,
+        Photo,
+        Video
+    }
 
     public class Media : TwitterObject
     {
