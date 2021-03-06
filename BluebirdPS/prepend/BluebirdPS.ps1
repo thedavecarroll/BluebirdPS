@@ -2,6 +2,7 @@ using namespace System.Management.Automation
 using namespace Collections.ObjectModel
 using namespace System.Collections
 using namespace Microsoft.PowerShell.Commands
+using namespace BluebirdPS
 
 # --------------------------------------------------------------------------------------------------
 
