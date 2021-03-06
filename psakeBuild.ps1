@@ -32,6 +32,7 @@ task GenerateExternalHelp {
     }
     New-ExternalHelp @NewAboutHelpParams | Out-Null
 
+    Start-Sleep -Seconds 2
 } -Description 'Generates MAML-based help from PlatyPS markdown files'
 
 task AddFileListToManifest {
@@ -47,6 +48,17 @@ task AddFileListToManifest {
 
 } -Description 'Add files list to module manifest'
 
+task DotNetBuild -Depends 'StageFiles' {
+    $OutputBinFolder = [IO.Path]::Combine($PSBPreference.Build.ModuleOutDir,'bin')
+    $DotNetSrcFolder = [IO.Path]::Combine($env:BHProjectPath,'src')
+
+    dotnet build $DotNetSrcFolder -o $OutputBinFolder
+    if ($LASTEXITCODE -ne 0) {
+        'DotNetBuild task failed' | Write-Error -ErrorAction Stop
+    }
+
+} -Description 'Compile .Net Library'
+
 <#
 New Tasks
 
@@ -60,6 +72,6 @@ https://github.com/microsoft/PowerShellForGitHub
 
 #>
 
-task Build -FromModule PowerShellBuild -depends @('CompileApiEndpoint','GenerateExternalHelp','AddFileListToManifest')
+task Build -FromModule PowerShellBuild -depends @('CompileApiEndpoint','DotNetBuild','GenerateExternalHelp','AddFileListToManifest')
 
 task default -depends Build
