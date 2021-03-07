@@ -242,8 +242,10 @@ function Get-ChangeLogUpdate {
                 if ($Entry.GitHubIssue) {
                     $EntryText = '- [Issue #{0}]({1}) - {2}' -f $Entry.GitHubIssue.number,$Entry.GitHubIssue.html_url,$Entry.GitHubIssue.title
                 }
-                $EntryText | Write-Verbose
-                [void]$NewChangeLogEntry.AppendLine($EntryText)
+                if (-Not $NewChangeLogEntry.ToString().Contains($EntryText)) {
+                    $EntryText | Write-Verbose
+                    [void]$NewChangeLogEntry.AppendLine($EntryText)
+                }
             }
             [void]$NewChangeLogEntry.AppendLine()
         }

@@ -6,7 +6,7 @@
         Version = '4.9.0'
     }
     'BuildHelpers' = @{
-        Version = '2.0.11'
+        Version = '2.0.16'
     }
     'PowerShellBuild' = @{
         RequiredVersion = '0.5.0-beta1'
@@ -19,6 +19,6 @@
         Version = '0.14.0'
     }
     'PowerShellforGitHub' = @{
-        Version = '0.15.1'
+        Version = '0.16.0'
     }
 }
