@@ -12,11 +12,10 @@ namespace BluebirdPS.APIV1
         public string FullName { get; set; }
         public string Description { get; set; }
         public string Uri { get; set; }
-        public Int64 MemberCount { get; set; }
-        public Int64 SubscriberCount { get; set; }
+        public long MemberCount { get; set; }
+        public long SubscriberCount { get; set; }
         public string UserId { get; set; }
-        public string UserName { get; set; }        
-        public string UserDescription { get; set; }
+        public string UserName { get; set; }
         public bool Following { get; set; }
 
         public List() { }
@@ -39,7 +38,6 @@ namespace BluebirdPS.APIV1
 
                 UserId = input.user.id_str;
                 UserName = input.user.screen_name;
-                UserDescription = input.user.description;
             }
             catch { }
         }
@@ -61,6 +59,14 @@ namespace BluebirdPS.APIV1
         public Uri SourceAppUrl { get; set; }
 
         public DirectMessage() { }
+        public DirectMessage(dynamic input) 
+        {
+            OriginalObject = input;
+
+            Id = input.id;
+            SenderId = input.sender_id;
+            RecipientId = input.target.reciptient;
+        }
     }
 
     public class Media : TwitterObject
@@ -99,9 +105,16 @@ namespace BluebirdPS.APIV1
         public DateTime CreatedAt { get; set; }
         public string Name { get; set; }
         public string Query { get; set; }
-        public string Position { get; set; }
 
         public SavedSearch() { }
+        public SavedSearch(dynamic input) {
+            OriginalObject = input;
+
+            Id = input.id_str;
+            CreatedAt = Helpers.ConvertV1Date(input.created_at);
+            Name = input.name;
+            Query = input.query;
+        }
     }
 
     public class AccountSettings : TwitterObject
@@ -126,6 +139,8 @@ namespace BluebirdPS.APIV1
         public AccountSettings() { }
         public AccountSettings(dynamic input)
         {
+            OriginalObject = input;
+
             TimeZoneInfo = GetTimeZoneInfo(input);
             Protected = input.@protected;
             UserName = input.screen_name;
@@ -142,8 +157,6 @@ namespace BluebirdPS.APIV1
             TranslatorType = input.translator_type;
             SleepTime = input.sleep_time;
             TrendLocation = input.trendlocation;
-
-            OriginalObject = input;
         }
 
         private TimeZoneInfo GetTimeZoneInfo(dynamic input)

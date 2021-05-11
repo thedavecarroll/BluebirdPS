@@ -1,6 +1,8 @@
 ﻿using System;
+using BluebirdPS.APIV2.MediaInfo.Metrics;
+using BluebirdPS.APIV2.Objects;
 
-namespace BluebirdPS.APIV2.Media
+namespace BluebirdPS.APIV2.MediaInfo
 {
     public enum MediaType
     {
@@ -15,6 +17,10 @@ namespace BluebirdPS.APIV2.Media
         public MediaType Type { get; set; }
         public int? Duration { get; set; }
         public long Height { get; set; }
+        public Public PublicMetrics { get; set; }
+        public NonPublic NonPublicMetrics { get; set; }
+        public Organic OrganicMetrics { get; set; }
+        public Promoted PromotedMetrics { get; set; }
         public long Width { get; set; }
         public Uri PreviewImageUrl { get; set; }
 
@@ -39,6 +45,19 @@ namespace BluebirdPS.APIV2.Media
                 {
                     PreviewImageUrl = new Uri(input.preview_image_url);
                 }
+
+                if (Helpers.HasProperty(input, "non_public_metrics"))
+                {
+                    NonPublicMetrics = new NonPublic(input.non_public_metrics);
+                }
+                if (Helpers.HasProperty(input, "organic_metrics"))
+                {
+                    OrganicMetrics = new Organic(input.organic_metrics);
+                }
+                if (Helpers.HasProperty(input, "promoted_metrics"))
+                {
+                    PromotedMetrics = new Promoted(input.promoted_metrics);
+                }
             }
             catch {
                 // any missing properties that are not on the input object
@@ -51,25 +70,26 @@ namespace BluebirdPS.APIV2.Media
 
     namespace Metrics
     {
-        public class Public
+        public class Public : BaseMetrics
         {
-            public Int64 ViewCount { get; set; }
+            public long ViewCount { get; set; }
 
             public Public() { }
             public Public(dynamic input)
             {
                 ViewCount = input.view_count;
+                OriginalObject = input;
             }
         }
 
-        public class NonPublic
+        public class NonPublic : BaseMetrics
         {
-            public Int64 PlaybackCount_0 { get; set; }
-            public Int64 PlaybackCount_100 { get; set; }
-            public Int64 PlaybackCount_25 { get; set; }
-            public Int64 PlaybackCount_50 { get; set; }
-            public Int64 PlaybackCount_75 { get; set; }
-            public Int64 ViewCount { get; set; }
+            public long PlaybackCount_0 { get; set; }
+            public long PlaybackCount_100 { get; set; }
+            public long PlaybackCount_25 { get; set; }
+            public long PlaybackCount_50 { get; set; }
+            public long PlaybackCount_75 { get; set; }
+            public long ViewCount { get; set; }
 
             public NonPublic() { }
             public NonPublic(dynamic input)
@@ -80,17 +100,18 @@ namespace BluebirdPS.APIV2.Media
                 PlaybackCount_50 = input.playback_50_count;
                 PlaybackCount_75 = input.playback_75_count;
                 ViewCount = input.view_count;
+                OriginalObject = input;
             }
         }
 
-        public class Organic
+        public class Organic : BaseMetrics
         {
-            public Int64 PlaybackCount_0 { get; set; }
-            public Int64 PlaybackCount_100 { get; set; }
-            public Int64 PlaybackCount_25 { get; set; }
-            public Int64 PlaybackCount_50 { get; set; }
-            public Int64 PlaybackCount_75 { get; set; }
-            public Int64 ViewCount { get; set; }
+            public long PlaybackCount_0 { get; set; }
+            public long PlaybackCount_100 { get; set; }
+            public long PlaybackCount_25 { get; set; }
+            public long PlaybackCount_50 { get; set; }
+            public long PlaybackCount_75 { get; set; }
+            public long ViewCount { get; set; }
 
             public Organic() { }
             public Organic(dynamic input)
@@ -101,17 +122,18 @@ namespace BluebirdPS.APIV2.Media
                 PlaybackCount_50 = input.playback_50_count;
                 PlaybackCount_75 = input.playback_75_count;
                 ViewCount = input.view_count;
+                OriginalObject = input;
             }
         }
 
-        public class Promoted
+        public class Promoted : BaseMetrics
         {
-            public Int64 PlaybackCount_0 { get; set; }
-            public Int64 PlaybackCount_100 { get; set; }
-            public Int64 PlaybackCount_25 { get; set; }
-            public Int64 PlaybackCount_50 { get; set; }
-            public Int64 PlaybackCount_75 { get; set; }
-            public Int64 ViewCount { get; set; }
+            public long PlaybackCount_0 { get; set; }
+            public long PlaybackCount_100 { get; set; }
+            public long PlaybackCount_25 { get; set; }
+            public long PlaybackCount_50 { get; set; }
+            public long PlaybackCount_75 { get; set; }
+            public long ViewCount { get; set; }
 
             public Promoted() { }
             public Promoted(dynamic input)
@@ -122,6 +144,7 @@ namespace BluebirdPS.APIV2.Media
                 PlaybackCount_50 = input.playback_50_count;
                 PlaybackCount_75 = input.playback_75_count;
                 ViewCount = input.view_count;
+                OriginalObject = input;
             }
         }
 

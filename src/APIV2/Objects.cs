@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Management.Automation;
+using System.Reflection;
 
 namespace BluebirdPS.APIV2.Objects
 {
-    public class BaseEntity
+    public class BaseEntity : TwitterObject
     {
         public long Start { get; set; }
         public long End { get; set; }
@@ -79,6 +80,7 @@ namespace BluebirdPS.APIV2.Objects
             }
             return entities.Count > 0 ? entities : null;
         }
+
     }
 
     public class Annotation : BaseEntity
@@ -95,7 +97,9 @@ namespace BluebirdPS.APIV2.Objects
             Probability = input.probability;
             Type = input.type;
             NormalizedText = input.normalized_text;
+            OriginalObject = input;
         }
+
     }
 
     public class CashTag : BaseEntity
@@ -108,6 +112,7 @@ namespace BluebirdPS.APIV2.Objects
             Start = input.start;
             End = input.end;
             Tag = input.tag;
+            OriginalObject = input;
         }
     }
 
@@ -121,6 +126,12 @@ namespace BluebirdPS.APIV2.Objects
             Start = input.start;
             End = input.end;
             Tag = input.tag;
+            OriginalObject = input;
+        }
+
+        public override string ToString()
+        {            
+            return $"#{Tag}";
         }
     }
 
@@ -134,6 +145,12 @@ namespace BluebirdPS.APIV2.Objects
             Start = input.start;
             End = input.end;
             Tag = input.tag;
+            OriginalObject = input;
+        }
+
+        public override string ToString()
+        {
+            return $"@{Tag}";
         }
     }
 
@@ -156,6 +173,7 @@ namespace BluebirdPS.APIV2.Objects
             Url = new Uri(input.url);
             ExpandedUrl = new Uri(input.expanded_url);
             DisplayUrl = input.display_url;
+            OriginalObject = input;
 
             if (Helpers.HasProperty(input, "status"))
             {
@@ -184,13 +202,15 @@ namespace BluebirdPS.APIV2.Objects
             }
 
         }
+
+        public override string ToString() => ExpandedUrl.AbsoluteUri;
     }
 
-    public class Image
+    public class Image : TwitterObject
     {
-        Uri Url { get; set; }
-        long Width { get; set; }
-        long Height { get; set; }
+        public Uri Url { get; set; }
+        public long Width { get; set; }
+        public long Height { get; set; }
 
         public Image() { }
         public Image(dynamic input)
@@ -198,10 +218,16 @@ namespace BluebirdPS.APIV2.Objects
             Url = new Uri(input.url);
             Width = input.width;
             Height = input.height;
+            OriginalObject = input;
+        }
+
+        public override string ToString()
+        {
+            return Url.AbsoluteUri;
         }
     }
 
-    public class WithheldContent
+    public class WithheldContent : TwitterObject
     {
         public bool Copyright { get; set; }
         public List<string> CountryCodes { get; set; }
@@ -215,10 +241,11 @@ namespace BluebirdPS.APIV2.Objects
             }
             Copyright = input.copyright;
             CountryCodes = input.country_codes;
+            OriginalObject = input;
         }
     }
 
-    public class Poll
+    public class Poll : TwitterObject
     {
         public string Id { get; set; }
         public List<PollOptions> Options { get; set; }
@@ -243,9 +270,10 @@ namespace BluebirdPS.APIV2.Objects
             }
             Options = pollOptions;
         }
+
     }
 
-    public class PollOptions
+    public class PollOptions : TwitterObject
     {
         public long Position { get; set; }
         public string Label { get; set; }
@@ -257,10 +285,16 @@ namespace BluebirdPS.APIV2.Objects
             Position = input.position;
             Label = input.label;
             Votes = input.votes;
+            OriginalObject = input;
+        }
+
+        public override string ToString()
+        {
+            return $"{Label}:{Votes}";
         }
     }
 
-    public class Place
+    public class Place : TwitterObject
     {
         //https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/geo
         public string Fullname { get; set; }
@@ -273,10 +307,29 @@ namespace BluebirdPS.APIV2.Objects
         public string PlaceType { get; set; }
 
         public Place() { }
-        public Place(dynamic input) { 
-            
+        public Place(dynamic input) {
+
+            OriginalObject = input;
         }
 
     }
+
+    public class BaseMetrics : TwitterObject
+    {
+        public override string ToString()
+        {
+            List<string> displayMetrics = new List<string>();
+            foreach (PropertyInfo property in GetType().GetProperties())
+            {
+                var value = property.GetValue(this, null);
+                if (value != null)
+                {
+                    displayMetrics.Add($"{property.Name}: {value}");
+                }
+            }
+            return string.Join(", ", displayMetrics);
+        }
     
+    }
+
 }

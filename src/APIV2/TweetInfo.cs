@@ -1,9 +1,10 @@
 ﻿using BluebirdPS.APIV2.Objects;
+using BluebirdPS.APIV2.TweetInfo.Metrics;
 using System;
 using System.Collections.Generic;
 using System.Management.Automation;
 
-namespace BluebirdPS.APIV2.TwitterTweet
+namespace BluebirdPS.APIV2.TweetInfo
 {
     public class Tweet : TwitterObject
     {
@@ -56,6 +57,7 @@ namespace BluebirdPS.APIV2.TwitterTweet
                 if (Helpers.HasProperty(input, "geo"))
                 {
                     Geo = input.geo;
+                    OriginalObject = input;
                 }
 
                 if (Helpers.HasProperty(input, "reply_settings"))
@@ -83,6 +85,19 @@ namespace BluebirdPS.APIV2.TwitterTweet
                     List<Context.ContextAnnotation> contextAnnotations = new List<Context.ContextAnnotation>();
 
                 }
+
+                if (Helpers.HasProperty(input, "non_public_metrics"))
+                {
+                    NonPublicMetrics = new NonPublic(input.non_public_metrics);
+                }
+                if (Helpers.HasProperty(input, "organic_metrics"))
+                {
+                    OrganicMetrics = new Organic(input.organic_metrics);
+                }
+                if (Helpers.HasProperty(input, "promoted_metrics"))
+                {
+                    PromotedMetrics = new Promoted(input.promoted_metrics);
+                }
             }
             catch
             {
@@ -94,7 +109,7 @@ namespace BluebirdPS.APIV2.TwitterTweet
 
     }
 
-    public class ReferencedTweet
+    public class ReferencedTweet : TwitterObject
     {
         public string Type;
         public string Id;
@@ -104,16 +119,18 @@ namespace BluebirdPS.APIV2.TwitterTweet
         {
             Type = Helpers.ToTitleCase(input.type);
             Id = input.id;
+            OriginalObject = input;
         }
     }
 
-    public class Attachments
+    public class Attachments : TwitterObject
     {
         public string Type { get; set; }
         public List<string> Ids { get; set; }
 
         public Attachments() { }
         public Attachments(dynamic input) {
+            OriginalObject = input;
 
             try
             {
@@ -130,7 +147,7 @@ namespace BluebirdPS.APIV2.TwitterTweet
                 }
                 else if (Helpers.HasProperty(input, "media_keys"))
                 {
-                    Type = "Media";
+                    Type = "MediaInfo";
                     foreach (string attachment in input.media_keys)
                     {
                         attachments.Add(attachment);
@@ -148,12 +165,13 @@ namespace BluebirdPS.APIV2.TwitterTweet
 
     namespace Metrics
     {
-        public class Public
+
+        public class Public : BaseMetrics
         {
-            public Int64 RetweetCount { get; set; }
-            public Int64 ReplyCount { get; set; }
-            public Int64 LikeCount { get; set; }
-            public Int64 QuoteCount { get; set; }
+            public long RetweetCount { get; set; }
+            public long ReplyCount { get; set; }
+            public long LikeCount { get; set; }
+            public long QuoteCount { get; set; }
 
             public Public() { }
             public Public(dynamic input)
@@ -162,14 +180,17 @@ namespace BluebirdPS.APIV2.TwitterTweet
                 ReplyCount = input.reply_count;
                 LikeCount = input.like_count;
                 QuoteCount = input.quote_count;
+                OriginalObject = input;
             }
+
+
         }
 
-        public class NonPublic
+        public class NonPublic : BaseMetrics
         {
-            public Int64 ImpressionCount { get; set; }
-            public Int64 UrlLinkClicks { get; set; }
-            public Int64 UserProfileClicks { get; set; }
+            public long ImpressionCount { get; set; }
+            public long UrlLinkClicks { get; set; }
+            public long UserProfileClicks { get; set; }
 
             public NonPublic() { }
             public NonPublic(dynamic input)
@@ -177,17 +198,18 @@ namespace BluebirdPS.APIV2.TwitterTweet
                 ImpressionCount = input.impression_count;
                 UrlLinkClicks = input.url_link_clicks;
                 UserProfileClicks = input.user_profile_clicks;
+                OriginalObject = input;
             }
         }
 
-        public class Organic
+        public class Organic : BaseMetrics
         {
-            public Int64 ImpressionCount { get; set; }
-            public Int64 LikeCount { get; set; }
-            public Int64 ReplyCount { get; set; }
-            public Int64 RetweetCount { get; set; }
-            public Int64 UrlLinkClicks { get; set; }
-            public Int64 UserProfileClicks { get; set; }
+            public long ImpressionCount { get; set; }
+            public long LikeCount { get; set; }
+            public long ReplyCount { get; set; }
+            public long RetweetCount { get; set; }
+            public long UrlLinkClicks { get; set; }
+            public long UserProfileClicks { get; set; }
 
             public Organic() { }
             public Organic(dynamic input)
@@ -198,17 +220,18 @@ namespace BluebirdPS.APIV2.TwitterTweet
                 RetweetCount = input.retweet_count;
                 UrlLinkClicks = input.url_link_clicks;
                 UserProfileClicks = input.user_profile_clicks;
+                OriginalObject = input;
             }
         }
 
-        public class Promoted
+        public class Promoted : BaseMetrics
         {
-            public Int64 ImpressionCount { get; set; }
-            public Int64 LikeCount { get; set; }
-            public Int64 ReplyCount { get; set; }
-            public Int64 RetweetCount { get; set; }
-            public Int64 UrlLinkClicks { get; set; }
-            public Int64 UserProfileClicks { get; set; }
+            public long ImpressionCount { get; set; }
+            public long LikeCount { get; set; }
+            public long ReplyCount { get; set; }
+            public long RetweetCount { get; set; }
+            public long UrlLinkClicks { get; set; }
+            public long UserProfileClicks { get; set; }
 
             public Promoted() { }
             public Promoted(dynamic input)
@@ -219,19 +242,22 @@ namespace BluebirdPS.APIV2.TwitterTweet
                 RetweetCount = input.retweet_count;
                 UrlLinkClicks = input.url_link_clicks;
                 UserProfileClicks = input.user_profile_clicks;
+                OriginalObject = input;
             }
         }
+
     }
 
     namespace Context
     {
-        public class ContextAnnotation
+        public class ContextAnnotation : TwitterObject
         {
             public Domain Domain { get; set; }
             public Entity Entity { get; set; }
 
             ContextAnnotation() { }
             ContextAnnotation(dynamic input) {
+                OriginalObject = input;
                 if (Helpers.HasProperty(input, "domain"))
                 {
                     Domain = new Domain(input.domain);
@@ -243,7 +269,7 @@ namespace BluebirdPS.APIV2.TwitterTweet
             }
         }
 
-        public class Domain
+        public class Domain : TwitterObject
         {
             public string Id { get; set; }
             public string Name { get; set; }
@@ -255,10 +281,12 @@ namespace BluebirdPS.APIV2.TwitterTweet
                 Id = input.id;
                 Name = input.name;
                 Description = input.description;
+                OriginalObject = input;
+                OriginalObject = input;
             }
         }
 
-        public class Entity
+        public class Entity : TwitterObject
         {
             public string Id { get; set; }
             public string Name { get; set; }
@@ -268,6 +296,7 @@ namespace BluebirdPS.APIV2.TwitterTweet
             {
                 Id = input.id;
                 Name = input.name;
+                OriginalObject = input;
             }
         }    
     }
