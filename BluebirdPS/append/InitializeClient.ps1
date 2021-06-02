@@ -1,6 +1,11 @@
-# import disk resource
-Import-TwitterResource -ErrorMapping
+# import resources from disk
+
+Import-BluebirdPSConfiguration
 
 Import-TwitterAuthentication
-Import-TwitterResource -Configuration
-Import-TwitterResource -Languages
+
+# register arugment completer
+
+Register-ArgumentCompleter -CommandName Get-TwitterApiEndpoint -ParameterName CommandName -ScriptBlock {
+    param($commandName,$parameterName,$stringMatch) Get-Command -Module BluebirdPS -ListImported | ForEach-Object Name | Where-Object { $_ -match $stringMatch }
+}
