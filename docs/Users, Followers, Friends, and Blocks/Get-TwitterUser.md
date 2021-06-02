@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser
+online version: https://docs.bluebirdps.dev/en/v0.5.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser
 schema: 2.0.0
 ---
 
@@ -13,77 +13,83 @@ Returns a variety of information about the specified user.
 
 ## SYNTAX
 
-### ScreenName
+### __AllParameterSets
 
 ```powershell
-Get-TwitterUser -ScreenName <String> [-ExcludeEntities] [<CommonParameters>]
-```
-
-### UserId
-
-```powershell
-Get-TwitterUser -UserId <String> [-ExcludeEntities] [<CommonParameters>]
+Get-TwitterUser [[-User <String[]>]] [-IncludeExpansions] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
 Returns a variety of information about the specified user.
 
-The author's most recent Tweet will be returned inline when possible.
-
-You must be following a protected user to be able to see their most recent Tweet.
-If you don't follow a protected user, the user's Tweet will be removed.
-A Tweet will not always be returned in the current_status field.
+If no input is provided, returns the authenticating user.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS > Get-TwitterUser -ScreenName thedavecarroll
+PS > Get-TwitterUser
 ```
 
-Returns details about the specified user.
+```text
+Id              : 292670084
+Name            : Dave Carroll
+UserName        : thedavecarroll
+CreatedAt       : 5/4/2011 1:22:46 AM
+Description     : Married to an amazing woman. #PowerShell #Blogger #RushTheBand #RetroComputing #Puns #Doggos #Tech #StarTrek #INTJ https://t.co/fLbRHoxt39
+Entities        : {https://powershell.anovelidea.org/, https://pronoun.is/he}
+Location        : Nashville, TN
+PinnedTweetId   : 1385709814890864648
+ProfileImageUrl : https://pbs.twimg.com/profile_images/1332944757186760704/s4AjaIMg_normal.jpg
+Protected       : False
+PublicMetrics   : FollowersCount: 947, FollowingCount: 1654, ListedCount: 27, TweetCount: 6475
+Url             : https://t.co/G5ojwP677I
+Verified        : False
+Withheld        :
+```
+
+Return the authenticating user's information.
+
+### Example 2
+
+```powershell
+PS > Get-TwitterUser -User 1330877955057344513,thedavecarroll,TwitterDev
+```
+
+Return the user information for the 3 specified users.
+
+### Example 3
+
+```powershell
+PS > 3234616374,1330877955057344513,'thedavecarroll' |  Get-TwitterUser
+```
+
+Return the user information for the specified user.
 
 ## PARAMETERS
 
-### -ScreenName
+### -User
 
-The screen name of the user for whom to return results.
+One or more identifiers for a Twitter user.
+You can provide UserName, Id, or a combination of both as this command will send the appropriate request to the Twitter API.
 
 ```yaml
-Type: String
-Parameter Sets: ScreenName
+Type: String[]
+Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
+Required: True (None) False (All)
+Position: 0
+Default value:
+Accept pipeline input: True
 Accept wildcard characters: False
 ```
 
-### -UserId
+### -IncludeExpansions
 
-The ID of the user for whom to return results.
-
-```yaml
-Type: String
-Parameter Sets: UserId
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ExcludeEntities
-
-Exclude the entities node.
-
-This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags.
+Include the pinned Tweet for the returned user(s).
 
 ```yaml
 Type: SwitchParameter
@@ -103,18 +109,24 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
+### System.String
 
 ## OUTPUTS
 
-### System.Object
+### BluebirdPS.APIV2.UserInfo.User
+
+### BluebirdPS.APIV2.UserInfo.User[]
 
 ## NOTES
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser)
 
-[Get-TwitterUserList](https://bluebirdps.anovelidea.org/en/latest/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUserList)
+[Api Reference - GET /2/users/by](https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users-by)
 
-[API Documentation - GET users/show](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-list)
+[Api Reference - GET /2/users/by/username/:username](https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users-by-username-username)
+
+[Api Reference - GET /2/users](https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users)
+
+[Api Reference - GET /2/users/:id](https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users-id)

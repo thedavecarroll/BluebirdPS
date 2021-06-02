@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Authentication/Import-TwitterAuthentication
+online version: https://docs.bluebirdps.dev/en/v0.5.0/Authentication/Import-TwitterAuthentication
 schema: 2.0.0
 ---
 
@@ -23,7 +23,7 @@ Import the current user's authentication credentials from an encrypted file.
 
 The encrypted credentials file will be stored in the folder $env:HOME/.BluebirdPS.
 
-The credentials are the API Key, API Key Secret, Access Token, Access Token Secret, and, if present, the bearer token for OAuth v2 endpoints.
+The credentials are the API Key, API Key Secret, Access Token, Access Token Secret, and, if present, the bearer token for OAuth 2.0.
 
 This essentially refreshes the session variable with the credentials from the encrypted file.
 
@@ -51,16 +51,18 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### None
 
 ## NOTES
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Authentication/Import-TwitterAuthentication)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Authentication/Import-TwitterAuthentication)
 
-[Export-TwitterAuthentication](https://bluebirdps.anovelidea.org/en/latest/Authentication/Export-TwitterAuthentication)
+[Export-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.5.0/Authentication/Export-TwitterAuthentication)
 
-[Set-TwitterAuthentication](https://bluebirdps.anovelidea.org/en/latest/Authentication/Set-TwitterAuthentication)
+[Set-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.5.0/Authentication/Set-TwitterAuthentication)
 
-[Api Reference - Authentication](https://developer.twitter.com/en/docs/authentication/oauth-1-0a)
+[Test-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.5.0/Authentication/Test-TwitterAuthentication)
+
+[Api Reference - Authentication Overview](https://developer.twitter.com/en/docs/authentication/overview)

@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Direct%20Message/Publish-TwitterDM
+online version: https://docs.bluebirdps.dev/en/v0.5.0/Direct%20Message/Publish-TwitterDM
 schema: 2.0.0
 ---
 
@@ -13,8 +13,22 @@ Publishes a new direct message to a specified user from the authenticating user.
 
 ## SYNTAX
 
+### DM (Default)
+
 ```powershell
-Publish-TwitterDM [-UserId] <String> [-Message] <String> [[-MediaId] <String>] [<CommonParameters>]
+Publish-TwitterDM [-Message] <String> -Id <String> [[-MediaId] <String>] [<CommonParameters>]
+```
+
+### DMWithMedia
+
+```powershell
+Publish-TwitterDM [-Message] <String> -Id <String> -TwitterUser <User> -Path <String> -Category <String> [-AltImageText <String>] [<CommonParameters>]
+```
+
+### DMUserObject
+
+```powershell
+Publish-TwitterDM [-Message] <String> -User <User> [[-MediaId] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,23 +45,25 @@ PS > Publish-TwitterDM -UserId 123456789 -Message "Did you hear about the releas
 
 Send the string message to the specified user as a direct message.
 
-## PARAMETERS
+### Example 2
 
-### -UserId
-
-The ID of the user to which you want to send a direct message.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: id
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
+```powershell
+PS > Get-TwitterUser -User BluebirdPS | Publish-TwitterDM -Message 'Are you excited about the upcoming release of BluebirdPS?' -Path $PathToFile -Category DMImage -AltImageText 'Good to have alt-img-text for screen readers'
 ```
+
+```text
+Id          : 1396582297319747588
+SenderId    : 292670084
+RecipientId : 1330877955057344513
+CreatedAt   : 5/23/2021 4:42:21 PM
+Message     : Are you excited about the upcoming release of BluebirdPS? https://t.co/zA8bPmHskI
+Media       : Id: 1396582290713686016, Type: Photo, DisplayUrl: pic.twitter.com/zA8bPmHskI
+SourceAppId :
+```
+
+Send the string message to the specified user as a direct message.
+
+## PARAMETERS
 
 ### -Message
 
@@ -65,19 +81,112 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Id
+
+Specifies the direct message recipient by Twitter user id.
+
+```yaml
+Type: String
+Parameter Sets: DM, DMWithMedia
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -User
+
+Specifies the direct message recipient by Twitter user object, returned by Get-TwitterUser.
+
+```yaml
+Type: User
+Parameter Sets: DMWithMedia
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+```yaml
+Type: User
+Parameter Sets: DMUserObject
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
 ### -MediaId
 
 The MediaId returned from the Send-TwitterMedia command.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases: media_id
+Parameter Sets: DM, DMUserObject
+Aliases:
 
 Required: False
 Position: 2
 Default value: None
-Accept pipeline input: True (ByPropertyName)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Path
+
+Specify the full path to the media file.
+
+```yaml
+Type: String
+Parameter Sets: DMWithMedia
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Category
+
+Specifies the type and use for the uploaded media.
+
+```yaml
+Type: String
+Parameter Sets: DMWithMedia
+Aliases:
+Accepted values: DMImage, DMVideo, DMGif
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AltImageText
+
+Provide additional information about the images or GIFs.
+
+```yaml
+Type: String
+Parameter Sets: DMWithMedia
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -91,16 +200,16 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### BluebirdPS.APIV1.DirectMessage
 
 ## NOTES
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Direct%20Message/Publish-TwitterDM)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Direct%20Message/Publish-TwitterDM)
 
-[Get-TwitterDM](https://bluebirdps.anovelidea.org/en/latest/Direct%20Message/Get-TwitterDM)
+[Get-TwitterDM](https://docs.bluebirdps.dev/en/v0.5.0/Direct%20Message/Get-TwitterDM)
 
-[Unpublish-TwitterDM](https://bluebirdps.anovelidea.org/en/latest/Direct%20Message/Unpublish-TwitterDM)
+[Unpublish-TwitterDM](https://docs.bluebirdps.dev/en/v0.5.0/Direct%20Message/Unpublish-TwitterDM)
 
 [Api Reference - GET direct_messages/events/list](https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/new-event)

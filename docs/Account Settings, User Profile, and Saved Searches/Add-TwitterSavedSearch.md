@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Searches/Add-TwitterSavedSearch
+online version: https://docs.bluebirdps.dev/en/v0.5.0/Account%20Settings%2C%20User%20Profile%2C%20and%20Saved%20Searches/Add-TwitterSavedSearch
 schema: 2.0.0
 ---
 
@@ -31,13 +31,10 @@ Note: A user may only have 25 saved searches.
 PS > Add-TwitterSavedSearch -SearchString '(#pwsh_eats)'
 ```
 
-```console
-id         : 1325982551094210566
-id_str     : 1325982551094210566
-query      : (#pwsh_eats)
-name       : (#pwsh_eats)
-position   :
-created_at : Tue Nov 10 02:04:10 +0000 2020
+```text
+Id                  CreatedAt            Name         Query
+--                  ---------            ----         -----
+1399362817376014341 5/31/2021 8:51:09 AM (#pwsh_eats) (#pwsh_eats)
 ```
 
 Add a new saved search for the #pwsh_eats hashtag.
@@ -66,22 +63,22 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
+### System.String
 
 ## OUTPUTS
 
-### System.Object
+### BluebirdPS.APIV1.SavedSearch
 
 ## NOTES
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Searches/Add-TwitterSavedSearch)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Account%20Settings%2C%20User%20Profile%2C%20and%20Saved%20Searches/Add-TwitterSavedSearch)
 
-[Get-TwitterSavedSearch](https://bluebirdps.anovelidea.org/en/latest/Searches/Get-TwitterSavedSearch)
+[Get-TwitterSavedSearch](https://docs.bluebirdps.dev/en/v0.5.0/Account%20Settings%2C%20User%20Profile%2C%20and%20Saved%20Searches/Get-TwitterSavedSearch)
 
-[Remove-TwitterSavedSearch](https://bluebirdps.anovelidea.org/en/latest/Searches/Remove-TwitterSavedSearch)
+[Remove-TwitterSavedSearch](https://docs.bluebirdps.dev/en/v0.5.0/Account%20Settings%2C%20User%20Profile%2C%20and%20Saved%20Searches/Remove-TwitterSavedSearch)
 
-[Search Standard Operators](https://developer.twitter.com/en/docs/twitter-api/v1/rules-and-filtering/overview/standard-operators)
+[Api Reference - Search Standard Operators](https://developer.twitter.com/en/docs/twitter-api/v1/rules-and-filtering/overview/standard-operators)
 
 [Api Reference - POST saved_searches/create](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-create)

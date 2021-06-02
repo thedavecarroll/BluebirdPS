@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Direct%20Message/Unpublish-TwitterDM
+online version: https://docs.bluebirdps.dev/en/v0.5.0/Direct%20Message/Unpublish-TwitterDM
 schema: 2.0.0
 ---
 
@@ -14,7 +14,7 @@ Deletes the direct message specified by the DirectMessageId parameter.
 ## SYNTAX
 
 ```powershell
-Unpublish-TwitterDM [-DirectMessageId] <String> [<CommonParameters>]
+Unpublish-TwitterDM -Id <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -37,19 +37,52 @@ Deletes the direct message specified by the DirectMessageId parameter.
 
 ## PARAMETERS
 
-### -DirectMessageId
+### -Confirm
 
-The id of the Direct Message event that should be deleted.
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Id
+
+The ID of the direct message.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: Id
+Aliases:
 
 Required: True
-Position: 0
+Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -WhatIf
+
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -61,18 +94,20 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.String
 
+### BluebirdPS.APIV1.DirectMessage
+
 ## OUTPUTS
 
-### System.Object
+### System.String
 
 ## NOTES
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Direct%20Message/Unpublish-TwitterDM)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Direct%20Message/Unpublish-TwitterDM)
 
-[Get-TwitterDM](https://bluebirdps.anovelidea.org/en/latest/Direct%20Message/Get-TwitterDM)
+[Get-TwitterDM](https://docs.bluebirdps.dev/en/v0.5.0/Direct%20Message/Get-TwitterDM)
 
-[Publish-TwitterDM](https://bluebirdps.anovelidea.org/en/latest/Direct%20Message/Publish-TwitterDM)
+[Publish-TwitterDM](https://docs.bluebirdps.dev/en/v0.5.0/Direct%20Message/Publish-TwitterDM)
 
 [Api Reference - DELETE direct_messages/events/destroy](https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/delete-message-event)

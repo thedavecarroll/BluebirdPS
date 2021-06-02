@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Tweets/Set-Retweet
+online version: https://docs.bluebirdps.dev/en/v0.5.0/Tweets/Set-Retweet
 schema: 2.0.0
 ---
 
@@ -9,25 +9,25 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Retweet or unretweet an existing tweet.
+Retweet or unretweet an existing Tweet.
 
 ## SYNTAX
 
 ### Retweet (Default)
 
 ```powershell
-Set-Retweet -Id <Int64> [-Retweet] [<CommonParameters>]
+Set-Retweet -Id <String> [-Retweet] [<CommonParameters>]
 ```
 
 ### Unretweet
 
 ```powershell
-Set-Retweet -Id <Int64> [-Unretweet] [<CommonParameters>]
+Set-Retweet -Id <String> [-Unretweet] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Retweet or unretweet an existing tweet.
+Retweet or unretweet an existing Tweet.
 
 Returns the original Tweet with Retweet details embedded.
 
@@ -39,7 +39,7 @@ Returns the original Tweet with Retweet details embedded.
 PS > Set-Retweet -Id 1330354141055643648
 ```
 
-Retweets the specified tweet.
+Retweets the specified Tweet.
 
 ### Example 2
 
@@ -47,16 +47,16 @@ Retweets the specified tweet.
 PS > Set-Retweet -Id 1330354141055643648 -Unretweet
 ```
 
-Unretweets the specified tweet.
+Unretweets the specified Tweet.
 
 ## PARAMETERS
 
 ### -Id
 
-The id of the tweet.
+The id of the Tweet.
 
 ```yaml
-Type: Int64
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -69,7 +69,7 @@ Accept wildcard characters: False
 
 ### -Retweet
 
-Instructs the command to retweet the specified tweet.
+Instructs the command to retweet the specified Tweet.
 
 ```yaml
 Type: SwitchParameter
@@ -78,14 +78,14 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Unretweet
 
-Instructs the command to unretweet the specified tweet.
+Instructs the command to unretweet the specified Tweet.
 
 ```yaml
 Type: SwitchParameter
@@ -94,7 +94,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -115,9 +115,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Tweets/Set-Retweet)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Tweets/Set-Retweet)
 
-[Get-Tweet](https://bluebirdps.anovelidea.org/en/latest/Tweets/Get-Tweet)
+[Get-Tweet](https://docs.bluebirdps.dev/en/v0.5.0/Tweets/Get-Tweet)
 
 [API Documentation - POST statuses/retweet/:id](https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-retweet-id)
 

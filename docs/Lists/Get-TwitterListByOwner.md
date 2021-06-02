@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListByOwner
+online version: https://docs.bluebirdps.dev/en/v0.5.0/Lists/Get-TwitterListByOwner
 schema: 2.0.0
 ---
 
@@ -13,16 +13,8 @@ Returns the lists owned by the specified user.
 
 ## SYNTAX
 
-### ScreenName (Default)
-
 ```powershell
-Get-TwitterListByOwner -ScreenName <String> [-ResultsPerPage <Int32>] [<CommonParameters>]
-```
-
-### UserId
-
-```powershell
-Get-TwitterListByOwner -UserId <Int64> [-ResultsPerPage <Int32>] [<CommonParameters>]
+Get-TwitterListByOwner [-UserName <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,60 +23,38 @@ Returns the lists owned by the specified user.
 
 Private lists will only be shown if the authenticated user is also the owner of the lists.
 
+This command retrieves all the lists for a user, up to the 1000 they can create.
+
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS > Get-TwitterListByOwner -ScreenName thedavecarroll
+PS > Get-TwitterListByOwner
 ```
 
-Returns the list owned by the specified user.
+Display the lists owned by the authenticating user.
+
+### Example 2
+
+```powershell
+PS > Get-TwitterListByOwner -UserName mikefrobbins
+```
+
+Display the lists owned by the authenticating user.
 
 ## PARAMETERS
 
-### -ResultsPerPage
+### -UserName
 
-Specifies the number of results to retrieve per page.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases: Count
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ScreenName
-
-The screen name of the user for whom to return results.
+Display the lists owned by the specified user.
 
 ```yaml
 Type: String
-Parameter Sets: ScreenName
+Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -UserId
-
-The ID of the user for whom to return results.
-
-```yaml
-Type: Int64
-Parameter Sets: UserId
-Aliases:
-
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -99,24 +69,20 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
+### System.String
+
 ## OUTPUTS
 
-### System.Object
+### BluebirdPS.APIV1.DirectMessage
+
+### BluebirdPS.APIV1.DirectMessage[]
 
 ## NOTES
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListByOwner)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Lists/Get-TwitterListByOwner)
 
-[Get-TwitterList](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterList)
-
-[Get-TwitterListMember](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListMember)
-
-[Get-TwitterListSubscriber](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListSubscriber)
-
-[Get-TwitterListSubscription](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListSubscription)
-
-[Get-TwitterListTweets](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListTweets)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.5.0/Lists/Get-TwitterList)
 
 [Api Reference - GET lists/ownerships](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-ownerships)

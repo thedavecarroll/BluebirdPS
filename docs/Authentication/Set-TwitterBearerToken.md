@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Authentication/Set-TwitterBearerToken
+online version: https://docs.bluebirdps.dev/en/v0.5.0/Authentication/Set-TwitterBearerToken
 schema: 2.0.0
 ---
 
@@ -9,49 +9,34 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-The Set-TwitterBearerToken command receives and sets the user's bearer token credential.
+The Set-TwitterBearerToken command receives and sets the user's OAuth 2.0 bearer token credential.
 
 ## SYNTAX
 
 ```powershell
-Set-TwitterBearerToken [-Persist] [<CommonParameters>]
+Set-TwitterBearerToken [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-The Set-TwitterBearerToken command receives and sets the user's bearer token credential.
+The Set-TwitterBearerToken command receives and sets the user's OAuth 2.0 bearer token credential.
 
 The command sends the user's API key and API key secret to the Twitter and receives the bearer token which is saved in the session variable.
 
-If using the Persist switch, the encrypted credentials file will be stored in the folder $env:HOME/.BluebirdPS.
+Additionally, it exports the updated session credential variable using Export-TwitterAuthentication.
+The encrypted credentials file will be stored in the folder $env:HOME/.BluebirdPS.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS > Set-TwitterBearerToken -Persist
+PS > Set-TwitterBearerToken
 ```
 
 Set the user's bearer token and save the session credentials in the folder $env:HOME/.BluebirdPS.
 
 ## PARAMETERS
-
-### -Persist
-
-Use this switch to save the tested credentials to an encrypted credentials file located in $env:HOME/.BluebirdPS.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### CommonParameters
 
@@ -63,14 +48,18 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### None
 
 ## NOTES
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Authentication/Set-TwitterBearerToken)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Authentication/Set-TwitterBearerToken)
 
-[Export-TwitterAuthentication](https://bluebirdps.anovelidea.org/en/latest/Authentication/Export-TwitterAuthentication)
+[Import-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.5.0/Authentication/Import-TwitterAuthentication)
 
-[Api Reference - Authentication](https://developer.twitter.com/en/docs/authentication/api-reference/token)
+[Export-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.5.0/Authentication/Export-TwitterAuthentication)
+
+[Test-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.5.0/Authentication/Test-TwitterAuthentication)
+
+[Api Reference - Authentication Overview](https://developer.twitter.com/en/docs/authentication/overview)

@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFollowers
+online version: https://docs.bluebirdps.dev/en/v0.5.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFollowers
 schema: 2.0.0
 ---
 
@@ -9,134 +9,94 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Returns a collection of user objects or array of user ids that is following the specified user.
+Returns a collection of Twitter users that follows the specified user.
 
 ## SYNTAX
 
-### Default (Default)
+### ById (Default)
 
 ```powershell
-Get-TwitterFollowers [-ScreenName <String>] [-UserId <String>] [-ResultsPerPage <Int32>] [<CommonParameters>]
+Get-TwitterFollowers [-Id <String>] [-IncludeExpansions] [<CommonParameters>]
 ```
 
-### List
+### ByUser
 
 ```powershell
-Get-TwitterFollowers [-ScreenName <String>] [-UserId <String>] [-ResultsPerPage <Int32>] [-List] [-SkipStatus] [-ExcludeEntities] [<CommonParameters>]
+Get-TwitterFollowers -User <User> [-IncludeExpansions] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Returns a collection of user objects or array of user ids that is following the specified user.
+Returns a collection of Twitter users that follows the specified user.
+
+If no user is specified, returns the followers of the authenticating user.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS > Get-TwitterFollowers -ScreenName thedavecarroll
+PS > Get-TwitterFollowers
 ```
 
-Returns an array of user ids that the specified user is following.
+Returns the followers of the authenticating user.
 
 ### Example 2
 
 ```powershell
-PS > Get-TwitterFollowers -List -ScreenName thedavecarroll -SkipStatus -ExcludeEntities
+PS > Get-TwitterFollowers -Id 1330877955057344513
 ```
 
-Returns a collection of user objects that the specified user is following, excluding the user's last status and the entities.
+Returns the followers of the user specified by their id.
+
+### Example 3
+
+```powershell
+PS > Get-TwitterUser -User BluebirdPS | Get-TwitterFollowers
+```
+
+Unfollows the user returned by Get-TwitterUser.
 
 ## PARAMETERS
 
-### -List
+### -Id
 
-By using this switch, this command will return user objects instead of an array of user ids.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ExcludeEntities
-
-Exclude the entities node.
-
-This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ResultsPerPage
-
-Specifies the number of results to retrieve per page.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ScreenName
-
-The screen name of the user for whom to return results.
+Specifies the id of the user to return their followers.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: ById
 Aliases:
 
 Required: False
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -SkipStatus
+### -User
 
-Exclude the user statuses from the returned user objects.
+The user object, returned by Get-TwitterUser, to return a list of users following them.
+
+```yaml
+Type: User
+Parameter Sets: ByUser
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -IncludeExpansions
+
+Include the pinned Tweet for the returned user(s).
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -UserId
-
-The ID of the user for whom to return results.
-
-```yaml
-Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -153,22 +113,20 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
+### System.String
+
+### BluebirdPS.APIV2.UserInfo.User
 
 ## OUTPUTS
 
-### System.Object
+### BluebirdPS.APIV2.UserInfo.User[]
 
 ## NOTES
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFollowers)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFollowers)
 
-[Get-TwitterFriends](https://bluebirdps.anovelidea.org/en/latest/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFriends)
+[Get-TwitterUser](https://docs.bluebirdps.dev/en/v0.5.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser)
 
-[Get-TwitterFollowers](https://bluebirdps.anovelidea.org/en/latest/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFollowers)
-
-[Api Reference - GET followers/ids](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-followers-ids)
-
-[Api Reference - GET followers/list](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-followers-list)
+[Api Reference - GET /2/users/:id/followers](https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/get-users-id-followers)

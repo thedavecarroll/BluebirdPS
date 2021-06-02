@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Supporting%20Commands/Get-TwitterRateLimitStatus
+online version: https://docs.bluebirdps.dev/en/v0.5.0/Supporting%20Commands/Get-TwitterRateLimitStatus
 schema: 2.0.0
 ---
 
@@ -34,39 +34,21 @@ Returns the current rate limits for all resources.
 ### Example 2
 
 ```powershell
-PS > Get-TwitterRateLimitStatus -Resources friends | ConvertTo-Json
+PS > $SavedSearches = Get-TwitterRateLimitStatus -Resources saved_searches
+PS > $SavedSearches.resources.saved_searches | Format-List
 ```
 
-```console
-{
-  "friends": {
-    "/friends/following/ids": {
-      "limit": 15,
-      "remaining": 15,
-      "reset": 1606013805
-    },
-    "/friends/following/list": {
-      "limit": 15,
-      "remaining": 15,
-      "reset": 1606013805
-    },
-    "/friends/list": {
-      "limit": 15,
-      "remaining": 15,
-      "reset": 1606013805
-    },
-    "/friends/ids": {
-      "limit": 15,
-      "remaining": 15,
-      "reset": 1606013805
-    }
-  }
-}
+```text
+/saved_searches/destroy/:id : @{limit=15; remaining=15; reset=1621904304}
+/saved_searches/show/:id    : @{limit=15; remaining=15; reset=1621904304}
+/saved_searches/list        : @{limit=15; remaining=15; reset=1621904304}
 ```
 
 Returns the current rate limits for the friends resource.
 
 The output was converted to JSON for easier readability.
+
+NOTE: This command currently returns the raw API response.
 
 ## PARAMETERS
 
@@ -101,12 +83,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### System.Management.Automation.PSCustomObject
 
 ## NOTES
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Supporting%20Commands/Get-TwitterRateLimitStatus)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Supporting%20Commands/Get-TwitterRateLimitStatus)
 
 [Api Reference - GET application/rate_limit_status](https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/rate-limit-status/api-reference/get-application-rate_limit_status)

@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Supporting%20Commands/Get-TwitterAccountSettings
+online version: https://docs.bluebirdps.dev/en/v0.5.0/Account%20Settings%2C%20User%20Profile%2C%20and%20Saved%20Searches/Get-TwitterAccountSettings
 schema: 2.0.0
 ---
 
@@ -45,12 +45,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### BluebirdPS.APIV1.AccountSettings
 
 ## NOTES
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Supporting%20Commands/Get-TwitterAccountSettings)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Account%20Settings%2C%20User%20Profile%2C%20and%20Saved%20Searches/Get-TwitterAccountSettings)
 
 [Api Reference - GET account/settings](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-account-settings)

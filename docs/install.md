@@ -28,4 +28,4 @@ For more information, please visit the [BluebirdPS page] on the Powershell Galle
 1. Clone repo to a folder of your choice.
 2. Change into the local repo folder.
 3. Run the `build.ps1` script.
-4. `Import-Module -Path .\BuildOutput\BluebirdPS\0.1.0\BluebirdPS.psd1`
+4. `Import-Module -Path .\BuildOutput\BluebirdPS\<module version>\BluebirdPS.psd1`

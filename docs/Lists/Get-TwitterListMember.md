@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListMember
+online version: https://docs.bluebirdps.dev/en/v0.5.0/Lists/Get-TwitterListMember
 schema: 2.0.0
 ---
 
@@ -9,31 +9,25 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Returns the members of the specified list.
+Returns the username for members of the specified list.
 
 ## SYNTAX
 
-### ListId (Default)
+### ById (Default)
 
 ```powershell
-Get-TwitterListMember -ListId <String> [-ResultsPerPage <Int32>] [-SkipStatus] [-ExcludeEntities] [<CommonParameters>]
+Get-TwitterListMember -Id <String> [<CommonParameters>]
 ```
 
-### ShowSlugOwnerId
+### ByList
 
 ```powershell
-Get-TwitterListMember -Slug <String> -OwnerId <Int64> [-ResultsPerPage <Int32>] [-SkipStatus] [-ExcludeEntities] [<CommonParameters>]
-```
-
-### ShowSlugOwnerScreenName
-
-```powershell
-Get-TwitterListMember -Slug <String> -OwnerScreenName <String> [-ResultsPerPage <Int32>] [-SkipStatus] [-ExcludeEntities] [<CommonParameters>]
+Get-TwitterListMember -List <List> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Returns the members of the specified list.
+Returns the username for members of the specified list.
 
 Private list members will only be shown if the authenticated user owns the specified list.
 
@@ -42,134 +36,50 @@ Private list members will only be shown if the authenticated user owns the speci
 ### Example 1
 
 ```powershell
-PS > Get-TwitterListMember -ListId 749356646665629696 -ExcludeEntities -SkipStatus
+PS > Get-TwitterListMember -Id 749356646665629696
 ```
 
-Returns the members of the specified list, but exclude the statuses and entities node.
+Returns the members of the specified list.
 
 ### Example 2
 
 ```powershell
-PS > Get-TwitterListMember -Slug powershell-team -OwnerScreenName powershell_team
+PS > Get-TwitterListMember -Slug powershell-team -OwnerUserName powershell_team
 ```
 
 Returns the members of the specified list.
 
 ## PARAMETERS
 
-### -ListId
+### -Id
 
-The numerical id of the list.
-
-```yaml
-Type: String
-Parameter Sets: ListId
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Slug
-
-Returns the specified list based on the slug which is derived from the name of the list.
-
-Note: Provide the list owner when returning a list based on the slug.
+The id of the list.
 
 ```yaml
 Type: String
-Parameter Sets: ShowSlugOwnerId, ShowSlugOwnerScreenName
+Parameter Sets: ById
 Aliases:
 
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -OwnerId
+### -List
 
-The user id that owns the list specified by the Slug parameter.
+A list object retrieved from Get-TwitterList.
 
 ```yaml
-Type: Int64
-Parameter Sets: ShowSlugOwnerId
+Type: List
+Parameter Sets: ByList
 Aliases:
 
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -OwnerScreenName
-
-The screen name of the user that owns the list specified by the Slug parameter.
-
-```yaml
-Type: String
-Parameter Sets: ShowSlugOwnerScreenName
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ExcludeEntities
-
-Exclude the entities node.
-
-This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ResultsPerPage
-
-Specifies the number of results to retrieve per page.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SkipStatus
-
-Exclude the user statuses from the returned user objects.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -179,26 +89,24 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
+### System.String
+
+### BluebirdPS.APIV1.List
 
 ## OUTPUTS
 
-### System.Object
+### System.String[]
 
 ## NOTES
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListMember)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Lists/Get-TwitterListMember)
 
-[Get-TwitterListByOwner](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListByOwner)
+[Add-TwitterListMember](https://docs.bluebirdps.dev/en/v0.5.0/Lists/Add-TwitterListMember)
 
-[Get-TwitterList](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterList)
+[Remove-TwitterListMember](https://docs.bluebirdps.dev/en/v0.5.0/Lists/Remove-TwitterListMember)
 
-[Get-TwitterListSubscriber](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListSubscriber)
-
-[Get-TwitterListSubscription](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListSubscription)
-
-[Get-TwitterListTweets](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListTweets)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.5.0/Lists/Get-TwitterList)
 
 [Api Reference - GET lists/members](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-members)

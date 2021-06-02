@@ -8,217 +8,130 @@ Welcome to the online documentation for BluebirdPS, a Twitter automation client 
 ## Work in Progress
 
 Please consider this a work in progress.
-At this point, anything and everything could changed.
+At this point, anything and everything could be changed.
 
 Also, expect errors, though I have tried to keep those at minimum.
 
-## Community Module
+## Community Project
 
-This module is still very much developed for the community and will gladly accept feedback from the
+This project is very much developed for the community and will gladly accept feedback from the
 community to make this module do what you need it to do, while adhering to the Twitter API design and
 PowerShell best practices.
+
+## What's New
+
+The v0.5.0 release of BluebirdPS packs a lot of new features and breaking changes from the previous release.
+
+- Support for Twitter API v2: Early Access
+- Complete management for:
+  - Saved searches
+  - List, list membership, and list subscriptions
+  - User friends (following) and followers
+  - User blocks, mutes, and spam reporting
+  - Tweet retweets, likes, and hiding individual replies
+- A new configuration framework
+- An updated command session history
+- C# classes for most API responses, and for request generation and authentication
+- Parameter consistency has been enforced, for example all references to the UserName instead of ScreenName and Id for the numerical identifier regardless of object type.
+- Nearly 20 more commands than the previous release.
 
 ## Examples
 
 ```PowerShell
-(Search-Tweet -SearchString "(from:rtpsug)" -MaxResults 100).statuses
+Search-Tweet -SearchString "(from:thedavecarroll)"
 
-Get-TwitterListByOwner -ScreenName thedavecarroll
+Get-Tweet -Id 1398279333823791104
 
-Publish-Tweet -TweetText "Continuing work on the #PowerShell Twitter module. Check it out! http://bit.ly/PwshTwitterModule"
+Publish-Tweet -TweetText "A new release of #BluebirdPS will soon be released. BluebirdPS is #PowerShell 7 Twitter automation client. Check it out! https://bit.ly/BluebirdPS"
+
+Get-TwitterList -Id 1397040831777984512 | Add-TwitterListMember -UserName thedavecarroll,BluebirdPS
 ```
 
-### More Than Meets the Eye
+## BluebirdPS Technical Overview
 
-This module includes output to the Information stream containing details on the call (or calls) made to Twitter.
+BluebirdPS was written to provide simple commands to work with the Twitter API while adhering to PowerShell best practices.
+It largely obfuscates the endpoints from the user, though they certainly can take a peek under the hood with a few commands.
 
-Here is an example of how to access it and what it contains.
+A framework consisting of configuration, request, authentication, and output objects allows commands to be easily crafted and updated.
 
-```powershell
-$ListMember = Get-TwitterListMember -Slug mylist -OwnerScreenName myscreenname -ResutsPerPage 100 -InformationVariable MyListMemberInfo
-$MyListMemberInfo.MessageData
-```
+### Configuration
 
-Output:
+BluebirdPS configuration is created on module import, and updated through setting authentication or manual changes.
+It is exported to disk and imported on all future module imports.
 
-```console
-Command            : Get-TwitterListMember
-HttpMethod         : GET
-Uri                : https://api.twitter.com/1.1/lists/members.json
-QueryString        : ?count=100&cursor=-1&include_entities=true&owner_screen_name=ossia&slug=devafter30
-Status             : 200 OK
-Server             : tsa_b
-ResponseTime       : 801
-RateLimit          : 900
-RateLimitRemaining : 819
-RateLimitReset     : 10/13/2020 12:50:37 PM
-Response           : {[Cache-Control, System.String[]], [Date, System.String[]], [Pragma, System.String[]], [Server, System.String[]]…}
+The configuration provides instructions to commands on how to handle rate limits and whether the raw API response should be returned.
+It stores the authenticating user's Id and username which are required by some endpoints.
+Additionally, it contains the save locations for the configuration and credential files, as well as the last time authentication was verified and exported.
 
-Command            : Get-TwitterListMember
-HttpMethod         : GET
-Uri                : https://api.twitter.com/1.1/lists/members.json
-QueryString        : ?count=100&cursor=4611686020715031288&include_entities=true&owner_screen_name=ossia&slug=devafter30
-Status             : 200 OK
-Server             : tsa_b
-ResponseTime       : 849
-RateLimit          : 900
-RateLimitRemaining : 818
-RateLimitReset     : 10/13/2020 12:50:37 PM
-Response           : {[Cache-Control, System.String[]], [Date, System.String[]], [Pragma, System.String[]], [Server, System.String[]]…}
+### Building a Twitter Request
 
-<truncated>
-```
-
-The `Response` property contains the raw response from Twitter.
-This function uses `Invoke-TwitterCursorRequest`, which takes the next cursor from the returned payload and appends the query appropriately.
-
-You can see the `ResponseTime` (in milliseconds) along with *RateLimit* specifics.
-
-## Public functions
-
-Here is list of current public functions.
-
-Currently, there are 43 public functions and 10 private functions.
-
-| Count     | Name |
-| --------- | ---- |
-| Get       | 26   |
-| Set       | 5    |
-| Export    | 2    |
-| Publish   | 2    |
-| Test      | 2    |
-| Add       | 1    |
-| Import    | 1    |
-| Remove    | 1    |
-| Search    | 1    |
-| Send      | 1    |
-| Unpublish | 1    |
+A Twitter API request has many parameters: the HTTP method/verb, the endpoint, a query, the authentication type, and potentially, body or form data.
+BluebirdPS collects the values for all of these parameters into a `[BluebirdPS.TwitterRequest]` class object and sends this to the `Invoke-TwitterRequest` command.
 
 ### Authentication
 
-* Set-TwitterAuthentication
-* Test-TwitterAuthentication
-* Export-TwitterAuthentication
-* Import-TwitterAuthentication
-* Set-TwitterBearerToken
+Connections to the Twitter API require authentication, which is provided by the `[BluebirdPS.Authentication]` class object.
+Depending on the endpoint, the request may require *OAuth 1.0a*, *OAuth2 Bearer Token*, or *Basic* authentication.
+The request object contains the authentication type required for the particular endpoint.
+When the authentication object is created, the request and appropriate credentials for the authentication type are used.
+The authentication object is used to generate the authentication header, final URL, and HTTP method.
 
-`Set-TwitterBearerToken` will be used to set the OAuth v2 bearer token used for some Twitter API v2 endpoints.
+### Sending the Twitter Request
 
-### Tweets
+`Invoke-TwitterRequest` uses the authentication and request objects to generate the web request.
+It then uses the PowerShell command `Invoke-RestMethod` to make the API call.
+The returned response, including response headers, the status code, and the request and authentication objects are used to created a new `[BluebirdPS.ResponseData]` class object.
 
-* Publish-Tweet
-* Get-Tweet
-* Set-Retweet
-* Set-TweetLike
-* Get-TweetLike
+### Response Data, History, Output Streams, and Exceptions
 
-### Users, Followers, Friends, and Blocks
+The response data object is sent to the `Write-TwitterResponse` command.
+This command performs the rate limit action when the threshold is reached, both based on configuration values.
 
-* Get-TwitterTimeline
-* Get-TwitterUser
-* Get-TwitterUserList
-* Get-TwitterFollowers
-* Get-TwitterFriends
-* Get-TwitterFriendship
-* Get-TwitterMutedUser
-* Get-TwitterBlocks
+Next, the command adds the response data to the module's session history table and writes the same data to the *Information Stream*.
 
-### Lists
+If the configuration value for RawOutput is true, it returns the raw API output, which is a `[PSCustomObject]` created by `Invoke-RestMethod`'s automatic conversion of JSON.
+If the value is false, the api response is parsed based on the API version.
+The command returns rich objects of various C# classes, simple string objects, or, when the parsing rules do not match the response, the raw response `[PSCustomObject]`.
 
-* Get-TwitterList
-* Get-TwitterListByOwner
-* Get-TwitterListMember
-* Get-TwitterListSubscriber
-* Get-TwitterListSubscription
-* Get-TwitterListTweets
+If there were errors returned, they are parsed and specific exceptions are thrown.
 
-### Searches
+### Rich Objects, C# Classes
 
-* Search-Tweet
-* Get-TwitterSavedSearch
-* Add-TwitterSavedSearch
-* Remove-TwitterSavedSearch
+The object model from both API versions was used as the basis for creating new C# classes.
+All BluebirdPS classes use `PascalCase`, instead of `snake_case` which the API returns.
+Most classes include a `GetOriginalObject()` method which returns the original object received.
 
-### Media
+### Pagination
 
-* Send-TwitterMedia
-
-### Direct Message
-
-* Get-TwitterDM
-* Publish-TwitterDM
-* Unpublish-TwitterDM
-
-### User Profile
-
-* Get-TwitterUserProfileBanner
-
-### Supporting Commands
-
-* Get-TwitterAccountSettings
-* Get-TwitterConfiguration
-* Get-TwitterLanguages
-* Get-TwitterRateLimitStatus
-* Export-TwitterResource
-
-### Helper Commands
-
-These functions do not connect to Twitter directly.
-
-* Get-TwitterApiEndpoint
-* Get-TwitterHistory
-* Get-TwitterRateLimitWarning
-* Set-TwitterRateLimitWarning
-* Test-SearchString
+The `Invoke-TwitterRequest` command handles pagination for API v2 endpoints, and for API v1.1 endpoints that support the `cursor`/`next_cursor` pattern.
 
 ## Command Verbs
 
-| Verb      | Usage                            | Example                                                                                           |
-| --------- | -------------------------------- | ------------------------------------------------------------------------------------------------- |
-| Get       | Get a resource                   | `Get-TwitterTimeLine -Home`                                                                       |
-| Publish   | Tweet or Direct Message          | `Publish-Tweet -TweetText 'Check out this pic of #Snoopy' -MediaId $UploadedPic.media_id`         |
-| Unpublish | Delete Tweet or Direct Message   | `Unpublish-TwitterDM -DirectMessageId 1239876543210147852`                                        |
-| Set       | Like, Unlink, Retweet, Unretweet | `Set-Tweet -Id 12345567896321478 -Like`                                                           |
-| Search    | Text search for a user or tweet  | `Search-Tweet -SearchString '#PSTweetChat'`                                                       |
-| Send      | Send media                       | `Send-TwitterMedia -Path $PathToImage -Category TweetImage -AltImageText 'A bowl of froot loops'` |
+The following table defines the command verbs that will be used by commands in this module.
 
-## Private Functions
-
-### API Calls
-
-The module has three functions that will make API calls dependent on if it's a single request,
-a cursored request, or a paged request.
-
-* Invoke-TwitterCursorRequest
-* Invoke-TwitterPageRequest
-* Invoke-TwitterRequest
-
-### Responses
-
-The `Write-TwitterResponseData` function handles all of the non-error output, which includes
-sending key response data to the Information stream.
-
-For the most part, the output is the response from `Invoke-Method`.
-The output of some commands contains only the property that's required which should always
-be an array of other others.
-
-The function that handles errors, `New-TwitterErrorRecord`, also sends response data to the
-Information stream.
-
-## API Authentication
-
-### OAuthParameters Class
-
-The cornerstone of the module is the `[OAuthParameters]` class which handles moving the URL and query
-to `Invoke-TwitterRequest`.
-It's primary function (method, actually) is to generate the OAuth signature string.
+| Verb        | Usage                            | Example                                                                                           |
+| ----------- | -------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Get         | Get a resource                   | `Get-TwitterUser`                                                                                 |
+| Set         | Like, unlike, update, and others | `Set-Tweet -Id 12345567896321478 -Like`                                                           |
+| Add         | Adding a new resource            | `Add-TwitterList -Name 'MyListName' -Description 'A cool description' -Mode Private`              |
+| Remove      | Removing a resource              | `Remove-TwitterList -Id 1399719470894100485`                                                      |
+| Search      | Text search for a user or Tweet  | `Search-Tweet -SearchString '#PSTweetChat'`                                                       |
+| Publish     | Tweet or Direct Message          | `Publish-Tweet -TweetText 'Check out this pic of #Snoopy' -MediaId $UploadedPic.media_id`         |
+| Unpublish   | Delete Tweet or Direct Message   | `Unpublish-Tweet -Id 1399711831015428097`                                                         |
+| Send        | Send media                       | `Send-TwitterMedia -Path $PathToImage -Category TweetImage -AltImageText 'A bowl of froot loops'` |
+| Submit      | Submit a user as spam            | `Submit-TwitterUserAsSpam -User ASpammyAccount`                                                   |
+| Export      | Export config or credentials     | `Export-BluebirdPSConfiguration`                                                                  |
+| Import      | Import config or credentials     | `Import-TwitterAuthentication`                                                                    |
+| Test        | Test credentials and others      | `Test-TwitterAuthentication`                                                                      |
+| ConvertFrom | Convert from other time formats  | `ConvertFrom-EpochTime -UnixTime 1622554869`                                                      |
+| Invoke      | Acts on the Twitter API          | `Invoke-TwitterRequest -RequestParameters $Request`                                               |
 
 ## Things to Do
 
-* Expand build scripts
-* Pester tests
-* TweetText processor (currently there no check for length)
-* Exploration of PIN-OAuth
-  * This will entail a security discussion on key storage
-* Additional commands
-* Twitter API V2 Endpoints
+- Rate limit based waiting period per endpoint
+  - Once a rate limit has been reached for a given endpoint, validate current time against rate limit reset time before making the call.
+  - Configuration value to enable/disable.
+- Expand build scripts
+- Pester tests
+- TweetText processor (currently there no check for length)
+- Exploration of PIN-OAuth

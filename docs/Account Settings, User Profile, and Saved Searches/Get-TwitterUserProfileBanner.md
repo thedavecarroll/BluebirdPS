@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/User%20Profile/Get-TwitterUserProfileBanner
+online version: https://docs.bluebirdps.dev/en/v0.5.0/Account%20Settings%2C%20User%20Profile%2C%20and%20Saved%20Searches/Get-TwitterUserProfileBanner
 schema: 2.0.0
 ---
 
@@ -13,16 +13,8 @@ Returns a map of the available size variations of the specified user's profile b
 
 ## SYNTAX
 
-### ScreenName
-
 ```powershell
-Get-TwitterUserProfileBanner -ScreenName <String> [<CommonParameters>]
-```
-
-### UserId
-
-```powershell
-Get-TwitterUserProfileBanner -UserId <String> [<CommonParameters>]
+Get-TwitterUserProfileBanner [-UserName <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,15 +23,17 @@ Returns a map of the available size variations of the specified user's profile b
 
 The profile banner data available at each size variant's URL is in PNG format.
 
+NOTE: This command currently returns the raw API response.
+
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS > Get-TwitterUserProfileBanner -ScreenName thedavecarroll
+PS > Get-TwitterUserProfileBanner | ForEach-Object sizes
 ```
 
-```console
+```text
 ipad          : @{h=313; w=626; url=https://pbs.twimg.com/profile_banners/292670084/1600359337/ipad}
 ipad_retina   : @{h=626; w=1252; url=https://pbs.twimg.com/profile_banners/292670084/1600359337/ipad_retina}
 web           : @{h=260; w=520; url=https://pbs.twimg.com/profile_banners/292670084/1600359337/web}
@@ -56,32 +50,17 @@ Returns a map of the available size variations of the specified user's profile b
 
 ## PARAMETERS
 
-### -ScreenName
+### -UserName
 
-The screen name of the user for whom to return results.
+The user name of the Twitter user for which you want to retrieve profile banner details.
 
-```yaml
-Type: String
-Parameter Sets: ScreenName
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -UserId
-
-The ID of the user for whom to return results.
+If you do not specify a UserName, it will return the profile banner details for the authenticating user.
 
 ```yaml
 Type: String
-Parameter Sets: UserId
-Aliases:
+Parameter Sets: UserName
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -94,16 +73,16 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
+### System.String
 
 ## OUTPUTS
 
-### System.Object
+### System.Management.Automation.PSCustomObject
 
 ## NOTES
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/User%20Profile/Get-TwitterUserProfileBanner)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Account%20Settings%2C%20User%20Profile%2C%20and%20Saved%20Searches/Get-TwitterUserProfileBanner)
 
 [Api Reference - GET users/profile_banner](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-users-profile_banner)

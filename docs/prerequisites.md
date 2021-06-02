@@ -10,21 +10,44 @@ Focusing on a single version will also allow us to forego handling the API calls
 Please see [Installing various versions of PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7) for instructions on installing PowerShell 7.
 You can install it on virtually any modern operating system - Windows, MacOS, or Linux.
 
-## Developer Account Tokens
+## Developer Account, Project, App, and Access Tokens
 
-Currently, any user of the module would need to [apply for a Twitter Developer account](https://developer.twitter.com/en/apply/user.html) and create an application in the portal.
+In order to use BluebirdPS, or any other Twitter API client or library, you will need to go through several steps to gain access to the API.
 
-> **Note**
-> The application must be given the appropriate access permissions.
-> At minimum, the application needs Read access for any `Get-` commands. `Set-`, `Send-`, and `Publish-Tweet` require Write access.
-> Publish-TwitterDM requires Direct Message.
+### Applying for a Developer Account
 
-1. Once you have created the application, generate your API key/secret and access token/secret.
-2. Next, clone this repo to a location of your choosing. This will change once the module is in the PowerShell Gallery.
-3. Then use the `Set-TwitterAuthentication -Persist` to add your key, token and secrets. (Omit the `-Persist` if you do not want to save your credentials to disk.)
+You must apply for a developer account at https://developer.twitter.com/en/apply-for-access.
+This process could take a couple weeks.
+
+### Activate Developer Portal
+
+Next, activate your developer portal at https://developer.twitter.com/content/developer-twitter/en/portal/opt-in.
+
+### Create a Project and Register a Developer App
+
+You must have a project with a developer app created in the portal.
+
+### Apply for Access for the Twitter API v2: Early Access
+
+Visit the [Twitter API Getting Started](https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api) page for details and additional links.
+
+### Generate Account Tokens
+
+From the portal, you will need to generate the consumer key, otherwise called the API Key and Secret.
+The API Key is linked to your application.
+
+You will also need to generate an Access Token and Secret.
+The Access Token is linked to your Twitter user account.
+
+The application must be given access permissions of Read, Write, and Direct Message for full usage.
+At minimum, the application needs Read access for any Get- commands.
+Set-, Send-, and Publish-Tweet require Write access, while *-TwitterDM requires Direct Message access.
+
+You can also generate a Bearer Token through the portal, or simply use the Set-TwitterAuthentication command.
+If your credentials are validated, the bearer token will be requested and set in the authentication file, as well.
 
 ```powershell
-Set-TwitterAuthentication -Persist -Verbose
+Set-TwitterAuthentication
 ```
 
 ```console
@@ -32,9 +55,4 @@ API Key: *************************
 API Secret: **************************************************
 Access Token: **************************************************
 Access Token Secret: *********************************************
-
-<truncated>
-
-VERBOSE: Successfully connected to Twitter.
-VERBOSE: Saved Twitter credentials to existing file: C:\Users\Dave\.TwitterPowerShell\twittercred.sav
 ```

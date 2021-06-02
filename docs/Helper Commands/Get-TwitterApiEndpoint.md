@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Helper%20Commands/Get-TwitterApiEndpoint
+online version: https://docs.bluebirdps.dev/en/v0.5.0/Helper%20Commands/Get-TwitterApiEndpoint
 schema: 2.0.0
 ---
 
@@ -9,89 +9,75 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Displays the Twitter Api endpoint metadata for endpoints supported by this module.
+Get a list of the module's commands or an array of commands, with the associated Twitter API endpoints (as used in the command) and documentation links.
 
 ## SYNTAX
 
-### Resource (Default)
-
 ```powershell
-Get-TwitterApiEndpoint [[-Resource] <String[]>] [<CommonParameters>]
-```
-
-### Command
-
-```powershell
-Get-TwitterApiEndpoint [-Command <String>] [<CommonParameters>]
+Get-TwitterApiEndpoint [[-CommandName] <String[]>] [[-Endpoint] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Displays the Twitter Api endpoint metadata for endpoints supported by this module.
+Get a list of the module's commands or an array of commands, with the associated Twitter API endpoints and documentation links.
+
+Some commands may act against more than one endpoint, depending on the parameters used.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS > Get-TwitterApiEndpoint -Resource help
+PS > Get-TwitterApiEndpoint -CommandName Get-TwitterList | Format-List
 ```
 
-```console
-Endpoint     : GET help/configuration
-Function     : Get-TwitterConfiguration
-ApiVersion   : v1.1
-Resource     : help/configuration
-Method       : GET
-Uri          : https://api.twitter.com/1.1/help/configuration.json
-ApiReference : https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/configuration/api-reference/get-help-configuration
-Description  : Returns the current configuration used by Twitter including twitter.com slugs which are not usernames, maximum photo resolutions, and t.co shortened URL length.
-               It is recommended applications request this endpoint when they are loaded, but no more than once a day.
-Iteration    : None
-Parameters   :
-
-Endpoint     : GET help/languages
-Function     : Get-TwitterLanguages
-ApiVersion   : v1.1
-Resource     : help/languages
-Method       : GET
-Uri          : https://api.twitter.com/1.1/help/languages.json
-ApiReference : https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/supported-languages/api-reference/get-help-languages
-Description  : Returns the list of languages supported by Twitter along with the language code supported by Twitter.
-                       The language code may be formatted as ISO 639-1 alpha-2 (en), ISO 639-3 alpha-3 (msa), or ISO 639-1 alpha-2 combined with an ISO 3166-1 alpha-2 localization (zh-tw)
-Iteration    : None
-Parameters   :
+```text
+CommandName      : Get-TwitterList
+Visibility       : Public
+ApiEndpoint      : {GET lists/list, GET lists/show}
+ApiDocumentation : {https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-list, https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-show}
 ```
 
-Display the endpoint metadata for the specified endpoint.
+Display details for the command Get-TwitterList.
 
 ### Example 2
 
 ```powershell
-PS > Get-TwitterApiEndpoint -Resource friends,followers,friendships
+PS > Get-TwitterApiEndpoint -Endpoint saved | Format-List
 ```
 
-Display the endpoint metadata for the specified endpoints.
+```text
+CommandName      : Add-TwitterSavedSearch
+Visibility       : Public
+ApiEndpoint      : POST saved_searches/create
+ApiDocumentation : https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-create
 
-### Example 3
+CommandName      : Get-TwitterSavedSearch
+Visibility       : Public
+ApiEndpoint      : {GET saved_searches/list, GET saved_searches/show/:id}
+ApiDocumentation : {https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-list, https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-list}
 
-```powershell
-PS > Get-TwitterApiEndpoint -Command Send-TwitterMedia
+CommandName      : Remove-TwitterSavedSearch
+Visibility       : Public
+ApiEndpoint      : POST saved_searches/destroy/:id
+ApiDocumentation : https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-destroy-id
 ```
 
-Display the endpoint metadata for the command `Send-TwitterMedia`.
+Display all commands whose endpoint contains the word 'saved'.
 
 ## PARAMETERS
 
-### -Resource
+### -CommandName
 
-Specifies the resource category of API endpoint that will be displayed.
+Specifies the name of the BluebirdPS command.
+
+Tab completion is enabled for this parameter for public functions.
 
 ```yaml
 Type: String[]
-Parameter Sets: Resource
+Parameter Sets: (All)
 Aliases:
-Accepted values: account, application, blocks, direct_messages, favorites, followers, friends, friendships, help, lists, media, mutes, oauth2, saved_searches, search, statuses, users
+
 Required: False
 Position: 0
 Default value: None
@@ -99,17 +85,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Command
+### -Endpoint
 
-Specifies the name of the module's function which to display the metadata for the API endpoint(s).
+The endpoint or part of the endpoint string.
+
+Specifying the endpoint will allow the user to discover commands that are included in BluebirdPS.
+
+The user may still be able to access endpoints, which are currently not supported by the module, by using the Invoke-TwitterRequest command.
+See the contextual help about_BluebirdPS_TwitterRequest for more details.
 
 ```yaml
 Type: String
-Parameter Sets: Command
+Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -121,14 +112,16 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
+### System.String
 
 ## OUTPUTS
 
-### System.Object
+### BluebirdPS.EndpointInfo
 
 ## NOTES
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Helper%20Commands/Get-TwitterApiEndpoint)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Helper%20Commands/Get-TwitterApiEndpoint)
+
+[Invoke-TwitterRequest](https://docs.bluebirdps.dev/en/v0.5.0/Supporting%20Commands/Invoke-TwitterRequest)
