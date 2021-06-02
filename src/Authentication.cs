@@ -19,6 +19,8 @@ namespace BluebirdPS
         public Uri Uri { get; private set; }
         public string AuthHeader { get; private set; }
 
+        public string Endpoint { get; private set; }
+
         // Properties to validate OAuth 1.0a request authentication
         public string ParameterString { get; private set; }
         public string SignatureBaseString { get; private set; }
@@ -55,19 +57,11 @@ namespace BluebirdPS
             HttpMethod = request.HttpMethod.ToString();
             Uri = request.GetUri();
 
-            string baseUri;
-            if (Uri.Query != string.Empty)
-            {
-                baseUri = Uri.AbsoluteUri.Replace(Uri.Query, null);
-            }
-            else
-            {
-                baseUri = Uri.AbsoluteUri;
-            }
-            
+            Endpoint = Uri.Query != string.Empty ? Uri.AbsoluteUri.Replace(Uri.Query, null) : Uri.AbsoluteUri;
+
             SetParameterString();
 
-            SignatureBaseString = $"{HttpMethod}&{Uri.EscapeDataString(baseUri)}&{Uri.EscapeDataString(ParameterString)}";
+            SignatureBaseString = $"{HttpMethod}&{Uri.EscapeDataString(Endpoint)}&{Uri.EscapeDataString(ParameterString)}";
                         
             SetOAuthSignature();
             SetOAuthHeaderString();
@@ -81,6 +75,7 @@ namespace BluebirdPS
         {
             HttpMethod = request.HttpMethod.ToString();
             Uri = request.GetUri();
+            Endpoint = Uri.Query != string.Empty ? Uri.AbsoluteUri.Replace(Uri.Query, null) : Uri.AbsoluteUri;
             AuthHeader = $"Bearer {bearerToken}";
         }
 
@@ -92,7 +87,8 @@ namespace BluebirdPS
         {
             HttpMethod = request.HttpMethod.ToString();
             Uri = request.GetUri();
-            string basicAuth = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{apiKey}:{apiSecret}"));
+            Endpoint = Uri.Query != string.Empty ? Uri.AbsoluteUri.Replace(Uri.Query, null) : Uri.AbsoluteUri;
+            string basicAuth = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{Uri.EscapeDataString(apiKey)}:{Uri.EscapeDataString(apiSecret)}"));
             AuthHeader = $"Basic {basicAuth}";
         }
 

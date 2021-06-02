@@ -20,15 +20,15 @@ namespace BluebirdPS.APIV2.TweetInfo
         public PSObject Geo { get; set; }
         public string InReplyToUserId { get; set; }
         public string Language { get; set; }
-        public Metrics.NonPublic NonPublicMetrics { get; set; }
-        public Metrics.Organic OrganicMetrics { get; set; }
+        public NonPublic NonPublicMetrics { get; set; }
+        public Organic OrganicMetrics { get; set; }
         public bool PossiblySensitive { get; set; }
-        public Metrics.Promoted PromotedMetrics { get; set; }
-        public Metrics.Public PublicMetrics { get; set; }
+        public Promoted PromotedMetrics { get; set; }
+        public Public PublicMetrics { get; set; }
         public List<ReferencedTweet> ReferencedTweets { get; set; }
         public string ReplySettings { get; set; }
         public string Source { get; set; }
-        public Objects.WithheldContent Withheld { get; set; }
+        public WithheldContent Withheld { get; set; }
 
         public Tweet() { }
         public Tweet(dynamic input)
@@ -37,16 +37,28 @@ namespace BluebirdPS.APIV2.TweetInfo
             {
                 OriginalObject = input;
 
-                Id = input.id;
+                if (Helpers.HasProperty(input, "id_str"))
+                {
+                    // API v1.1 return
+                    Id = input.id_str;
+                    AuthorId = input.user.id_str;
+                    CreatedAt = Helpers.ConvertFromV1Date(input.created_at); 
+                    InReplyToUserId = input.in_reply_to_user_id_str;
+
+                } else
+                {
+                    Id = input.id;
+                    AuthorId = input.author_id;
+                    CreatedAt = input.created_at;
+                    ConversationId = input.conversation_id;
+                    PublicMetrics = new Public(input.public_metrics);
+                    InReplyToUserId = input.in_reply_to_user_id;
+                }
+                
                 Text = input.text;
-                AuthorId = input.author_id;
-                ConversationId = input.conversation_id;
-                CreatedAt = input.created_at;
-                Entities = BaseEntity.GetEntities(input.entities);
-                InReplyToUserId = input.in_reply_to_user_id;
+                Entities = BaseEntity.GetEntities(input.entities);                
                 Language = input.lang;
-                PossiblySensitive = input.possibly_sensitive;
-                PublicMetrics = new Metrics.Public(input.public_metrics);
+                PossiblySensitive = input.possibly_sensitive;                
                 Source = input.source;
 
                 if (Helpers.HasProperty(input, "attachments"))
@@ -57,7 +69,6 @@ namespace BluebirdPS.APIV2.TweetInfo
                 if (Helpers.HasProperty(input, "geo"))
                 {
                     Geo = input.geo;
-                    OriginalObject = input;
                 }
 
                 if (Helpers.HasProperty(input, "reply_settings"))
@@ -161,6 +172,10 @@ namespace BluebirdPS.APIV2.TweetInfo
             }
         }
 
+        public override string ToString()
+        {
+            return $"{Type}";
+        }
     }
 
     namespace Metrics

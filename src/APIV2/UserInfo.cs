@@ -11,7 +11,7 @@ namespace BluebirdPS.APIV2.UserInfo
         public string UserName { get; set; }
 
         // remaining properties included with all user.fields 
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
         public string Description { get; set; }
         public List<object> Entities { get; set; }
         public string Location { get; set; }
@@ -34,7 +34,7 @@ namespace BluebirdPS.APIV2.UserInfo
                 {
                     Id = input.id;
                     UserName = input.username;
-                    CreatedAt = input.created_at;
+                    CreatedAt = input.created_at ?? null;
                     PinnedTweetId = input.pinned_tweet_id;
                     PublicMetrics = new Metrics.Public(input.public_metrics);
                 } 
@@ -42,17 +42,17 @@ namespace BluebirdPS.APIV2.UserInfo
                 {
                     Id = input.id.ToString();
                     UserName = input.screen_name;
-                    CreatedAt = Helpers.ConvertV1Date(input.created_at);
+                    CreatedAt = input.Helpers.ConvertFromV1Date(input.created_at) ?? null;
                 }
 
                 Name = input.name;
                 Description = input.description;
                 Entities = BaseEntity.GetEntities(input.entities);
                 Location = input.location;
-                ProfileImageUrl = new Uri(input.profile_image_url);
-                Protected = input.@protected;
+                ProfileImageUrl = new Uri(input.profile_image_url);                
+                Protected = input.@protected ?? null;
                 Url = new Uri(input.url);
-                Verified = input.verified;
+                Verified = input.verified ?? null;                
                 
                 if (Helpers.HasProperty(input, "withheld"))
                 {

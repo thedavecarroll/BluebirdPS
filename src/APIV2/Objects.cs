@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Management.Automation;
 using System.Reflection;
+using System.Linq;
 
 namespace BluebirdPS.APIV2.Objects
 {
@@ -100,6 +101,10 @@ namespace BluebirdPS.APIV2.Objects
             OriginalObject = input;
         }
 
+        public override string ToString()
+        {
+            return $"{Type}: {NormalizedText}";
+        }
     }
 
     public class CashTag : BaseEntity
@@ -113,6 +118,11 @@ namespace BluebirdPS.APIV2.Objects
             End = input.end;
             Tag = input.tag;
             OriginalObject = input;
+        }
+
+        public override string ToString()
+        {
+            return $"${Tag}";
         }
     }
 
@@ -137,20 +147,31 @@ namespace BluebirdPS.APIV2.Objects
 
     public class Mention : BaseEntity
     {
+        public string UserName { get; set; }
         public string Tag { get; set; }
 
         public Mention() { }
         public Mention(dynamic input)
         {
+            OriginalObject = input;
+
             Start = input.start;
             End = input.end;
-            Tag = input.tag;
-            OriginalObject = input;
+            
+            if (Helpers.HasProperty(input, "tag"))
+            {
+                Tag = input.tag;
+            }
+            if(Helpers.HasProperty(input, "username"))
+            {
+                UserName = input.username;
+            }
+
         }
 
         public override string ToString()
         {
-            return $"@{Tag}";
+            return $"@{UserName}";
         }
     }
 
@@ -257,6 +278,7 @@ namespace BluebirdPS.APIV2.Objects
 
         public Poll() { }
         public Poll(dynamic input) {
+            OriginalObject = input;
 
             Id = input.id;
             EndDateTime = input.end_datetime;
@@ -271,6 +293,16 @@ namespace BluebirdPS.APIV2.Objects
             Options = pollOptions;
         }
 
+        public override string ToString()
+        {
+            List<string> options = (from PollOptions option in Options
+                                    select option.ToString()).ToList();
+
+            string state = EndDateTime != null ? ", " + EndDateTime.ToString() : string.Empty;
+
+            return $"{string.Join(", ", options)} ({VotingStatus}{state})";
+        }
+
     }
 
     public class PollOptions : TwitterObject
@@ -282,15 +314,16 @@ namespace BluebirdPS.APIV2.Objects
         public PollOptions() { }
         public PollOptions(dynamic input)
         {
+            OriginalObject = input;
+
             Position = input.position;
             Label = input.label;
-            Votes = input.votes;
-            OriginalObject = input;
+            Votes = input.votes;            
         }
 
         public override string ToString()
         {
-            return $"{Label}:{Votes}";
+            return $"{Position}) {Label}:{Votes}";
         }
     }
 

@@ -6,7 +6,7 @@ using BluebirdPS.APIV2.MediaInfo;
 using BluebirdPS.APIV2.TweetInfo;
 using BluebirdPS.APIV2.UserInfo;
 using BluebirdPS.APIV2.Objects;
-using System.Linq;
+using System.Collections;
 
 namespace BluebirdPS
 {
@@ -21,19 +21,36 @@ namespace BluebirdPS
         {
             return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(input);
         }
-        public static DateTime ConvertV1Date(string input)
+        
+        public static DateTime? ConvertFromV1Date(string input)
         {
-            return DateTime.ParseExact(input, "ddd MMM dd HH:mm:ss zzz yyyy", CultureInfo.CurrentCulture);
+            return input != null ? (DateTime?)DateTime.ParseExact(input, "ddd MMM dd HH:mm:ss zzz yyyy", CultureInfo.CurrentCulture) : null;
+
+        }
+
+        public static DateTime? ConvertFromEpochTime(string input)
+        {
+            try
+            {
+                return input.Length == 10
+                    ? DateTimeOffset.FromUnixTimeSeconds(long.Parse(input)).ToLocalTime().DateTime
+                    : DateTimeOffset.FromUnixTimeMilliseconds(long.Parse(input)).ToLocalTime().DateTime;
+
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static string ConvertToV1Date(DateTime input)
+        {
+            return input != null ? input.ToUniversalTime().ToString("s", CultureInfo.InvariantCulture) + "Z" : null;
         }
 
         public static List<object> ParseApiV2Response(dynamic input)
         {
             List<object> twitterResponse = new List<object>();
-
-            if (HasProperty(input, "errors"))
-            {
-                // throw exceptions
-            }
 
             if (HasProperty(input, "data"))
             {
@@ -108,6 +125,10 @@ namespace BluebirdPS
                     {
                         twitterResponse.Add(new APIV1.List(twitterObject));
                     }
+                    else if (HasProperty(twitterObject, "connections"))
+                    {
+                        twitterResponse.Add(new APIV1.FriendshipConnections(twitterObject));
+                    }
                     else if (HasProperty(twitterObject, "screen_name"))
                     {
                         twitterResponse.Add(new User(twitterObject));
@@ -115,7 +136,11 @@ namespace BluebirdPS
                     else if (HasProperty(twitterObject, "query"))
                     {
                         twitterResponse.Add(new APIV1.SavedSearch(twitterObject));
-                    } 
+                    }
+                    else if (HasProperty(twitterObject, "in_reply_to_user_id_str"))
+                    {
+                        twitterResponse.Add(new Tweet(twitterObject));
+                    }                    
                     else
                     {
                         twitterResponse.Add(twitterObject);
@@ -135,6 +160,10 @@ namespace BluebirdPS
                 {
                     twitterResponse.Add(new APIV1.AccountSettings(input));
                 }
+                else if (HasProperty(input, "relationship"))
+                {
+                    twitterResponse.Add(new APIV1.Relationship(input.relationship));
+                }
                 else if (HasProperty(input, "member_count"))
                 {
                     twitterResponse.Add(new APIV1.List(input));
@@ -151,6 +180,29 @@ namespace BluebirdPS
                 {
                     twitterResponse.AddRange(input.ids);
                 }
+                else if (HasProperty(input, "events") || HasProperty(input, "event"))
+                {
+                    dynamic directMessages = null;
+                    if (HasProperty(input, "events"))
+                    {
+                        directMessages = input.events;
+                    }
+                    else if (HasProperty(input, "event"))
+                    {
+                        directMessages = input.@event;
+                    }
+                    if (directMessages is IEnumerable)
+                    {
+                        foreach (dynamic message in directMessages)
+                        {
+                            twitterResponse.Add(new APIV1.DirectMessage(message));
+                        }
+                    } else
+                    {
+                        twitterResponse.Add(new APIV1.DirectMessage(directMessages));
+                    }
+                                       
+                }
                 else if (HasProperty(input, "users"))
                 {
                     foreach (dynamic user in input.users)
@@ -158,13 +210,21 @@ namespace BluebirdPS
                         twitterResponse.Add(new User(user));
                     }
                 }
+                //else if (HasProperty(input, "text"))
+                //{
+                //    twitterResponse.Add(new Tweet(input));
+                //}
                 else
                 {
-                    twitterResponse.Add(input);
+                    if (!HasProperty(input, "errors"))
+                    {
+                        twitterResponse.Add(input);
+                    }
                 }
             }
 
             return twitterResponse;
         }
+            
     }
 }

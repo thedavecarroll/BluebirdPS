@@ -28,13 +28,16 @@ namespace BluebirdPS
         public Hashtable Query { get; set; } = new Hashtable();
         public string Body { get; set; }
         public Hashtable Form { get; set; }
-        public string ContentType { get; set; } = "application/json";
-        public ExpansionTypes? Expansions { get; set; }
+        public string ContentType { get; set; } = "application/json";        
+        public ExpansionTypes? ExpansionType { get; set; }
         public bool NonPublicMetrics { get; set; }
         public bool PromotedMetrics { get; set; }
         public bool OrganicMetrics { get; set; }
+        public bool IncludeExpansions { get; set; }
         public string CommandName { get; private set; }
-        private bool _isExpanded { get; set; }
+
+        private bool _hasExpansionsIncluded { get; set; }
+        private bool _hasFieldsIncluded { get; set; }
 
         // ----------------------------------------------------------------------------------------
         // Constructor
@@ -68,7 +71,8 @@ namespace BluebirdPS
 
         public Uri GetUri()
         {
-            SetQueryExpansionFields();
+            SetFields();
+            SetExpansions();
 
             string RequestUri;
 
@@ -90,27 +94,41 @@ namespace BluebirdPS
 
         // ----------------------------------------------------------------------------------------
         // Public methods
-        private void SetQueryExpansionFields()
+        private void SetFields()
         {
-            if (_isExpanded == false && Expansions != null)
+            if (_hasFieldsIncluded == false && ExpansionType != null)
             {
-                if (Expansions == ExpansionTypes.Tweet)
+                if (ExpansionType == ExpansionTypes.Tweet)
+                {
+                    Query.Add("tweet.fields", ObjectFields.GetFieldList("Tweet", NonPublicMetrics, OrganicMetrics, PromotedMetrics));
+                }
+                else if (ExpansionType == ExpansionTypes.User)
+                {
+                    Query.Add("user.fields", ObjectFields.GetFieldList("User"));
+                }
+                _hasFieldsIncluded = true;
+            }
+        }
+
+        public void SetExpansions()
+        {
+            if (_hasExpansionsIncluded == false && ExpansionType != null && IncludeExpansions == true)
+            {
+                if (ExpansionType == ExpansionTypes.Tweet)
                 {
                     Query.Add("expansions", ExpansionFields.GetExpansionFields(ExpansionTypes.Tweet));
-                    Query.Add("tweet.fields", ObjectFields.GetFieldList("Tweet", NonPublicMetrics, OrganicMetrics, PromotedMetrics));
                     Query.Add("user.fields", ObjectFields.GetFieldList("User"));
                     Query.Add("media.fields", ObjectFields.GetFieldList("Media", NonPublicMetrics, OrganicMetrics, PromotedMetrics));
                     Query.Add("poll.fields", ObjectFields.GetFieldList("Poll"));
                     Query.Add("place.fields", ObjectFields.GetFieldList("Place"));
-                }
-                else if (Expansions == ExpansionTypes.User)
+                }            
+                else if (ExpansionType == ExpansionTypes.User)
                 {
                     Query.Add("expansions", ExpansionFields.GetExpansionFields(ExpansionTypes.User));
-                    Query.Add("user.fields", ObjectFields.GetFieldList("User"));
                     Query.Add("tweet.fields", ObjectFields.GetFieldList("Tweet", NonPublicMetrics, OrganicMetrics, PromotedMetrics));
                 }
-                _isExpanded = true;
             }
+             _hasExpansionsIncluded = true;
         }
 
     }
