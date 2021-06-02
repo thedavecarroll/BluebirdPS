@@ -1,4 +1,5 @@
 function New-ValidationErrorRecord {
+    [SuppressMessage('PSUseShouldProcessForStateChangingFunctions', '')]
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)]

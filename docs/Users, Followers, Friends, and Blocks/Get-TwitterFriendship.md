@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFriendship
+online version: https://docs.bluebirdps.dev/en/v0.5.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFriendship
 schema: 2.0.0
 ---
 
@@ -9,44 +9,32 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Returns information about the friendships of the authenticating user.
+Returns information about the friendships of the authenticating user or a source user and target user.
 
 ## SYNTAX
 
-### LookupScreenName (Default)
+### Lookup (Default)
 
 ```powershell
-Get-TwitterFriendship -ScreenName <String[]> [<CommonParameters>]
+Get-TwitterFriendship -UserName <String[]> [<CommonParameters>]
 ```
 
-### LookupUserId
+### Show
 
 ```powershell
-Get-TwitterFriendship -UserId <Int32[]> [<CommonParameters>]
-```
-
-### ShowScreenName
-
-```powershell
-Get-TwitterFriendship -SourceScreenName <String> -TargetScreenName <String> [<CommonParameters>]
-```
-
-### ShowUserId
-
-```powershell
-Get-TwitterFriendship -SourceUserId <Int32> -TargetUserId <Int32> [<CommonParameters>]
-```
-
-### Incoming
-
-```powershell
-Get-TwitterFriendship [-Incoming] [<CommonParameters>]
+Get-TwitterFriendship -SourceUserName <String> -TargetUserName <String> [<CommonParameters>]
 ```
 
 ### Pending
 
 ```powershell
 Get-TwitterFriendship [-Pending] [<CommonParameters>]
+```
+
+### Incoming
+
+```powershell
+Get-TwitterFriendship [-Incoming] [<CommonParameters>]
 ```
 
 ### NoRetweets
@@ -57,7 +45,9 @@ Get-TwitterFriendship [-NoRetweets] [<CommonParameters>]
 
 ## DESCRIPTION
 
-Returns information about the friendships of the authenticating user.
+Returns information about the friendships of the authenticating user or a source user and target user.
+
+Suspended users are filtered out after connections are queried.
 
 The information returned depends on the parameters used.
 
@@ -66,24 +56,145 @@ The information returned depends on the parameters used.
 ### Example 1
 
 ```powershell
-PS > Get-TwitterFriendship -Pending | ForEach-Object {Get-TwitterUser -UserId $_ | Select-Object -Property screen_name,verified,statuses_count,follow_request_sent,followers_count}
+PS > Get-TwitterFriendship -UserName BluebirdPS,newsbreakApp,AutoOverload,SportsCenter,AppInsights
 ```
 
-```console
-screen_name         : AppInsights
-verified            : True
-statuses_count      : 251
-follow_request_sent : True
-followers_count     : 805
+```text
+UserName     Id                  Connections
+--------     --                  -----------
+BluebirdPS   1330877955057344513 {Following, FollowedBy}
+newsbreakApp 4127951894          {Blocking}
+AutoOverload 2896222807          {Muting}
+SportsCenter 26257166            {None}
+AppInsights  4036841419          {FollowingRequested}
 ```
 
-Return a list of pending follow requests and then get information about the Twitter users that have been requested to be followed.
+Providing one or more user names to return connection information between the authenticating user and the specified user(s).
+
+### Example 2
+
+```powershell
+PS > $Friendship = Get-TwitterFriendship -SourceUserName thedavecarroll -TargetUserName BillGates
+PS > $Friendship
+PS > $Friendship.Source
+PS > $Friendship.Target
+```
+
+```text
+# Output for $Friendship
+Source                                                         Target
+------                                                         ------
+thedavecarroll : Following, NotificationsEnabled, WantRetweets BillGates : FollowedBy
+
+# Output for $Friendship.Source
+Id                   : 292670084
+UserName             : thedavecarroll
+Following            : True
+FollowedBy           : False
+LiveFollowing        : False
+FollowingReceived    : False
+FollowingRequested   : False
+NotificationsEnabled : True
+CanDM                : False
+Blocking             : False
+BlockedBy            : False
+Muting               : False
+WantRetweets         : True
+AllReplies           : False
+MarkedSpam           : False
+
+# Output for $Friendship.Target
+Id                 : 50393960
+UserName           : BillGates
+Following          : False
+FollowedBy         : True
+FollowingReceived  : False
+FollowingRequested : False
+```
+
+Returns detailed information about the relationship between two users.
+
+### Example 3
+
+```powershell
+PS > Get-TwitterFriendship -Incoming | Get-TwitterUser
+```
+
+Return a list user ids of incoming follow requests and then get information about the Twitter users that have requested to follow the authenticating user.
+
+If the authenticating user's Tweets are not protected, the command with the Incoming switch will return 0 results.
+
+### Example 4
+
+```powershell
+PS > Get-TwitterFriendship -Pending
+```
+
+Return a list user ids of outgoing follow requests.
+
+### Example 5
+
+```powershell
+PS > Get-TwitterFriendship -NoRetweets
+```
+
+Return a list user ids that the authenticating user does not want to see Retweets from.
 
 ## PARAMETERS
 
+### -UserName
+
+One or more user names to return the connection details.
+
+Connections can be: Following, FollowingRequested, FollowedBy, Blocking, Muting, or None.
+
+```yaml
+Type: String[]
+Parameter Sets: Lookup
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -SourceUserName
+
+Specifies the source user to return detailed information about the relationship with the target user.
+
+```yaml
+Type: String
+Parameter Sets: Show
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -TargetUserName
+
+Specifies the target user to return detailed information about the relationship with the source user.
+
+```yaml
+Type: String
+Parameter Sets: Show
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Incoming
 
-Returns an array of user ids for every user who has requested to follow the authenticating user.
+Returns an array of user ids for every user who has requested to follow the authenticating user, if their Tweets are private.
 
 ```yaml
 Type: SwitchParameter
@@ -92,23 +203,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -NoRetweets
-
-Returns an array of user ids that the authenticating user does not want to receive retweets from.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: NoRetweets
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -124,103 +219,23 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ScreenName
+### -NoRetweets
 
-The screen name of the user for whom to return results.
-
-```yaml
-Type: String[]
-Parameter Sets: LookupScreenName
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -UserId
-
-The ID of the user for whom to return results.
+Returns an array of user ids that the authenticating user does not want to receive retweets from.
 
 ```yaml
-Type: Int32[]
-Parameter Sets: LookupUserId
+Type: SwitchParameter
+Parameter Sets: NoRetweets
 Aliases:
 
-Required: True
+Required: False
 Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -SourceScreenName
-
-The screen name of the source user for whom to return results.
-
-```yaml
-Type: String
-Parameter Sets: ShowScreenName
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SourceUserId
-
-The ID of the target user for whom to return results.
-
-```yaml
-Type: Int32
-Parameter Sets: ShowUserId
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -TargetScreenName
-
-The screen name of the target user for whom to return results.
-
-```yaml
-Type: String
-Parameter Sets: ShowScreenName
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -TargetUserId
-
-The ID of the target user for whom to return results.
-
-```yaml
-Type: Int32
-Parameter Sets: ShowUserId
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -233,28 +248,26 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.String[]
 
-### System.Int32[]
-
 ## OUTPUTS
 
-### System.Object
+### BluebirdPS.APIV1.FriendshipConnections
+
+### BluebirdPS.APIV1.Relationship
+
+### System.String[]
 
 ## NOTES
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFriendship)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFriendship)
 
-[Get-TwitterFriends](https://bluebirdps.anovelidea.org/en/latest/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFriends)
+[Api Reference - GET friendships/lookup](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-lookup)
 
-[Get-TwitterFollowers](https://bluebirdps.anovelidea.org/en/latest/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFollowers)
+[Api Reference - GET friendships/show](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-show)
+
+[Api Reference - GET friendships/outgoing](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-outgoing)
 
 [Api Reference - GET friendships/incoming](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-incoming)
 
 [Api Reference - GET friendships/no_retweets/ids](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-no_retweets-ids)
-
-[Api Reference - GET friendships/lookup](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-lookup)
-
-[Api Reference - GET friendships/outgoing](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-outgoing)
-
-[Api Reference - GET friendships/show](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-show)

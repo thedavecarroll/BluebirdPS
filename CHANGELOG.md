@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.2.0 - Unreleased
+
+BugFix and Feature; Update Strongly Recommended
+
+### Fixed
+
+- [Issue #29](https://github.com/thedavecarroll/BluebirdPS/issues/29) - [BUG] Get-TwitterDM is not allowed
+- [Issue #30](https://github.com/thedavecarroll/BluebirdPS/issues/30) - [New Feature] All commands using parameter sets needs default parameter set in cmdletbinding
+- [Issue #42](https://github.com/thedavecarroll/BluebirdPS/issues/42) - Suppress Duplicate ChangeLog Entries
+- [Issue #36](https://github.com/thedavecarroll/BluebirdPS/issues/36) - Add CodeAnalysis.SuppressMessage as Required
+- [Issue #35](https://github.com/thedavecarroll/BluebirdPS/issues/35) - Expand Build Scripts
+- [Issue #34](https://github.com/thedavecarroll/BluebirdPS/issues/34) - Remove ValueFromPipeline from Private Functions
+
+### Added
+
+- [Issue #40](https://github.com/thedavecarroll/BluebirdPS/issues/40) - Add C# Enums as required
+- [Issue #41](https://github.com/thedavecarroll/BluebirdPS/issues/41) - Add C# Classes for Output and Processing
+
+### Maintenance
+
+- [Issue #38](https://github.com/thedavecarroll/BluebirdPS/issues/38) - Add OAuthVersion to Endpoint JSON
+- [Issue #39](https://github.com/thedavecarroll/BluebirdPS/issues/39) - Maint move source files into api versioned folders
+- [Issue #37](https://github.com/thedavecarroll/BluebirdPS/issues/37) - Build script does not work on MacOS or Raspbian
+
 ## [0.1.1] - 2020-11-23
 
 Bugfix; Update Strongly Recommended

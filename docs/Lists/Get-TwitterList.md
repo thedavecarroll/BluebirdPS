@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterList
+online version: https://docs.bluebirdps.dev/en/v0.5.0/Lists/Get-TwitterList
 schema: 2.0.0
 ---
 
@@ -13,34 +13,22 @@ Returns a specific list or all lists the authenticating or specified user subscr
 
 ## SYNTAX
 
-### ListScreenName (Default)
+### ByListUserName (Default)
 
 ```powershell
-Get-TwitterList [-ScreenName <String>] [-OwnedListFirst] [<CommonParameters>]
+Get-TwitterList [-UserName <String>] [-OwnedListFirst] [<CommonParameters>]
 ```
 
-### ListUserId
+### ById
 
 ```powershell
-Get-TwitterList -UserId <String> [-OwnedListFirst] [<CommonParameters>]
+Get-TwitterList -Id <String> [<CommonParameters>]
 ```
 
-### ShowId
+### BySlug
 
 ```powershell
-Get-TwitterList -ListId <String> [<CommonParameters>]
-```
-
-### ShowSlugOwnerId
-
-```powershell
-Get-TwitterList -Slug <String> -OwnerId <Int64> [<CommonParameters>]
-```
-
-### ShowSlugOwnerScreenName
-
-```powershell
-Get-TwitterList -Slug <String> -OwnerScreenName <String> [<CommonParameters>]
+Get-TwitterList -Slug <String> [-OwnerUserName <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -55,20 +43,20 @@ Returns a specific list or all lists the authenticating or specified user subscr
 PS > Get-TwitterList
 ```
 
-Returns the lists owned by the authenticating user.
+Returns the lists the authenticating user subscribes to, including their own.
 
 ### Example 2
 
 ```powershell
-PS > Get-TwitterList -UserId 123456789
+PS > Get-TwitterList -UserName BluebirdPS
 ```
 
-Returns the lists owned by the specified user.
+Returns the lists that the user BluebirdPS subscribes to, including their own.
 
 ### Example 3
 
 ```powershell
-PS > Get-TwitterList -ListId 749356646665629696
+PS > Get-TwitterList -Id 749356646665629696
 ```
 
 Returns the specified list.
@@ -76,39 +64,25 @@ Returns the specified list.
 ### Example 4
 
 ```powershell
-PS > Get-TwitterList -Slug powershell-team -OwnerScreenName powershell_team
+PS > Get-TwitterList -Slug powershell-team -OwnerUserName powershell_team
 ```
 
 Returns the specified list owned by the specified owner.
 
 ## PARAMETERS
 
-### -ScreenName
+### -UserName
 
-The screen name of the user for whom to return results.
+Returns the lists that the specified user subscribes to, including their own.
+
+If UserName, Id, and Slug are not provided, this command will return the lists for the authenticating user.
 
 ```yaml
 Type: String
-Parameter Sets: ListScreenName
+Parameter Sets: ByListUserName
 Aliases:
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -UserId
-
-The ID of the user for whom to return results.
-
-```yaml
-Type: String
-Parameter Sets: ListUserId
-Aliases:
-
-Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -121,23 +95,23 @@ Return the authenticating user's lists first.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: ListScreenName, ListUserId
+Parameter Sets: ByListUserName
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ListId
+### -Id
 
 The numerical id of the list.
 
 ```yaml
 Type: String
-Parameter Sets: ShowId
+Parameter Sets: ById
 Aliases:
 
 Required: True
@@ -155,7 +129,7 @@ Note: Provide the list owner when returning a list based on the slug.
 
 ```yaml
 Type: String
-Parameter Sets: ShowSlugOwnerId, ShowSlugOwnerScreenName
+Parameter Sets: BySlug
 Aliases:
 
 Required: True
@@ -165,32 +139,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -OwnerId
+### -OwnerUserName
 
-The user id that owns the list specified by the Slug parameter.
-
-```yaml
-Type: Int64
-Parameter Sets: ShowSlugOwnerId
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -OwnerScreenName
-
-The screen name of the user that owns the list specified by the Slug parameter.
+The username of the user that owns the list specified by the Slug parameter.
 
 ```yaml
 Type: String
-Parameter Sets: ShowSlugOwnerScreenName
+Parameter Sets: BySlug
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -207,23 +165,17 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### BluebirdPS.APIV1.List
+
+### BluebirdPS.APIV1.List[]
 
 ## NOTES
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterList)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Lists/Get-TwitterList)
 
-[Get-TwitterListByOwner](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListByOwner)
-
-[Get-TwitterListMember](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListMember)
-
-[Get-TwitterListSubscriber](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListSubscriber)
-
-[Get-TwitterListSubscription](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListSubscription)
-
-[Get-TwitterListTweets](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListTweets)
+[Get-TwitterListByOwner](https://docs.bluebirdps.dev/en/v0.5.0/Lists/Get-TwitterListByOwner)
 
 [Api Reference - GET lists/list](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-list)
 

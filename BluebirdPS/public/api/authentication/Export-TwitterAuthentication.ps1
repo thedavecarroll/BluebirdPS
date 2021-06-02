@@ -3,17 +3,21 @@ function Export-TwitterAuthentication {
     param()
 
     try {
-        if (-Not (Test-Path -Path $OAuthTokenSavePath)) {
+        if (-Not (Test-Path -Path $BluebirdPSConfiguration.CredentialsPath)) {
             $Action = 'new'
-            New-Item -Path $OAuthTokenSavePath -Force -ItemType File | Out-Null
+            New-Item -Path $BluebirdPSConfiguration.CredentialsPath -Force -ItemType File | Out-Null
         } else {
             $Action = 'existing'
         }
 
-        $OAuth | ConvertTo-Json | ConvertTo-SecureString -AsPlainText |
-            ConvertFrom-SecureString | Set-Content -Path $OAuthTokenSavePath -Force
+        [SuppressMessage('PSAvoidUsingConvertToSecureStringWithPlainText', '')]
+        $OAuth | ConvertTo-Json | ConvertTo-SecureString -AsPlainText | ConvertFrom-SecureString | Set-Content -Path $BluebirdPSConfiguration.CredentialsPath -Force
 
-        'Saved Twitter credentials to {0} file: {1}' -f $Action,$OAuthTokenSavePath | Write-Verbose
+        'Saved Twitter credentials to {0} file: {1}' -f $Action,$BluebirdPSConfiguration.CredentialsPath | Write-Verbose
+
+        $BluebirdPSConfiguration.AuthLastExportDate = (Get-ChildItem -Path $BluebirdPSConfiguration.CredentialsPath).LastWriteTime
+        Export-BluebirdPSConfiguration
+
     }
     catch {
         $PSCmdlet.ThrowTerminatingError($_)

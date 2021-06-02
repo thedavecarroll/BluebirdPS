@@ -1,15 +1,17 @@
 function Test-TwitterAuthentication {
     [CmdletBinding()]
-    param()
-
-    $OAuthParameters = [OAuthParameters]::new(
-        'GET',
-        'https://api.twitter.com/1.1/account/verify_credentials.json',
-        @{
-            include_entities = 'false'
-            skip_status = 'true'
-        }
+    param(
+        [switch]$BearerToken
     )
-    Invoke-TwitterRequest -OAuthParameters $OAuthParameters -InformationVariable Response | Out-Null
-    $Response.MessageData.Status -match '200' ? $true : $false
+
+    Invoke-TwitterVerifyCredentials @PSBoundParameters | Out-Null
+    if ($LastStatusCode -eq '200') {
+        $true
+        $BluebirdPSConfiguration.AuthValidationDate = Get-Date
+    } else {
+        $false
+        $BluebirdPSConfiguration.AuthValidationDate = $null
+    }
+
+    Export-BluebirdPSConfiguration
 }

@@ -1,66 +1,150 @@
-# BluebirdPS
+# about_BluebirdPS
 
 ## about_BluebirdPS
 
 # Short Description
 
-BluebirdPS is a Twitter automation client written for PowerShell 7 and above.
+BluebirdPS is a Twitter Automation Client for PowerShell 7. Tweet, retweet, send direct messages, manage lists, and more.
 
 # Long Description
 
-With BluebirdPS, you can publish a tweet, reply to a tweet, publish a direct message, upload media to use in tweets or direct messages, retweet/unretweet, like/unlike, add/delete saved searches, and retrieve many resources such as blocks, followers, timelines, and users. Additionally, you can retrieve lists, list membership, and list subscribers.
+With BluebirdPS, you can interact with many Twitter API endpoints without needing to craft complicated requests.
+You can search for a Tweet, retrieve one or more Tweets you specify, publish or delete a Tweet, like or unlike a Tweet, and retweet or delete a retweet.
+For users, you can retrieve one or users you specify, manage your friends (following) and followers, and manage muted and blocked users.
+BluebirdPS also gives you the ability to manage Twitter lists, including membership and retrieving subscribers.
+You can send a Direct Message to a user, retrieve DMs, delete a DM, and manage saved searches.
 
-# DEVELOPER ACCOUNT TOKENS
+BluebirdPS provides you with an easy interface to Twitter.
 
-Currently, any user of the module would need to apply for a Twitter Developer account at https://developer.twitter.com/en/apply/user.html and create an application in the portal. The application must be given access permissions of Read, Write, and Direct Message. At minimum, the application needs Read access for any Get- commands. Set-, Send-, and Publish-Tweet require Write access, while Publish-TwitterDM requires Direct Message. Once you have created the application, generate your API key/secret and access token/secret. Then use the following command to add your key, token and secrets. Omit the `-Persist` if you do not want to save your credentials to disk.
+# Developer Access
+
+In order to use BluebirdPS, or any other Twitter API client or library, you will need to go through several steps to gain access to the API.
+
+### Applying for a Developer Account
+
+You must apply for a developer account at https://developer.twitter.com/en/apply-for-access.
+This process could take a couple weeks.
+
+### Activate Developer Portal
+
+Next, activate your developer portal at https://developer.twitter.com/content/developer-twitter/en/portal/opt-in.
+
+### Create a Project and Register a Developer App
+
+You must have a project with a developer app created in the portal.
+
+### Apply for Access for the Twitter API v2: Early Access
+
+Visit the Twitter API Getting Started page, at https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api, for details and additional links.
+
+### Generate Account Tokens
+
+From the portal, you will need to generate the consumer key, otherwise called the API Key and Secret.
+The API Key is linked to your application.
+
+You will also need to generate an Access Token and Secret.
+The Access Token is linked to your Twitter user account.
+
+The application must be given access permissions of Read, Write, and Direct Message for full usage.
+At minimum, the application needs Read access for any Get- commands.
+Set-, Send-, and Publish-Tweet require Write access, while *-TwitterDM requires Direct Message access.
+
+You can also generate a Bearer Token through the portal, or simply use the Set-TwitterAuthentication command.
+If your credentials are validated, the bearer token will be requested and set in the authentication file, as well.
 
 ### Example
 
-Set-TwitterAuthentication -Persist
+Set-TwitterAuthentication
 
-# HISTORY AND INFORMATION STREAM
+# Information Stream and History
 
-The execution results of commands that connect to the Twitter API are collected in a module variable. The data contained in each record in the command history is the same that is written to the information stream. Some API calls, such as the append call within the Send-TwitterMedia command, may not added to history as there could hundreds of such calls when uploading large videos.
+The execution results of commands that connect to the Twitter API are written to Powershell's information stream.
+These results contains the command name, HTTP method, URL, OAuth Version, HTTP Status, API response (converted from JSON automatically via Invoke-RestMethod), endpoint rate limit details, and more.
 
-### History Note
-
-THE COMMAND HISTORY DATA ONLY LIVES IN YOUR CURRENT SESSION AND IS NOT TRANSMITTED. If you re-import the module, the history will be reset.
+The same data is also written to the a history record that is only maintained for the current session.
+Reimporting the module will reset the command history.
 
 ### Example (Last 5 commands sent to Twitter)
 
-Get-TwitterHistory -Last 5
+Get-BluebirdPSHistory -Last 5
 
-# TWITTER API
+### Example (Last command with error details)
 
-While a few commands in this module are helper commands that don't connect to the Twitter API, the majority of commands do. For completeness of documentation, the developer has included definitions of the API endpoints that are currently supported. The command Get-TwitterApiEndpoint can help you discover "under the hood" aspects of each command. The definitions includes the API URL, which is also included in each commands LINKs section.
+Get-BluebirdPSHistory -Last 1 -Errors
+
+# Supported Twitter API Endpoints
+
+While a few commands in this module are helper commands that don't connect to the Twitter API, the majority of commands do.
+For completeness of documentation, the developer has included definitions of the API endpoints that are currently supported.
+The command Get-TwitterApiEndpoint can help you discover which command to use for a specific API endpoint.
 
 ### Example
 
-Get-TwitterApiEndpoint -Command Get-TwitterTimeline
+Get-TwitterApiEndpoint -Endpoint lists
 
 # New Features
 
 More features are on the way but if you have a use case that the module does not support, please submit a feature request at https://bit.ly/BluebirdPSFeatureRequest.
 
-# Found a bug?
+# Found a Bug?
 
 If you find a bug, please report it at https://bit.ly/BluebirdPSBugReport.
 
-# KEYWORDS
+# Join the Discussion
+
+Ask a question or pose a topic at https://bit.ly/BluebirdPSDiscussion.
+
+# Keywords
 
 Twitter
 
 TwitterAPI
 
-Export-TwitterAuthentication
+Import-BluebirdPSConfiguration
+
+Set-BluebirdPSConfiguration
+
+Export-BluebirdPSConfiguration
+
+Get-BluebirdPSConfiguration
+
+Get-BluebirdPSHistory
+
+ConvertFrom-EpochTime
+
+Set-Retweet
+
+Publish-Tweet
+
+Search-Tweet
+
+Get-Tweet
+
+Set-TweetLike
+
+Get-TweetLikes
+
+Get-TweetPoll
+
+Set-TweetReply
+
+Get-TwitterAccountSettings
+
+Get-TwitterApiEndpoint
 
 Import-TwitterAuthentication
 
 Set-TwitterAuthentication
 
+Test-TwitterAuthentication
+
+Export-TwitterAuthentication
+
 Set-TwitterBearerToken
 
-Test-TwitterAuthentication
+Get-TwitterBlockedUser
+
+Set-TwitterBlockedUser
 
 Get-TwitterDM
 
@@ -68,23 +152,43 @@ Publish-TwitterDM
 
 Unpublish-TwitterDM
 
-Get-TwitterApiEndpoint
+Get-TwitterFollowers
 
-Get-TwitterHistory
+Remove-TwitterFriend
 
-Get-TwitterRateLimitWarning
+Add-TwitterFriend
 
-Set-TwitterRateLimitWarning
+Get-TwitterFriends
 
-Test-SearchString
+Get-TwitterFriendship
+
+Add-TwitterList
 
 Get-TwitterList
 
+Set-TwitterList
+
+Remove-TwitterList
+
 Get-TwitterListByOwner
+
+Add-TwitterListMember
 
 Get-TwitterListMember
 
+Remove-TwitterListMember
+
+Get-TwitterListMembership
+
+Test-TwitterListMembership
+
 Get-TwitterListSubscriber
+
+Remove-TwitterListSubscription
+
+Add-TwitterListSubscription
+
+Test-TwitterListSubscription
 
 Get-TwitterListSubscription
 
@@ -92,49 +196,28 @@ Get-TwitterListTweets
 
 Send-TwitterMedia
 
-Add-TwitterSavedSearch
+Get-TwitterMutedUser
 
-Get-TwitterSavedSearch
+Set-TwitterMutedUser
 
-Remove-TwitterSavedSearch
-
-Search-Tweet
-
-Export-TwitterResource
-
-Get-TwitterAccountSettings
-
-Get-TwitterConfiguration
-
-Get-TwitterLanguages
+Get-TwitterPermissions
 
 Get-TwitterRateLimitStatus
 
-Get-Tweet
+Invoke-TwitterRequest
 
-Get-TweetLike
+Get-TwitterSavedSearch
 
-Publish-Tweet
+Add-TwitterSavedSearch
 
-Set-Retweet
-
-Set-TweetLike
-
-Get-TwitterUserProfileBanner
-
-Get-TwitterBlocks
-
-Get-TwitterFollowers
-
-Get-TwitterFriends
-
-Get-TwitterFriendship
-
-Get-TwitterMutedUser
+Remove-TwitterSavedSearch
 
 Get-TwitterTimeline
 
 Get-TwitterUser
 
-Get-TwitterUserList
+Submit-TwitterUserAsSpam
 
+Get-TwitterUserProfileBanner
+
+ConvertFrom-TwitterV1Date

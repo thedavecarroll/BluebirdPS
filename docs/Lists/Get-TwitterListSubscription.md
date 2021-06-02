@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListSubscription
+online version: https://docs.bluebirdps.dev/en/v0.5.0/Lists/Get-TwitterListSubscription
 schema: 2.0.0
 ---
 
@@ -13,16 +13,8 @@ Returns a collection of lists to which the specified user is subscribed.
 
 ## SYNTAX
 
-### ScreenName (Default)
-
 ```powershell
-Get-TwitterListSubscription -ScreenName <String> [-ResultsPerPage <Int32>] [<CommonParameters>]
-```
-
-### UserId
-
-```powershell
-Get-TwitterListSubscription -UserId <String> [-ResultsPerPage <Int32>] [<CommonParameters>]
+Get-TwitterListSubscription [-UserName <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -36,51 +28,43 @@ Does not include the user's own lists.
 ### Example 1
 
 ```powershell
-PS > Get-TwitterListSubscription -ScreenName thedavecarroll
+PS > Get-TwitterListSubscription
+```
+
+Returns a collection of lists to which the authenticating user is subscribed.
+
+### Example 2
+
+```powershell
+PS > Get-TwitterListSubscription -UserName BlueBirdPS
+```
+
+```text
+Id              : 749356646665629696
+CreatedAt       : 7/2/2016 4:38:41 PM
+Slug            : powershell-team
+Name            : PowerShell Team
+FullName        : @PowerShell_Team/powershell-team
+Description     : Members of the PowerShell Team at Microsoft
+Uri             : https://twitter.com/PowerShell_Team/lists/powershell-team
+Mode            : Public
+MemberCount     : 23
+SubscriberCount : 287
+UserId          : 702907554368630784
+UserName        : PowerShell_Team
+Following       : True
 ```
 
 Returns a collection of lists to which the specified user is subscribed.
 
 ## PARAMETERS
 
-### -ScreenName
+### -UserName
 
-The screen name of the user for whom to return results.
-
-```yaml
-Type: String
-Parameter Sets: ScreenName
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -UserId
-
-The ID of the user for whom to return results.
+Specifies the user for which you want to obtain a collection of the lists to which they subscribe.
 
 ```yaml
 Type: String
-Parameter Sets: UserId
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ResultsPerPage
-
-Specifies the number of results to retrieve per page.
-
-```yaml
-Type: Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -99,24 +83,24 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
+### System.String
+
 ## OUTPUTS
 
-### System.Object
+### BluebirdPS.APIV1.List[]
 
 ## NOTES
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListSubscription)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Lists/Get-TwitterListSubscription)
 
-[Get-TwitterListSubscriber](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListSubscriber)
+[Add-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.5.0/Lists/Add-TwitterListSubscription)
 
-[Get-TwitterList](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterList)
+[Remove-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.5.0/Lists/Remove-TwitterListSubscription)
 
-[Get-TwitterListMember](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListMember)
+[Test-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.5.0/Lists/Test-TwitterListSubscription)
 
-[Get-TwitterListByOwner](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListByOwner)
-
-[Get-TwitterListTweets](https://bluebirdps.anovelidea.org/en/latest/Lists/Get-TwitterListTweets)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.5.0/Lists/Get-TwitterList)
 
 [Api Reference - GET lists/subscriptions](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-subscriptions)

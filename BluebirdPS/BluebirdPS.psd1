@@ -8,6 +8,7 @@
     Copyright = '2020'
     Description = 'A Twitter Automation Client for PowerShell 7. Tweet, retweet, send direct messages, manage lists, and more.'
     PowerShellVersion = '7.0'
+    NestedModules = 'bin/BluebirdPS.dll'
     FunctionsToExport = @()
     CmdletsToExport = @()
     VariablesToExport = @()

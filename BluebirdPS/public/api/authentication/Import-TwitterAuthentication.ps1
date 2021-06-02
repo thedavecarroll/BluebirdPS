@@ -4,9 +4,9 @@ function Import-TwitterAuthentication {
 
     'Checking Twitter credentials file.' | Write-Verbose
 
-    $SetValues = 'Please use Set-TwitterAuthentication to set the requried API keys and secrets. Use the -Persist switch to save the values to disk.'
+    $SetValues = 'Please use Set-TwitterAuthentication to set the requried API keys and secrets. The authentication values will be encrypted and saved to disk.'
 
-    if (Test-Path -Path $OAuthTokenSavePath) {
+    if (Test-Path -Path $BluebirdPSConfiguration.CredentialsPath) {
 
         'Twitter credentials file found.' | Write-Verbose
 
@@ -15,7 +15,7 @@ function Import-TwitterAuthentication {
             'Attempting to import Twitter credentials file.' | Write-Verbose
 
             # read the encrypted credentials file, decrypt, and convert from JSON to object
-            $OAuthFromDisk = Get-Content -Path $OAuthTokenSavePath | ConvertTo-SecureString -ErrorAction Stop |
+            $OAuthFromDisk = Get-Content -Path $BluebirdPSConfiguration.CredentialsPath | ConvertTo-SecureString -ErrorAction Stop |
                 ConvertFrom-SecureString -AsPlainText | ConvertFrom-Json
 
             # ensure that the credentials file has the correct keys/attributes
@@ -36,15 +36,37 @@ function Import-TwitterAuthentication {
 
                 'Twitter credentials file imported.' | Write-Verbose
 
+                try {
+                    Invoke-TwitterVerifyCredentials | Out-Null
+                }
+                catch {
+                    'Authentication file appears to have invalid credentials. {0}' -f 'Please use Set-TwitterAuthentication to update your stored credentials.' | Write-Warning
+                    return
+                }
+                if ($null -eq $BluebirdPSConfiguration.AuthUserId) {
+                    Set-BluebirdPSAuthUser
+                }
+                try {
+                    Invoke-TwitterVerifyCredentials -BearerToken | Out-Null
+                }
+                catch {
+                    'Authentication file appears to have an invalid bearer token. {0}' -f 'Please use Set-TwitterBearerToken to update your stored bearer token.' | Write-Warning
+                    return
+                }
+
+                Export-BluebirdPSConfiguration
+
             } else {
                 'Authentication file missing one or more values. {0}' -f $SetValues | Write-Warning
             }
         }
         catch {
             'Authentication file appears to be corrupted. {0}' -f $SetValues | Write-Warning
+            $PSCmdlet.ThrowTerminatingError($_)
         }
 
     } else {
         $SetValues | Write-Warning
+        $PSCmdlet.ThrowTerminatingError($_)
     }
 }

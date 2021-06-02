@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterMutedUser
+online version: https://docs.bluebirdps.dev/en/v0.5.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterMutedUser
 schema: 2.0.0
 ---
 
@@ -13,16 +13,10 @@ Returns a collection of user objects or array of user ids that the authenticatin
 
 ## SYNTAX
 
-### Default (Default)
+### __AllParameterSets
 
 ```powershell
 Get-TwitterMutedUser [<CommonParameters>]
-```
-
-### List
-
-```powershell
-Get-TwitterMutedUser [-List] [-SkipStatus] [-ExcludeEntities] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -42,62 +36,12 @@ Returns a list of user ids the authenticating user has muted.
 ### Example 2
 
 ```powershell
-PS > Get-TwitterMutedUser
+PS > Get-TwitterMutedUser | Get-TwitterUser
 ```
 
-Returns a list of user ids the authenticating user has muted.
+Use the list of user ids the authenticating user has muted as input for Get-TwitterUser.
 
 ## PARAMETERS
-
-### -List
-
-By using this switch, this command will return user objects instead of an array of user ids.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SkipStatus
-
-Exclude the user statuses from the returned user objects.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ExcludeEntities
-
-Exclude the entities node.
-
-This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### CommonParameters
 
@@ -109,14 +53,16 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### System.String[]
 
 ## NOTES
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterMutedUser)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterMutedUser)
+
+[Set-TwitterMutedUser](https://docs.bluebirdps.dev/en/v0.5.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Set-TwitterMutedUser)
+
+[Get-TwitterUser](https://docs.bluebirdps.dev/en/v0.5.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser)
 
 [API Documentation - GET mutes/users/ids](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-ids)
-
-[API Documentation - GET mutes/users/list](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-list)

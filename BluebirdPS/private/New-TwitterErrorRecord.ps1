@@ -1,74 +1,96 @@
 function New-TwitterErrorRecord {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory,ValueFromPipeline)]
-        [ErrorRecord]$ErrorRecord
+        [Parameter(Mandatory)]
+        [ResponseData]$ResponseData
     )
 
-    try {
-
-        $Command = (Get-PSCallStack).Where{$_.Command -notmatch 'ErrorRecord|ResponseData|Request|ScriptBlock'}.Command
-
-        $Response = $ErrorRecord.Exception.Response
-        if ($Response.Headers.ToString() -match '(?:x-response-time:\s)(\d+)') {
-            $ResponseTime = $Matches[1]
-        }
-
-        if ($Response.RequestMessage.RequestUri.Query.Length -gt 0) {
-            $Uri = $Response.RequestMessage.RequestUri.AbsoluteUri.Replace($Response.RequestMessage.RequestUri.Query,'')
-        } else {
-            $Uri = $Response.RequestMessage.RequestUri.AbsoluteUri
-        }
-
-        $Status = '{0} {1}' -f $Response.StatusCode.Value__,$Response.ReasonPhrase
-        $Server = $Response.Headers.Where{$_.Key -eq 'server'}.Value
-
-        try {
-            if ($ErrorRecord.ErrorDetails) {
-                $TwitterError = ($ErrorRecord.ErrorDetails.Message | ConvertFrom-Json).errors
-                $ErrorCategory = $TwitterErrorMapping.Where{$_.ErrorCode -eq $TwitterError.code}.Exception
-                $ErrorMessage = $TwitterError.message
-                $ErrorCode = $TwitterError.code
-            } else {
-                $MappedError = $TwitterErrorMapping.Where{$_.HttpStatusCode -eq $Response.StatusCode.Value__}
-                $ErrorCategory = $MappedError.Exception
-                if ($MappedError.Message) {
-                    $ErrorMessage = $MappedError.Message
-                } else {
-                    $ErrorMessage = $TwitterError.ReasonPhrase
+    function GetErrorData {
+        param($ErrorList)
+        $AllErrors = [System.Collections.Generic.List[hashtable]]::new()
+            foreach ($AnError in $ErrorList) {
+                $ThisError = @{}
+                foreach ($Property in $AnError.psobject.Properties) {
+                    $ThisError.Add($Property.Name,$Property.Value)
                 }
-                $ErrorCode = $null
+                $AllErrors.Add($ThisError)
             }
-        }
-        catch {
-            $ErrorCategory = $ErrorRecord.CategoryInfo.Category
-            $ErrorMessage = $Response.StatusCode
-            $ErrorCode = $null
-        }
-
-        $ResponseData = [PsCustomObject]@{
-            PSTypeName = 'Twitter.Error'
-            Command = $Command
-            HttpMethod = $Response.RequestMessage.Method.ToString()
-            Uri = $Uri
-            QueryString = $Response.RequestMessage.RequestUri.Query
-            Status = $Status
-            Message = $ErrorMessage
-            Server = $Server
-            ResponseTime = $ResponseTime
-            Response = $Response
-            ErrorCode = $ErrorCode
-        }
-        $TwitterHistoryList.Add($ResponseData)
-        Write-Information -MessageData $ResponseData
-
-        $TwitterException = [HttpResponseException]::new($ErrorMessage,$Response)
-
-        [ErrorRecord]::new($TwitterException,$Command,$ErrorCategory,$ResponseData.Uri)
-
+        $AllErrors
     }
-    catch {
-        $PSCmdlet.ThrowTerminatingError($_)
+
+    $HttpStatusCode = $ResponseData.Status.value__.ToString()
+    $ApiResponse  = $ResponseData.ApiResponse
+
+    $ErrorId = 'APIv{0}-{1}' -f $ResponseData.ApiVersion,$ResponseData.Command
+    $AllErrors = GetErrorData -ErrorList $ApiResponse.errors
+
+    if ($ApiResponse.psobject.Properties.Name -notcontains 'data') {
+        $IsTerminatingError = $true
+    } else {
+        $IsTerminatingError = $false
+    }
+
+    if ($ApiResponse.Type) {
+        $ErrorMessage = $ApiResponse.Detail
+        $ErrorCategory = Get-ErrorCategory -ErrorType $ApiResponse.Type
+        $ExceptionType = Get-ExceptionType -ErrorCategory $ErrorCategory
+
+        $TwitterException = Get-TwitterException -ExceptionType $ExceptionType -ErrorMessage $ErrorMessage
+        $TwitterException.Source = $ResponseData.Command
+        $TwitterException.Data.Add('TwitterApiError',$AllErrors)
+
+        $ErrorRecord = [ErrorRecord]::new($TwitterException,$ErrorId,$ErrorCategory,$ResponseData.Endpoint)
+        $ErrorRecord.ErrorDetails = $ErrorMessage
+
+        $ErrorParams = @{
+            ErrorRecord = $ErrorRecord
+            CategoryActivity = $ResponseData.Command
+        }
+
+        if ($IsTerminatingError -and $TwitterErrors.Count -eq ($i + 1)) {
+            $ErrorParams.Add('ErrorAction','Stop')
+        }
+        Write-Error @ErrorParams
+    } else {
+        $TwitterErrors = $ApiResponse.errors
+        for ($i = 0; $i -le $TwitterErrors.Count; $i++) {
+
+        #}
+        #foreach ($TwitterError in $ApiResponse.errors) {
+            switch ($ResponseData.ApiVersion) {
+                1.1 {
+                    $ErrorCategory = Get-ErrorCategory -StatusCode $HttpStatusCode -ErrorCode $TwitterErrors[$i].Code
+                    if ($Twitter.Code -eq 415) {
+                        $ErrorMessage = 'Message size exceeds limits of 10000 characters.'
+                    } else {
+                        $ErrorMessage = $TwitterErrors[$i].Message
+                    }
+                }
+                2 {
+                    $ErrorCategory = Get-ErrorCategory -ErrorType $TwitterErrors[$i].Type
+                    $ErrorMessage = $TwitterErrors[$i].Detail
+                }
+            }
+
+            $ExceptionType = Get-ExceptionType -ErrorCategory $ErrorCategory
+
+            $TwitterException = Get-TwitterException -ExceptionType $ExceptionType -ErrorMessage $ErrorMessage
+            $TwitterException.Source = $ResponseData.Command
+            $TwitterException.Data.Add('TwitterApiError',$AllErrors)
+
+            $ErrorRecord = [ErrorRecord]::new($TwitterException,$ErrorId,$ErrorCategory,$ResponseData.Endpoint)
+            $ErrorRecord.ErrorDetails = $ErrorMessage
+
+            $ErrorParams = @{
+                ErrorRecord = $ErrorRecord
+                CategoryActivity = $ResponseData.Command
+            }
+
+            if ($IsTerminatingError -and $TwitterErrors.Count -eq ($i + 1)) {
+                $ErrorParams.Add('ErrorAction','Stop')
+            }
+            Write-Error @ErrorParams
+        }
     }
 
 }

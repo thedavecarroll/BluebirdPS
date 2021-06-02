@@ -1,19 +1,21 @@
 function Set-TwitterMediaAltImageText {
+    [SuppressMessage('PSUseShouldProcessForStateChangingFunctions', '')]
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory,ValueFromPipelineByPropertyName)]
+        [Parameter(Mandatory)]
         [Alias('media_id')]
         [string]$MediaId,
 
+        [Parameter(Mandatory)]
         [ValidateLength(1,1000)]
         [string]$AltImageText
     )
 
-    $OAuthParameters = [OAuthParameters]::new(
-        'POST',
-        'https://upload.twitter.com/1.1/media/metadata/create.json'
-    )
+    $Request = [TwitterRequest]@{
+        HttpMethod = 'POST'
+        Endpoint = 'https://upload.twitter.com/1.1/media/metadata/create.json'
+    }
 
-    $OAuthParameters.Body = ('{{"media_id":"{0}","alt_text":{{"text":"{1}"}}}}' -f $MediaId,$AltImageText)
-    Invoke-TwitterRequest -OAuthParameters $OAuthParameters
+    $Request.Body = '{{"media_id":"{0}","alt_text":{{"text":"{1}"}}}}' -f $MediaId,$AltImageText
+    Invoke-TwitterRequest -RequestParameters $Request
 }

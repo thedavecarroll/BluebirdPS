@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Searches/Search-Tweet
+online version: https://docs.bluebirdps.dev/en/v0.5.0/Searches/Search-Tweet
 schema: 2.0.0
 ---
 
@@ -14,7 +14,7 @@ Returns a collection of relevant Tweets matching a specified query.
 ## SYNTAX
 
 ```powershell
-Search-Tweet [-SearchString] <String> [[-MaxResults] <Int32>] [-ExcludeEntities] [<CommonParameters>]
+Search-Tweet [-SearchString] <String> [-IncludeExpansions] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,54 +26,30 @@ Returns a collection of relevant Tweets matching a specified query.
 ### Example 1
 
 ```powershell
-PS > Search-Tweet -SearchString '(from:thedavecarroll) (#BluebirdPS)' -InformationVariable myinfo
+PS > Search-Tweet -SearchString '(from:thedavecarroll) (#BluebirdPS)'
 ```
 
-```console
-created_at                : Sat Nov 21 21:05:14 +0000 2020
-id                        : 1330255977636048896
-id_str                    : 1330255977636048896
-text                      : Continuing work on #BluebirdPS #PowerShell 7 Twitter module. Tweaking the Send-TwitterMedia function.… https://t.co/ylU7YX8gBV
-truncated                 : True
-entities                  : @{hashtags=System.Object[]; symbols=System.Object[]; user_mentions=System.Object[]; urls=System.Object[]}
-metadata                  : @{iso_language_code=en; result_type=recent}
-source                    : <a href="https://powershell.anovelidea.org" rel="nofollow">thedavecarrroll-tweets-with-pwsh</a>
-...
-is_quote_status           : False
-retweet_count             : 1
-favorite_count            : 3
-favorited                 : False
-retweeted                 : False
-possibly_sensitive        : False
-lang                      : en
-```
-
-```powershell
-PS > $myinfo.MessageData
-```
-
-```console
-Command            : Search-Tweet
-HttpMethod         : GET
-Uri                : https://api.twitter.com/1.1/search/tweets.json
-QueryString        : ?include_entities=true&q=%28from%3Athedavecarroll%29%20%28%23BluebirdPS%29
-Status             : 200 OK
-Server             : tsa_b
-ResponseTime       : 55
-RateLimit          : 180
-RateLimitRemaining : 174
-RateLimitReset     : 11/21/2020 8:25:04 PM
-Response           : {[Cache-Control, System.String[]], [Date, System.String[]], [Pragma, System.String[]], [Server, System.String[]]…}
-
-completed_in : 0.022
-max_id       : 1330255977636048896
-max_id_str   : 1330255977636048896
-next_results : ?max_id=1330255977636048895&q=%28from%3Athedavecarroll%29%20%28%23BluebirdPS%29&include_entities=1
-query        : %28from%3Athedavecarroll%29+%28%23BluebirdPS%29
-refresh_url  : ?since_id=1330255977636048896&q=%28from%3Athedavecarroll%29%20%28%23BluebirdPS%29&include_entities=1
-count        : 15
-since_id     : 0
-since_id_str : 0
+```text
+Id                 : 1395753890352701446
+Text               : @mikefrobbins @karlprosser @sunnyc7 @PSHOrg @JeffHicks @PowerTip @Josh_Atwell @ravikanth @ScriptWarrior @SAPIENTech @MaxTrinidad The #PSFollowFriday Tweet brought to you by #BluebirdPS. https://t.co/9ZRyGjusRq
+Attachments        : MediaInfo
+AuthorId           : 292670084
+ContextAnnotations :
+ConversationId     : 1395747574317998080
+CreatedAt          : 5/21/2021 2:50:33 PM
+Entities           : {#PSFollowFriday, #BluebirdPS, @mikefrobbins, @karlprosser…}
+Geo                :
+InReplyToUserId    : 292670084
+Language           : en
+NonPublicMetrics   :
+OrganicMetrics     :
+PossiblySensitive  : False
+PromotedMetrics    :
+PublicMetrics      : RetweetCount: 0, ReplyCount: 0, LikeCount: 1, QuoteCount: 0
+ReferencedTweets   : {1395747574317998080}
+ReplySettings      : Everyone
+Source             : BluebirdPS
+Withheld           :
 ```
 
 Returns a collection of relevant Tweets matching a specified query.
@@ -96,11 +72,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ExcludeEntities
+### -IncludeExpansions
 
-Exclude the entities node.
-
-This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags.
+Include additional data objects, such as the Tweet author's user, mentioned users, media, poll, and more.
 
 ```yaml
 Type: SwitchParameter
@@ -114,33 +88,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Count
-
-Specifies the number of tweets to retrieve.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### None
+### System.String
 
 ## OUTPUTS
 
-### System.Object
+### BluebirdPS.APIV2.TweetInfo.Tweet[]
 
 ## NOTES
 
@@ -151,10 +109,8 @@ To learn how to use Twitter Search effectively, please see the Standard search o
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Searches/Search-Tweet)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Searches/Search-Tweet)
 
-[Test-SearchString](https://bluebirdps.anovelidea.org/en/latest/Helper%20Commands/Test-SearchString)
+[Api Reference - Search Standard Operators](https://developer.twitter.com/en/docs/twitter-api/v1/rules-and-filtering/overview/standard-operators)
 
-[Search Standard Operators](https://developer.twitter.com/en/docs/twitter-api/v1/rules-and-filtering/overview/standard-operators)
-
-[Api Reference - GET search/tweets](https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/api-reference/get-search-tweets)
+[Api Reference - GET /2/tweets/search/recent](https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-recent)

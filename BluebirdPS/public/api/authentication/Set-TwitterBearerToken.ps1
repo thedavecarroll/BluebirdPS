@@ -1,43 +1,28 @@
 function Set-TwitterBearerToken {
+    [SuppressMessage('PSUseShouldProcessForStateChangingFunctions', '')]
     [CmdletBinding()]
-    param(
-        [switch]$Persist
-    )
+    param()
 
     try {
-        $Credential = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes(('{0}:{1}' -f $OAuth['ApiKey'],$OAuth['ApiSecret'])))
-        $BasicAuth = 'Basic {0}' -f $Credential
 
-        $WebRequestParams = @{
-            Uri = 'https://api.twitter.com/oauth2/token'
-            Method = 'POST'
-            Headers = @{ 'Authorization' = $BasicAuth }
-            ContentType = 'application/x-www-form-urlencoded'
-            ResponseHeadersVariable = 'TwitterResponse'
-            StatusCodeVariable = 'TwitterStatusCode'
+        $Request = [TwitterRequest]@{
+            HttpMethod = 'POST'
+            Endpoint = 'https://api.twitter.com/oauth2/token'
+            OAuthVersion = 'Basic'
             Body = 'grant_type=client_credentials'
-            Verbose = $false
+            ContentType = 'application/x-www-form-urlencoded'
         }
 
-        $Token = Invoke-RestMethod @WebRequestParams
-        $OAuth['BearerToken'] = $Token.access_token
+        'Attempting to obtain an OAuth 2.0 bearer token.' | Write-Verbose
 
-        if ($PSBoundParameters.ContainsKey('Persist')) {
-            Export-TwitterAuthentication
-        }
+        $TwitterRequest = Invoke-TwitterRequest -RequestParameters $Request
 
-        $ResponseData = [PsCustomObject]@{
-            TwitterResponse = $TwitterResponse
-            StatusCode = $TwitterStatusCode
-            Uri = $WebRequestParams.Uri
-            QueryString = $null
-            HttpMethod = $WebRequestParams.Method
-        }
-        $ResponseData | Write-TwitterResponseData
+        $OAuth['BearerToken'] = $TwitterRequest.access_token
 
-    }
-    catch [Microsoft.PowerShell.Commands.HttpResponseException] {
-        $_ | New-TwitterErrorRecord
+        Export-TwitterAuthentication
+
+        'OAuth 2.0 bearer token successfully set.' | Write-Verbose
+
     }
     catch {
         $PSCmdlet.ThrowTerminatingError($_)

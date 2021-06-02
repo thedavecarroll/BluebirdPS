@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://bluebirdps.anovelidea.org/en/latest/Tweets/Set-TweetLike
+online version: https://docs.bluebirdps.dev/en/v0.5.0/Tweets/Set-TweetLike
 schema: 2.0.0
 ---
 
@@ -9,25 +9,25 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Likes or un-likes the specified tweet as the authenticating user.
+Likes or un-likes the specified Tweet as the authenticating user.
 
 ## SYNTAX
 
 ### Like (Default)
 
 ```powershell
-Set-TweetLike -TweetId <Int64> [-Like] [-ExcludeEntities] [<CommonParameters>]
+Set-TweetLike -Id <String> [-Like] [<CommonParameters>]
 ```
 
 ### Unlike
 
 ```powershell
-Set-TweetLike -TweetId <Int64> [-Unlike] [-ExcludeEntities] [<CommonParameters>]
+Set-TweetLike -Id <String> [-Unlike] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Likes or un-likes the specified tweet as the authenticating user.
+Likes or un-likes the specified Tweet as the authenticating user.
 
 The immediately returned Tweet object may not indicate the resultant status of the Tweet.
 
@@ -36,29 +36,29 @@ The immediately returned Tweet object may not indicate the resultant status of t
 ### Example 1
 
 ```powershell
-PS > Set-TweetLike -TweetId 1330354141055643648
+PS > Set-TweetLike -Id 1330354141055643648
 ```
 
-Like the specified tweet.
+Like the specified Tweet.
 
 ### Example 2
 
 ```powershell
-PS > Set-TweetLike -TweetId 1330354141055643648 -Unlike
+PS > Set-TweetLike -Id 1330354141055643648 -Unlike
 ```
 
-Un-like the specified tweet.
+Un-like the specified Tweet.
 
 ## PARAMETERS
 
-### -TweetId
+### -Id
 
-The numerical ID of the desired Tweet.
+The id of the Tweet.
 
 ```yaml
-Type: Int64
+Type: String
 Parameter Sets: (All)
-Aliases: Id)
+Aliases:
 
 Required: True
 Position: Named
@@ -69,7 +69,7 @@ Accept wildcard characters: False
 
 ### -Like
 
-Like the specified tweet.
+Like the specified Tweet.
 
 ```yaml
 Type: SwitchParameter
@@ -78,14 +78,14 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Unlike
 
-Un-like the specified tweet.
+Un-like the specified Tweet.
 
 ```yaml
 Type: SwitchParameter
@@ -94,25 +94,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ExcludeEntities
-
-Exclude the entities node.
-
-This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -133,10 +115,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://bluebirdps.anovelidea.org/en/latest/Tweets/Set-TweetLike)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Tweets/Set-TweetLike)
 
-[Get-TweetLike](https://bluebirdps.anovelidea.org/en/latest/Tweets/Get-TweetLike)
+[Get-TweetLike](https://docs.bluebirdps.dev/en/v0.5.0/Tweets/Get-TweetLike)
 
-[API Documentation - POST favorites/create](https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-favorites-create)
+[API Documentation - POST /2/users/:id/likes](https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/post-users-id-likes)
 
-[API Documentation - POST favorites/destroy](https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-favorites-destroy)
+[API Documentation - DELETE /2/users/:id/likes/:tweet_id](https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/delete-users-id-likes-tweet_id)
