@@ -1,19 +1,9 @@
 properties {
     $PSBPreference.Build.CompileModule = $true
     $PSBPreference.Build.CompileDirectories = 'Prepend', 'Classes', 'Private', 'Public', 'Append'
-    $PSBPreference.Build.CopyDirectories = 'resources'
     $PSBPreference.Build.CompileScriptHeader = [System.Environment]::NewLine
     $PSBPreference.Test.ScriptAnalysis.SettingsPath = [IO.Path]::Combine($env:BHProjectPath,'build','ScriptAnalyzerSettings.psd1')
 }
-
-task CompileApiEndpoint -Depends 'StageFiles' {
-    Import-Module $([IO.Path]::Combine($env:BHProjectPath,'build','BuildFunctions.psm1'))
-
-    Import-TwitterApiEndpoints -Path $([IO.Path]::Combine($env:BHProjectPath,'Endpoints')) |
-        ConvertTo-Json -Depth 20 |
-        Add-Content -Path $([IO.Path]::Combine($PSBPreference.Build.ModuleOutDir,'resources','TwitterApiEndpoints.json'))
-
-} -Description 'Compile the Twitter API Endpoint JSON resource'
 
 task GenerateExternalHelp {
     $ExternalHelpPath = [IO.Path]::Combine($PSBPreference.Build.ModuleOutDir,(Get-UICulture).Name)
@@ -25,14 +15,16 @@ task GenerateExternalHelp {
     }
     New-ExternalHelp @NewExternalHelpParams | Out-Null
 
-    $NewAboutHelpParams = @{
-        Path = $([IO.Path]::Combine($PSBPreference.Docs.RootDir,"about_$env:BHProjectName.md"))
-        OutputPath = $ExternalHelpPath
-        Force = $true
+    $AboutHelpMarkdown = Get-ChildItem -Path $([IO.Path]::Combine($PSBPreference.Docs.RootDir,"about_*.md"))
+    foreach ($Help in $AboutHelpMarkdown) {
+        $NewAboutHelpParams = @{
+            Path = $Help.FullName
+            OutputPath = $ExternalHelpPath
+            Force = $true
+        }
+        New-ExternalHelp @NewAboutHelpParams | Out-Null
     }
-    New-ExternalHelp @NewAboutHelpParams | Out-Null
 
-    Start-Sleep -Seconds 2
 } -Description 'Generates MAML-based help from PlatyPS markdown files'
 
 task AddFileListToManifest {
@@ -44,23 +36,51 @@ task AddFileListToManifest {
             $_.FullName.Replace($FileListParentFolder,'')
         }
     }
-    Update-ModuleManifest @UpdateManifestParams
+    do {
+        try {
+            Update-ModuleManifest @UpdateManifestParams
+            $Retry = $false
+        }
+        catch {
+            $Retry = $true
+        }
+    } while ($Retry)
+
 
 } -Description 'Add files list to module manifest'
 
 task DotNetBuild -Depends 'StageFiles' {
-    $OutputBinFolder = [IO.Path]::Combine($PSBPreference.Build.ModuleOutDir,'bin')
+    $ManifestPath = [IO.Path]::Combine($PSBPreference.Build.ModuleOutDir,"$env:BHProjectName.psd1")
+    $FileListParentFolder = '{0}{1}' -f $PSBPreference.Build.ModuleOutDir,[IO.Path]::DirectorySeparatorChar
+    $OutputLibFolder = [IO.Path]::Combine($PSBPreference.Build.ModuleOutDir,'lib')
     $DotNetSrcFolder = [IO.Path]::Combine($env:BHProjectPath,'src')
 
-    dotnet build $DotNetSrcFolder -o $OutputBinFolder
+    dotnet build $DotNetSrcFolder -o $OutputLibFolder
     if ($LASTEXITCODE -ne 0) {
         'DotNetBuild task failed' | Write-Error -ErrorAction Stop
     }
+
+    $Libraries = Get-ChildItem -Path $OutputLibFolder -Filter '*.dll'
+    $LibraryList = $Libraries| ForEach-Object {
+        $_.FullName.Replace($FileListParentFolder,'')
+    }
+    do {
+        try {
+            Update-ModuleManifest -Path $ManifestPath -NestedModules ($LibraryList -join ',')
+            $Retry = $false
+        }
+        catch {
+            $Retry = $true
+        }
+    } while ($Retry)
 
 } -Description 'Compile .Net Library'
 
 <#
 New Tasks
+
+task GenerateMarkdownHelp
+task TestHelp
 
 task UpdateChangeLog
 task UpdateReleaseNotes -Depends UpdateChangeLog
@@ -68,10 +88,12 @@ task UpdateReleaseNotes -Depends UpdateChangeLog
 task CreateReleaseAsset
 task PublishReleaseToGitHub -Depends CreateReleaseAsset
 
+task PublishModuleToGallery
+
 https://github.com/microsoft/PowerShellForGitHub
 
 #>
 
-task Build -FromModule PowerShellBuild -depends @('CompileApiEndpoint','DotNetBuild','GenerateExternalHelp','AddFileListToManifest')
+task Build -FromModule PowerShellBuild -depends @('DotNetBuild','GenerateExternalHelp','AddFileListToManifest')
 
 task default -depends Build

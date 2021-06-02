@@ -16,9 +16,15 @@
         Version = '1.19.1'
     }
     'platyPS' = @{
-        Version = '0.14.0'
+        Version = '0.14.1'
     }
     'PowerShellforGitHub' = @{
         Version = '0.16.0'
+    }
+    'Pester' = @{
+        Version = '5.2.0'
+    }
+    'PowerShellGet' = @{
+        Version = '2.2.0'
     }
 }
