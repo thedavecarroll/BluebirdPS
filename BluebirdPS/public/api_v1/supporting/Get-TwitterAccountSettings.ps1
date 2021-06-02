@@ -1,5 +1,6 @@
 function Get-TwitterAccountSettings {
     [CmdletBinding()]
+    [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "")]
     param()
 
     $OAuthParameters = [OAuthParameters]::new(

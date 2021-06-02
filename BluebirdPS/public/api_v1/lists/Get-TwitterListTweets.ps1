@@ -1,6 +1,5 @@
 function Get-TwitterListTweets {
-    [Alias('Get-TwitterListStatus')]
-    [CmdletBinding(DefaultParameterSetName='ListId')]
+    [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "")]
     param(
 
         [Parameter(Mandatory,ParameterSetName='ListId')]
