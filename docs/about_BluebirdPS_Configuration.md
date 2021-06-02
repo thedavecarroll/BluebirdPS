@@ -10,7 +10,7 @@ BluebirdPS Configuration provides instructions to commands on how to handle rate
 
 BluebirdPS Configuration provides commands on how to handle rate limits, whether the raw API response should be returned, and information of configuration and credential file save locations. During module import, the session variable is created and the saved configuration is read from disk.
 
-### User Settable Values
+# User Settable Values
 
 The use can use Set-BluebirdPSConfiguration to set the following values: RateLimitAction, RateLimitThreshold, and RawOutput.
 
@@ -25,7 +25,7 @@ user, or return rich objects. The module uses Invoke-RestMethod which converts J
 response to a [PSCustomObject].
 ```
 
-### Other Values
+# Other Values
 
 ```text
 The AuthUserId and AuthUserName are used by some endpoints that require the

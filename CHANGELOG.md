@@ -1,8 +1,13 @@
 # Changelog
 
-## 0.2.0 - Unreleased
+## [0.5.0] - 2021-06-02
 
-BugFix and Feature; Update Strongly Recommended
+Feature, Bugfix, and Maintenance; Update Strongly Recommended
+
+### Deprecated
+
+- [Issue #43](https://github.com/thedavecarroll/BluebirdPS/issues/43) - Remove Functions for Migrated Endpoints
+- [Issue #54](https://github.com/thedavecarroll/BluebirdPS/issues/54) - Remove Unused or Replaced Functions
 
 ### Fixed
 
@@ -17,11 +22,26 @@ BugFix and Feature; Update Strongly Recommended
 
 - [Issue #40](https://github.com/thedavecarroll/BluebirdPS/issues/40) - Add C# Enums as required
 - [Issue #41](https://github.com/thedavecarroll/BluebirdPS/issues/41) - Add C# Classes for Output and Processing
+- [Issue #38](https://github.com/thedavecarroll/BluebirdPS/issues/38) - Add OAuthVersion to Endpoint JSON
+- [Issue #52](https://github.com/thedavecarroll/BluebirdPS/issues/52) - Add Commands for API v2 Endpoints
+- [Issue #55](https://github.com/thedavecarroll/BluebirdPS/issues/55) - Add Commands for v1.1 Endpoints
+- [Issue #56](https://github.com/thedavecarroll/BluebirdPS/issues/56) - Create private functions as required
+- [Issue #57](https://github.com/thedavecarroll/BluebirdPS/issues/57) - Create functions to support new configuration, history, and api endpoint search
+- [Issue #32](https://github.com/thedavecarroll/BluebirdPS/issues/32) - Convert-TweetDate
+- [Issue #53](https://github.com/thedavecarroll/BluebirdPS/issues/53) - Update Functions to Use New Classes
+- [Issue #58](https://github.com/thedavecarroll/BluebirdPS/issues/58) - Update authentication functions to integrate configuration framework
+- [Issue #59](https://github.com/thedavecarroll/BluebirdPS/issues/59) - Update Invoke-TwitterRequest for new classes and configuration, and make public
+- [Issue #60](https://github.com/thedavecarroll/BluebirdPS/issues/60) - Cleanup remaining outstanding commands
+- [Issue #61](https://github.com/thedavecarroll/BluebirdPS/issues/61) - Update module's prepend and append scripts
+
+### Removed
+
+- [Issue #51](https://github.com/thedavecarroll/BluebirdPS/issues/51) - Remove Endpoints JSON
 
 ### Maintenance
 
-- [Issue #38](https://github.com/thedavecarroll/BluebirdPS/issues/38) - Add OAuthVersion to Endpoint JSON
 - [Issue #39](https://github.com/thedavecarroll/BluebirdPS/issues/39) - Maint move source files into api versioned folders
+- [Issue #50](https://github.com/thedavecarroll/BluebirdPS/issues/50) - Move docs site to new domain
 - [Issue #37](https://github.com/thedavecarroll/BluebirdPS/issues/37) - Build script does not work on MacOS or Raspbian
 
 ## [0.1.1] - 2020-11-23
@@ -60,6 +80,7 @@ Initial release
 
 [0.1.0]: https://github.com/thedavecarroll/BluebirdPS/tree/27d2d3251bc76558d0b7b91a5db6b967da85b269
 [0.1.1]: https://github.com/thedavecarroll/BluebirdPS/tree/962d11e2f6d3d6de68671fc495dd2693e717b4b8
+[0.5.0]: https://github.com/thedavecarroll/BluebirdPS/tree/feab8637afcbdb58dd3b816796c145764be0c170
 
 ## Keep a Changelog
 
