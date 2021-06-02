@@ -1,5 +1,5 @@
 function Publish-TwitterDM {
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName='DM')]
     param(
         [Parameter(Mandatory,ValueFromPipelineByPropertyName)]
         [Alias('id')]

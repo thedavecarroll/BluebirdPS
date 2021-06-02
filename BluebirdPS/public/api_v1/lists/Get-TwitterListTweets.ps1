@@ -1,4 +1,5 @@
 function Get-TwitterListTweets {
+    [CmdletBinding(DefaultParameterSetName='ById')]
     [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "")]
     param(
 

@@ -1,5 +1,5 @@
 function Publish-Tweet {
-    [CmdletBinding(DefaultParameterSetName='Default')]
+    [CmdletBinding(DefaultParameterSetName='Tweet')]
     param(
         [Parameter(Mandatory)]
         [string]$TweetText,

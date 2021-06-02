@@ -1,5 +1,5 @@
 function Get-TwitterListMember {
-    [CmdletBinding(DefaultParameterSetName='ListId')]
+    [CmdletBinding(DefaultParameterSetName='ById')]
     param(
         [Parameter(Mandatory,ParameterSetName='ListId')]
         [string]$ListId,

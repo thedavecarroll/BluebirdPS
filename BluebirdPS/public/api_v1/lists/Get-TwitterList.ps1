@@ -1,5 +1,5 @@
 function Get-TwitterList {
-    [CmdletBinding(DefaultParameterSetName='ListScreenName')]
+    [CmdletBinding(DefaultParameterSetName='ByListUserName')]
     param(
         [Parameter(ParameterSetName='ListScreenName')]
         [string]$ScreenName,

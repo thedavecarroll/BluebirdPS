@@ -1,5 +1,5 @@
 function Remove-TwitterSavedSearch {
-    [CmdletBinding(SupportsShouldProcess,ConfirmImpact='high')]
+    [CmdletBinding(DefaultParameterSetName='ById',SupportsShouldProcess,ConfirmImpact='High')]
     param(
         [Parameter(Mandatory)]
         [Alias('Id')]

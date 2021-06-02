@@ -1,5 +1,5 @@
 function Get-TwitterFriendship {
-    [CmdletBinding(DefaultParameterSetName='LookupScreenName')]
+    [CmdletBinding(DefaultParameterSetName='Lookup')]
     param(
         [Parameter(Mandatory,ValueFromPipeline,ParameterSetName='LookupScreenName')]
         [ValidateCount(1,100)]

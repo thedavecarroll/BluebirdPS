@@ -1,5 +1,5 @@
 function Unpublish-TwitterDM {
-    [CmdLetBinding()]
+    [CmdLetBinding(DefaultParameterSetName='ById',SupportsShouldProcess,ConfirmImpact='High')]
     param(
         [Parameter(Mandatory,ValueFromPipelineByPropertyName)]
         [ValidateNotNullOrEmpty()]
