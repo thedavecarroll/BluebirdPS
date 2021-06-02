@@ -1,45 +1,45 @@
 function Get-TwitterApiEndpoint {
-    [CmdLetBinding(DefaultParameterSetName='Resource')]
+    [CmdletBinding()]
     param(
-        [Parameter(ParameterSetName='Resource')]
-        [ValidateSet(
-            'account','application','blocks','direct_messages','favorites','followers',
-            'friends','friendships','help','lists','media','mutes','oauth2','saved_searches',
-            'search','statuses','users'
-        )]
-        [string[]]$Resource,
-        [Parameter(ParameterSetName='Command')]
-        [string]$Command
+        [Parameter()]
+        [string[]]$CommandName,
+        [ValidateNotNullOrEmpty()]
+        [string]$Endpoint
     )
 
-    $ParameterFormat = 'Name','PSParameter','Implemented','Required','Description','DefaultValue',
-        'MinValue','MaxValue','Example'
+    if ($script:BluebirdPSCommands.Count -lt 1) {
+        $script:AllBluebirdPSCommands = Get-Command -Module BluebirdPS -ListImported
+        $script:PublicFunctions = (Get-Module -Name BluebirdPS).ExportedFunctions.Values.Name
+    }
 
-    $EndpointFormat = @{l='Endpoint';e={ '{0} {1}' -f $_.Method.ToUpper(), $_.Resource}},'Function',
-        'ApiVersion','Resource','Method','Uri','ApiReference','Description','Iteration',
-        @{l='Parameters';e={
-            foreach ($Param in $_.Parameters) {
-                [PSCustomObject]$Param | Select-Object $ParameterFormat
-            }
-        }}
-
-    $TwitterApiEndpoints = Get-Content -Path $ApiEndpointsPath -Raw | ConvertFrom-Json -Depth 20 -AsHashtable
-
-    switch ($PSCmdlet.ParameterSetName) {
-        'Resource' {
-            if ($PSBoundParameters.ContainsKey('Resource')) {
-                $Resource | ForEach-Object {
-                    $TwitterApiEndpoints.$_.Values | Select-Object $EndpointFormat
-                }
-            } else {
-                $TwitterApiEndpoints.values.values | Select-Object $EndpointFormat
-            }
+    if ($PSBoundParameters.ContainsKey('CommandName')) {
+        $BluebirdPSCommands = foreach ($Command in $CommandName) {
+            $AllBluebirdPSCommands | Where-Object { $_.Name -eq $Command }
         }
-        'Command' {
-            $TwitterApiEndpoints.Values.Values.Where{$_.Function -eq $Command} | ForEach-Object {
-                [PSCustomObject]$_ | Select-Object $EndpointFormat
-            }
+    } else {
+        $BluebirdPSCommands = $AllBluebirdPSCommands
+    }
+
+    $TwitterEndpoints = foreach ($Command in $BluebirdPSCommands) {
+        $NavigationLinks = (Get-Help -Name $Command.Name).relatedLinks.navigationLink.Where{$_.linkText -match '^(?!.*(Online|\w+-)).*$'}.Where{$_.linkText -match '- \w+\s(\/|\w+\/)'}
+        if ($NavigationLinks.Count -gt 0) {
+            $ApiEndpoint = $NavigationLinks.LinkText | ForEach-Object { $_.Split('-')[1].Trim() }
+            $ApiDocumentation = $NavigationLinks.Uri
+        } else {
+            continue
         }
+        [EndpointInfo]::new(
+            $Command.Name,
+            ($Command.Name -notin $PublicFunctions ? 'Private' : 'Public'),
+            $ApiEndpoint,
+            $ApiDocumentation
+        )
+    }
+
+    if ($PSBoundParameters.ContainsKey('Endpoint')) {
+        $TwitterEndpoints | Where-Object {$_.ApiEndpoint -match $Endpoint -and $_.CommandName -ne 'Get-TwitterApiEndpoint'} | Sort-Object -Property Visibility
+    } else {
+        $TwitterEndpoints | Where-Object {$_.ApiEndpoint.Count -gt 0 -and $_.CommandName -ne 'Get-TwitterApiEndpoint'} | Sort-Object -Property Visibility
     }
 
 }
