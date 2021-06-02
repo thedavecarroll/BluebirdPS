@@ -6,11 +6,11 @@ function Add-TwitterSavedSearch {
         [string]$SearchString
     )
 
-    $OAuthParameters = [OAuthParameters]::new(
-        'POST',
-        'https://api.twitter.com/1.1/saved_searches/create.json',
-        @{ query = [System.Uri]::EscapeDataString($SearchString) }
-    )
-    Invoke-TwitterRequest -OAuthParameters $OAuthParameters
+    $Request = [TwitterRequest]@{
+        HttpMethod = 'POST'
+        Endpoint = 'https://api.twitter.com/1.1/saved_searches/create.json'
+        Query = @{ query = $SearchString }
+    }
 
+    Invoke-TwitterRequest -RequestParameters $Request
 }

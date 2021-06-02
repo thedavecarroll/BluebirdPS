@@ -3,10 +3,10 @@ function Get-TwitterAccountSettings {
     [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "")]
     param()
 
-    $OAuthParameters = [OAuthParameters]::new(
-        'GET',
-        'https://api.twitter.com/1.1/account/settings.json'
-    )
+    $Request = [TwitterRequest]@{
+        Endpoint = 'https://api.twitter.com/1.1/account/settings.json'
+    }
 
-    Invoke-TwitterRequest -OAuthParameters $OAuthParameters
+    Invoke-TwitterRequest -RequestParameters $Request
+
 }

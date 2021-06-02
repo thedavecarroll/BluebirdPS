@@ -3,35 +3,48 @@ function Get-TwitterListTweets {
     [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "")]
     param(
 
-        [Parameter(Mandatory,ParameterSetName='ListId')]
-        [string]$ListId,
+        [Parameter(Mandatory,ParameterSetName='ById')]
+        [string]$Id,
 
-        [Parameter(Mandatory,ParameterSetName='ShowSlugOwnerScreenName')]
-        [Parameter(Mandatory,ParameterSetName='ShowSlugOwnerId')]
-        [ValidateNotNullOrEmpty()]
-        [string]$Slug,
-        [Parameter(Mandatory,ParameterSetName='ShowSlugOwnerScreenName')]
-        [ValidateNotNullOrEmpty()]
-        [string]$OwnerScreenName,
-        [Parameter(Mandatory,ParameterSetName='ShowSlugOwnerId')]
-        [ValidateNotNullOrEmpty()]
-        [long]$OwnerId,
+        [Parameter(Mandatory,ParameterSetName='ByList',ValueFromPipeline)]
+        [BluebirdPS.APIV1.List]$List,
 
-        [long]$SinceId,
-        [long]$MaxId,
+        [string]$SinceId,
+        [string]$MaxId,
 
-        [ValidateRange(1,200)]
-        [long]$Count = 20,
-        [switch]$ExcludeEntities,
         [switch]$ExcludeRetweets
     )
 
-    $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
-    $OAuthParameters = [OAuthParameters]::new(
-        'GET',
-        'https://api.twitter.com/1.1/lists/statuses.json',
-        $Query
-    )
-    Invoke-TwitterRequest -OAuthParameters $OAuthParameters | ConvertTo-Json -Depth 10 | ConvertFrom-Json
+    $Request = [TwitterRequest]@{
+        Endpoint = 'https://api.twitter.com/1.1/lists/statuses.json'
+        Query = @{
+            count = 200
+        }
+    }
 
+    if ($PSBoundParameters.ContainsKey('SinceId')) {
+        $Request.Query.Add('since_id',$SinceId)
+    }
+    if ($PSBoundParameters.ContainsKey('MaxId')) {
+        $Request.Query.Add('max_id',$MaxId)
+    }
+
+    if ($ExcludeRetweets.IsPresent) {
+        $Request.Query.Add('include_rts',$false)
+        $RetweetInfo = ', including retweets,'
+    }
+
+    switch ($PSCmdlet.ParameterSetName) {
+        'ById' {
+            $Request.Query.Add('list_id',$Id)
+            $ListInfo = 'Id: {0}' -f $Id
+        }
+        'ByList' {
+            $Request.Query.Add('list_id',$List.Id)
+            $ListInfo = 'Id: {0}, Name: {1}' -f $List.Id,$List.Name
+        }
+    }
+
+    'Getting tweets{0} for list: {1}' -f $RetweetInfo,$ListInfo | Write-Verbose
+    Invoke-TwitterRequest -RequestParameters $Request
 }

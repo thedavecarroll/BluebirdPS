@@ -1,32 +1,34 @@
 function Get-TwitterListMember {
     [CmdletBinding(DefaultParameterSetName='ById')]
     param(
-        [Parameter(Mandatory,ParameterSetName='ListId')]
-        [string]$ListId,
+        [Parameter(Mandatory,ParameterSetName='ById',ValueFromPipeline)]
+        [ValidateNotNullOrEmpty()]
+        [string]$Id,
 
-        [Parameter(Mandatory,ParameterSetName='ShowSlugOwnerScreenName')]
-        [Parameter(Mandatory,ParameterSetName='ShowSlugOwnerId')]
-        [ValidateNotNullOrEmpty()]
-        [string]$Slug,
-        [Parameter(Mandatory,ParameterSetName='ShowSlugOwnerScreenName')]
-        [ValidateNotNullOrEmpty()]
-        [string]$OwnerScreenName,
-        [Parameter(Mandatory,ParameterSetName='ShowSlugOwnerId')]
-        [ValidateNotNullOrEmpty()]
-        [long]$OwnerId,
-
-        [ValidateRange(1,5000)]
-        [int]$ResultsPerPage = 20,
-        [switch]$SkipStatus,
-        [switch]$ExcludeEntities
+        [Parameter(Mandatory,ParameterSetName='ByList',ValueFromPipeline)]
+        [BluebirdPS.APIV1.List]$List
     )
 
-    $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
-    $OAuthParameters = [OAuthParameters]::new(
-        'GET',
-        'https://api.twitter.com/1.1/lists/members.json',
-        $Query
-    )
-    Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue users
+    $Request = [TwitterRequest]@{
+        Endpoint = 'https://api.twitter.com/1.1/lists/members.json'
+        Query = @{
+            'skip_status' = $true
+            'include_entities' = $true
+            'count' = 5000
+        }
+    }
 
+    switch ($PSCmdlet.ParameterSetName) {
+        'ById' {
+            $Request.Query.Add( 'list_id', $Id )
+            $ListInfo = 'Id: {0}' -f $Id
+        }
+        'ByList' {
+            $Request.Query.Add( 'list_id', $List.Id )
+            $ListInfo = 'Id: {0}, Name: {1}' -f $List.Id,$List.Name
+        }
+    }
+
+    'Getting members of list: {0}' -f $ListInfo | Write-Verbose
+    Invoke-TwitterRequest -RequestParameters $Request | Select-Object -ExpandProperty UserName
 }

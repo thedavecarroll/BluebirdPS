@@ -1,6 +1,5 @@
 function Send-TwitterMedia {
     [CmdletBinding()]
-    [Alias('Send-Media')]
     param(
         [Parameter(Mandatory,ValueFromPipeline)]
         [ValidateScript({Resolve-Path -Path $_})]
@@ -11,10 +10,7 @@ function Send-TwitterMedia {
         [string]$Category,
 
         [ValidateLength(1,1000)]
-        [string]$AltImageText,
-
-        [ValidateCount(1,100)]
-        [int[]]$AddOwners
+        [string]$AltImageText
     )
 
     begin {
@@ -122,20 +118,25 @@ function Send-TwitterMedia {
         # ------------------------------------------------------------------------------------------
         # INIT phase
         'Beginning INIT phase - media size {0}, category {1}, type {2}' -f $TotalBytes,$MediaCategory,$MimeType | Write-Verbose
-        $OAuthParameters = [OAuthParameters]::new('POST',$MediaUploadUrl)
-        $OAuthParameters.Form = @{
-            command = 'INIT'
-            total_bytes = $TotalBytes
-            media_category = $MediaCategory
-            media_type = $MimeType
-        }
-        if ($PSBoundParameters.ContainsKey('AddOwners')) {
-            $OAuthParameters.Form.Add(($AddOwners -join ','))
+        $Request = [TwitterRequest]@{
+            HttpMethod = 'POST'
+            Endpoint = $MediaUploadUrl
+            Form = @{
+                command = 'INIT'
+                total_bytes = $TotalBytes
+                media_category = $MediaCategory
+                media_type = $MimeType
+            }
         }
 
-        $SendMediaInitResult = Invoke-TwitterRequest -OAuthParameters $OAuthParameters -Verbose:$false
-        if ($SendMediaInitResult-is [ErrorRecord]) {
-            $PSCmdlet.ThrowTerminatingError($SendMediaInitResult)
+        try {
+            $SendMediaInitResult = Invoke-TwitterRequest -RequestParameters $Request -Verbose:$false
+            if ($SendMediaInitResult-is [ErrorRecord]) {
+                $PSCmdlet.ThrowTerminatingError($SendMediaInitResult)
+            }
+        }
+        catch {
+            $PSCmdlet.ThrowTerminatingError($_)
         }
 
         $MediaId = $SendMediaInitResult.'media_id'
@@ -153,22 +154,18 @@ function Send-TwitterMedia {
             $Status = "{0}% Complete:" -f $PercentComplete
             Write-Progress -Activity $Activity -CurrentOperation $CurrentOperation -Status $Status -PercentComplete $PercentComplete
 
-            $OAuthParameters = [OAuthParameters]::new('POST',$MediaUploadUrl)
-            $OAuthParameters.Form = @{
-                command = 'APPEND'
-                media_id = $MediaId
-                media_data = $Media[$Index]
-                segment_index = $Index
+            $Request = [TwitterRequest]@{
+                HttpMethod = 'POST'
+                Endpoint = $MediaUploadUrl
+                Form = @{
+                    command = 'APPEND'
+                    media_id = $MediaId
+                    media_data = $Media[$Index]
+                    segment_index = $Index
+                }
             }
 
-            $SendMediaAppendResultParam = @{
-                OAuthParameters = $OAuthParameters
-                Verbose = $false
-            }
-            if ($Index -eq 0) {
-                $SendMediaAppendResultParam.Add('SkipHistory',$true)
-            }
-            $SendMediaAppendResult = Invoke-TwitterRequest @SendMediaAppendResultParam
+            $SendMediaAppendResult = Invoke-TwitterRequest -RequestParameters $Request -Verbose:$false
 
             if ($SendMediaAppendResult -is [ErrorRecord]) {
                 $PSCmdlet.ThrowTerminatingError($SendMediaAppendResult)
@@ -180,12 +177,16 @@ function Send-TwitterMedia {
         # ------------------------------------------------------------------------------------------
         # FINALIZE phase
         'Beginning FINALIZE phase' | Write-Verbose
-        $OAuthParameters = [OAuthParameters]::new('POST',$MediaUploadUrl)
-        $OAuthParameters.Form = @{
-            command = 'FINALIZE'
-            media_id = $MediaId
+        $Request = [TwitterRequest]@{
+            HttpMethod = 'POST'
+            Endpoint = $MediaUploadUrl
+            Form = @{
+                command = 'FINALIZE'
+                media_id = $MediaId
+            }
         }
-        $SendMediaFinalizeResult = Invoke-TwitterRequest -OAuthParameters $OAuthParameters -Verbose:$false
+
+        $SendMediaFinalizeResult = Invoke-TwitterRequest -RequestParameters $Request -Verbose:$false
         if ($SendMediaFinalizeResult -is [ErrorRecord]) {
             $PSCmdlet.ThrowTerminatingError($SendMediaFinalizeResult)
         }
@@ -206,8 +207,7 @@ function Send-TwitterMedia {
         if ($AltImageText.Length -gt 0) {
             'Adding AltImageText to media {0}' -f $MediaId | Write-Verbose
             Set-TwitterMediaAltImageText -MediaId $MediaId -AltImageText $AltImageText -Verbose:$false | Out-Null
-            $LastTwitterCommand = Get-TwitterHistory -Last 1
-            if ($LastTwitterCommand.Status -match '200') {
+            if ($LastStatusCode -eq '200') {
                 'Alt image text successfully added to media' | Write-Verbose
             }
         }

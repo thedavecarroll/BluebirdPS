@@ -1,23 +1,26 @@
 function Get-TwitterListSubscription {
-    [CmdletBinding(DefaultParameterSetName='ScreenName')]
+    [CmdletBinding()]
     param(
-        [Parameter(Mandatory,ParameterSetName='ScreenName')]
+        [Parameter()]
         [ValidateNotNullOrEmpty()]
-        [string]$ScreenName,
-        [Parameter(Mandatory,ParameterSetName='UserId')]
-        [ValidateNotNullOrEmpty()]
-        [string]$UserId,
-
-        [ValidateRange(1,1000)]
-        [int]$ResultsPerPage = 20
+        [string]$UserName
     )
 
-    $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
-    $OAuthParameters = [OAuthParameters]::new(
-        'GET',
-        'https://api.twitter.com/1.1/lists/subscriptions.json',
-        $Query
-    )
-    Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue lists
+    if ($PSBoundParameters.ContainsKey('UserName')) {
+        $UserInfo = $UserName
+    } else {
+        $UserInfo = $BluebirdPSConfiguration.AuthUserName
+    }
 
+    $Request = [TwitterRequest]@{
+        Endpoint = 'https://api.twitter.com/1.1/lists/subscriptions.json'
+        Query = @{
+            count = 1000
+            cursor = -1
+            screen_name = $UserInfo
+        }
+    }
+
+    'Getting list subscriptions for user: {0}' -f $UserInfo | Write-Verbose
+    Invoke-TwitterRequest -RequestParameters $Request
 }

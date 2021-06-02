@@ -1,30 +1,29 @@
 function Remove-TwitterSavedSearch {
     [CmdletBinding(DefaultParameterSetName='ById',SupportsShouldProcess,ConfirmImpact='High')]
     param(
-        [Parameter(Mandatory)]
-        [Alias('Id')]
+        [Parameter(Mandatory,ParameterSetName='ById',ValueFromPipeline)]
         [ValidateNotNullOrEmpty()]
-        [long[]]$SearchId
+        [string]$Id,
+        [Parameter(Mandatory,ParameterSetName='BySavedSearch',ValueFromPipeline)]
+        [ValidateNotNullOrEmpty()]
+        [BluebirdPS.APIV1.SavedSearch]$SavedSearch
     )
 
-    begin {
-        $SavedSearches = Get-TwitterSavedSearch
+    if ($PSCmdlet.ParameterSetName -eq 'ById') {
+        $SavedSearch = Get-TwitterSavedSearch -Id $Id
     }
 
-    process {
-        foreach ($Id in $SearchId) {
-            $ThisSearch = $SavedSearches.Where({$_.id -eq $Id})
-            $ThisSearchInfo = 'Search : {0}, Created: {1}' -f $ThisSearch.query,$ThisSearch.created_at
-            if ($ThisSearch) {
-                if ($PSCmdlet.ShouldProcess($ThisSearchInfo, 'Removing Saved Search')) {
-                    $Url = 'https://api.twitter.com/1.1/saved_searches/destroy/{0}.json' -f $Id
-                    $OAuthParameters = [OAuthParameters]::new('POST',$Url)
-                    Invoke-TwitterRequest -OAuthParameters $OAuthParameters | Out-Null
-                }
-            } else {
-                'No saved search found with SearchId of {0}' -f $Id | Write-Warning
+    $SearchInfo = 'Search: {0}, Created: {1}' -f $SavedSearch.Query,$SavedSearch.CreatedAt
+    if ($SavedSearch) {
+        if ($PSCmdlet.ShouldProcess($SearchInfo, 'Removing Saved Search')) {
+            $Request = [TwitterRequest]@{
+                HttpMethod = 'POST'
+                Endpoint = 'https://api.twitter.com/1.1/saved_searches/destroy/{0}.json' -f $SavedSearch.Id
             }
+            Invoke-TwitterRequest -RequestParameters $Request | Out-Null
         }
+    } else {
+        'No saved search found with SearchId of {0}' -f $ThisSearchId | Write-Warning
     }
 
 }

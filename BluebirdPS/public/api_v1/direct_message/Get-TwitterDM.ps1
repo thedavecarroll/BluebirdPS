@@ -2,28 +2,22 @@ function Get-TwitterDM {
     [CmdletBinding()]
     param(
         [ValidateNotNullOrEmpty()]
-        [Alias('Id')]
-        [string]$DirectMessageId,
+        [string]$Id,
         [ValidateRange(1,50)]
-        [int]$Count = 20
+        [int]$MessageCount = 20
     )
 
-    if ($PSBoundParameters.ContainsKey('DirectMessageId')) {
-        $OAuthParameters = [OAuthParameters]::new(
-            'GET',
-            'https://api.twitter.com/1.1/direct_messages/events/show.json',
-            @{'id' = $DirectMessageId; 'count' = $Count}
-        )
-
-        Invoke-TwitterRequest -OAuthParameters $OAuthParameters
-
+    if ($PSBoundParameters.ContainsKey('Id')) {
+        $Request = [TwitterRequest]@{
+            Endpoint = 'https://api.twitter.com/1.1/direct_messages/events/show.json'
+            Query = @{'id' = $Id }
+        }
     } else {
-        $OAuthParameters = [OAuthParameters]::new(
-            'GET',
-            'https://api.twitter.com/1.1/direct_messages/events/list.json',
-            @{'count'= $Count }
-        )
-
-        Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue events
+        $Request = [TwitterRequest]@{
+            Endpoint = 'https://api.twitter.com/1.1/direct_messages/events/list.json'
+            Query = @{'count'= $MessageCount }
+        }
     }
+
+    Invoke-TwitterRequest -RequestParameters $Request
 }

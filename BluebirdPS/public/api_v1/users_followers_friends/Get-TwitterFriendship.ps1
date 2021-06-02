@@ -1,25 +1,15 @@
 function Get-TwitterFriendship {
     [CmdletBinding(DefaultParameterSetName='Lookup')]
     param(
-        [Parameter(Mandatory,ValueFromPipeline,ParameterSetName='LookupScreenName')]
+        [Parameter(Mandatory,ValueFromPipeline,ParameterSetName='Lookup')]
         [ValidateCount(1,100)]
-        [string[]]$ScreenName,
+        [string[]]$UserName,
 
-        [Parameter(Mandatory,ValueFromPipeline,ParameterSetName='LookupUserId')]
-        [ValidateCount(1,100)]
-        [int[]]$UserId,
+        [Parameter(Mandatory,ParameterSetName='Show')]
+        [string]$SourceUserName,
 
-        [Parameter(Mandatory,ParameterSetName='ShowScreenName')]
-        [string]$SourceScreenName,
-
-        [Parameter(Mandatory,ParameterSetName='ShowUserId')]
-        [int]$SourceUserId,
-
-        [Parameter(Mandatory,ParameterSetName='ShowScreenName')]
-        [string]$TargetScreenName,
-
-        [Parameter(Mandatory,ParameterSetName='ShowUserId')]
-        [int]$TargetUserId,
+        [Parameter(Mandatory,ParameterSetName='Show')]
+        [string]$TargetUserName,
 
         [Parameter(ParameterSetName='Incoming')]
         [switch]$Incoming,
@@ -32,47 +22,33 @@ function Get-TwitterFriendship {
 
     )
 
+    $Query = @{}
+
     switch -Regex ($PSCmdlet.ParameterSetName) {
         'Lookup' {
-            $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
-            $OAuthParameters = [OAuthParameters]::new(
-                'GET',
-                'https://api.twitter.com/1.1/friendships/lookup.json',
-                $Query
-            )
-            Invoke-TwitterRequest -OAuthParameters $OAuthParameters
+            $Endpoint = 'https://api.twitter.com/1.1/friendships/lookup.json'
+            $Query.Add('screen_name',($UserName -join ','))
         }
         'Show' {
-            $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
-            $OAuthParameters = [OAuthParameters]::new(
-                'GET',
-                'https://api.twitter.com/1.1/friendships/show.json',
-                $Query
-            )
-            Invoke-TwitterRequest -OAuthParameters $OAuthParameters
+            $Endpoint = 'https://api.twitter.com/1.1/friendships/show.json'
+            $Query.Add('source_screen_name',$SourceUserName)
+            $Query.Add('target_screen_name',$TargetUserName)
         }
         'Incoming' {
-            $OAuthParameters = [OAuthParameters]::new(
-                'GET',
-                'https://api.twitter.com/1.1/friendships/incoming.json',
-                @{ cursor = -1 }
-            )
-            Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue ids
+            $Endpoint = 'https://api.twitter.com/1.1/friendships/incoming.json'
         }
         'Pending' {
-            $OAuthParameters = [OAuthParameters]::new(
-                'GET',
-                'https://api.twitter.com/1.1/friendships/outgoing.json',
-                @{ cursor = -1 }
-            )
-            Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue ids
+            $Endpoint = 'https://api.twitter.com/1.1/friendships/outgoing.json'
         }
         'NoRetweets' {
-            $OAuthParameters = [OAuthParameters]::new(
-                'GET',
-                'https://api.twitter.com/1.1/friendships/no_retweets/ids.json'
-            )
-            Invoke-TwitterRequest -OAuthParameters $OAuthParameters
+            $Endpoint = 'https://api.twitter.com/1.1/friendships/no_retweets/ids.json'
         }
     }
+
+    $Request = [TwitterRequest]@{
+        Endpoint = $Endpoint
+        Query = $Query
+    }
+
+    Invoke-TwitterRequest -RequestParameters $Request
 }

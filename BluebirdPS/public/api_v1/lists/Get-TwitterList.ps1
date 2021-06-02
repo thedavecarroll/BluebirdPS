@@ -1,50 +1,52 @@
 function Get-TwitterList {
     [CmdletBinding(DefaultParameterSetName='ByListUserName')]
     param(
-        [Parameter(ParameterSetName='ListScreenName')]
-        [string]$ScreenName,
-        [Parameter(Mandatory,ParameterSetName='ListUserId')]
-        [ValidateNotNullOrEmpty()]
-        [string]$UserId,
-        [Parameter(ParameterSetName='ListScreenName')]
-        [Parameter(ParameterSetName='ListUserId')]
+        [Parameter(ParameterSetName='ByListUserName')]
+        [string]$UserName,
+        [Parameter(ParameterSetName='ByListUserName')]
         [switch]$OwnedListFirst,
 
-        [Parameter(Mandatory,ParameterSetName='ShowId')]
+        [Parameter(Mandatory,ParameterSetName='ById')]
         [ValidateNotNullOrEmpty()]
-        [string]$ListId,
+        [string]$Id,
 
-        [Parameter(Mandatory,ParameterSetName='ShowSlugOwnerScreenName')]
-        [Parameter(Mandatory,ParameterSetName='ShowSlugOwnerId')]
+        [Parameter(Mandatory,ParameterSetName='BySlug')]
         [ValidateNotNullOrEmpty()]
         [string]$Slug,
-        [Parameter(Mandatory,ParameterSetName='ShowSlugOwnerScreenName')]
+        [Parameter(ParameterSetName='BySlug')]
         [ValidateNotNullOrEmpty()]
-        [string]$OwnerScreenName,
-        [Parameter(Mandatory,ParameterSetName='ShowSlugOwnerId')]
-        [ValidateNotNullOrEmpty()]
-        [long]$OwnerId
+        [string]$OwnerUserName
     )
 
-    if ($PSCmdlet.ParameterSetName -match 'List') {
-
-        $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
-        $OAuthParameters = [OAuthParameters]::new(
-            'GET',
-            'https://api.twitter.com/1.1/lists/list.json',
-            $Query
-        )
-        Invoke-TwitterRequest -OAuthParameters $OAuthParameters
-
-    } else {
-
-        $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
-        $OAuthParameters = [OAuthParameters]::new(
-            'Get',
-            'https://api.twitter.com/1.1/lists/show.json',
-            $Query
-        )
-        Invoke-TwitterRequest -OAuthParameters $OAuthParameters
-
+    $Request = [TwitterRequest]@{
+        Endpoint = 'https://api.twitter.com/1.1/lists/show.json'
     }
+
+    switch ($PSCmdlet.ParameterSetName) {
+        'ByListUserName' {
+            $Request.Endpoint = 'https://api.twitter.com/1.1/lists/list.json'
+            if ($null -ne $UserName) {
+                $Request.Query.Add('screen_name', $UserName)
+            } else {
+                $Request.Query.Add('screen_name', $BluebirdPSConfiguration.AuthUserName)
+            }
+            if ($OwnedListFirst.IsPresent) {
+                $Request.Query.Add( 'reverse', $true)
+            }
+        }
+        'ById' {
+            $Request.Query.Add( 'list_id', $Id )
+        }
+        'BySlug' {
+            $Request.Query.Add( 'slug', $Slug)
+            if ($PSBoundParameters.ContainsKey('OwnerUserName')) {
+                $Request.Query.Add('owner_screen_name', $OwnerUserName)
+            } else {
+                $Request.Query.Add('owner_screen_name', $BluebirdPSConfiguration.AuthUserName)
+            }
+
+        }
+    }
+
+    Invoke-TwitterRequest -RequestParameters $Request
 }

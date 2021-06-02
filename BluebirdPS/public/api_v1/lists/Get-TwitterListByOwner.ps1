@@ -1,22 +1,19 @@
 function Get-TwitterListByOwner {
-    [CmdletBinding(DefaultParameterSetName='ScreenName')]
+    [CmdletBinding()]
     param(
-        [Parameter(Mandatory,ParameterSetName='ScreenName')]
+        [Parameter()]
         [ValidateNotNullOrEmpty()]
-        [string]$ScreenName,
-        [Parameter(Mandatory,ParameterSetName='UserId')]
-        [ValidateNotNullOrEmpty()]
-        [long]$UserId,
-        [ValidateRange(1,1000)]
-        [Alias('Count')]
-        [int]$ResultsPerPage=20
+        [string]$UserName
     )
 
-    $Query = New-TwitterQuery -ApiParameters $PSBoundParameters
-    $OAuthParameters = [OAuthParameters]::new(
-        'GET',
-        'https://api.twitter.com/1.1/lists/ownerships.json',
-        $Query
-    )
-    Invoke-TwitterCursorRequest -OAuthParameters $OAuthParameters -ReturnValue lists
+    $Request = [TwitterRequest]@{
+        Endpoint = 'https://api.twitter.com/1.1/lists/ownerships.json'
+        Query = @{
+            screen_name = $PSBoundParameters.ContainsKey('UserName') ? $UserName : $BluebirdPSConfiguration.AuthUserName
+            count = 1000
+        }
+    }
+
+    'Getting lists owned by: {0}' -f $Request.Query.'screen_name' | Write-Verbose
+    Invoke-TwitterRequest -RequestParameters $Request
 }

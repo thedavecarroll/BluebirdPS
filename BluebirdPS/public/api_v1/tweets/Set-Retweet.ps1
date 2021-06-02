@@ -1,9 +1,9 @@
 function Set-Retweet {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseShouldProcessForStateChangingFunctions', '')]
+    [SuppressMessage('PSUseShouldProcessForStateChangingFunctions', '')]
     [CmdletBinding(DefaultParameterSetName='Retweet')]
     param(
         [Parameter(Mandatory)]
-        [long]$Id,
+        [string]$Id,
         [Parameter(ParameterSetName='Retweet')]
         [switch]$Retweet,
         [Parameter(ParameterSetName='Unretweet')]
@@ -11,11 +11,15 @@ function Set-Retweet {
     )
 
     if ($PSCmdlet.ParameterSetName -eq 'Retweet') {
-        $BaseUri = 'https://api.twitter.com/1.1/statuses/retweet/{0}.json' -f $Id
+        $Endpoint = 'https://api.twitter.com/1.1/statuses/retweet/{0}.json' -f $Id
     } else {
-        $BaseUri = 'https://api.twitter.com/1.1/statuses/unretweet/{0}.json' -f $Id
+        $Endpoint = 'https://api.twitter.com/1.1/statuses/unretweet/{0}.json' -f $Id
     }
 
-    $OAuthParameters = [OAuthParameters]::new('POST',$BaseUri)
-    Invoke-TwitterRequest -OAuthParameters $OAuthParameters
+    $Request = [TwitterRequest]@{
+        HttpMethod = 'POST'
+        Endpoint = $Endpoint
+    }
+
+    Invoke-TwitterRequest -RequestParameters $Request
 }

@@ -9,14 +9,10 @@ function Get-SendMediaStatus {
         [int]$WaitSeconds
     )
 
-    $OAuthParameters = [OAuthParameters]::new(
-        'GET',
-        'https://upload.twitter.com/1.1/media/upload.json',
-        @{
-            'command' = 'STATUS'
-            'media_id' = $MediaId
-        }
-    )
+    $Request = [TwitterRequest]@{
+        Endpoint = 'https://upload.twitter.com/1.1/media/upload.json'
+        Query = @{'command' = 'STATUS'; 'media_id' = $MediaId }
+    }
 
     if ($PSBoundParameters.ContainsKey('WaitSeconds')) {
         $StatusCheck = 0
@@ -31,7 +27,7 @@ function Get-SendMediaStatus {
             Start-Sleep -Seconds $WaitSeconds
             $TotalWaitSeconds += $WaitSeconds
 
-            $SendMediaStatus = Invoke-TwitterRequest -OAuthParameters $OAuthParameters
+            $SendMediaStatus = Invoke-TwitterRequest -RequestParameters $Request
             if ($SendMediaStatus -is [ErrorRecord]) {
                 $PSCmdlet.ThrowTerminatingError($SendMediaStatus)
             }
@@ -49,7 +45,7 @@ function Get-SendMediaStatus {
         $SendMediaStatus
 
     } else {
-        Invoke-TwitterRequest -OAuthParameters $OAuthParameters
+        Invoke-TwitterRequest -RequestParameters $Request
     }
 
 }
