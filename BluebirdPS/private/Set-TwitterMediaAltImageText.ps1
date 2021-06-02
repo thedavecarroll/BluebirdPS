@@ -2,7 +2,7 @@ function Set-TwitterMediaAltImageText {
     [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseShouldProcessForStateChangingFunctions', '')]
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory,ValueFromPipelineByPropertyName)]
+        [Parameter(Mandatory)]
         [Alias('media_id')]
         [string]$MediaId,
 
