@@ -1,12 +1,11 @@
 function Set-TwitterAuthentication {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseShouldProcessForStateChangingFunctions', '')]
+    [SuppressMessage('PSUseShouldProcessForStateChangingFunctions', '')]
     [CmdletBinding()]
     param (
         [SecureString]$ApiKey = (Read-Host -Prompt 'API Key' -AsSecureString),
         [SecureString]$ApiSecret = (Read-Host -Prompt 'API Secret' -AsSecureString),
         [SecureString]$AccessToken = (Read-Host -Prompt 'Access Token' -AsSecureString),
-        [SecureString]$AccessTokenSecret = (Read-Host -Prompt 'Access Token Secret' -AsSecureString),
-        [switch]$Persist
+        [SecureString]$AccessTokenSecret = (Read-Host -Prompt 'Access Token Secret' -AsSecureString)
     )
 
     try {
@@ -18,13 +17,14 @@ function Set-TwitterAuthentication {
         if (Test-TwitterAuthentication) {
             'Successfully connected to Twitter.' | Write-Verbose
 
-            if ($PSBoundParameters.ContainsKey('Persist')) {
-                Export-TwitterAuthentication
-            }
+            Set-TwitterBearerToken
+            Set-BluebirdPSAuthUser
+            Export-TwitterAuthentication
 
         } else {
             'Failed authentication verification. Please check your credentials and try again.' | Write-Error -ErrorAction Stop
         }
+
     }
     catch {
         $PSCmdlet.ThrowTerminatingError($_)
