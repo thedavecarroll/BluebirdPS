@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.5.1 - 2021-06-05
+## [0.5.1] - 2021-06-05
 
 Bugfix and Maintenance; Update Strongly Recommended
 
@@ -92,6 +92,7 @@ Initial release
 [0.1.0]: https://github.com/thedavecarroll/BluebirdPS/tree/27d2d3251bc76558d0b7b91a5db6b967da85b269
 [0.1.1]: https://github.com/thedavecarroll/BluebirdPS/tree/962d11e2f6d3d6de68671fc495dd2693e717b4b8
 [0.5.0]: https://github.com/thedavecarroll/BluebirdPS/tree/feab8637afcbdb58dd3b816796c145764be0c170
+[0.5.1]: https://github.com/thedavecarroll/BluebirdPS/tree/feab8637afcbdb58dd3b816796c145764be0c170
 
 ## Keep a Changelog
 
