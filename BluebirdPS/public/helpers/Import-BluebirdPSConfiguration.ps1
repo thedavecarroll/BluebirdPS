@@ -44,7 +44,5 @@ function Import-BluebirdPSConfiguration {
             '{0} appears to be corrupted. Please run Export-BluebirdPSConfiguration to regenerate.' -f $FileDescription | Write-Warning
         }
 
-    } else {
-        '{0} not found. Please run Export-BluebirdPSConfiguration to regenerate.' -f $FileDescription | Write-Warning
     }
 }
