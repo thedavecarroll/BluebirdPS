@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.5.1 - 2021-06-05
+
+Bugfix and Maintenance; Update Strongly Recommended
+
+### Fixed
+
+- [Issue #64](https://github.com/thedavecarroll/BluebirdPS/issues/64) - Remove unnecessary warning message from Import-BluebirdPSConfiguration
+- [Issue #66](https://github.com/thedavecarroll/BluebirdPS/issues/66) - Get-TwitterList - Omission of UserName parameter generates incorrect query
+- [Issue #68](https://github.com/thedavecarroll/BluebirdPS/issues/68) - Documentation - Publish-Tweet has typo in description
+- [Issue #69](https://github.com/thedavecarroll/BluebirdPS/issues/69) - Set-TwitterAuthentication throws "Cannot find path" error when ~\.BluebirdPS\ does not exist
+
 ## [0.5.0] - 2021-06-02
 
 Feature, Bugfix, and Maintenance; Update Strongly Recommended
