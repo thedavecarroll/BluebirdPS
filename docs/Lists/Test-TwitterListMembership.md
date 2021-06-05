@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.5.0/Lists/Test-TwitterListMembership
+online version: https://docs.bluebirdps.dev/en/v0.5.1/Lists/Test-TwitterListMembership
 schema: 2.0.0
 ---
 
@@ -125,8 +125,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Lists/Test-TwitterListMembership)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.1/Lists/Test-TwitterListMembership)
 
-[Get-TwitterListMembership](https://docs.bluebirdps.dev/en/v0.5.0/Lists/Get-TwitterListMembership)
+[Get-TwitterListMembership](https://docs.bluebirdps.dev/en/v0.5.1/Lists/Get-TwitterListMembership)
 
 [Api Reference - GET lists/members/show](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-members-show)

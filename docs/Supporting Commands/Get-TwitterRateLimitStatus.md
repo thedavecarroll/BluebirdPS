@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.5.0/Supporting%20Commands/Get-TwitterRateLimitStatus
+online version: https://docs.bluebirdps.dev/en/v0.5.1/Supporting%20Commands/Get-TwitterRateLimitStatus
 schema: 2.0.0
 ---
 
@@ -89,6 +89,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Supporting%20Commands/Get-TwitterRateLimitStatus)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.1/Supporting%20Commands/Get-TwitterRateLimitStatus)
 
 [Api Reference - GET application/rate_limit_status](https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/rate-limit-status/api-reference/get-application-rate_limit_status)

@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.5.0/Searches/Search-Tweet
+online version: https://docs.bluebirdps.dev/en/v0.5.1/Searches/Search-Tweet
 schema: 2.0.0
 ---
 
@@ -109,7 +109,7 @@ To learn how to use Twitter Search effectively, please see the Standard search o
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Searches/Search-Tweet)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.1/Searches/Search-Tweet)
 
 [Api Reference - Search Standard Operators](https://developer.twitter.com/en/docs/twitter-api/v1/rules-and-filtering/overview/standard-operators)
 

@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.5.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Submit-TwitterUserAsSpam
+online version: https://docs.bluebirdps.dev/en/v0.5.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Submit-TwitterUserAsSpam
 schema: 2.0.0
 ---
 
@@ -140,10 +140,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.5.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Submit-TwitterUserAsSpam)
+[Online Version](https://docs.bluebirdps.dev/en/v0.5.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Submit-TwitterUserAsSpam)
 
-[Get-TwitterUser](https://docs.bluebirdps.dev/en/v0.5.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser)
+[Get-TwitterUser](https://docs.bluebirdps.dev/en/v0.5.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser)
 
-[Get-TwitterFriendship](https://docs.bluebirdps.dev/en/v0.5.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFriendship)
+[Get-TwitterFriendship](https://docs.bluebirdps.dev/en/v0.5.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFriendship)
 
 [Api Reference - POST users/report_spam](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-users-report_spam)
