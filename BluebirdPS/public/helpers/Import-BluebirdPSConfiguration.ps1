@@ -5,8 +5,6 @@ function Import-BluebirdPSConfiguration {
     $FileDescription = 'BluebirdPS configuration file'
     'Checking {0}.' -f $FileDescription | Write-Verbose
 
-#    $SetValues = 'Please use Set-TwitterAuthentication to set the requried API keys and secrets. The authentication values will be encrypted and saved to disk.'
-
     if (Test-Path -Path $BluebirdPSConfiguration.ConfigurationPath) {
 
         '{0} found.' -f $FileDescription | Write-Verbose
@@ -46,7 +44,5 @@ function Import-BluebirdPSConfiguration {
             '{0} appears to be corrupted. Please run Export-BluebirdPSConfiguration to regenerate.' -f $FileDescription | Write-Warning
         }
 
-    } else {
-        '{0} not found. Please run Export-BluebirdPSConfiguration to regenerate.' -f $FileDescription | Write-Warning
     }
 }

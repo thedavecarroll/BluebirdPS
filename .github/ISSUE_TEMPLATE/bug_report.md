@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Create a report to help us improve the module
-title: "[BUG]"
+title: "[BUG][CommandName] - [Short bug description]"
 labels: bug
 assignees: thedavecarroll
 

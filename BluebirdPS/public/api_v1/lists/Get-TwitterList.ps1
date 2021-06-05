@@ -25,10 +25,8 @@ function Get-TwitterList {
     switch ($PSCmdlet.ParameterSetName) {
         'ByListUserName' {
             $Request.Endpoint = 'https://api.twitter.com/1.1/lists/list.json'
-            if ($null -ne $UserName) {
+            if ($UserName -ne [String]::Empty) {
                 $Request.Query.Add('screen_name', $UserName)
-            } else {
-                $Request.Query.Add('screen_name', $BluebirdPSConfiguration.AuthUserName)
             }
             if ($OwnedListFirst.IsPresent) {
                 $Request.Query.Add( 'reverse', $true)
