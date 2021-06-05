@@ -10,7 +10,9 @@ function Export-BluebirdPSConfiguration {
             $Action = 'existing'
         }
 
-        $BluebirdPSConfiguration.AuthLastExportDate = (Get-ChildItem -Path $BluebirdPSConfiguration.CredentialsPath).LastWriteTime
+        if (Test-Path -Path $BluebirdPSConfiguration.CredentialsPath) {
+            $BluebirdPSConfiguration.AuthLastExportDate = (Get-ChildItem -Path $BluebirdPSConfiguration.CredentialsPath).LastWriteTime
+        }
 
         $BluebirdPSConfiguration | ConvertTo-Json | Set-Content -Path $BluebirdPSConfiguration.ConfigurationPath -Force
 

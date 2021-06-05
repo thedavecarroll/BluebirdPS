@@ -4,8 +4,6 @@ function Import-TwitterAuthentication {
 
     'Checking Twitter credentials file.' | Write-Verbose
 
-    $SetValues = 'Please use Set-TwitterAuthentication to set the requried API keys and secrets. The authentication values will be encrypted and saved to disk.'
-
     if (Test-Path -Path $BluebirdPSConfiguration.CredentialsPath) {
 
         'Twitter credentials file found.' | Write-Verbose
@@ -40,7 +38,7 @@ function Import-TwitterAuthentication {
                     Invoke-TwitterVerifyCredentials | Out-Null
                 }
                 catch {
-                    'Authentication file appears to have invalid credentials. {0}' -f 'Please use Set-TwitterAuthentication to update your stored credentials.' | Write-Warning
+                    'Authentication file appears to have invalid credentials. Please use the Set-TwitterAuthentication command to update your stored credentials.' | Write-Warning
                     return
                 }
                 if ($null -eq $BluebirdPSConfiguration.AuthUserId) {
@@ -50,23 +48,22 @@ function Import-TwitterAuthentication {
                     Invoke-TwitterVerifyCredentials -BearerToken | Out-Null
                 }
                 catch {
-                    'Authentication file appears to have an invalid bearer token. {0}' -f 'Please use Set-TwitterBearerToken to update your stored bearer token.' | Write-Warning
+                    'Authentication file appears to have an invalid bearer token.','Please use the Set-TwitterBearerToken command to update your stored bearer token.' | Write-Warning
                     return
                 }
 
                 Export-BluebirdPSConfiguration
 
             } else {
-                'Authentication file missing one or more values. {0}' -f $SetValues | Write-Warning
+                'Authentication file missing one or more values.','Please use the Set-TwitterAuthentication command to update the required API keys and secrets.' | Write-Warning
             }
         }
         catch {
-            'Authentication file appears to be corrupted. {0}' -f $SetValues | Write-Warning
+            'Authentication file appears to be corrupted.','Please use the Set-TwitterAuthentication command to update the required API keys and secrets.' | Write-Warning
             $PSCmdlet.ThrowTerminatingError($_)
         }
 
     } else {
-        $SetValues | Write-Warning
-        $PSCmdlet.ThrowTerminatingError($_)
+        'Please use the Set-TwitterAuthentication command to set the required API keys and secrets.','The authentication values will be encrypted and saved to disk.' | Write-Warning
     }
 }
