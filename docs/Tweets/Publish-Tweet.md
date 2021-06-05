@@ -29,7 +29,7 @@ Publish-Tweet [-TweetText] <String> [[-ReplyToTweet] <String>] -Path <String> -C
 
 Publishes a Tweet for the authenticating user.
 
-Duplicate Tweetsa re not allowed, that is to say, a user cannot post the same Tweet twice in a row.
+Duplicate Tweets are not allowed, that is to say, a user cannot post the same Tweet twice in a row.
 
 ## EXAMPLES
 
@@ -44,24 +44,34 @@ Publishes the provided text for the authenticating user.
 ### Example 2
 
 ```powershell
-PS > Publish-Tweet -TweetText 'The Publish-Tweet command of the #BluebirdPS #PowerShell 7 module for Twitter can also reply to a Tweet unless I have a silly typo in the definition. ¯\_(ツ)_/¯' -ReplyToTweet 1330354141055643648 -MediaId 1330355920799412226
-
-created_at                : Sun Nov 22 03:47:42 +0000 2020
-id                        : 1330357261626208258
-id_str                    : 1330357261626208258
-text                      : The Publish-Tweet command of the #BluebirdPS #PowerShell 7 module for Twitter can also reply to a Tweet unless I ha… https://t.co/Kz6qAA0fNb
-truncated                 : True
-entities                  : @{hashtags=System.Object[]; symbols=System.Object[]; user_mentions=System.Object[]; urls=System.Object[]}
-source                    : <a href="https://powershell.anovelidea.org" rel="nofollow">thedavecarrroll-tweets-with-pwsh</a>
-in_reply_to_status_id     : 1330354141055643648
-in_reply_to_status_id_str : 1330354141055643648
-in_reply_to_user_id       : 292670084
-in_reply_to_user_id_str   : 292670084
-in_reply_to_screen_name   : thedavecarroll
-<TRUNCATED OUTPUT>
+PS > Publish-Tweet -TweetText "It took a long time to get this update out. I hope you will find much more useful when working with the Twitter API. #BluebirdPS #PSTweetChat" -ReplyToTweet 1400861303053467650
 ```
 
-Publishes the provided text as a reply with the specified media for the authenticating user.
+```text
+Id                 : 1400862088432599045
+Text               : @JeffHicks It took a long time to get this update out. I hope you will find much more useful when working with the Twitter API.
+                     #BluebirdPS #PSTweetChat
+Attachments        :
+AuthorId           : 292670084
+ContextAnnotations :
+ConversationId     : 1400861303053467650
+CreatedAt          : 6/4/2021 5:08:43 PM
+Entities           : {Product: Twitter API, #BluebirdPS, #PSTweetChat, @JeffHicks}
+Geo                :
+InReplyToUserId    : 14478644
+Language           : en
+NonPublicMetrics   :
+OrganicMetrics     :
+PossiblySensitive  : False
+PromotedMetrics    :
+PublicMetrics      : RetweetCount: 0, ReplyCount: 0, LikeCount: 0, QuoteCount: 0
+ReferencedTweets   : {1400861303053467650}
+ReplySettings      : Everyone
+Source             : BluebirdPS
+Withheld           :
+```
+
+Publishes the provided text as a reply to the specified Tweet sfor the authenticating user.
 
 ## PARAMETERS
 
