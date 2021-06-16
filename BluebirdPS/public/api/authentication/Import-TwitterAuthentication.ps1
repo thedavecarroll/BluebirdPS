@@ -44,26 +44,19 @@ function Import-TwitterAuthentication {
                 if ($null -eq $BluebirdPSConfiguration.AuthUserId) {
                     Set-BluebirdPSAuthUser
                 }
-                try {
-                    Invoke-TwitterVerifyCredentials -BearerToken | Out-Null
-                }
-                catch {
-                    'Authentication file appears to have an invalid bearer token.','Please use the Set-TwitterBearerToken command to update your stored bearer token.' | Write-Warning
-                    return
-                }
 
-                Export-BluebirdPSConfiguration
-
-            } else {
-                'Authentication file missing one or more values.','Please use the Set-TwitterAuthentication command to update the required API keys and secrets.' | Write-Warning
-            }
-        }
-        catch {
-            'Authentication file appears to be corrupted.','Please use the Set-TwitterAuthentication command to update the required API keys and secrets.' | Write-Warning
-            $PSCmdlet.ThrowTerminatingError($_)
-        }
-
-    } else {
-        'Please use the Set-TwitterAuthentication command to set the required API keys and secrets.','The authentication values will be encrypted and saved to disk.' | Write-Warning
+    if ($null -eq $OAuth['BearerToken']) {
+        'Bearer token not present in Twitter authentication data.','Attempting to retrieve current bearer token from Twitter.' | Write-Verbose
+        Set-TwitterBearerToken
     }
+
+    try {
+        Invoke-TwitterVerifyCredentials -BearerToken | Out-Null
+    }
+    catch {
+        'Authentication data appears to have an invalid bearer token.','Please use the Set-TwitterBearerToken command to update your stored bearer token.' | Write-Warning
+        $PSCmdlet.WriteError($_)
+    }
+
+    Export-BluebirdPSConfiguration
 }
