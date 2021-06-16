@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Management.Automation;
 using System.Linq;
 using System.Net;
 
@@ -9,6 +10,7 @@ namespace BluebirdPS
     public class ResponseData
     {
         public string Command { get; set; }
+        public InvocationInfo InvocationInfo { get; set; }
         public HttpMethod HttpMethod { get; set; }
         public Uri Uri { get; set; }
         public string Endpoint { get; set; }
@@ -32,6 +34,7 @@ namespace BluebirdPS
             try
             {
                 Command = request.CommandName;
+                InvocationInfo = request.InvocationInfo;
                 HttpMethod = request.HttpMethod;
                 Uri = authentication.Uri;
                 Endpoint = authentication.Endpoint;

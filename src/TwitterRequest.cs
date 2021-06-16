@@ -36,6 +36,8 @@ namespace BluebirdPS
         public bool IncludeExpansions { get; set; }
         public string CommandName { get; private set; }
 
+        public InvocationInfo InvocationInfo { get; private set; }
+
         private bool _hasExpansionsIncluded { get; set; }
         private bool _hasFieldsIncluded { get; set; }
 
@@ -44,20 +46,19 @@ namespace BluebirdPS
         // The intent is for the class to be instantiated using accelerator and hashtable
         public TwitterRequest() 
         {
-            SetCommandName();
+            try {
+                CallStackFrame _callStackFrame = Runspace.DefaultRunspace.Debugger.GetCallStack().ToList().First();
+                CommandName = _callStackFrame.FunctionName;
+                InvocationInfo = _callStackFrame.InvocationInfo;
+            }
+            catch
+            {
+
+            }
         }
 
         // ----------------------------------------------------------------------------------------
         // Public methods
-        public void SetCommandName()
-        {
-            try
-            {
-                IEnumerable<CallStackFrame> callstack = Runspace.DefaultRunspace.Debugger.GetCallStack();
-                CommandName = callstack.ToList().First().FunctionName;
-            }
-            catch { }
-        }
 
         public void SetCommandName(string command)
         {
