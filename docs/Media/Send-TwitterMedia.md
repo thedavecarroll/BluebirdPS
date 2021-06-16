@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.5.1/Media/Send-TwitterMedia
+online version: https://docs.bluebirdps.dev/en/v0.6.1/Media/Send-TwitterMedia
 schema: 2.0.0
 ---
 
@@ -120,7 +120,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.5.1/Media/Send-TwitterMedia)
+[Online Version](https://docs.bluebirdps.dev/en/v0.6.1/Media/Send-TwitterMedia)
 
 [Api Reference - POST media/upload (INIT)](https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-init)
 

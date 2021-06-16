@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.5.1/Helper%20Commands/Get-BluebirdPSHistory
+online version: https://docs.bluebirdps.dev/en/v0.6.1/Helper%20Commands/Get-BluebirdPSHistory
 schema: 2.0.0
 ---
 
@@ -26,12 +26,13 @@ Every command issued against the Twitter API is recorded in a session variable, 
 NOTE: On module import, if credentials have been saved, the Import-TwitterAuthentication makes 2 calls against the API.
 These will be the first 2 entries in the history.
 
-Each entry in the BluebirdPS history record, includes the following fields:
+Each entry in the BluebirdPS history record includes the following fields:
 
 GENERAL:
 
 - Command: the name of the command
 - ApiVersion: derived from the URI
+- InvocationInfo: the PowerShell InvocationInfo for the specific Twitter API call
 
 REQUEST:
 
@@ -65,6 +66,7 @@ PS > Get-BluebirdPSHistory -Last 1
 
 ```text
 Command            : Get-TwitterUser
+InvocationInfo     : System.Management.Automation.InvocationInfo
 HttpMethod         : GET
 Uri                : https://api.twitter.com/2/users/by/username/BluebirdPS?user.fields=id%2Cname%2Cusername%2Ccreated_at%2Cdescription%2Centities%2Clocation%2Cpinned_tweet_id%2Cprofile_image_ur
                      l%2Cprotected%2Cpublic_metrics%2Curl%2Cverified%2Cwithheld
@@ -219,4 +221,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.5.1/Helper%20Commands/Get-BluebirdPSHistory)
+[Online Version](https://docs.bluebirdps.dev/en/v0.6.1/Helper%20Commands/Get-BluebirdPSHistory)

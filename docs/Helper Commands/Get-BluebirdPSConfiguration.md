@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.5.1/Helper%20Commands/Get-BluebirdPSConfiguration
+online version: https://docs.bluebirdps.dev/en/v0.6.1/Helper%20Commands/Get-BluebirdPSConfiguration
 schema: 2.0.0
 ---
 
@@ -74,10 +74,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.5.1/Helper%20Commands/Export-BluebirdPSConfiguration)
+[Online Version](https://docs.bluebirdps.dev/en/v0.6.1/Helper%20Commands/Export-BluebirdPSConfiguration)
 
-[Import-BluebirdPSConfiguration](https://docs.bluebirdps.dev/en/v0.5.1/Helper%20Commands/Import-BluebirdPSConfiguration)
+[Import-BluebirdPSConfiguration](https://docs.bluebirdps.dev/en/v0.6.1/Helper%20Commands/Import-BluebirdPSConfiguration)
 
-[Get-BluebirdPSConfiguration](https://docs.bluebirdps.dev/en/v0.5.1/Helper%20Commands/Get-BluebirdPSConfiguration)
+[Get-BluebirdPSConfiguration](https://docs.bluebirdps.dev/en/v0.6.1/Helper%20Commands/Get-BluebirdPSConfiguration)
 
-[Set-BluebirdPSConfiguration](https://docs.bluebirdps.dev/en/v0.5.1/Helper%20Commands/Set-BluebirdPSConfiguration)
+[Set-BluebirdPSConfiguration](https://docs.bluebirdps.dev/en/v0.6.1/Helper%20Commands/Set-BluebirdPSConfiguration)

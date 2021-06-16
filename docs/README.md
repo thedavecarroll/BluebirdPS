@@ -20,6 +20,12 @@ PowerShell best practices.
 
 ## What's New
 
+The v0.6.1 release of BluebirdPS adds the following new features.
+
+- Import-TwitterAuthentication will attempt to import authentication data from environment variables first before importing from the encrypted credentials file.
+- Invoke-TwitterRequest progress bar for paged requests
+- Added InvocationInfo to ResponseData and TotalVotes to Poll classes.
+
 The v0.5.0 release of BluebirdPS packs a lot of new features and breaking changes from the previous release.
 
 - Support for Twitter API v2: Early Access

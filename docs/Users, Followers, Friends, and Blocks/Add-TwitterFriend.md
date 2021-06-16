@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.5.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Add-TwitterFriend
+online version: https://docs.bluebirdps.dev/en/v0.6.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Add-TwitterFriend
 schema: 2.0.0
 ---
 
@@ -109,12 +109,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.5.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Add-TwitterFriend)
+[Online Version](https://docs.bluebirdps.dev/en/v0.6.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Add-TwitterFriend)
 
-[Remove-TwitterFriend](https://docs.bluebirdps.dev/en/v0.5.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Remove-TwitterFriend)
+[Remove-TwitterFriend](https://docs.bluebirdps.dev/en/v0.6.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Remove-TwitterFriend)
 
-[Get-TwitterFriends](https://docs.bluebirdps.dev/en/v0.5.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFriends)
+[Get-TwitterFriends](https://docs.bluebirdps.dev/en/v0.6.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFriends)
 
-[Get-TwitterUser](https://docs.bluebirdps.dev/en/v0.5.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser)
+[Get-TwitterUser](https://docs.bluebirdps.dev/en/v0.6.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser)
 
 [Api Reference - POST /2/users/:id/following](https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/post-users-source_user_id-following)

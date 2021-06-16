@@ -270,10 +270,9 @@ namespace BluebirdPS.APIV2.Objects
     {
         public string Id { get; set; }
         public List<PollOptions> Options { get; set; }
-
+        public long TotalVotes { get; set; }
         public long Duration { get; set; }
         public DateTime EndDateTime { get; set; }
-
         public string VotingStatus { get; set; }
 
         public Poll() { }
@@ -288,7 +287,9 @@ namespace BluebirdPS.APIV2.Objects
             List<PollOptions> pollOptions = new List<PollOptions>();
             foreach (dynamic item in input.options)
             {
-                pollOptions.Add(new PollOptions(item));
+                PollOptions option = new PollOptions(item);
+                pollOptions.Add(option);
+                TotalVotes += option.Votes;
             }
             Options = pollOptions;
         }
@@ -300,7 +301,7 @@ namespace BluebirdPS.APIV2.Objects
 
             string state = EndDateTime != null ? ", " + EndDateTime.ToString() : string.Empty;
 
-            return $"{string.Join(", ", options)} ({VotingStatus}{state})";
+            return $"{string.Join(", ", options)} ({VotingStatus})";
         }
 
     }

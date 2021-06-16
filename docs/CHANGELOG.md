@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.6.1 - 2021-06-16
+
+Bugfix, Feature, and Maintenance; Update Strongly Recommended
+
+### Fixed
+
+- [Issue #71](https://github.com/thedavecarroll/BluebirdPS/issues/71) - Documentation - Get-TwitterSavedSearch - API reference link incorrect for saved_searches/show/:id
+- [Issue #75](https://github.com/thedavecarroll/BluebirdPS/issues/75) - Import-TwitterAuthentication - Import from previous version throws error
+- [Issue #77](https://github.com/thedavecarroll/BluebirdPS/issues/77) - Invoke-TwitterRequest - Stagger API request submissions
+- [Issue #80](https://github.com/thedavecarroll/BluebirdPS/issues/80) - Uri for License and Project missing in PSGallery package
+
+### Changed
+
+- [Issue #79](https://github.com/thedavecarroll/BluebirdPS/issues/79) - Get-TwitterApiEndpoint - Store endpoint data in a module variable
+
+### Added
+
+- [Issue #74](https://github.com/thedavecarroll/BluebirdPS/issues/74) - Import-TwitterAuthentication - Use environment  variables to set authentication values
+- [Issue #76](https://github.com/thedavecarroll/BluebirdPS/issues/76) - Invoke-TwitterRequest - Add option for progress bar for paged requests
+- [Issue #81](https://github.com/thedavecarroll/BluebirdPS/issues/81) - [BluebirdPS.ResponseData] - Add InvocationInfo to history
+- [Issue #82](https://github.com/thedavecarroll/BluebirdPS/issues/82) - [BluebirdPS.APIV2.Objects.Poll] - Add TotalVotes property
+- [Issue #73](https://github.com/thedavecarroll/BluebirdPS/issues/73) - LICENSE - Include license file with module
+
 ## [0.5.1] - 2021-06-05
 
 Bugfix and Maintenance; Update Strongly Recommended
