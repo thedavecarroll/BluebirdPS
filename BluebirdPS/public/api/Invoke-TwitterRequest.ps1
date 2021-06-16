@@ -64,7 +64,16 @@ function Invoke-TwitterRequest {
         Write-TwitterResponse -ResponseData $ResponseData
 
         # recursively call this function for pagination or cursoring
+        $script:CurrentPage = 2
+        $Progress = @{
+            Activity = 'Retrieving paged results from Twitter API'
+            Status = 'Current page'
+        }
+
         if ($ResponseData.ApiResponse.psobject.Properties.Name -match 'meta|next_cursor') {
+
+            Write-Progress @Progress -CurrentOperation $CurrentPage
+            $CurrentPage++
 
             Start-Sleep -Milliseconds (Get-Random -Minimum 300 -Maximum 600)
 
