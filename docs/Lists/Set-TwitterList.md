@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.5.1/Lists/Set-TwitterList
+online version: https://docs.bluebirdps.dev/en/v0.6.1/Lists/Set-TwitterList
 schema: 2.0.0
 ---
 
@@ -214,12 +214,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.5.1/Lists/Set-TwitterList)
+[Online Version](https://docs.bluebirdps.dev/en/v0.6.1/Lists/Set-TwitterList)
 
-[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.5.1/Lists/Get-TwitterList)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.6.1/Lists/Get-TwitterList)
 
-[Add-TwitterList](https://docs.bluebirdps.dev/en/v0.5.1/Lists/Add-TwitterList)
+[Add-TwitterList](https://docs.bluebirdps.dev/en/v0.6.1/Lists/Add-TwitterList)
 
-[Remove-TwitterList](https://docs.bluebirdps.dev/en/v0.5.1/Lists/Remove-TwitterList)
+[Remove-TwitterList](https://docs.bluebirdps.dev/en/v0.6.1/Lists/Remove-TwitterList)
 
 [Api Reference - POST lists/update](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-update)

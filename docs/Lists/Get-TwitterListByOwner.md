@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.5.1/Lists/Get-TwitterListByOwner
+online version: https://docs.bluebirdps.dev/en/v0.6.1/Lists/Get-TwitterListByOwner
 schema: 2.0.0
 ---
 
@@ -81,8 +81,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.5.1/Lists/Get-TwitterListByOwner)
+[Online Version](https://docs.bluebirdps.dev/en/v0.6.1/Lists/Get-TwitterListByOwner)
 
-[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.5.1/Lists/Get-TwitterList)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.6.1/Lists/Get-TwitterList)
 
 [Api Reference - GET lists/ownerships](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-ownerships)

@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.5.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Set-TwitterMutedUser
+online version: https://docs.bluebirdps.dev/en/v0.6.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Set-TwitterMutedUser
 schema: 2.0.0
 ---
 
@@ -115,11 +115,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.5.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Set-TwitterMutedUser)
+[Online Version](https://docs.bluebirdps.dev/en/v0.6.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Set-TwitterMutedUser)
 
-[Get-TwitterMutedUser](https://docs.bluebirdps.dev/en/v0.5.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterMutedUser)
+[Get-TwitterMutedUser](https://docs.bluebirdps.dev/en/v0.6.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterMutedUser)
 
-[Get-TwitterUser](https://docs.bluebirdps.dev/en/v0.5.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser)
+[Get-TwitterUser](https://docs.bluebirdps.dev/en/v0.6.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser)
 
 [Api Reference - POST mutes/users/create](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-mutes-users-create)
 
