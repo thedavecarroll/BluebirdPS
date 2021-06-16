@@ -38,7 +38,7 @@
   }
   CmdletsToExport = @()
   CompatiblePSEditions = 'Core'
-  ModuleVersion = '0.5.1'
+  ModuleVersion = '0.6.0'
   VariablesToExport = @()
   CompanyName = 'thedavecarroll'
   AliasesToExport = @()
