@@ -24,7 +24,7 @@
 
       ### Added
 
-      - [Issue #74](https://github.com/thedavecarroll/BluebirdPS/issues/74) - Import-TwitterAuthentication - Use environment  variables to set authentication values
+      - [Issue #74](https://github.com/thedavecarroll/BluebirdPS/issues/74) - Import-TwitterAuthentication - Use environment variables to set authentication values
       - [Issue #76](https://github.com/thedavecarroll/BluebirdPS/issues/76) - Invoke-TwitterRequest - Add option for progress bar for paged requests
       - [Issue #81](https://github.com/thedavecarroll/BluebirdPS/issues/81) - [BluebirdPS.ResponseData] - Add InvocationInfo to history
       - [Issue #82](https://github.com/thedavecarroll/BluebirdPS/issues/82) - [BluebirdPS.APIV2.Objects.Poll] - Add TotalVotes property
