@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.5.2 - 2021-06-16
+## 0.6.0 - 2021-06-16
 
 Bugfix, Feature, and Maintenance; Update Strongly Recommended
 

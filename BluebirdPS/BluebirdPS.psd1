@@ -7,7 +7,7 @@
   Copyright = '2020-2021'
   PrivateData = @{
     PSData = @{
-      ReleaseNotes = '## 0.5.2 - 2021-06-16
+      ReleaseNotes = '## 0.6.0 - 2021-06-16
 
       Bugfix, Feature, and Maintenance; Update Strongly Recommended
 
