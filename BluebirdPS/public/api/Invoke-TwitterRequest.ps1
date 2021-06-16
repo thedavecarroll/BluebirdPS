@@ -65,6 +65,9 @@ function Invoke-TwitterRequest {
 
         # recursively call this function for pagination or cursoring
         if ($ResponseData.ApiResponse.psobject.Properties.Name -match 'meta|next_cursor') {
+
+            Start-Sleep -Milliseconds (Get-Random -Minimum 300 -Maximum 600)
+
             if ($ResponseData.ApiResponse.meta.next_token.length -gt 0) {
 
                 # Twitter API V2
