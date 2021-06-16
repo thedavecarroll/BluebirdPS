@@ -21,6 +21,8 @@
       For full CHANGELOG, see https://docs.bluebirdps.dev/en/latest/CHANGELOG/
       '
       Tags = @('Twitter-Client','Twitter-API','Twitter','Tweet','Automation','Social-Media')
+      LicenseUri = 'https://docs.bluebirdps.dev/en/latest/LICENSE/'
+      ProjectUri = 'https://github.com/thedavecarroll/BluebirdPS'
     }
   }
   CmdletsToExport = @()
