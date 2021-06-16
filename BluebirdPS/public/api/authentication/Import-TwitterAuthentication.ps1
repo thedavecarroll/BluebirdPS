@@ -10,17 +10,17 @@ function Import-TwitterAuthentication {
         'env:BLUEBIRDPS_ACCESS_TOKEN',
         'env:BLUEBIRDPS_ACCESS_TOKEN_SECRET'
 
-    $BluebirdPSAuthEnvPaths = 'env:BLUEBIRDPS_BEARER_TOKEN'
+        $BluebirdPSBearerTokenEnvPath = 'env:BLUEBIRDPS_BEARER_TOKEN'
 
     if ((Test-Path -Path $BluebirdPSAuthEnvPaths) -notcontains $false) {
         'Importing Twitter authentication from environment variables.' | Write-Verbose
 
-        $OAuth['ApiKey'] = $env:BLUEBIRDPS_API_SECRET
+        $OAuth['ApiKey'] = $env:BLUEBIRDPS_API_KEY
         $OAuth['ApiSecret'] = $env:BLUEBIRDPS_API_SECRET
         $OAuth['AccessToken'] = $env:BLUEBIRDPS_ACCESS_TOKEN
         $OAuth['AccessTokenSecret'] = $env:BLUEBIRDPS_ACCESS_TOKEN_SECRET
 
-        if (Test-Path -Path $BluebirdPSBearerTokenEnvironmentPath) {
+        if (Test-Path -Path $BluebirdPSBearerTokenEnvPath) {
             $OAuth['BearerToken'] = $env:BLUEBIRDPS_BEARER_TOKEN
         }
 

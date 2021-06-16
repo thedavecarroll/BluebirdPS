@@ -7,7 +7,7 @@
   Copyright = '2020-2021'
   PrivateData = @{
     PSData = @{
-      ReleaseNotes = '## 0.6.0 - 2021-06-16
+      ReleaseNotes = '## 0.6.1 - 2021-06-16
 
       Bugfix, Feature, and Maintenance; Update Strongly Recommended
 
@@ -38,7 +38,7 @@
   }
   CmdletsToExport = @()
   CompatiblePSEditions = 'Core'
-  ModuleVersion = '0.6.0'
+  ModuleVersion = '0.6.1'
   VariablesToExport = @()
   CompanyName = 'thedavecarroll'
   AliasesToExport = @()
