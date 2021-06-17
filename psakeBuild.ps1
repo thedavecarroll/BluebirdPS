@@ -76,6 +76,10 @@ task DotNetBuild -Depends 'StageFiles' {
 
 } -Description 'Compile .Net Library'
 
+task CopyLicense -Depends StageFiles {
+    $LicenseFile = [IO.Path]::Combine($env:BHProjectPath,'LICENSE')
+    Copy-Item -Path $LicenseFile -Destination $PSBPreference.Build.ModuleOutDir -Force
+} -Description 'Copy LICENSE File'
 <#
 New Tasks
 
@@ -94,6 +98,6 @@ https://github.com/microsoft/PowerShellForGitHub
 
 #>
 
-task Build -FromModule PowerShellBuild -depends @('DotNetBuild','GenerateExternalHelp','AddFileListToManifest')
+task Build -FromModule PowerShellBuild -depends @('DotNetBuild','CopyLicense','GenerateExternalHelp','AddFileListToManifest')
 
 task default -depends Build
