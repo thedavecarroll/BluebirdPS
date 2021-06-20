@@ -10,6 +10,7 @@ namespace BluebirdPS
     public class ResponseData
     {
         public string Command { get; set; }
+        public DateTime Timestamp { get; set; }
         public InvocationInfo InvocationInfo { get; set; }
         public HttpMethod HttpMethod { get; set; }
         public Uri Uri { get; set; }
@@ -34,6 +35,7 @@ namespace BluebirdPS
             try
             {
                 Command = request.CommandName;
+                Timestamp = DateTime.Now;
                 InvocationInfo = request.InvocationInfo;
                 HttpMethod = request.HttpMethod;
                 Uri = authentication.Uri;
@@ -92,7 +94,7 @@ namespace BluebirdPS
             {
                 DateTime resetTime = new DateTime(1970, 1, 1, 0, 0, 0, 0);
                 RateLimitReset = resetTime.AddSeconds(int.Parse((string)HeaderResponse["x-rate-limit-reset"])).ToLocalTime();
-            }             
+            }
         }
     }
 }
