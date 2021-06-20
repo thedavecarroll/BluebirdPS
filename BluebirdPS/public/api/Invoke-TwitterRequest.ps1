@@ -60,30 +60,19 @@ function Invoke-TwitterRequest {
         $script:LastHeaders = $ResponseHeaders
 
         $ResponseData = [ResponseData]::new($RequestParameters,$Authentication,$ResponseHeaders,$LastStatusCode,$ApiResponse)
-
         Write-TwitterResponse -ResponseData $ResponseData
-
-        # recursively call this function for pagination or cursoring
-        $script:CurrentPage = 2
-        $Progress = @{
-            Activity = 'Retrieving paged results from Twitter API'
-            Status = 'Current page'
-        }
 
         if ($ResponseData.ApiResponse.psobject.Properties.Name -match 'meta|next_cursor') {
 
-            Write-Progress @Progress -CurrentOperation $CurrentPage
-            $CurrentPage++
+            $Progress = @{
+                Activity = 'Retrieving paged results from Twitter API'
+            }
 
-            Start-Sleep -Milliseconds (Get-Random -Minimum 300 -Maximum 600)
+            if ($RequestParameters.Endpoint -match '\/2\/' -and $null -ne $ResponseData.ApiResponse.meta.next_token) {
 
-            if ($ResponseData.ApiResponse.meta.next_token.length -gt 0) {
-
-                # Twitter API V2
-                'Returned {0} objects' -f $ResponseData.ApiResponse.meta.result_count | Write-Verbose
-
-                if ($RequestParameters.Query.Keys -match 'pagination_token') {
-                    $RequestParameters.Query.Remove('pagination_token')
+                # Twitter API V2 pagination
+                if ($ResponseData.ApiResponse.meta.result_count) {
+                    'Returned {0} objects' -f $ResponseData.ApiResponse.meta.result_count | Write-Verbose
                 }
 
                 # The endpoint /2/tweets/search/recent uses a different token for pagination
@@ -101,16 +90,20 @@ function Invoke-TwitterRequest {
                 }
                 $RequestParameters.Query.Add($NextPageKey,$ResponseData.ApiResponse.meta.next_token)
 
-            } elseif ($ResponseData.ApiResponse.next_cursor) {
+            } elseif ($null -ne $ResponseData.ApiResponse.next_cursor -and $ResponseData.ApiResponse.next_cursor -ne 0) {
 
-                # Twitter API V1.1, calls to endpoints will assume starting cursor of -1
+                # Twitter API V1.1 cursoring, calls to endpoints will assume starting cursor of -1
                 if ($RequestParameters.Query.Keys -match 'cursor') {
                     $RequestParameters.Query.Remove('cursor')
                 }
                 $RequestParameters.Query.Add('cursor',$ResponseData.ApiResponse.next_cursor)
-
-                Invoke-TwitterRequest -RequestParameters $RequestParameters
+            } else {
+                return
             }
+
+            Write-Progress @Progress
+            Start-Sleep -Milliseconds (Get-Random -Minimum 300 -Maximum 600)
+            Invoke-TwitterRequest -RequestParameters $RequestParameters
         }
     }
     catch {
