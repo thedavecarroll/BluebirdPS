@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.6.1/Tweets/Set-TweetReply
+online version: https://docs.bluebirdps.dev/en/v0.6.2/Tweets/Set-TweetReply
 schema: 2.0.0
 ---
 
@@ -114,6 +114,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.6.1/Tweets/Set-TweetReply)
+[Online Version](https://docs.bluebirdps.dev/en/v0.6.2/Tweets/Set-TweetReply)
 
 [Api Documentation - PUT /2/tweets/:id/hidden](https://developer.twitter.com/en/docs/twitter-api/tweets/hide-replies/api-reference/put-tweets-id-hidden)

@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.6.1/Lists/Remove-TwitterListSubscription
+online version: https://docs.bluebirdps.dev/en/v0.6.2/Lists/Remove-TwitterListSubscription
 schema: 2.0.0
 ---
 
@@ -132,14 +132,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.6.1/Lists/Remove-TwitterListSubscription)
+[Online Version](https://docs.bluebirdps.dev/en/v0.6.2/Lists/Remove-TwitterListSubscription)
 
-[Add-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.6.1/Lists/Add-TwitterListSubscription)
+[Add-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.6.2/Lists/Add-TwitterListSubscription)
 
-[Get-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.6.1/Lists/Get-TwitterListSubscription)
+[Get-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.6.2/Lists/Get-TwitterListSubscription)
 
-[Test-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.6.1/Lists/Test-TwitterListSubscription)
+[Test-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.6.2/Lists/Test-TwitterListSubscription)
 
-[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.6.1/Lists/Get-TwitterList)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.6.2/Lists/Get-TwitterList)
 
 [Api Reference - POST lists/subscribers/destroy](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-destroy)

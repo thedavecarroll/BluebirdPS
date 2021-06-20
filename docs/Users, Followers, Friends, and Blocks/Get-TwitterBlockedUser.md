@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.6.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterBlockedUser
+online version: https://docs.bluebirdps.dev/en/v0.6.2/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterBlockedUser
 schema: 2.0.0
 ---
 
@@ -73,8 +73,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.6.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterBlockedUser)
+[Online Version](https://docs.bluebirdps.dev/en/v0.6.2/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterBlockedUser)
 
-[Set-TwitterBlockedUser](https://docs.bluebirdps.dev/en/v0.6.1/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Set-TwitterBlockedUser)
+[Set-TwitterBlockedUser](https://docs.bluebirdps.dev/en/v0.6.2/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Set-TwitterBlockedUser)
 
 [Api Reference - GET /2/users/:id/blocking](https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-reference/get-users-blocking)
