@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.6.1/Helper%20Commands/Get-TwitterApiEndpoint
+online version: https://docs.bluebirdps.dev/en/v0.6.2/Helper%20Commands/Get-TwitterApiEndpoint
 schema: 2.0.0
 ---
 
@@ -122,6 +122,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.6.1/Helper%20Commands/Get-TwitterApiEndpoint)
+[Online Version](https://docs.bluebirdps.dev/en/v0.6.2/Helper%20Commands/Get-TwitterApiEndpoint)
 
-[Invoke-TwitterRequest](https://docs.bluebirdps.dev/en/v0.6.1/Supporting%20Commands/Invoke-TwitterRequest)
+[Invoke-TwitterRequest](https://docs.bluebirdps.dev/en/v0.6.2/Supporting%20Commands/Invoke-TwitterRequest)

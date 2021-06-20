@@ -60,54 +60,50 @@ function Invoke-TwitterRequest {
         $script:LastHeaders = $ResponseHeaders
 
         $ResponseData = [ResponseData]::new($RequestParameters,$Authentication,$ResponseHeaders,$LastStatusCode,$ApiResponse)
-
         Write-TwitterResponse -ResponseData $ResponseData
-
-        # recursively call this function for pagination or cursoring
-        $script:CurrentPage = 2
-        $Progress = @{
-            Activity = 'Retrieving paged results from Twitter API'
-            Status = 'Current page'
-        }
 
         if ($ResponseData.ApiResponse.psobject.Properties.Name -match 'meta|next_cursor') {
 
-            Write-Progress @Progress -CurrentOperation $CurrentPage
-            $CurrentPage++
+            $Progress = @{
+                Activity = 'Retrieving paged results from Twitter API'
+            }
 
-            Start-Sleep -Milliseconds (Get-Random -Minimum 300 -Maximum 600)
+            if ($RequestParameters.Endpoint -match '\/2\/' -and $null -ne $ResponseData.ApiResponse.meta.next_token) {
 
-            if ($ResponseData.ApiResponse.meta.next_token.length -gt 0) {
-
-                # Twitter API V2
-                'Returned {0} objects' -f $ResponseData.ApiResponse.meta.result_count | Write-Verbose
-
-                if ($RequestParameters.Query.Keys -match 'pagination_token') {
-                    $RequestParameters.Query.Remove('pagination_token')
+                # Twitter API V2 pagination
+                if ($ResponseData.ApiResponse.meta.result_count) {
+                    'Returned {0} objects' -f $ResponseData.ApiResponse.meta.result_count | Write-Verbose
                 }
 
-
-                if ($RequestParameters.Query.Keys -match 'next_token') {
-                    $RequestParameters.Query.Remove('next_token')
-                }
-                if ($RequestParameters.CommandName -eq 'Search-Tweet') {
-                    $RequestParameters.Query.Add('next_token',$ResponseData.ApiResponse.meta.next_token)
+                # The endpoint /2/tweets/search/recent uses a different token for pagination
+                # https://twittercommunity.com/t/why-does-timeline-use-pagination-token-while-search-uses-next-token/150963/2
+                if ($RequestParameters.Endpoint -match 'tweets\/search\/recent') {
+                    if ($RequestParameters.Query.Keys -match 'next_token') {
+                        $RequestParameters.Query.Remove('next_token')
+                    }
+                    $NextPageKey = 'next_token'
                 } else {
-                    $RequestParameters.Query.Add('pagination_token',$ResponseData.ApiResponse.meta.next_token)
+                    if ($RequestParameters.Query.Keys -match 'pagination_token') {
+                        $RequestParameters.Query.Remove('pagination_token')
+                    }
+                    $NextPageKey = 'pagination_token'
                 }
+                $RequestParameters.Query.Add($NextPageKey,$ResponseData.ApiResponse.meta.next_token)
 
-                Invoke-TwitterRequest -RequestParameters $RequestParameters
+            } elseif ($null -ne $ResponseData.ApiResponse.next_cursor -and $ResponseData.ApiResponse.next_cursor -ne 0) {
 
-            } elseif ($ResponseData.ApiResponse.next_cursor) {
-
-                # Twitter API V1.1, calls to endpoints will assume starting cursor of -1
+                # Twitter API V1.1 cursoring, calls to endpoints will assume starting cursor of -1
                 if ($RequestParameters.Query.Keys -match 'cursor') {
                     $RequestParameters.Query.Remove('cursor')
                 }
                 $RequestParameters.Query.Add('cursor',$ResponseData.ApiResponse.next_cursor)
-
-                Invoke-TwitterRequest -RequestParameters $RequestParameters
+            } else {
+                return
             }
+
+            Write-Progress @Progress
+            Start-Sleep -Milliseconds (Get-Random -Minimum 300 -Maximum 600)
+            Invoke-TwitterRequest -RequestParameters $RequestParameters
         }
     }
     catch {

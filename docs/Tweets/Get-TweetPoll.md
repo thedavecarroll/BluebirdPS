@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.6.1/Tweets/Get-TweetPoll
+online version: https://docs.bluebirdps.dev/en/v0.6.2/Tweets/Get-TweetPoll
 schema: 2.0.0
 ---
 
@@ -108,6 +108,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.6.1/Tweets/Get-TweetPoll)
+[Online Version](https://docs.bluebirdps.dev/en/v0.6.2/Tweets/Get-TweetPoll)
 
-[Get-Tweet](https://docs.bluebirdps.dev/en/v0.6.1/Tweets/Get-Tweet)
+[Get-Tweet](https://docs.bluebirdps.dev/en/v0.6.2/Tweets/Get-Tweet)

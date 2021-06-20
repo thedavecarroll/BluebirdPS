@@ -20,6 +20,11 @@ PowerShell best practices.
 
 ## What's New
 
+The v0.6.2 release of BluebirdPS includes the following:
+
+- Fixes pagination for /2/tweets/search/recent endpoint and display of progress bar
+- Adds Timestamp property to ResponseData
+
 The v0.6.1 release of BluebirdPS adds the following new features.
 
 - Import-TwitterAuthentication will attempt to import authentication data from environment variables first before importing from the encrypted credentials file.
