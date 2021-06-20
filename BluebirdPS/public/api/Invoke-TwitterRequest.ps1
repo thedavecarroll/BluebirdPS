@@ -86,17 +86,20 @@ function Invoke-TwitterRequest {
                     $RequestParameters.Query.Remove('pagination_token')
                 }
 
-
-                if ($RequestParameters.Query.Keys -match 'next_token') {
-                    $RequestParameters.Query.Remove('next_token')
-                }
-                if ($RequestParameters.CommandName -eq 'Search-Tweet') {
-                    $RequestParameters.Query.Add('next_token',$ResponseData.ApiResponse.meta.next_token)
+                # The endpoint /2/tweets/search/recent uses a different token for pagination
+                # https://twittercommunity.com/t/why-does-timeline-use-pagination-token-while-search-uses-next-token/150963/2
+                if ($RequestParameters.Endpoint -match 'tweets\/search\/recent') {
+                    if ($RequestParameters.Query.Keys -match 'next_token') {
+                        $RequestParameters.Query.Remove('next_token')
+                    }
+                    $NextPageKey = 'next_token'
                 } else {
-                    $RequestParameters.Query.Add('pagination_token',$ResponseData.ApiResponse.meta.next_token)
+                    if ($RequestParameters.Query.Keys -match 'pagination_token') {
+                        $RequestParameters.Query.Remove('pagination_token')
+                    }
+                    $NextPageKey = 'pagination_token'
                 }
-
-                Invoke-TwitterRequest -RequestParameters $RequestParameters
+                $RequestParameters.Query.Add($NextPageKey,$ResponseData.ApiResponse.meta.next_token)
 
             } elseif ($ResponseData.ApiResponse.next_cursor) {
 
