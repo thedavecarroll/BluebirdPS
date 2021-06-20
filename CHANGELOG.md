@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.6.2 - 2021-06-20
+
+Bugfix and Feature; Update Strongly Recommended
+
+### Fixed
+
+- [Issue #73](https://github.com/thedavecarroll/BluebirdPS/issues/73) - LICENSE - Include license file with module
+- [Issue #85](https://github.com/thedavecarroll/BluebirdPS/issues/85) - Invoke-TwitterRequest - Progress bar is displayed after the first page, even when there is no second page
+- [Issue #87](https://github.com/thedavecarroll/BluebirdPS/issues/87) - Invoke-TwitterRequest - tweets/search/recent endpoint used multiple times, but command only checks for Search-Tweet
+
+### Added
+
+- [Issue #86](https://github.com/thedavecarroll/BluebirdPS/issues/86) - [BluebirdPS.ResponseData] - Add Timestamp property
+
 ## [0.6.1] - 2021-06-16
 
 Bugfix, Feature, and Maintenance; Update Strongly Recommended
