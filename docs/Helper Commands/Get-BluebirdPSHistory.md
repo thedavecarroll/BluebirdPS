@@ -53,7 +53,7 @@ HEADER RESPONSE:
 API RESPONSE:
 
 - Status: the http status of the call indicating success or specific failure
-- The raw api response
+- The raw API response
 
 ## EXAMPLES
 
