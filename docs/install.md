@@ -8,7 +8,7 @@ Start PowerShell 7 and run the following command:
 Install-Module -Name BluebirdPS -Scope CurrentUser
 ```
 
-For more information, please visit the [BluebirdPS page] on the Powershell Gallery.
+For more information, please visit the [BluebirdPS page] on the PowerShell Gallery.
 
 [BluebirdPS page]: https://bit.ly/BluebirdPS
 
