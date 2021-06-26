@@ -20,6 +20,15 @@ PowerShell best practices.
 
 ## What's New
 
+The v0.7.0 release of BluebirdPS includes the following:
+
+- **Adds new command, `Get-TweetCount`, which corresponds to the recently released `GET /tweets/count/recent` endpoint.**
+
+- Fixes parameter sets for `Publish-TwitterDM` and parameter validation for several commands.
+- Fixes `Get-TwitterApiEndpoint` filter for `CommandName`.
+- `Publish-TwitterDM` now allows users to send a message only, message and media, or media only.
+- Add `ToString()` override for Tweet and User object classes.
+
 The v0.6.2 release of BluebirdPS includes the following:
 
 - Fixes pagination for /2/tweets/search/recent endpoint and display of progress bar

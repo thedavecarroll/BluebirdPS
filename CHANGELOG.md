@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.7.0 - 2021-06-26
+
+Bugfix and Feature; Update Strongly Recommended
+
+### Fixed
+
+- [Issue #89](https://github.com/thedavecarroll/BluebirdPS/issues/89) - Publish-TwitterDM - Parameter sets not functioning correctly
+- [Issue #94](https://github.com/thedavecarroll/BluebirdPS/issues/94) - Get-TwitterListMember, and other functions - Does not check if List parameter is an empty object
+- [Issue #95](https://github.com/thedavecarroll/BluebirdPS/issues/95) - Get-TwitterApiEndpoint - Parameter CommandName does not filter correctly
+
+### Added
+
+- [Issue #72](https://github.com/thedavecarroll/BluebirdPS/issues/72) - [New Feature] BluebirdPS.APIV2.TweetInfo.Tweet should override .ToString()
+- [Issue #90](https://github.com/thedavecarroll/BluebirdPS/issues/90) - Publish-TwitterDM - Allow users to send message only, message and media, or media only direct messages
+- [Issue #91](https://github.com/thedavecarroll/BluebirdPS/issues/91) - Get-TweetCount - Add new function recent Tweet counts endpoint
+- [Issue #92](https://github.com/thedavecarroll/BluebirdPS/issues/92) - BluebirdPS.APIV2.UserInfo.User - Override ToString()
+- [Issue #93](https://github.com/thedavecarroll/BluebirdPS/issues/93) - Get-TwitterList - Accept list full name as another parameter set
+
 ## [0.6.2] - 2021-06-20
 
 Bugfix and Feature; Update Strongly Recommended
