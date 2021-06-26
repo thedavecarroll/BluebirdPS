@@ -261,3 +261,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 [Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Get-TweetCount)
 
 [Get-Tweet](https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Get-Tweet)
+
+[Api Reference - GET /tweets/count/recent](https://developer.twitter.com/en/docs/twitter-api/tweets/counts/api-reference/get-tweets-counts-recent)
