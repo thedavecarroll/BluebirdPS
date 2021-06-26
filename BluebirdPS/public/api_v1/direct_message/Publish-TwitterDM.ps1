@@ -1,32 +1,34 @@
 function Publish-TwitterDM {
-    [CmdletBinding(DefaultParameterSetName='DM')]
+    [CmdletBinding(DefaultParameterSetName='DMUserId')]
     param(
-        [Parameter(Mandatory)]
-        [ValidateLength(1,10000)]
         [string]$Message,
 
-        [Parameter(Mandatory,ParameterSetName='DM',ValueFromPipeline)]
-        [Parameter(Mandatory,ParameterSetName='DMWithMedia',ValueFromPipeline)]
+        [Parameter(Mandatory,ParameterSetName='DMUserId',ValueFromPipeline)]
+        [Parameter(Mandatory,ParameterSetName='DMUserIdWithMedia',ValueFromPipeline)]
         [string]$Id,
 
         [Parameter(Mandatory,ParameterSetName='DMUserObject',ValueFromPipeline)]
+        [Parameter(Mandatory,ParameterSetName='DMUserObjectWithMedia',ValueFromPipeline)]
         [ValidateObjectNotNullOrEmpty()]
         [BluebirdPS.APIV2.UserInfo.User]$User,
 
-        [Parameter(ParameterSetName='DM')]
+        [Parameter(ParameterSetName='DMUserId')]
         [Parameter(ParameterSetName='DMUserObject')]
         [ValidateNotNullOrEmpty()]
         [string]$MediaId,
 
-        [Parameter(Mandatory,ParameterSetName='DMWithMedia')]
+        [Parameter(Mandatory,ParameterSetName='DMUserIdWithMedia')]
+        [Parameter(Mandatory,ParameterSetName='DMUserObjectWithMedia')]
         [ValidateScript({Test-Path -Path $_})]
         [string]$Path,
 
-        [Parameter(Mandatory,ParameterSetName='DMWithMedia')]
+        [Parameter(Mandatory,ParameterSetName='DMUserIdWithMedia')]
+        [Parameter(Mandatory,ParameterSetName='DMUserObjectWithMedia')]
         [ValidateSet('DMImage','DMVideo','DMGif')]
         [string]$Category,
 
-        [Parameter(ParameterSetName='DMWithMedia')]
+        [Parameter(ParameterSetName='DMUserIdWithMedia')]
+        [Parameter(ParameterSetName='DMUserObjectWithMedia')]
         [ValidateLength(1,1000)]
         [string]$AltImageText
     )
@@ -34,7 +36,7 @@ function Publish-TwitterDM {
     $MessageTemplate = '{{"event":{{"type":"message_create","message_create":{{"target":{{"recipient_id":{0}}},"message_data":{{"text":"{1}"}}}}}}}}'
     $MessageWithMediaTemplate = '{{"event":{{"type":"message_create","message_create":{{"target":{{"recipient_id":{0}}},"message_data":{{"text":"{1}","attachment":{{"type":"media","media":{{"id":{2}}}}}}}}}}}}}'
 
-    if ($PSCmdlet.ParameterSetName -eq 'DMWithMedia') {
+    if ($PSCmdlet.ParameterSetName -match 'WithMedia') {
         $TwitterMediaParams = @{
             Path = $Path
             Category = $Category
