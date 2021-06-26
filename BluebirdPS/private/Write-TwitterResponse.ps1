@@ -24,6 +24,10 @@ function Write-TwitterResponse {
         $BluebirdPSHistoryList.Add($ResponseData)
         Write-Information -MessageData $ResponseData
 
+        if ($BluebirdPSConfiguration.RawOutput) {
+            return
+        }
+
         if ($LastStatusCode -eq 401) {
             New-TwitterErrorRecord -ResponseData $ResponseData
         } elseif ($BluebirdPSConfiguration.RawOutput) {
