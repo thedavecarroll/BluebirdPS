@@ -149,8 +149,8 @@ namespace BluebirdPS.APIV2.TweetInfo
         {
             OriginalObject = input;
 
-            Start = input.start;
-            End = input.end;
+            Start = input.start.ToLocalTime();
+            End = input.end.ToLocalTime();
             Count = input.tweet_count;
         }
 
@@ -173,8 +173,8 @@ namespace BluebirdPS.APIV2.TweetInfo
         {
             SearchString = search;
             Granularity = granularity;
-            StartTime = starttime;
-            EndTime = endtime;            
+            StartTime = starttime.ToLocalTime();
+            EndTime = endtime.ToLocalTime();            
             TotalCount = totalCount;
         }
 
