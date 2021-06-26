@@ -66,6 +66,10 @@ namespace BluebirdPS
                         {
                             twitterResponse.Add(new Tweet(twitterObject));
                         }
+                        else if (HasProperty(twitterObject, "tweet_count"))
+                        {
+                            twitterResponse.Add(new TweetCount(twitterObject));
+                        }
                     }
                 }
                 else
