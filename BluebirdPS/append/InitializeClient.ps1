@@ -27,7 +27,7 @@ $BluebirdPSCommands = Get-Command -Module BluebirdPS -ListImported
 $PublicFunctions = (Get-Module -Name BluebirdPS).ExportedFunctions.Values.Name
 
 [SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
-$TwitterEndpoints = foreach ($Command in $BluebirdPSCommands) {
+$script:TwitterEndpoints = foreach ($Command in $BluebirdPSCommands) {
     $NavigationLinks = (Get-Help -Name $Command.Name).relatedLinks.navigationLink.Where{$_.linkText -match '^(?!.*(Online|\w+-)).*$'}.Where{$_.linkText -match '- \w+\s(\/|\w+\/)'}
     if ($NavigationLinks.Count -gt 0) {
         $ApiEndpoint = $NavigationLinks.LinkText | ForEach-Object { $_.Split('-')[1].Trim() }
