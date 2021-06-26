@@ -23,11 +23,13 @@ PowerShell best practices.
 The v0.7.0 release of BluebirdPS includes the following:
 
 - **Adds new command, `Get-TweetCount`, which corresponds to the recently released `GET /tweets/count/recent` endpoint.**
+- **Removes configuration value for `RawOutput`. This capability is replaced by new configuration value `OutputType`.**
 
 - Fixes parameter sets for `Publish-TwitterDM` and parameter validation for several commands.
 - Fixes `Get-TwitterApiEndpoint` filter for `CommandName`.
 - `Publish-TwitterDM` now allows users to send a message only, message and media, or media only.
-- Add `ToString()` override for Tweet and User object classes.
+- Adds `ToString()` override for Tweet and User object classes.
+- Adds new configuration value `OutputType` with values of 'CustomClasses', 'PSCustomObject', or 'JSON'. This will allow a user to specify the format for API output.
 
 The v0.6.2 release of BluebirdPS includes the following:
 
