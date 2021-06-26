@@ -15,7 +15,11 @@ function Get-TwitterList {
         [string]$Slug,
         [Parameter(ParameterSetName='BySlug')]
         [ValidateNotNullOrEmpty()]
-        [string]$OwnerUserName
+        [string]$OwnerUserName,
+
+        [Parameter(Mandatory,ParameterSetName='ByFullName')]
+        [ValidateNotNullOrEmpty()]
+        [string]$FullName
     )
 
     $Request = [TwitterRequest]@{
@@ -42,7 +46,11 @@ function Get-TwitterList {
             } else {
                 $Request.Query.Add('owner_screen_name', $BluebirdPSConfiguration.AuthUserName)
             }
-
+        }
+        'ByFullName' {
+            $UserName, $Slug = $FullName.Split('/')
+            $Request.Query.Add( 'slug', $Slug)
+            $Request.Query.Add( 'owner_screen_name', $UserName.Replace('^@',''))
         }
     }
 
