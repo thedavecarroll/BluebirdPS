@@ -31,8 +31,8 @@ The RateLimitAction and RateLimitThreshold values instruct how and when to act a
 
 The ConfigurationPath and CredentialsPath values are used to export configuration and authentication.
 
-The RawOutput value specifies whether the raw response should be presented to the user, or return rich objects.
-The module uses Invoke-RestMethod which converts JSON response to a [PSCustomObject].
+The OutputType value specifies what type of data to return to the user.
+The default OutputType is 'CustomClasses' (custom C# classes), but 'PSCustomObject' (as returned by Invoke-RestMethod) or 'JSON' can be specified.
 
 ## EXAMPLES
 
@@ -45,13 +45,13 @@ PS > Get-BluebirdPSConfiguration
 ```text
 AuthUserId         : 292670084
 AuthUserName       : thedavecarroll
-AuthValidationDate : 5/23/2021 4:02:57 PM
-AuthLastExportDate : 5/13/2021 4:16:59 PM
+AuthValidationDate : 6/26/2021 5:33:03 PM
+AuthLastExportDate : 5/31/2021 2:40:48 PM
 RateLimitAction    : Warning
 RateLimitThreshold : 5
 ConfigurationPath  : C:\Users\Dave\.BluebirdPS\Configuration.json
 CredentialsPath    : C:\Users\Dave\.BluebirdPS\twittercred.sav
-RawOutput          : False
+OutputType         : CustomClasses
 ```
 
 Display the current BluebirdPS configuration.

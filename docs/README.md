@@ -109,11 +109,10 @@ This command performs the rate limit action when the threshold is reached, both 
 
 Next, the command adds the response data to the module's session history table and writes the same data to the *Information Stream*.
 
-If the configuration value for RawOutput is true, it returns the raw API output, which is a `[PSCustomObject]` created by `Invoke-RestMethod`'s automatic conversion of JSON.
-If the value is false, the api response is parsed based on the API version.
-The command returns rich objects of various C# classes, simple string objects, or, when the parsing rules do not match the response, the raw response `[PSCustomObject]`.
+With possible values of 'CustomClasses', 'PsCustomObject', or 'JSON', the configuration value for OutputType determines the format that the API response will be presented to the user.
 
-If there were errors returned, they are parsed and specific exceptions are thrown.
+If errors are returned and the OutputType is 'CustomClasses', they are parsed and specific exceptions are thrown.
+Otherwise, the errors are included in the output.
 
 ### Rich Objects, C# Classes
 
