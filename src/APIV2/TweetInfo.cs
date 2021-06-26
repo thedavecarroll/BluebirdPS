@@ -1,4 +1,4 @@
-﻿using BluebirdPS.APIV2.Objects;
+using BluebirdPS.APIV2.Objects;
 using BluebirdPS.APIV2.TweetInfo.Metrics;
 using System;
 using System.Collections.Generic;
@@ -118,6 +118,10 @@ namespace BluebirdPS.APIV2.TweetInfo
             }
         }
 
+        public override string ToString()
+        {
+            return $"{Id}:{Text}";
+        }
     }
 
     public class ReferencedTweet : TwitterObject
