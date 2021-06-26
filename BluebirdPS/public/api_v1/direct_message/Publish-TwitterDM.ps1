@@ -31,6 +31,9 @@ function Publish-TwitterDM {
         [string]$AltImageText
     )
 
+    $MessageTemplate = '{{"event":{{"type":"message_create","message_create":{{"target":{{"recipient_id":{0}}},"message_data":{{"text":"{1}"}}}}}}}}'
+    $MessageWithMediaTemplate = '{{"event":{{"type":"message_create","message_create":{{"target":{{"recipient_id":{0}}},"message_data":{{"text":"{1}","attachment":{{"type":"media","media":{{"id":{2}}}}}}}}}}}}}'
+
     if ($PSCmdlet.ParameterSetName -eq 'DMWithMedia') {
         $TwitterMediaParams = @{
             Path = $Path
@@ -42,13 +45,18 @@ function Publish-TwitterDM {
         $MediaId = Send-TwitterMedia @TwitterMediaParams | Select-Object -ExpandProperty media_id
     }
 
-    $MessageTemplate = '{{"event":{{"type":"message_create","message_create":{{"target":{{"recipient_id":"{0}"}},"message_data":{{"text":"{1}"}}}}}}}}'
-    $MessageWithMediaTemplate = '{{"event":{{"type":"message_create","message_create":{{"target":{{"recipient_id":"{0}"}},"message_data":{{"text":"{1}","attachment":{{"type":"media","media":{{"id":{2}}}}}}}}}}}}}'
+    $RecipientId = $PSCmdlet.ParameterSetName -match 'DMUserObject' ? $User.Id : $Id
+    $MessageText = [string]::IsNullOrEmpty($Message) ? [string]::Empty : $Message
 
-    if ($MediaId) {
-        $Body = $MessageWithMediaTemplate -f $Id,$Message,$MediaId
+    if ($MessageText) {
+        if ($MediaId) {
+            $Body = $MessageWithMediaTemplate -f $RecipientId,$MessageText,$MediaId
+        } else {
+            $Body = $MessageTemplate -f $RecipientId,$MessageText
+        }
     } else {
-        $Body = $MessageTemplate -f $Id,$Message
+        'You must provide a message, media, or a message and media. Please try again.' | Write-Warning
+        return
     }
 
     $Request = [TwitterRequest]@{
