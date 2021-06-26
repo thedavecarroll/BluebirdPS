@@ -4,6 +4,7 @@ function Unpublish-Tweet {
         [Parameter(Mandatory,ParameterSetName='ById',ValueFromPipeline)]
         [string]$Id,
         [Parameter(Mandatory,ParameterSetName='ByTweet',ValueFromPipeline)]
+        [ValidateObjectNotNullOrEmpty()]
         [BluebirdPS.APIV2.TweetInfo.Tweet]$Tweet
     )
 

@@ -5,6 +5,7 @@ function Add-TwitterFriend {
         [string]$Id,
 
         [Parameter(Mandatory,ParameterSetName='ByUser',ValueFromPipeline)]
+        [ValidateObjectNotNullOrEmpty()]
         [BluebirdPS.APIV2.UserInfo.User]$User
     )
 

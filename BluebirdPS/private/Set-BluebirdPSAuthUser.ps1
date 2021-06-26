@@ -5,12 +5,11 @@ function Set-BluebirdPSAuthUser {
     $Request = Invoke-TwitterVerifyCredentials
     if ($Request.Id) {
         $BluebirdPSConfiguration.AuthUserId = $Request.Id
-        if ($BluebirdPSConfiguration.RawOutput) {
-            $BluebirdPSConfiguration.AuthUserName = $Request.screen_name
-        } else {
-            $BluebirdPSConfiguration.AuthUserName = $Request.UserName
+        $BluebirdPSConfiguration.AuthUserName = switch ($BluebirdPSConfiguration.OutputType) {
+            'CustomClasses' { $Request.UserName }
+            'PSCustomObject' { $Request.screen_name }
+            'JSON' { ($Request | ConvertFrom-Json -Depth 10).screen_name }
         }
-
         'Set AuthUserId ({0}), AuthUserName ({1})' -f $BluebirdPSConfiguration.AuthUserId,$BluebirdPSConfiguration.AuthUserName | Write-Verbose
 
         Export-BluebirdPSConfiguration

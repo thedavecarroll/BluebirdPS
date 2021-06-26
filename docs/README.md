@@ -20,6 +20,17 @@ PowerShell best practices.
 
 ## What's New
 
+The v0.7.0 release of BluebirdPS includes the following:
+
+- **Adds new command, `Get-TweetCount`, which corresponds to the recently released `GET /tweets/count/recent` endpoint.**
+- **Removes configuration value for `RawOutput`. This capability is replaced by new configuration value `OutputType`.**
+
+- Fixes parameter sets for `Publish-TwitterDM` and parameter validation for several commands.
+- Fixes `Get-TwitterApiEndpoint` filter for `CommandName`.
+- `Publish-TwitterDM` now allows users to send a message only, message and media, or media only.
+- Adds `ToString()` override for Tweet and User object classes.
+- Adds new configuration value `OutputType` with values of 'CustomClasses', 'PSCustomObject', or 'JSON'. This will allow a user to specify the format for API output.
+
 The v0.6.2 release of BluebirdPS includes the following:
 
 - Fixes pagination for /2/tweets/search/recent endpoint and display of progress bar
@@ -100,11 +111,10 @@ This command performs the rate limit action when the threshold is reached, both 
 
 Next, the command adds the response data to the module's session history table and writes the same data to the *Information Stream*.
 
-If the configuration value for RawOutput is true, it returns the raw API output, which is a `[PSCustomObject]` created by `Invoke-RestMethod`'s automatic conversion of JSON.
-If the value is false, the api response is parsed based on the API version.
-The command returns rich objects of various C# classes, simple string objects, or, when the parsing rules do not match the response, the raw response `[PSCustomObject]`.
+With possible values of 'CustomClasses', 'PsCustomObject', or 'JSON', the configuration value for OutputType determines the format that the API response will be presented to the user.
 
-If there were errors returned, they are parsed and specific exceptions are thrown.
+If errors are returned and the OutputType is 'CustomClasses', they are parsed and specific exceptions are thrown.
+Otherwise, the errors are included in the output.
 
 ### Rich Objects, C# Classes
 

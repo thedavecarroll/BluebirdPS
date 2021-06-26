@@ -39,5 +39,5 @@ $BluebirdPSConfiguration = [Configuration]@{
 
 #region other variables
 [SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
-$BluebirdPSHistoryList = [List[object]]::new()
+$BluebirdPSHistoryList = [List[ResponseData]]::new()
 #endregion

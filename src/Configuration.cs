@@ -18,6 +18,13 @@ namespace BluebirdPS
         Error
     }
 
+    public enum OutputType
+    {
+        CustomClasses,
+        PSCustomObject,
+        JSON
+    }
+
     public class Configuration
     {
         
@@ -29,7 +36,7 @@ namespace BluebirdPS
         public int RateLimitThreshold { get; set; } = 5;
         public string ConfigurationPath { get; set; }
         public string CredentialsPath { get; set; }
-        public bool RawOutput { get; set; } = false;
+        public OutputType OutputType { get; set; } = OutputType.CustomClasses;
         public Configuration() { }
 
     }

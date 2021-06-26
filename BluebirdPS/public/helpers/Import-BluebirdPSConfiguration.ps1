@@ -22,12 +22,19 @@ function Import-BluebirdPSConfiguration {
                 if ($ConfigValue -eq 'AuthLastExportDate') {
                     if ($null -ne $ConfigFromDisk.AuthLastExportDate) {
                         $AuthLastExportDate = $ConfigFromDisk.AuthLastExportDate
+                        'Importing value {0} into {1}' -f $AuthLastExportDate,$ConfigValue | Write-Verbose
                     } else {
                         if (Test-Path -Path $BluebirdPSConfiguration.CredentialsPath) {
                             $AuthLastExportDate = (Get-ChildItem -Path $BluebirdPSConfiguration.CredentialsPath).LastWriteTime
+                            'Discovered value {0} from LastWriteTime for {1}' -f $AuthLastExportDate,$ConfigValue | Write-Verbose
                         }
                     }
                     $BluebirdPSConfiguration.AuthLastExportDate = $AuthLastExportDate
+                    continue
+                }
+
+                if ($ConfigValue -in 'RawOutput') {
+                    'Configuration value {0} has been removed. Please see documentation for further details.' -f $ConfigValue | Write-Warning
                     continue
                 }
 

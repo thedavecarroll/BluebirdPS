@@ -24,10 +24,19 @@ function Write-TwitterResponse {
         $BluebirdPSHistoryList.Add($ResponseData)
         Write-Information -MessageData $ResponseData
 
+        switch ($BluebirdPSConfiguration.OutputType) {
+            'PSCustomObject' {
+                $ResponseData.ApiResponse
+                return
+            }
+            'JSON' {
+                $ResponseData.ApiResponse | ConvertTo-Json -Depth 25
+                return
+            }
+        }
+
         if ($LastStatusCode -eq 401) {
             New-TwitterErrorRecord -ResponseData $ResponseData
-        } elseif ($BluebirdPSConfiguration.RawOutput) {
-            $ResponseData.ApiResponse
         } else {
             switch ($ResponseData.ApiVersion) {
                 'oauth2' {

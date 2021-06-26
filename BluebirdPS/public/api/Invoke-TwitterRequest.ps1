@@ -2,7 +2,8 @@ function Invoke-TwitterRequest {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory,ValueFromPipeline)]
-        [TwitterRequest]$RequestParameters
+        [ValidateObjectNotNullOrEmpty()]
+        [BluebirdPS.TwitterRequest]$RequestParameters
     )
 
     try {

@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.7.0] - 2021-06-26
+
+Bugfix and Feature; Update Strongly Recommended
+
+### Fixed
+
+- [Issue #89](https://github.com/thedavecarroll/BluebirdPS/issues/89) - Publish-TwitterDM - Parameter sets not functioning correctly
+- [Issue #94](https://github.com/thedavecarroll/BluebirdPS/issues/94) - Get-TwitterListMember, and other functions - Does not check if List parameter is an empty object
+- [Issue #95](https://github.com/thedavecarroll/BluebirdPS/issues/95) - Get-TwitterApiEndpoint - Parameter CommandName does not filter correctly
+- [Issue #96](https://github.com/thedavecarroll/BluebirdPS/issues/96) - Write-TwitterResponse - ErrorRecord should only be generated when API errors are returned and OutputType is CustomClasses
+
+### Changed
+
+- [Issue #98](https://github.com/thedavecarroll/BluebirdPS/issues/98) - BluebirdPSConfiguration.RawOutput - Remove this configuration value
+
+### Added
+
+- [Issue #72](https://github.com/thedavecarroll/BluebirdPS/issues/72) - [New Feature] BluebirdPS.APIV2.TweetInfo.Tweet should override .ToString()
+- [Issue #90](https://github.com/thedavecarroll/BluebirdPS/issues/90) - Publish-TwitterDM - Allow users to send message only, message and media, or media only direct messages
+- [Issue #91](https://github.com/thedavecarroll/BluebirdPS/issues/91) - Get-TweetCount - Add new function recent Tweet counts endpoint
+- [Issue #92](https://github.com/thedavecarroll/BluebirdPS/issues/92) - BluebirdPS.APIV2.UserInfo.User - Override ToString()
+- [Issue #93](https://github.com/thedavecarroll/BluebirdPS/issues/93) - Get-TwitterList - Accept list full name as another parameter set
+- [Issue #97](https://github.com/thedavecarroll/BluebirdPS/issues/97) - BluebirdPSConfiguration.OutputType - Add new configuration value to set the output type
+
 ## [0.6.2] - 2021-06-20
 
 Bugfix and Feature; Update Strongly Recommended
@@ -132,6 +156,7 @@ Initial release
 [0.5.1]: https://github.com/thedavecarroll/BluebirdPS/tree/51bbfffb87d0e8d6e2c846971f878644b9daf873
 [0.6.1]: https://github.com/thedavecarroll/BluebirdPS/tree/12acb1ab9d988bd27c10ebdb37ad5b012cf5a4ab
 [0.6.2]: https://github.com/thedavecarroll/BluebirdPS/tree/ba829bae4735df569e48f93bf32ea56252695783
+[0.7.0]: https://github.com/thedavecarroll/BluebirdPS/tree/a1a963635037d73d9574bd9d202ab8811ce8d4e6
 
 ## Keep a Changelog
 

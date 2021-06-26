@@ -7,6 +7,7 @@ function Get-TwitterListTweets {
         [string]$Id,
 
         [Parameter(Mandatory,ParameterSetName='ByList',ValueFromPipeline)]
+        [ValidateObjectNotNullOrEmpty()]
         [BluebirdPS.APIV1.List]$List,
 
         [string]$SinceId,

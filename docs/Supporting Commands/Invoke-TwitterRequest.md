@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.6.2/Supporting%20Commands/Invoke-TwitterRequest
+online version: https://docs.bluebirdps.dev/en/v0.7.0/Supporting%20Commands/Invoke-TwitterRequest
 schema: 2.0.0
 ---
 
@@ -79,10 +79,10 @@ Entities        :
 Location        :
 PinnedTweetId   :
 ProfileImageUrl :
-Protected       :
+Protected       : False
 PublicMetrics   :
 Url             :
-Verified        :
+Verified        : False
 Withheld        :
 ```
 
@@ -91,12 +91,12 @@ Get the user BluebirdPS using the specified endpoint without using any field exp
 ### Example 3
 
 ```powershell
-PS > Set-BluebirdPSConfiguration -RawOutput $true
+PS > Set-BluebirdPSConfiguration -OutputType JSON
 PS > $Request = [BluebirdPS.TwitterRequest]@{
        ExpansionType = 'User'
        Endpoint = 'https://api.twitter.com/2/users/by/username/bluebirdps'
 }
-PS > Invoke-TwitterRequest -RequestParameters $Request | ConvertTo-Json -Depth 2
+PS > Invoke-TwitterRequest -RequestParameters $Request
 ```
 
 ```json
@@ -126,9 +126,7 @@ PS > Invoke-TwitterRequest -RequestParameters $Request | ConvertTo-Json -Depth 2
 }
 ```
 
-Set the BluebirdPS configuration value for RawOutput to $true, then get the user BluebirdPS using the specified endpoint with field expansions. Return the raw API output.
-
-NOTE: This command uses the PowerShell command Invoke-RestMethod which automatically converts the returned JSON into PSCustomObject types. This example converts the output back to JSON.
+Set the BluebirdPS configuration value for OutputType to JSON, then get the user BluebirdPS using the specified endpoint with field expansions. Returns the raw API output.
 
 ## PARAMETERS
 
@@ -166,4 +164,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.6.2/Supporting%20Commands/Invoke-TwitterRequest)
+[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Supporting%20Commands/Invoke-TwitterRequest)

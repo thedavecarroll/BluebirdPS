@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.6.2/Tweets/Get-TwitterTimeline
+online version: https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Get-TwitterTimeline
 schema: 2.0.0
 ---
 
@@ -268,9 +268,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.6.2/Tweets/Get-TwitterTimeline)
+[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Get-TwitterTimeline)
 
-[Get-TwitterUser](https://docs.bluebirdps.dev/en/v0.6.2/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser)
+[Get-TwitterUser](https://docs.bluebirdps.dev/en/v0.7.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser)
 
 [Api Reference - GET /2/users/:id/tweets](https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-reference/get-users-id-tweets)
 

@@ -66,6 +66,11 @@ namespace BluebirdPS.APIV2.UserInfo
                 // do not fail(for now)
             }
         }
+
+        public override string ToString()
+        {
+            return $"{UserName}:{Id}:{Name}";
+        }
     }
 
     namespace Metrics

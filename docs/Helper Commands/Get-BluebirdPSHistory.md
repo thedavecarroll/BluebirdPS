@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.6.2/Helper%20Commands/Get-BluebirdPSHistory
+online version: https://docs.bluebirdps.dev/en/v0.7.0/Helper%20Commands/Get-BluebirdPSHistory
 schema: 2.0.0
 ---
 
@@ -53,7 +53,7 @@ HEADER RESPONSE:
 API RESPONSE:
 
 - Status: the http status of the call indicating success or specific failure
-- The raw api response
+- The raw API response
 
 ## EXAMPLES
 
@@ -221,4 +221,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.6.2/Helper%20Commands/Get-BluebirdPSHistory)
+[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Helper%20Commands/Get-BluebirdPSHistory)

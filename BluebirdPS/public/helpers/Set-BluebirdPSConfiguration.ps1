@@ -3,7 +3,7 @@ function Set-BluebirdPSConfiguration {
     param(
         [BluebirdPS.RateLimitAction]$RateLimitAction,
         [int]$RateLimitThreshold,
-        [bool]$RawOutput,
+        [BluebirdPS.OutputType]$OutputType,
         [switch]$Export
     )
 

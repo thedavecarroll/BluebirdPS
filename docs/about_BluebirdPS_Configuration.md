@@ -12,7 +12,7 @@ BluebirdPS Configuration provides commands on how to handle rate limits, whether
 
 # User Settable Values
 
-The use can use Set-BluebirdPSConfiguration to set the following values: RateLimitAction, RateLimitThreshold, and RawOutput.
+The use can use Set-BluebirdPSConfiguration to set the following values: RateLimitAction, RateLimitThreshold, and OutputType.
 
 ```text
 The RateLimitAction and RateLimitThreshold values instruct how and when to act
@@ -20,9 +20,8 @@ against the Twitter API rate limits.
 ```
 
 ```text
-The RawOutput value specifies whether the raw response should be presented to the
-user, or return rich objects. The module uses Invoke-RestMethod which converts JSON
-response to a [PSCustomObject].
+The OutputType value specifies what type of data to return to the user.
+The default OutputType is 'CustomClasses' (custom C# classes), but 'PSCustomObject' (as returned by Invoke-RestMethod) or 'JSON' can be specified.
 ```
 
 # Other Values
