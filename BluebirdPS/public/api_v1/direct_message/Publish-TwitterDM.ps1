@@ -10,7 +10,7 @@ function Publish-TwitterDM {
         [string]$Id,
 
         [Parameter(Mandatory,ParameterSetName='DMUserObject',ValueFromPipeline)]
-        [Parameter(Mandatory,ParameterSetName='DMWithMedia',ValueFromPipeline)]
+        [ValidateObjectNotNullOrEmpty()]
         [BluebirdPS.APIV2.UserInfo.User]$User,
 
         [Parameter(ParameterSetName='DM')]

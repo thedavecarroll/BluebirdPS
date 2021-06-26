@@ -5,7 +5,7 @@ function Unpublish-TwitterDM {
         [ValidateNotNullOrEmpty()]
         [string]$Id,
         [Parameter(Mandatory,ParameterSetName='ByDM',ValueFromPipeline)]
-        [ValidateNotNullOrEmpty()]
+        [ValidateObjectNotNullOrEmpty()]
         [BluebirdPS.APIV1.DirectMessage]$TwitterDM
     )
 

@@ -2,6 +2,7 @@ function Set-TwitterBlockedUser {
     [CmdletBinding(DefaultParameterSetName='Block')]
     param(
         [Parameter(Mandatory,ValueFromPipeline)]
+        [ValidateObjectNotNullOrEmpty()]
         [BluebirdPS.APIV2.UserInfo.User]$User,
 
         [Parameter(ParameterSetName='Block')]

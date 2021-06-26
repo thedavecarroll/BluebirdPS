@@ -6,6 +6,7 @@ function Remove-TwitterListMember {
         [string]$Id,
 
         [Parameter(Mandatory,ParameterSetName='ByList',ValueFromPipeline)]
+        [ValidateObjectNotNullOrEmpty()]
         [BluebirdPS.APIV1.List]$List,
 
         [Parameter(Mandatory)]

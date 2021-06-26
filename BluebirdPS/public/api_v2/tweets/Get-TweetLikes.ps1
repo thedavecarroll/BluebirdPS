@@ -9,6 +9,7 @@ function Get-TweetLikes {
         [string]$Id,
 
         [Parameter(Mandatory,ValueFromPipeline,ParameterSetName='ByTweet')]
+        [ValidateObjectNotNullOrEmpty()]
         [BluebirdPS.APIV2.TweetInfo.Tweet]$Tweet,
 
         [switch]$IncludeExpansions

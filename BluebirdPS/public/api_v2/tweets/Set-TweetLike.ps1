@@ -11,6 +11,7 @@ function Set-TweetLike {
 
         [Parameter(Mandatory,ValueFromPipeline,ParameterSetName='LikeByTweet')]
         [Parameter(Mandatory,ValueFromPipeline,ParameterSetName='UnlikeByTweet')]
+        [ValidateObjectNotNullOrEmpty()]
         [BluebirdPS.APIV2.TweetInfo.Tweet]$Tweet,
 
         [Parameter(ParameterSetName='LikeById')]

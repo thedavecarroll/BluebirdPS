@@ -5,7 +5,7 @@ function Remove-TwitterSavedSearch {
         [ValidateNotNullOrEmpty()]
         [string]$Id,
         [Parameter(Mandatory,ParameterSetName='BySavedSearch',ValueFromPipeline)]
-        [ValidateNotNullOrEmpty()]
+        [ValidateObjectNotNullOrEmpty()]
         [BluebirdPS.APIV1.SavedSearch]$SavedSearch
     )
 
