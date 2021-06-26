@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.6.2/Authentication/Test-TwitterAuthentication
+online version: https://docs.bluebirdps.dev/en/v0.7.0/Authentication/Test-TwitterAuthentication
 schema: 2.0.0
 ---
 
@@ -77,6 +77,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.6.2/Authentication/Test-TwitterAuthentication)
+[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Authentication/Test-TwitterAuthentication)
 
 [Api Reference - GET account/verify_credentials](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-account-verify_credentials)

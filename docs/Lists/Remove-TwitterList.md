@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.6.2/Lists/Remove-TwitterList
+online version: https://docs.bluebirdps.dev/en/v0.7.0/Lists/Remove-TwitterList
 schema: 2.0.0
 ---
 
@@ -150,12 +150,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.6.2/Lists/Remove-TwitterList)
+[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Remove-TwitterList)
 
-[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.6.2/Lists/Get-TwitterList)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterList)
 
-[Add-TwitterList](https://docs.bluebirdps.dev/en/v0.6.2/Lists/Add-TwitterList)
+[Add-TwitterList](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Add-TwitterList)
 
-[Set-TwitterList](https://docs.bluebirdps.dev/en/v0.6.2/Lists/Set-TwitterList)
+[Set-TwitterList](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Set-TwitterList)
 
 [Api Reference - POST lists/destroy](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-destroy)
