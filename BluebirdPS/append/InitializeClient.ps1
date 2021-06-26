@@ -24,7 +24,6 @@ Register-ArgumentCompleter -CommandName Get-TwitterApiEndpoint -ParameterName Co
 
 # store EndpointInfo in module variable
 $BluebirdPSCommands = Get-Command -Module BluebirdPS -ListImported
-$PublicFunctions = (Get-Module -Name BluebirdPS).ExportedFunctions.Values.Name
 
 [SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
 $script:TwitterEndpoints = foreach ($Command in $BluebirdPSCommands) {
@@ -37,7 +36,6 @@ $script:TwitterEndpoints = foreach ($Command in $BluebirdPSCommands) {
     }
     [EndpointInfo]::new(
         $Command.Name,
-        ($Command.Name -notin $PublicFunctions ? 'Private' : 'Public'),
         $ApiEndpoint,
         $ApiDocumentation
     )

@@ -8,9 +8,11 @@ function Get-TwitterApiEndpoint {
     )
 
     if ($PSBoundParameters.ContainsKey('Endpoint')) {
-        $TwitterEndpoints | Where-Object {$_.ApiEndpoint -match $Endpoint } | Sort-Object -Property Visibility
+        $TwitterEndpoints | Where-Object {$_.ApiEndpoint -match $Endpoint }
+    } elseif ($PSBoundParameters.ContainsKey('CommandName')) {
+        $TwitterEndpoints | Where-Object {$_.CommandName -in $CommandName}
     } else {
-        $TwitterEndpoints | Where-Object {$_.CommandName -in $CommandName} | Sort-Object -Property Visibility
+        $TwitterEndpoints
     }
 
 }
