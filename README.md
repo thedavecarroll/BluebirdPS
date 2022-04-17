@@ -110,8 +110,10 @@ For more information, please visit the [BluebirdPS page] on the PowerShell Galle
 
 1. Clone repo to a folder of your choice.
 2. Change into the local repo folder.
-3. Run the `build.ps1` script.
-4. `Import-Module -Path .\BuildOutput\BluebirdPS\<module version>\BluebirdPS.psd1`
+3. Install and Import Module `psake`, `BuildHelpers`, `PowerShellBuild`
+4. Install [dotnet (6.0)](https://dotnet.microsoft.com/en-us/download/dotnet)
+5. Run the `build.ps1` script.
+6. `Import-Module -Path .\BuildOutput\BluebirdPS\<module version>\BluebirdPS.psd1`
 
 ## Examples
 
