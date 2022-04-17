@@ -13,12 +13,14 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Install psake
+    - name: Install psake and BuildHelpers
       shell: pwsh
       run: |
         Set-PSRepository PSGallery -InstallationPolicy Trusted
         Install-Module psake
         Import-Module psake
+        Install-Module BuildHelpers
+        Import-Module BuildHelpers
     - name: Build BlueBirdPS
       shell: pwsh
       run: |
