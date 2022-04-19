@@ -47,10 +47,10 @@ function Publish-Tweet {
     }
 
     if ($PSBoundParameters.ContainsKey('ReplyToTweet')) {
-        $body.Add('in_reply_to_status_id', $ReplyToTweet)
-
-        # this will use the tweet id to get the screen_name and append it to the @mentions until @mentions have reached the limit.
-        $body.Add('auto_populate_reply_metadata', 'true')
+        $reply = @{
+            in_reply_to_tweet_id = $ReplyToTweet
+        }
+        $body.Add('reply', $reply)
     }
 
     if ($MediaId.Count -gt 0) {
