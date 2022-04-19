@@ -54,8 +54,12 @@ function Publish-Tweet {
     }
 
     if ($MediaId.Count -gt 0) {
-        $body.Add('media_ids', ($MediaId -join ','))
+        $media = @{
+            media_ids = $MediaId
+        }
+        $body.Add('media', $media)
     }
+
     $Request = [TwitterRequest]@{
         HttpMethod = 'POST'
         Endpoint = 'https://api.twitter.com/2/tweets'
