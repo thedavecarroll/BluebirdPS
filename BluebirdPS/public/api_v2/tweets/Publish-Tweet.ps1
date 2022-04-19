@@ -42,24 +42,25 @@ function Publish-Tweet {
         $MediaId = Send-TwitterMedia @SendMediaParams | Select-Object -ExpandProperty media_id
     }
 
-    $Query = @{
-        status = $TweetText
+    $body = @{
+        text = $TweetText
     }
 
     if ($PSBoundParameters.ContainsKey('ReplyToTweet')) {
-        $Query.Add('in_reply_to_status_id', $ReplyToTweet)
+        $body.Add('in_reply_to_status_id', $ReplyToTweet)
 
         # this will use the tweet id to get the screen_name and append it to the @mentions until @mentions have reached the limit.
-        $Query.Add('auto_populate_reply_metadata', 'true')
+        $body.Add('auto_populate_reply_metadata', 'true')
     }
 
     if ($MediaId.Count -gt 0) {
-        $Query.Add('media_ids', ($MediaId -join ','))
+        $body.Add('media_ids', ($MediaId -join ','))
     }
     $Request = [TwitterRequest]@{
         HttpMethod = 'POST'
-        Endpoint = 'https://api.twitter.com/1.1/statuses/update.json'
-        Query = $Query
+        Endpoint = 'https://api.twitter.com/2/tweets'
+        ContentType = 'application/json'
+        body = ($body | Convertto-json -Depth 10 -Compress)
     }
 
     try {
