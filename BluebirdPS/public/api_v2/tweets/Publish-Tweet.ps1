@@ -1,7 +1,7 @@
 function Publish-Tweet {
     [CmdletBinding(DefaultParameterSetName='Tweet')]
     param(
-        [Parameter(Mandatory,ValueFromPipeline)]
+        [Parameter(Mandatory,ValueFromPipeline,Position='1')]
         [ValidateLength(1,10000)]
         [string]$TweetText,
 
