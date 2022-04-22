@@ -8,6 +8,9 @@ function Publish-Tweet {
         [Parameter()]
         [string]$ReplyToTweet,
 
+        [Parameter()]
+        [string]$QuoteTweet,
+
         [Parameter(ParameterSetName='Tweet')]
         [string[]]$MediaId,
 
@@ -51,6 +54,10 @@ function Publish-Tweet {
             in_reply_to_tweet_id = $ReplyToTweet
         }
         $body.Add('reply', $reply)
+    }
+
+    if ($PSBoundParameters.ContainsKey('QuoteTweet')) {
+        $body.Add('quote_tweet_id', $QuoteTweet)
     }
 
     if ($MediaId.Count -gt 0) {
