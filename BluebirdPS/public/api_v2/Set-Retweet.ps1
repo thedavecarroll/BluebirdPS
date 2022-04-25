@@ -11,14 +11,14 @@ function Set-Retweet {
     )
 
     if ($PSCmdlet.ParameterSetName -eq 'Retweet') {
-        $Endpoint = 'https://api.twitter.com/1.1/statuses/retweet/{0}.json' -f $Id
+        $HttpMethod = 'POST'
     } else {
-        $Endpoint = 'https://api.twitter.com/1.1/statuses/unretweet/{0}.json' -f $Id
+        $HttpMethod = 'DELETE'
     }
 
     $Request = [TwitterRequest]@{
-        HttpMethod = 'POST'
-        Endpoint = $Endpoint
+        HttpMethod = $HttpMethod
+        Endpoint = 'https://api.twitter.com//2/users/{0}/retweets' -f $Id
     }
 
     Invoke-TwitterRequest -RequestParameters $Request
