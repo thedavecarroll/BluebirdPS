@@ -18,8 +18,8 @@ function Unpublish-Tweet {
 
     if ($PSCmdlet.ShouldProcess($TweetInfo, 'Deleting Tweet')) {
         $Request = [TwitterRequest]@{
-            HttpMethod = 'POST'
-            Endpoint = 'https://api.twitter.com/1.1/statuses/destroy/{0}.json' -f $TweetId
+            HttpMethod = 'DELETE'
+            Endpoint = 'https://api.twitter.com/2/tweets/{0}' -f $TweetId
         }
         Invoke-TwitterRequest -RequestParameters $Request | Out-Null
     }
