@@ -1,8 +1,8 @@
 function Publish-Tweet {
-    [CmdletBinding(DefaultParameterSetName='Tweet')]
+    [CmdletBinding(DefaultParameterSetName = 'Tweet')]
     param(
-        [Parameter(Mandatory,ValueFromPipeline,Position='1')]
-        [ValidateLength(1,10000)]
+        [Parameter(Mandatory, ValueFromPipeline, Position = '1')]
+        [ValidateLength(1, 10000)]
         [string]$TweetText,
 
         [Parameter()]
@@ -11,19 +11,19 @@ function Publish-Tweet {
         [Parameter()]
         [string]$QuoteTweet,
 
-        [Parameter(ParameterSetName='Tweet')]
+        [Parameter(ParameterSetName = 'Tweet')]
         [string[]]$MediaId,
 
-        [Parameter(Mandatory,ParameterSetName='TweetWithMedia')]
-        [ValidateScript({Test-Path -Path $_})]
+        [Parameter(Mandatory, ParameterSetName = 'TweetWithMedia')]
+        [ValidateScript({ Test-Path -Path $_ })]
         [string]$Path,
 
-        [Parameter(Mandatory,ParameterSetName='TweetWithMedia')]
-        [ValidateSet('TweetImage','TweetVideo','TweetGif')]
+        [Parameter(Mandatory, ParameterSetName = 'TweetWithMedia')]
+        [ValidateSet('TweetImage', 'TweetVideo', 'TweetGif')]
         [string]$Category,
 
-        [Parameter(ParameterSetName='TweetWithMedia')]
-        [ValidateLength(1,1000)]
+        [Parameter(ParameterSetName = 'TweetWithMedia')]
+        [ValidateLength(1, 1000)]
         [string]$AltImageText
 
     )
@@ -36,42 +36,42 @@ function Publish-Tweet {
 
     if ($PSCmdlet.ParameterSetName -eq 'TweetWithMedia') {
         $SendMediaParams = @{
-            Path = $Path
+            Path     = $Path
             Category = $Category
         }
         if ($PSBoundParameters.ContainsKey('AltImageText')) {
-            $SendMediaParams.Add('AltImageText',$AltImageText)
+            $SendMediaParams.Add('AltImageText', $AltImageText)
         }
         $MediaId = Send-TwitterMedia @SendMediaParams | Select-Object -ExpandProperty media_id
     }
 
-    $body = @{
+    $Body = @{
         text = $TweetText
     }
 
     if ($PSBoundParameters.ContainsKey('ReplyToTweet')) {
-        $reply = @{
+        $Reply = @{
             in_reply_to_tweet_id = $ReplyToTweet
         }
-        $body.Add('reply', $reply)
+        $Body.Add('reply', $Reply)
     }
 
     if ($PSBoundParameters.ContainsKey('QuoteTweet')) {
-        $body.Add('quote_tweet_id', $QuoteTweet)
+        $Body.Add('quote_tweet_id', $QuoteTweet)
     }
 
     if ($MediaId.Count -gt 0) {
-        $media = @{
+        $Media = @{
             media_ids = $MediaId
         }
-        $body.Add('media', $media)
+        $Body.Add('media', $Media)
     }
 
     $Request = [TwitterRequest]@{
-        HttpMethod = 'POST'
-        Endpoint = 'https://api.twitter.com/2/tweets'
+        HttpMethod  = 'POST'
+        Endpoint    = 'https://api.twitter.com/2/tweets'
         ContentType = 'application/json'
-        body = ($body | Convertto-json -Depth 10 -Compress)
+        Body        = ($Body | Convertto-Json -Depth 10 -Compress)
     }
 
     try {
