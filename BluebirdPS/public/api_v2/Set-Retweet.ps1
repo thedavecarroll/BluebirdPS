@@ -1,12 +1,12 @@
 function Set-Retweet {
     [SuppressMessage('PSUseShouldProcessForStateChangingFunctions', '')]
-    [CmdletBinding(DefaultParameterSetName='Retweet')]
+    [CmdletBinding(DefaultParameterSetName = 'Retweet')]
     param(
         [Parameter(Mandatory)]
         [string]$Id,
-        [Parameter(ParameterSetName='Retweet')]
+        [Parameter(ParameterSetName = 'Retweet')]
         [switch]$Retweet,
-        [Parameter(ParameterSetName='Unretweet')]
+        [Parameter(ParameterSetName = 'Unretweet')]
         [switch]$Unretweet
     )
 
@@ -16,13 +16,14 @@ function Set-Retweet {
         }
         $Request = [TwitterRequest]@{
             HttpMethod = 'POST'
-            Endpoint = 'https://api.twitter.com/2/users/{0}/retweets' -f $BluebirdPSConfiguration.AuthUserId
-            body = ($body | Convertto-json -Depth 10 -Compress)
+            Endpoint   = 'https://api.twitter.com/2/users/{0}/retweets' -f $BluebirdPSConfiguration.AuthUserId
+            body       = ($body | Convertto-json -Depth 10 -Compress)
         }
-    } else {
+    }
+    else {
         $Request = [TwitterRequest]@{
             HttpMethod = 'DELETE'
-            Endpoint = 'https://api.twitter.com/2/users/{0}/retweets/{1}' -f $BluebirdPSConfiguration.AuthUserId, $id
+            Endpoint   = 'https://api.twitter.com/2/users/{0}/retweets/{1}' -f $BluebirdPSConfiguration.AuthUserId, $id
         }
     }
 
