@@ -11,13 +11,13 @@ function Set-Retweet {
     )
 
     if ($PSCmdlet.ParameterSetName -eq 'Retweet') {
-        $body = @{
+        $Body = @{
             tweet_id = $Id
         }
         $Request = [TwitterRequest]@{
             HttpMethod = 'POST'
             Endpoint   = 'https://api.twitter.com/2/users/{0}/retweets' -f $BluebirdPSConfiguration.AuthUserId
-            body       = ($body | Convertto-json -Depth 10 -Compress)
+            Body       = ($Body | ConvertTo-Json -Depth 10 -Compress)
         }
     }
     else {
