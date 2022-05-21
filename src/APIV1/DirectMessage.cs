@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BluebirdPS.APIV1
 {
@@ -80,65 +78,4 @@ namespace BluebirdPS.APIV1
         //    }
         //}
     }
-
-
-    public class Media : TwitterObject
-    {
-        public string Id { get; set; }
-        public Uri MediaUrl { get; set; }
-        public Uri Url { get; set; }
-        public string DisplayUrl { get; set; }
-        public Uri ExpandedUrl { get; set; }
-        public string Type { get; set; }
-        //public PSObject Sizes { get; set; }
-
-        public Media(dynamic input)
-        {
-            try
-            {
-                Id = input.id_str;
-                MediaUrl = new Uri(input.media_url_https);
-                Url = new Uri(input.url);
-                DisplayUrl = input.display_url;
-                ExpandedUrl = new Uri(input.expanded_url);
-                Type = Helpers.ToTitleCase(input.type);
-
-                //Sizes = input.sizes;
-            }
-            catch
-            {
-
-            }
-        }
-
-        public override string ToString()
-        {
-            return $"Id: {Id}, Type: {Type}, DisplayUrl: {DisplayUrl}";
-        }
-        //sizes
-        //    large
-        //    small
-        //    medium
-        //    thumb
-        //        w
-        //        h
-        //        resize
-    }
-
-    public class MediaSize : TwitterObject
-    {
-        public string Size { get; set; }
-        public string Width { get; set; }
-        public string Height { get; set; }
-        public string Resize { get; set; }
-
-        public MediaSize(dynamic input)
-        {
-            Size = input;
-            Width = input.w;
-            Height = input.h;
-            Resize = Helpers.ToTitleCase(input.resize);
-        }
-    }
-
 }

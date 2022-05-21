@@ -5,12 +5,12 @@ using System.Collections.Generic;
 namespace BluebirdPS.APIV2.UserInfo
 {
     public class User : TwitterObject
-    {       
+    {
         public string Id { get; set; }
         public string Name { get; set; }
         public string UserName { get; set; }
 
-        // remaining properties included with all user.fields 
+        // remaining properties included with all user.fields
         public DateTime? CreatedAt { get; set; }
         public string Description { get; set; }
         public List<object> Entities { get; set; }
@@ -29,7 +29,7 @@ namespace BluebirdPS.APIV2.UserInfo
             try
             {
                 OriginalObject = input;
-                
+
                 if (Helpers.HasProperty(input, "username"))
                 {
                     Id = input.id;
@@ -37,7 +37,7 @@ namespace BluebirdPS.APIV2.UserInfo
                     CreatedAt = input.created_at ?? null;
                     PinnedTweetId = input.pinned_tweet_id;
                     PublicMetrics = new Metrics.Public(input.public_metrics);
-                } 
+                }
                 else if (Helpers.HasProperty(input, "screen_name"))
                 {
                     Id = input.id.ToString();
@@ -49,11 +49,11 @@ namespace BluebirdPS.APIV2.UserInfo
                 Description = input.description;
                 Entities = BaseEntity.GetEntities(input.entities);
                 Location = input.location;
-                ProfileImageUrl = new Uri(input.profile_image_url);                
+                ProfileImageUrl = new Uri(input.profile_image_url);
                 Protected = input.@protected ?? null;
                 Url = new Uri(input.url);
-                Verified = input.verified ?? null;                
-                
+                Verified = input.verified ?? null;
+
                 if (Helpers.HasProperty(input, "withheld"))
                 {
                     Withheld = new WithheldContent(input.withheld);
@@ -71,26 +71,6 @@ namespace BluebirdPS.APIV2.UserInfo
         {
             return $"{UserName}:{Id}:{Name}";
         }
-    }
 
-    namespace Metrics
-    {
-        public class Public : BaseMetrics
-        {
-            public long FollowersCount { get; set; }
-            public long FollowingCount { get; set; }
-            public long ListedCount { get; set; }
-            public long TweetCount { get; set; }
-
-            public Public() { }
-            public Public(dynamic input)
-            {
-                FollowersCount = input.followers_count;
-                FollowingCount = input.following_count;
-                ListedCount = input.listed_count;
-                TweetCount = input.tweet_count;
-                OriginalObject = input;
-            }
-        }
     }
 }

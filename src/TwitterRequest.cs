@@ -8,16 +8,6 @@ using System.Management.Automation.Runspaces;
 
 namespace BluebirdPS
 {
-    public enum HttpMethod
-    {
-        GET, POST, DELETE, PATCH, PUT, HEAD, OPTIONS, TRACE
-    }
-
-    public enum ExpansionTypes
-    {
-        Tweet, User
-    }
-
     public class TwitterRequest
     {
         // ----------------------------------------------------------------------------------------
@@ -28,7 +18,7 @@ namespace BluebirdPS
         public Hashtable Query { get; set; } = new Hashtable();
         public string Body { get; set; }
         public Hashtable Form { get; set; }
-        public string ContentType { get; set; } = "application/json";        
+        public string ContentType { get; set; } = "application/json";
         public ExpansionTypes? ExpansionType { get; set; }
         public bool NonPublicMetrics { get; set; }
         public bool PromotedMetrics { get; set; }
@@ -44,7 +34,7 @@ namespace BluebirdPS
         // ----------------------------------------------------------------------------------------
         // Constructor
         // The intent is for the class to be instantiated using accelerator and hashtable
-        public TwitterRequest() 
+        public TwitterRequest()
         {
             try {
                 CallStackFrame _callStackFrame = Runspace.DefaultRunspace.Debugger.GetCallStack().ToList().First();
@@ -81,10 +71,10 @@ namespace BluebirdPS
             {
                 List<string> queryFields = (from DictionaryEntry kvp in Query
                                             select $"{Uri.EscapeDataString(kvp.Key.ToString())}={Uri.EscapeDataString(kvp.Value.ToString())}").ToList();
-                
+
                 RequestUri = $"{Endpoint.AbsoluteUri.TrimEnd('/')}?{string.Join("&", queryFields)}";
-            
-            } 
+
+            }
             else
             {
                 RequestUri = Endpoint.AbsoluteUri;
@@ -107,6 +97,10 @@ namespace BluebirdPS
                 {
                     Query.Add("user.fields", ObjectFields.GetFieldList("User"));
                 }
+                else if (ExpansionType == ExpansionTypes.List)
+                {
+                    Query.Add("list.fields", ObjectFields.GetFieldList("List"));
+                }
                 _hasFieldsIncluded = true;
             }
         }
@@ -122,11 +116,16 @@ namespace BluebirdPS
                     Query.Add("media.fields", ObjectFields.GetFieldList("Media", NonPublicMetrics, OrganicMetrics, PromotedMetrics));
                     Query.Add("poll.fields", ObjectFields.GetFieldList("Poll"));
                     Query.Add("place.fields", ObjectFields.GetFieldList("Place"));
-                }            
+                }
                 else if (ExpansionType == ExpansionTypes.User)
                 {
                     Query.Add("expansions", ExpansionFields.GetExpansionFields(ExpansionTypes.User));
                     Query.Add("tweet.fields", ObjectFields.GetFieldList("Tweet", NonPublicMetrics, OrganicMetrics, PromotedMetrics));
+                }
+                else if (ExpansionType == ExpansionTypes.List)
+                {
+                    Query.Add("expansions", ExpansionFields.GetExpansionFields(ExpansionTypes.List));
+                    Query.Add("list.fields", ObjectFields.GetFieldList("List", NonPublicMetrics, OrganicMetrics, PromotedMetrics));
                 }
             }
              _hasExpansionsIncluded = true;
