@@ -5,8 +5,10 @@ using namespace System.Management.Automation
 using namespace System.Diagnostics.CodeAnalysis
 using namespace Microsoft.PowerShell.Commands
 using namespace BluebirdPS
-using namespace BluebirdPS.APIV2
 using namespace BluebirdPS.APIV1
+using namespace BluebirdPS.APIV2
+using namespace BluebirdPS.Exceptions
+using namespace BluebirdPS.Validation
 
 # --------------------------------------------------------------------------------------------------
 

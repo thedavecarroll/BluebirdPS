@@ -1,33 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Management.Automation;
-using System.Management.Automation.Runspaces;
-using System.Text;
-using System.Text.RegularExpressions;
 
 namespace BluebirdPS
 {
-    public enum RateLimitAction
-    {
-        // type of output stream used to display a message
-        // when the remaining calls are at the RateLimitThreshold or less
-
-        Verbose,
-        Warning,
-        Error
-    }
-
-    public enum OutputType
-    {
-        CustomClasses,
-        PSCustomObject,
-        JSON
-    }
-
     public class Configuration
     {
-        
+
         public string AuthUserId { get; set; }
         public string AuthUserName { get; set; }
         public DateTime? AuthValidationDate { get; set; }
@@ -37,6 +14,7 @@ namespace BluebirdPS
         public string ConfigurationPath { get; set; }
         public string CredentialsPath { get; set; }
         public OutputType OutputType { get; set; } = OutputType.CustomClasses;
+        public AccessLevel AccessLevel { get; set; }
         public Configuration() { }
 
     }
