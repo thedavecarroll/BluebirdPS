@@ -6,9 +6,9 @@ namespace BluebirdPS.APIV2
     {
         public static List<string> TweetFields => new List<string>()
         {
-            // default fields    
+            // default fields
             "id","text",
-                
+
             // additional fields
             "attachments","author_id","context_annotations","conversation_id",
             "created_at","entities","geo","in_reply_to_user_id","lang","possibly_sensitive",
@@ -36,8 +36,8 @@ namespace BluebirdPS.APIV2
             "media_key","type",
 
             // additional fields
-            "duration_ms","height","preview_image_url","public_metrics","width"
-        
+            "duration_ms","height","width","preview_image_url","url","alt_text","public_metrics","variants"
+
             // possible metrics fields
             //  non_public_metrics
             //  organic_metrics
@@ -62,6 +62,14 @@ namespace BluebirdPS.APIV2
             "contained_within","country","country_code","geo","name","place_type"
         };
 
+        public static List<string> ListFields => new List<string>()
+        {
+            // default fields
+            "id","name",
+
+            // additional fields
+            "created_at","description","follower_count","member_count","private","owner_id"
+        };
         public static string GetFieldList(string objectType, bool nonPublicMetrics = false, bool organicMetrics = false, bool promotedMetrics = false)
         {
             List<string> fieldList = new List<string>();
@@ -81,6 +89,9 @@ namespace BluebirdPS.APIV2
                     break;
                 case "Place":
                     fieldList.AddRange(PlaceFields);
+                    break;
+                case "List":
+                    fieldList.AddRange(ListFields);
                     break;
             }
 
@@ -104,5 +115,4 @@ namespace BluebirdPS.APIV2
         }
 
     }
-
 }

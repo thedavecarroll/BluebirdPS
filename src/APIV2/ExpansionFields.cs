@@ -1,6 +1,4 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BluebirdPS.APIV2
 {
@@ -32,6 +30,6 @@ namespace BluebirdPS.APIV2
             }
             return expansionFields;
         }
-    }
 
+    }
 }
