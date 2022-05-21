@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using BluebirdPS.APIV2.MediaInfo.Metrics;
 
 namespace BluebirdPS.APIV2.MediaInfo
@@ -15,7 +15,8 @@ namespace BluebirdPS.APIV2.MediaInfo
         public Promoted PromotedMetrics { get; set; }
         public long Width { get; set; }
         public Uri PreviewImageUrl { get; set; }
-
+        public Uri Url { get; set; }
+        public string AltText { get; set; }
 
         public Media() { }
         public Media(dynamic input)
@@ -37,6 +38,14 @@ namespace BluebirdPS.APIV2.MediaInfo
                 if (Helpers.HasProperty(input, "preview_image_url"))
                 {
                     PreviewImageUrl = new Uri(input.preview_image_url);
+                }
+                if (Helpers.HasProperty(input, "url"))
+                {
+                    Url = new Uri(input.url);
+                }
+                if (Helpers.HasProperty(input, "alt_text"))
+                {
+                    AltText = input.alt_text;
                 }
 
                 if (Helpers.HasProperty(input, "non_public_metrics"))
