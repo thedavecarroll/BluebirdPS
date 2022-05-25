@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Management.Automation;
@@ -25,7 +25,6 @@ namespace BluebirdPS
         public bool OrganicMetrics { get; set; }
         public bool IncludeExpansions { get; set; }
         public string CommandName { get; private set; }
-
         public InvocationInfo InvocationInfo { get; private set; }
 
         private bool _hasExpansionsIncluded { get; set; }
@@ -109,23 +108,22 @@ namespace BluebirdPS
         {
             if (_hasExpansionsIncluded == false && ExpansionType != null && IncludeExpansions == true)
             {
-                if (ExpansionType == ExpansionTypes.Tweet)
-                {
-                    Query.Add("expansions", ExpansionFields.GetExpansionFields(ExpansionTypes.Tweet));
-                    Query.Add("user.fields", ObjectFields.GetFieldList("User"));
-                    Query.Add("media.fields", ObjectFields.GetFieldList("Media", NonPublicMetrics, OrganicMetrics, PromotedMetrics));
-                    Query.Add("poll.fields", ObjectFields.GetFieldList("Poll"));
-                    Query.Add("place.fields", ObjectFields.GetFieldList("Place"));
-                }
-                else if (ExpansionType == ExpansionTypes.User)
-                {
-                    Query.Add("expansions", ExpansionFields.GetExpansionFields(ExpansionTypes.User));
-                    Query.Add("tweet.fields", ObjectFields.GetFieldList("Tweet", NonPublicMetrics, OrganicMetrics, PromotedMetrics));
-                }
-                else if (ExpansionType == ExpansionTypes.List)
-                {
-                    Query.Add("expansions", ExpansionFields.GetExpansionFields(ExpansionTypes.List));
-                    Query.Add("list.fields", ObjectFields.GetFieldList("List", NonPublicMetrics, OrganicMetrics, PromotedMetrics));
+                switch (ExpansionType) {
+                    case ExpansionTypes.Tweet:
+                        Query.Add("expansions", ExpansionFields.GetExpansionFields(ExpansionTypes.Tweet));
+                        Query.Add("user.fields", ObjectFields.GetFieldList("User"));
+                        Query.Add("media.fields", ObjectFields.GetFieldList("Media", NonPublicMetrics, OrganicMetrics, PromotedMetrics));
+                        Query.Add("poll.fields", ObjectFields.GetFieldList("Poll"));
+                        Query.Add("place.fields", ObjectFields.GetFieldList("Place"));
+                        break;
+                    case ExpansionTypes.User:
+                        Query.Add("expansions", ExpansionFields.GetExpansionFields(ExpansionTypes.User));
+                        Query.Add("tweet.fields", ObjectFields.GetFieldList("Tweet", NonPublicMetrics, OrganicMetrics, PromotedMetrics));
+                        break;
+                    case ExpansionTypes.List:
+                        Query.Add("expansions", ExpansionFields.GetExpansionFields(ExpansionTypes.List));
+                        Query.Add("user.fields", ObjectFields.GetFieldList("User"));
+                        break;
                 }
             }
              _hasExpansionsIncluded = true;

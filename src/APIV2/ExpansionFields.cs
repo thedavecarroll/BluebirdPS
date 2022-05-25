@@ -16,6 +16,11 @@ namespace BluebirdPS.APIV2
             "pinned_tweet_id"
         };
 
+        public static List<string> List => new List<string>()
+        {
+            "owner_id"
+        };
+
         public static string GetExpansionFields(ExpansionTypes type)
         {
             string expansionFields = string.Empty;
@@ -26,6 +31,9 @@ namespace BluebirdPS.APIV2
                     break;
                 case ExpansionTypes.User:
                     expansionFields = string.Join(",", User);
+                    break;
+               case ExpansionTypes.List:
+                    expansionFields = string.Join(",", List);
                     break;
             }
             return expansionFields;
