@@ -21,7 +21,7 @@ namespace BluebirdPS
         {
             return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(input);
         }
-        
+
         public static DateTime? ConvertFromV1Date(string input)
         {
             return input != null ? (DateTime?)DateTime.ParseExact(input, "ddd MMM dd HH:mm:ss zzz yyyy", CultureInfo.CurrentCulture) : null;
@@ -60,15 +60,19 @@ namespace BluebirdPS
                     {
                         if (HasProperty(twitterObject, "username"))
                         {
-                            twitterResponse.Add(new User(twitterObject));
+                            twitterResponse.Add(new APIV2.UserInfo.User(twitterObject));
                         }
                         else if (HasProperty(twitterObject, "text"))
                         {
-                            twitterResponse.Add(new Tweet(twitterObject));
+                            twitterResponse.Add(new APIV2.TweetInfo.Tweet(twitterObject));
                         }
                         else if (HasProperty(twitterObject, "tweet_count"))
                         {
-                            twitterResponse.Add(new TweetCount(twitterObject));
+                            twitterResponse.Add(new APIV2.TweetInfo.TweetCount(twitterObject));
+                        }
+                        else if (HasProperty(twitterObject, "member_count"))
+                        {
+                            twitterResponse.Add(new APIV2.ListInfo.List(twitterObject));
                         }
                     }
                 }
@@ -76,11 +80,19 @@ namespace BluebirdPS
                 {
                     if (HasProperty(input.data, "username"))
                     {
-                        twitterResponse.Add(new User(input.data));
+                        twitterResponse.Add(new APIV2.UserInfo.User(input.data));
                     }
                     else if (HasProperty(input.data, "text"))
                     {
-                        twitterResponse.Add(new Tweet(input.data));
+                        twitterResponse.Add(new APIV2.TweetInfo.Tweet(input.data));
+                    }
+                    else if (HasProperty(input.data, "text"))
+                    {
+                        twitterResponse.Add(new APIV2.TweetInfo.TweetCount(input.data));
+                    }
+                    else if (HasProperty(input.data, "member_count"))
+                    {
+                        twitterResponse.Add(new APIV2.ListInfo.List(input.data));
                     }
                 }
             }
@@ -89,28 +101,28 @@ namespace BluebirdPS
             {
                 foreach (dynamic tweet in input.includes.tweets)
                 {
-                    twitterResponse.Add(new Tweet(tweet));
+                    twitterResponse.Add(new APIV2.TweetInfo.Tweet(tweet));
                 }
             }
             if (HasProperty(input.includes, "users"))
             {
                 foreach (dynamic user in input.includes.users)
                 {
-                    twitterResponse.Add(new User(user));
+                    twitterResponse.Add(new APIV2.UserInfo.User(user));
                 }
             }
             if (HasProperty(input.includes, "media"))
             {
                 foreach (dynamic thisMedia in input.includes.media)
                 {
-                    twitterResponse.Add(new Media(thisMedia));
+                    twitterResponse.Add(new APIV2.MediaInfo.Media(thisMedia));
                 }
             }
             if (HasProperty(input.includes, "polls"))
             {
                 foreach (dynamic poll in input.includes.polls)
                 {
-                    twitterResponse.Add(new Poll(poll));
+                    twitterResponse.Add(new APIV2.Objects.Poll(poll));
                 }
             }
 
@@ -144,7 +156,7 @@ namespace BluebirdPS
                     else if (HasProperty(twitterObject, "in_reply_to_user_id_str"))
                     {
                         twitterResponse.Add(new Tweet(twitterObject));
-                    }                    
+                    }
                     else
                     {
                         twitterResponse.Add(twitterObject);
@@ -205,7 +217,7 @@ namespace BluebirdPS
                     {
                         twitterResponse.Add(new APIV1.DirectMessage(directMessages));
                     }
-                                       
+
                 }
                 else if (HasProperty(input, "users"))
                 {
@@ -229,6 +241,6 @@ namespace BluebirdPS
 
             return twitterResponse;
         }
-            
+
     }
 }

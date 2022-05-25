@@ -2,7 +2,7 @@ namespace BluebirdPS
 {
     public enum ExpansionTypes
     {
-        Tweet, User
+        Tweet, User, List
     }
 
 }
