@@ -50,12 +50,21 @@ function Invoke-TwitterRequest {
             SkipHttpErrorCheck = $true
             Verbose = $false
         }
+
+    $VerboseProperties = 'Method','Uri','ContentType','OAuthVersion'
         if ($RequestParameters.Form) {
             $WebRequestParams.Add('Form',$RequestParameters.Form)
+        $VerboseProperties  += 'Form'
         } elseif ($RequestParameters.Body) {
             $WebRequestParams.Add('Body',$RequestParameters.Body)
+        $VerboseProperties  += 'Body'
         }
 
+    if ($RequestParameters.InvocationInfo.BoundParameters.ContainsKey('Verbose')) {
+        [PSCustomObject]($WebRequestParams + @{ OAuthVersion = $RequestParameters.OAuthVersion }) |
+            Select-Object -Property $VerboseProperties | Format-List |
+            Out-String | Write-Verbose
+    }
         $ApiResponse = Invoke-RestMethod @WebRequestParams
         $script:LastStatusCode = $StatusCode
         $script:LastHeaders = $ResponseHeaders
