@@ -24,9 +24,9 @@ namespace BluebirdPS
         public bool PromotedMetrics { get; set; }
         public bool OrganicMetrics { get; set; }
         public bool IncludeExpansions { get; set; }
+        public bool NoPagination { get; set; } = false;
         public string CommandName { get; private set; }
         public InvocationInfo InvocationInfo { get; private set; }
-
         private bool _hasExpansionsIncluded { get; set; }
         private bool _hasFieldsIncluded { get; set; }
 

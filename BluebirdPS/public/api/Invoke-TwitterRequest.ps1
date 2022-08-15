@@ -72,7 +72,7 @@ function Invoke-TwitterRequest {
         $ResponseData = [ResponseData]::new($RequestParameters,$Authentication,$ResponseHeaders,$LastStatusCode,$ApiResponse)
         Write-TwitterResponse -ResponseData $ResponseData
 
-        if ($ResponseData.ApiResponse.psobject.Properties.Name -match 'meta|next_cursor') {
+    if ($ResponseData.ApiResponse.psobject.Properties.Name -match 'meta|next_cursor' -and -Not $RequestParameters.NoPagination) {
 
             $Progress = @{
                 Activity = 'Retrieving paged results from Twitter API'

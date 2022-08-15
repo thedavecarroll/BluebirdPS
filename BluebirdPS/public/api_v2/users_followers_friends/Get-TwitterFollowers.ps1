@@ -9,7 +9,11 @@ function Get-TwitterFollowers {
         [ValidateObjectNotNullOrEmpty()]
         [BluebirdPS.APIV2.UserInfo.User]$User,
 
-        [switch]$IncludeExpansions
+        [switch]$IncludeExpansions,
+
+        [ValidateRange(1,1000)]
+        [int]$MaxResultsPerPage=1000,
+        [switch]$NoPagination
     )
 
     switch ($PSCmdlet.ParameterSetName) {
@@ -24,12 +28,16 @@ function Get-TwitterFollowers {
             $Endpoint = 'https://api.twitter.com/2/users/{0}/followers' -f $User.Id
         }
     }
+    if ($MaxResultsPerPage -lt 1000) {
+        $NoPagination = $true
+    }
 
     $Request = [TwitterRequest]@{
-        ExpansionType = 'User'
         Endpoint = $Endpoint
-        Query = @{'max_results' = 1000 }
+        Query = @{'max_results' = $MaxResultsPerPage }
+        ExpansionType = 'User'
         IncludeExpansions = $IncludeExpansions
+        NoPagination = $NoPagination
     }
 
     Invoke-TwitterRequest -RequestParameters $Request
