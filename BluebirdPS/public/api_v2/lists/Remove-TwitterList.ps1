@@ -2,30 +2,31 @@ function Remove-TwitterList {
     [CmdletBinding(DefaultParameterSetName='ById',SupportsShouldProcess,ConfirmImpact='High')]
     param(
         [Parameter(Mandatory,ParameterSetName='ById',ValueFromPipeline)]
-        [ValidateNotNullOrEmpty()]
+        [ValidatePattern('^[0-9]{1,19}$', ErrorMessage = "The List Id '{0}' is not valid.")]
         [string]$Id,
 
         [Parameter(Mandatory,ParameterSetName='ByList',ValueFromPipeline)]
         [ValidateObjectNotNullOrEmpty()]
-        [BluebirdPS.APIV1.List]$List
+        [BluebirdPS.APIV2.ListInfo.List]$List
     )
-
-    $Request = [TwitterRequest]@{
-        HttpMethod = 'POST'
-        Endpoint = 'https://api.twitter.com/1.1/lists/destroy.json'
-    }
 
     switch ($PSCmdlet.ParameterSetName) {
         'ById' {
-            $Request.Query.Add('list_id',$Id)
+            $ListId = $Id
             $List = Get-TwitterList -Id $Id
         }
         'ByList' {
-            $Request.Query.Add('list_id',$List.Id)
+            $ListId = $List.Id
         }
     }
 
-    if ($PSCmdlet.ShouldProcess($List.ToString(), 'Removing List')) {
-        Invoke-TwitterRequest -RequestParameters $Request | Out-Null
+    $Request = [TwitterRequest]@{
+        HttpMethod = 'DELETE'
+        Endpoint = 'https://api.twitter.com/2/lists/{0}' -f $ListId
     }
+
+    if ($PSCmdlet.ShouldProcess($List.ToString(), 'Removing List')) {
+        Invoke-TwitterRequest -RequestParameters $Request
+    }
+
 }
