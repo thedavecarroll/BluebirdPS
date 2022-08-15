@@ -22,19 +22,28 @@ function Get-TwitterTimeline {
         [string]$UntilId,
 
         [switch]$IncludeExpansions,
+
         [switch]$NonPublicMetrics,
         [switch]$PromotedMetrics,
-        [switch]$OrganicMetrics
+        [switch]$OrganicMetrics,
+
+        [ValidateRange(10,100)]
+        [int]$MaxResultsPerPage=100,
+        [switch]$NoPagination
     )
 
+    if ($MaxResultsPerPage -lt 100) {
+        $NoPagination = $true
+    }
+
     $Request = [TwitterRequest]@{
-        Endpoint = $Endpoint
+        Query = @{ 'max_results' = $MaxResultsPerPage }
         ExpansionType = 'Tweet'
+        IncludeExpansions = $IncludeExpansions
+        NoPagination = $NoPagination
         NonPublicMetrics = $NonPublicMetrics
         PromotedMetrics = $PromotedMetrics
         OrganicMetrics = $OrganicMetrics
-        IncludeExpansions = $IncludeExpansions
-        Query = @{ 'max_results' = 100 }
     }
 
     switch ($PSCmdlet.ParameterSetName) {
