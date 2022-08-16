@@ -10,7 +10,7 @@ function Import-TwitterAuthentication {
         'env:BLUEBIRDPS_ACCESS_TOKEN',
         'env:BLUEBIRDPS_ACCESS_TOKEN_SECRET'
 
-        $BluebirdPSBearerTokenEnvPath = 'env:BLUEBIRDPS_BEARER_TOKEN'
+    $BluebirdPSBearerTokenEnvPath = 'env:BLUEBIRDPS_BEARER_TOKEN'
 
     if ((Test-Path -Path $BluebirdPSAuthEnvPaths) -notcontains $false) {
         'Importing Twitter authentication from environment variables.' | Write-Verbose
