@@ -1,4 +1,8 @@
 function Get-TwitterUser {
+    [OutputType(
+        'BluebirdPS.APIV2.UserInfo.User',
+        'BluebirdPS.APIV2.TweetInfo.Tweet'
+    )]
     [CmdletBinding()]
     param(
         [Parameter(ValueFromPipeline)]

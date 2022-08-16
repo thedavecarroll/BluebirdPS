@@ -36,8 +36,12 @@ namespace BluebirdPS.APIV2.ListInfo
         public override string ToString()
         {
             string strDescription = ! String.IsNullOrEmpty(Description) ? $", Description: {Description}" : string.Empty;
-            return $"Name: {Name}, Members: {MemberCount}, Followers: {FollowerCount}, Created: {CreatedAt}{strDescription}";
+            return $"Id: {Id}, Name: {Name}, Members: {MemberCount}, Followers: {FollowerCount}, Created: {CreatedAt}{strDescription}";
         }
 
+        public string ToShortString()
+        {
+            return $"Id: {Id}, Name: {Name}, Members: {MemberCount}";
+        }
     }
 }
