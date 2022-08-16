@@ -197,19 +197,31 @@ function Get-ChangeLogUpdate {
             GitHubIssue = $GitHubIssue
         }
     }
-    $ChangeLogCommits | Out-String | Write-Verbose
+    #$ChangeLogCommits | Out-String | Write-Verbose
 
     foreach ($EntryType in [ChangeLogEntryType].GetEnumNames()) {
-        $SectionCommits = $ChangeLogCommits.Where({$_.EntryType -match $EntryType -and $_.GitHubIssue}) | Sort-Object -Property GitHubIssue.created_at,CommitterDate,CommitMessage
+        #$SectionCommits = $ChangeLogCommits.Where({$_.EntryType -match $EntryType -and $_.GitHubIssue}) | Sort-Object -Property GitHubIssue.created_at,CommitterDate,CommitMessage
+        $SectionCommits = $ChangeLogCommits.Where({$_.EntryType -match $EntryType}) | Sort-Object -Property GitHubIssue.created_at,CommitterDate,CommitMessage
 
         if ($SectionCommits) {
             $SectionHeader = '### {0}' -f $EntryType
+            $SectionHeader | Write-Verbose
             [void]$NewChangeLogEntry.AppendLine($SectionHeader)
             [void]$NewChangeLogEntry.AppendLine()
 
             foreach ($Entry in $SectionCommits) {
-                if ($Entry.GitHubIssue) {
-                    $EntryText = '- [Issue #{0}]({1}) - {2}' -f $Entry.GitHubIssue.number,$Entry.GitHubIssue.html_url,$Entry.GitHubIssue.title
+                if ($EntryType -eq 'Maintenance') {
+                    if ($Entry.GitHubIssue -And $Entry.GitHubIssue.html_url -notmatch 'pull') {
+                        $EntryText = '- [Issue #{0}]({1}) - {2}' -f $Entry.GitHubIssue.number,$Entry.GitHubIssue.html_url,$Entry.GitHubIssue.title
+                    }
+                } else {
+                    if ($Entry.GitHubIssue) {
+                        $EntryText = '- [Issue #{0}]({1}) - {2}' -f $Entry.GitHubIssue.number,$Entry.GitHubIssue.html_url,$Entry.GitHubIssue.title
+                    } else {
+                        if ($Entry.CommitMessage -notmatch 'release') {
+                            $EntryText = '- No Issue - {0}' -f $Entry.CommitMessage
+                        }
+                    }
                 }
                 if (-Not $NewChangeLogEntry.ToString().Contains($EntryText)) {
                     $EntryText | Write-Verbose
