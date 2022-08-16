@@ -12,7 +12,10 @@ function Get-TwitterList {
         [Parameter(ParameterSetName='ByUser',ValueFromPipeline)]
         [BluebirdPS.APIV2.UserInfo.User]$User,
 
-        [switch]$IncludeExpansions
+        [switch]$IncludeExpansions,
+
+        [ValidateNotNullOrEmpty()]
+        [string]$SearchName
     )
 
     if ($PSCmdlet.ParameterSetName -eq 'ByListId') {
@@ -28,6 +31,10 @@ function Get-TwitterList {
         IncludeExpansions = $IncludeExpansions
     }
 
-    Invoke-TwitterRequest -RequestParameters $Request
+    if ($PSBoundParameters.ContainsKey('SearchName')) {
+        Invoke-TwitterRequest -RequestParameters $Request | Where-Object Name -match $SearchName
+    } else {
+        Invoke-TwitterRequest -RequestParameters $Request
+    }
 
 }

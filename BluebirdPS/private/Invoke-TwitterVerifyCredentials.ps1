@@ -1,4 +1,5 @@
 function Invoke-TwitterVerifyCredentials {
+    [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "")]
     [CmdletBinding()]
     param(
         [switch]$BearerToken
@@ -11,8 +12,9 @@ function Invoke-TwitterVerifyCredentials {
         }
     } else {
         $Request = [TwitterRequest]@{
-            Endpoint = 'https://api.twitter.com/1.1/account/verify_credentials.json'
-            Query = @{ include_entities = 'false'; skip_status = 'true' }
+            ExpansionType     = 'User'
+            IncludeExpansions = $IncludeExpansions
+            Endpoint = 'https://api.twitter.com/2/users/me'
         }
     }
 
