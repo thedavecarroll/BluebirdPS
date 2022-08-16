@@ -31,7 +31,12 @@ function New-TwitterErrorRecord {
     }
 
     if ($ApiResponse.Type) {
-        $ErrorMessage = $ApiResponse.Detail
+        if ($ApiResponse.errors.message) {
+            $ErrorMessage = $ApiResponse.errors.message
+        } else {
+            $ErrorMessage = $ApiResponse.detail
+        }
+
         $ErrorCategory = Get-ErrorCategory -ErrorType $ApiResponse.Type
         $ExceptionType = Get-ExceptionType -ErrorCategory $ErrorCategory
 
@@ -47,13 +52,13 @@ function New-TwitterErrorRecord {
             CategoryActivity = $ResponseData.Command
         }
 
-        if ($IsTerminatingError -and $TwitterErrors.Count -eq ($i + 1)) {
+        if ($IsTerminatingError) {
             $ErrorParams.Add('ErrorAction','Stop')
         }
         Write-Error @ErrorParams
     } else {
         $TwitterErrors = $ApiResponse.errors
-        for ($i = 0; $i -le $TwitterErrors.Count; $i++) {
+        for ($i = 0; $i -lt $TwitterErrors.Count; $i++) {
 
         #}
         #foreach ($TwitterError in $ApiResponse.errors) {
