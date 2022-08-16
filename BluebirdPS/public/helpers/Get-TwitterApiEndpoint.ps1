@@ -1,4 +1,5 @@
 function Get-TwitterApiEndpoint {
+    [OutputType('Get-TwitterApiEndpoint')]
     [CmdletBinding()]
     param(
         [Parameter()]

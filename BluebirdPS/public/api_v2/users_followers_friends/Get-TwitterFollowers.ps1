@@ -1,4 +1,5 @@
 function Get-TwitterFollowers {
+    [OutputType('BluebirdPS.APIV2.UserInfo.User')]
     [CmdletBinding(DefaultParameterSetName='ById')]
     [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "")]
     param(

@@ -1,5 +1,11 @@
 function Get-Tweet {
-    [CmdletBinding(DefaultParameterSetName='Tweet')]
+    [OutputType(
+        'BluebirdPS.APIV2.TweetInfo.Tweet',
+        'BluebirdPS.APIV2.UserInfo.User',
+        'BluebirdPS.APIV2.MediaInfo.Media',
+        'BluebirdPS.APIV2.Objects.Poll'
+    )]
+    [CmdletBinding()]
     param(
         [Parameter(Mandatory,Position=0,ParameterSetName='Tweet')]
         [ValidateNotNullOrEmpty()]

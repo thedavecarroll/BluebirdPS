@@ -1,4 +1,5 @@
 function Get-TwitterBlockedUser {
+    [OutputType('BluebirdPS.APIV2.UserInfo.User')]
     [CmdletBinding()]
     param(
         [switch]$IncludeExpansions,
