@@ -25,5 +25,8 @@ function Set-TwitterBlockedUser {
         }
     }
 
-    Invoke-TwitterRequest -RequestParameters $Request
+    $SetTwitterBlockedUser = Invoke-TwitterRequest -RequestParameters $Request
+    $Blocking = $SetTwitterBlockedUser ? 'blocking' : 'not blocking'
+    'You are {0} user {1}' -f $Blocking,$User.ToString()
+
 }
