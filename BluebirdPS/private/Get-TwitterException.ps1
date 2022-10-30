@@ -15,6 +15,7 @@ function Get-TwitterException {
         ResourceNotFoundException  { return [ResourceNotFoundException]::new($ErrorMessage) }
         SecurityException          { return [SecurityException]::new($ErrorMessage) }
         ConnectionException        { return [ConnectionException]::new($ErrorMessage) }
+        MetricsException           { return [MetricsException]::new($ErrorMessage) }
         UnspecifiedException       { return [UnspecifiedException]::new($ErrorMessage) }
         default                    { return [UnspecifiedException]::new($ErrorMessage) }
     }

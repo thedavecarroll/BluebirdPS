@@ -18,7 +18,6 @@ function New-TwitterErrorRecord {
         $AllErrors
     }
 
-    $HttpStatusCode = $ResponseData.Status.value__.ToString()
     $ApiResponse  = $ResponseData.ApiResponse
 
     $ErrorId = 'APIv{0}-{1}' -f $ResponseData.ApiVersion,$ResponseData.Command
@@ -56,15 +55,13 @@ function New-TwitterErrorRecord {
             $ErrorParams.Add('ErrorAction','Stop')
         }
         Write-Error @ErrorParams
+
     } else {
         $TwitterErrors = $ApiResponse.errors
         for ($i = 0; $i -lt $TwitterErrors.Count; $i++) {
-
-        #}
-        #foreach ($TwitterError in $ApiResponse.errors) {
             switch ($ResponseData.ApiVersion) {
                 1.1 {
-                    $ErrorCategory = Get-ErrorCategory -StatusCode $HttpStatusCode -ErrorCode $TwitterErrors[$i].Code
+                    $ErrorCategory = Get-ErrorCategory -StatusCode $script:LastStatusCode -ErrorCode $TwitterErrors[$i].Code
                     if ($Twitter.Code -eq 415) {
                         $ErrorMessage = 'Message size exceeds limits of 10000 characters.'
                     } else {
@@ -77,7 +74,23 @@ function New-TwitterErrorRecord {
                 }
             }
 
-            $ExceptionType = Get-ExceptionType -ErrorCategory $ErrorCategory
+            if ($ErrorMessage -match '_metrics') {
+                if ($ErrorMessage -match 'field') {
+                    $MetricsRegex = "The '\w+\.\w+' field"
+                } else {
+                    $MetricsRegex = "'\w+\.\w+'"
+                }
+                $ExceptionType = 'MetricsException'
+                if ($ErrorMessage -match 'organic_metrics') {
+                    $ErrorMessage = $ErrorMessage -replace $MetricsRegex,'OrganicMetrics'
+                } elseif ($ErrorMessage -match 'promoted_metrics') {
+                    $ErrorMessage = $ErrorMessage -replace $MetricsRegex,'PromotedMetrics'
+                } if ($ErrorMessage -match 'non_public_metrics') {
+                    $ErrorMessage = $ErrorMessage -replace $MetricsRegex,'NonPublicMetrics'
+                }
+            } else {
+                $ExceptionType = Get-ExceptionType -ErrorCategory $ErrorCategory
+            }
 
             $TwitterException = Get-TwitterException -ExceptionType $ExceptionType -ErrorMessage $ErrorMessage
             $TwitterException.Source = $ResponseData.Command
@@ -91,7 +104,10 @@ function New-TwitterErrorRecord {
                 CategoryActivity = $ResponseData.Command
             }
 
-            if ($IsTerminatingError -and $TwitterErrors.Count -eq ($i + 1)) {
+            if ($ExceptionType -eq 'MetricsException') {
+                # only display this exception once despite 3 errors returned for each non_public_metrics field
+                $ErrorParams.Add('ErrorAction','Stop')
+            } elseif ($IsTerminatingError -and $TwitterErrors.Count -eq ($i + 1)) {
                 $ErrorParams.Add('ErrorAction','Stop')
             }
             Write-Error @ErrorParams
