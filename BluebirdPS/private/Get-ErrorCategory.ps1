@@ -48,7 +48,7 @@ function Get-ErrorCategory {
             }
             403 {
                 switch ($ErrorCode) {
-                    326 { return 'SecurityError' }
+                    { $_ -in 326,453 }                  { return 'SecurityError' }
                     { $_ -in 200, 272, 160, 203, 431 }  { return 'InvalidOperation' }
                     { $_ -in 386, 205, 226, 327 }       { return 'QuotaExceeded' }
                     { $_ -in 99, 89 }                   { return 'AuthenticationError' }

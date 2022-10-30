@@ -39,6 +39,12 @@ function New-TwitterErrorRecord {
         $ErrorCategory = Get-ErrorCategory -ErrorType $ApiResponse.Type
         $ExceptionType = Get-ExceptionType -ErrorCategory $ErrorCategory
 
+        if ($ResponseData.Status -eq 403) {
+            $ErrorCategory = 'SecurityError'
+            $ExceptionType = 'SecurityException'
+            $ErrorMessage = "Action forbidden. Please check your permissions. You may need to update your Twitter app's Access Token permissions."
+            $IsTerminatingError = $true
+        }
         $TwitterException = Get-TwitterException -ExceptionType $ExceptionType -ErrorMessage $ErrorMessage
         $TwitterException.Source = $ResponseData.Command
         $TwitterException.Data.Add('TwitterApiError',$AllErrors)

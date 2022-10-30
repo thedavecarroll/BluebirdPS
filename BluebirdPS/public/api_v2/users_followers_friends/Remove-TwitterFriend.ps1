@@ -21,9 +21,14 @@ function Remove-TwitterFriend {
         Endpoint = 'https://api.twitter.com/2/users/{0}/following/{1}' -f $BluebirdPSConfiguration.AuthUserId,$UserId
     }
 
-    if ($PSCmdlet.ShouldProcess($User.ToString(), 'Unfollow user')) {
-        $RemoveTwitterFriend = Invoke-TwitterRequest -RequestParameters $Request
-        $Following = $RemoveTwitterFriend ? 'following' : 'not following'
-        'You are {0} user {1}' -f $Following,$User.ToString()
+    try{
+        if ($PSCmdlet.ShouldProcess($User.ToString(), 'Unfollow user')) {
+            $RemoveTwitterFriend = Invoke-TwitterRequest -RequestParameters $Request
+            $Following = $RemoveTwitterFriend ? 'following' : 'not following'
+            'You are {0} user {1}' -f $Following,$User.ToString()
+        }
+    }
+    catch {
+        $PSCmdlet.ThrowTerminatingError($_)
     }
 }
