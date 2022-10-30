@@ -73,7 +73,7 @@ function Invoke-TwitterRequest {
     $script:LastStatusCode = $StatusCode
     $script:LastHeaders = $ResponseHeaders
 
-    $ResponseData = [ResponseData]::new($RequestParameters,$Authentication,$ResponseHeaders,$LastStatusCode,$ApiResponse)
+    $ResponseData = [ResponseData]::new($RequestParameters,$Authentication,$ResponseHeaders,$LastStatusCode,$ApiResponse,$BluebirdPSConfiguration.AuthUserName)
     Write-TwitterResponse -ResponseData $ResponseData
 
     if ($ResponseData.ApiResponse.psobject.Properties.Name -match 'meta|next_cursor' -and -Not $RequestParameters.NoPagination) {

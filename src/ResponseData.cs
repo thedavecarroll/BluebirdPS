@@ -12,6 +12,7 @@ namespace BluebirdPS
         public string Command { get; set; }
         public DateTime Timestamp { get; set; }
         public InvocationInfo InvocationInfo { get; set; }
+        public string AuthenticatedUser { get; set; }
         public HttpMethod HttpMethod { get; set; }
         public Uri Uri { get; set; }
         public string Endpoint { get; set; }
@@ -30,13 +31,14 @@ namespace BluebirdPS
         public dynamic ApiResponse { get; set; }
 
         public ResponseData() { }
-        public ResponseData(TwitterRequest request, Authentication authentication, dynamic headerResponse, HttpStatusCode statusCode, dynamic apiResponse)
+        public ResponseData(TwitterRequest request, Authentication authentication, dynamic headerResponse, HttpStatusCode statusCode, dynamic apiResponse, string authenticatedUser)
         {
             try
             {
                 Command = request.CommandName;
                 Timestamp = DateTime.Now;
                 InvocationInfo = request.InvocationInfo;
+                AuthenticatedUser = authenticatedUser;
                 HttpMethod = request.HttpMethod;
                 Uri = authentication.Uri;
                 Endpoint = authentication.Endpoint;
@@ -67,9 +69,9 @@ namespace BluebirdPS
                         if (headers.ContainsKey(kvp.Key) == false)
                         {
                             headers.Add(kvp.Key, values.First());
-                        }                        
+                        }
                     }
-                } 
+                }
                 else
                 {
                     headerResponse.TryGetValue(kvp.Key, out values);
@@ -89,7 +91,7 @@ namespace BluebirdPS
 
             RateLimit = HeaderResponse.ContainsKey("x-rate-limit-limit") ? (string)HeaderResponse["x-rate-limit-limit"] : null;
             RateLimitRemaining = HeaderResponse.ContainsKey("x-rate-limit-remaining") ? (string)HeaderResponse["x-rate-limit-remaining"] : null;
-                
+
             if (HeaderResponse.ContainsKey("x-rate-limit-reset") && HeaderResponse["x-rate-limit-reset"] != null)
             {
                 DateTime resetTime = new DateTime(1970, 1, 1, 0, 0, 0, 0);
