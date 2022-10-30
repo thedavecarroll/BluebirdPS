@@ -19,11 +19,16 @@ function Add-TwitterFriend {
         Body = '{{"target_user_id": "{0}"}}' -f $User.Id
     }
 
-    $AddTwitterFriend = Invoke-TwitterRequest -RequestParameters $Request
-
-    $Following = $AddTwitterFriend.following ? 'following' : 'not following'
-    'You are {0} user {1}' -f $Following,$User.ToString()
-    if ($AddTwitterFriend.pending_follow) {
-        'There is a pending follow for user {1}' -f $User.ToString()
+    try {
+        $AddTwitterFriend = Invoke-TwitterRequest -RequestParameters $Request
+        $Following = $AddTwitterFriend.following ? 'following' : 'not following'
+        'You are {0} user {1}' -f $Following,$User.ToString()
+        if ($AddTwitterFriend.pending_follow) {
+            'There is a pending follow for user {1}' -f $User.ToString()
+        }
     }
+    catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
+
 }

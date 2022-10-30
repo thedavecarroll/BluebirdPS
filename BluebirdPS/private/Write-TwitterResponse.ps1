@@ -73,6 +73,10 @@ function Write-TwitterResponse {
                             default                         { [ResponseInfo]::ParseApiV2Response($ResponseData.ApiResponse); break }
                         }
                         break
+                    } else {
+                        if ($LastStatusCode -eq 403) {
+                            New-TwitterErrorRecord -ResponseData $ResponseData
+                        }
                     }
                 }
             }
