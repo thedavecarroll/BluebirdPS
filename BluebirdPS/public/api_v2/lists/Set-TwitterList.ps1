@@ -41,11 +41,16 @@ function Set-TwitterList {
         Body = [PSCustomObject]$Body | ConvertTo-Json
     }
 
-    if ($PSCmdlet.ShouldProcess($List.ToString(),'Update list')) {
-        $SetTwitterList = Invoke-TwitterRequest -RequestParameters $Request
-        if ($SetTwitterList) {
-            Get-TwitterList -Id $SetTwitterList
+    try{
+        if ($PSCmdlet.ShouldProcess($List.ToString(),'Update list')) {
+            $SetTwitterList = Invoke-TwitterRequest -RequestParameters $Request
+            if ($SetTwitterList) {
+                Get-TwitterList -Id $SetTwitterList
+            }
         }
+    }
+    catch {
+        $PSCmdlet.ThrowTerminatingError($_)
     }
 
 }
