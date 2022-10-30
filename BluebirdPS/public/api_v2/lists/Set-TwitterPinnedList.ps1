@@ -25,7 +25,12 @@ function Set-TwitterPinnedList {
         }
     }
 
-    $SetTwitterPinnedList = Invoke-TwitterRequest -RequestParameters $Request
-    $PinnedList = $SetTwitterPinnedList ? 'pinned' : 'not pinned'
-    'List {0} is {1}' -f $List.ToShortString(),$PinnedList
+    try{
+        $SetTwitterPinnedList = Invoke-TwitterRequest -RequestParameters $Request
+        $PinnedList = $SetTwitterPinnedList ? 'pinned' : 'not pinned'
+        'List {0} is {1}' -f $List.ToShortString(),$PinnedList
+    }
+    catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
