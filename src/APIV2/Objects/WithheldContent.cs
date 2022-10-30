@@ -18,5 +18,9 @@ namespace BluebirdPS.APIV2.Objects
             CountryCodes = input.country_codes;
         }
 
+        public override string ToString()
+        {
+            return $"Copyright:{Copyright}, CountryCodes:{CountryCodes}";
+        }
     }
 }

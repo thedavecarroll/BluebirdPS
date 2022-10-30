@@ -11,5 +11,9 @@ namespace BluebirdPS.APIV2.TweetInfo.Context {
             Entity = new Entity(input.entity);
         }
 
+        public override string ToString()
+        {
+            return $"{Domain}:{Entity}";
+        }
     }
 }

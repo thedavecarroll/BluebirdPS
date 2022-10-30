@@ -12,5 +12,9 @@ namespace BluebirdPS.APIV2.TweetInfo.Context
             Name = input.name;
         }
 
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
