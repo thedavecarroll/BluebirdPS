@@ -10,7 +10,6 @@ namespace BluebirdPS.APIV2.MediaInfo.Metrics
         public Public(dynamic input)
         {
             ViewCount = input.view_count;
-            OriginalObject = input;
         }
 
     }

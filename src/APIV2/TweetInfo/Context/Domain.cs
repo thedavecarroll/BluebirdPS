@@ -1,5 +1,5 @@
 namespace BluebirdPS.APIV2.TweetInfo.Context {
-    public class Domain : TwitterObject
+    public class Domain
     {
         public string Id { get; set; }
         public string Name { get; set; }
@@ -11,8 +11,6 @@ namespace BluebirdPS.APIV2.TweetInfo.Context {
             Id = input.id;
             Name = input.name;
             Description = input.description;
-            OriginalObject = input;
-            OriginalObject = input;
         }
 
     }
