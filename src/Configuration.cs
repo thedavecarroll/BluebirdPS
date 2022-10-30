@@ -4,7 +4,7 @@ namespace BluebirdPS
 {
     public class Configuration
     {
-
+        public string ProfileName { get; set; }
         public string AuthUserId { get; set; }
         public string AuthUserName { get; set; }
         public DateTime? AuthValidationDate { get; set; }

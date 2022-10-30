@@ -22,6 +22,7 @@ if ($IsWindows) {
 
 #region Authentication variables and setup
 [SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
+$BluebirdPSProfile = [Profile]::new()
 $OAuth =  @{
     ApiKey = $null
     ApiSecret = $null
