@@ -41,3 +41,9 @@ $script:TwitterEndpoints = foreach ($Command in $BluebirdPSCommands) {
     )
 }
 #endregion
+
+#region BluebirdPS Version
+[SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
+$BluebirdPSVersion = (Get-Module -Name BluebirdPS).Version.ToString(3)
+#endregion
+
