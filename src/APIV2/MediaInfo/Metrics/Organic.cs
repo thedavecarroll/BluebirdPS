@@ -20,7 +20,6 @@ namespace BluebirdPS.APIV2.MediaInfo.Metrics
             PlaybackCount_50 = input.playback_50_count;
             PlaybackCount_75 = input.playback_75_count;
             ViewCount = input.view_count;
-            OriginalObject = input;
         }
 
     }

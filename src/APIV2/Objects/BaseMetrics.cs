@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace BluebirdPS.APIV2.Objects
 {
-    public class BaseMetrics : TwitterObject
+    public class BaseMetrics
     {
         public override string ToString()
         {

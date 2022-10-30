@@ -20,7 +20,6 @@ namespace BluebirdPS.APIV2.TweetInfo.Metrics
             RetweetCount = input.retweet_count;
             UrlLinkClicks = input.url_link_clicks;
             UserProfileClicks = input.user_profile_clicks;
-            OriginalObject = input;
         }
 
     }

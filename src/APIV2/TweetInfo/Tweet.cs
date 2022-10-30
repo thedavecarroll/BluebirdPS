@@ -19,6 +19,8 @@ namespace BluebirdPS.APIV2.TweetInfo
         public List<object> Entities { get; set; }
         public PSObject Geo { get; set; }
         public string InReplyToUserId { get; set; }
+        public List<string> EditHistoryTweetIds { get; set; } = new List<string>();
+        public object EditControls { get; set; }
         public string Language { get; set; }
         public NonPublic NonPublicMetrics { get; set; }
         public Organic OrganicMetrics { get; set; }
@@ -76,10 +78,11 @@ namespace BluebirdPS.APIV2.TweetInfo
                     ReplySettings = Helpers.ToTitleCase(input.reply_settings);
                 }
 
-                if (Helpers.HasProperty(input, "withheld"))
-                {
-                    Withheld = new WithheldContent(input.withheld);
-                }
+            EditControls = new EditControls(input.edit_controls);
+            foreach (string editTweetIds in input.edit_history_tweet_ids)
+            {
+                EditHistoryTweetIds.Add(editTweetIds);
+            }
 
                 if (Helpers.HasProperty(input, "referenced_tweets"))
                 {

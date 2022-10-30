@@ -8,7 +8,7 @@ namespace BluebirdPS.APIV2
         {
             "author_id","referenced_tweets.id","referenced_tweets.id.author_id",
             "entities.mentions.username","attachments.poll_ids","attachments.media_keys",
-            "in_reply_to_user_id","geo.place_id"
+            "in_reply_to_user_id","geo.place_id","edit_history_tweet_ids"
         };
 
         public static List<string> User => new List<string>()

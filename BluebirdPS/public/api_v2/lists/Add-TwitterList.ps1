@@ -27,7 +27,7 @@ function Add-TwitterList {
 
     $AddTwitterList = Invoke-TwitterRequest -RequestParameters $Request
     if ($AddTwitterList) {
-        Get-TwitterList -Id $AddTwitterList
+        Get-TwitterList -Id $AddTwitterList.Id
     }
 
 }

@@ -6,7 +6,7 @@ function Add-TwitterListSubscription {
         [Alias('ListId')]
         [string]$Id,
 
-        [Parameter(Mandatory,ParameterSetName='ByList')]
+        [Parameter(Mandatory,ParameterSetName='ByList',ValueFromPipeline)]
         [ValidateObjectNotNullOrEmpty()]
         [BluebirdPS.APIV2.ListInfo.List]$List
     )

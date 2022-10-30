@@ -33,9 +33,14 @@ function Add-TwitterListMember {
                 Body = [PSCustomObject]@{'user_id' = $NewMember.Id } | ConvertTo-Json
             }
             $Request.SetCommandName('Add-TwitterListMember')
-            $AddTwitterListMember = Invoke-TwitterRequest -RequestParameters $Request
-            $IsMember = $AddTwitterListMember ? 'is' : 'is not'
-            'User {0} {1} a member of list {2}' -f $NewMember.Name,$IsMember,$List.ToShortString()
+            try{
+                $AddTwitterListMember = Invoke-TwitterRequest -RequestParameters $Request
+                $IsMember = $AddTwitterListMember ? 'is' : 'is not'
+                'User {0} {1} a member of list {2}' -f $NewMember.Name,$IsMember,$List.ToShortString()
+            }
+            catch {
+                $PSCmdlet.ThrowTerminatingError($_)
+            }
         }
     }
 

@@ -14,7 +14,6 @@ namespace BluebirdPS.APIV2.TweetInfo.Metrics
             ImpressionCount = input.impression_count;
             UrlLinkClicks = input.url_link_clicks;
             UserProfileClicks = input.user_profile_clicks;
-            OriginalObject = input;
         }
 
     }

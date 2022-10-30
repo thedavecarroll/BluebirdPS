@@ -16,7 +16,6 @@ namespace BluebirdPS.APIV2.TweetInfo.Metrics
             ReplyCount = input.reply_count;
             LikeCount = input.like_count;
             QuoteCount = input.quote_count;
-            OriginalObject = input;
         }
 
     }

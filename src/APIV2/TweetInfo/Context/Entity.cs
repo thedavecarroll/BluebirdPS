@@ -1,6 +1,6 @@
 namespace BluebirdPS.APIV2.TweetInfo.Context
 {
-    public class Entity : TwitterObject
+    public class Entity
     {
         public string Id { get; set; }
         public string Name { get; set; }
@@ -10,8 +10,11 @@ namespace BluebirdPS.APIV2.TweetInfo.Context
         {
             Id = input.id;
             Name = input.name;
-            OriginalObject = input;
         }
 
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

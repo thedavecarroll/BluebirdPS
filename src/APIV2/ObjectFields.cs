@@ -7,12 +7,12 @@ namespace BluebirdPS.APIV2
         public static List<string> TweetFields => new List<string>()
         {
             // default fields
-            "id","text",
+            "id","text","edit_history_tweet_ids",
 
             // additional fields
             "attachments","author_id","context_annotations","conversation_id",
             "created_at","entities","geo","in_reply_to_user_id","lang","possibly_sensitive",
-            "public_metrics","referenced_tweets","reply_settings","source","withheld"
+            "public_metrics","referenced_tweets","reply_settings","source","withheld","edit_controls"
 
             // possible metrics fields
             //  non_public_metrics

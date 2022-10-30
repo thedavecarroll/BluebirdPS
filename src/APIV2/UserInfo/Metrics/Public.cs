@@ -16,7 +16,6 @@ namespace BluebirdPS.APIV2.UserInfo.Metrics
             FollowingCount = input.following_count;
             ListedCount = input.listed_count;
             TweetCount = input.tweet_count;
-            OriginalObject = input;
         }
 
     }

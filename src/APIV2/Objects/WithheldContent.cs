@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace BluebirdPS.APIV2.Objects
 {
-    public class WithheldContent : TwitterObject
+    public class WithheldContent
     {
         public bool Copyright { get; set; }
         public List<string> CountryCodes { get; set; }
@@ -16,8 +16,11 @@ namespace BluebirdPS.APIV2.Objects
             }
             Copyright = input.copyright;
             CountryCodes = input.country_codes;
-            OriginalObject = input;
         }
 
+        public override string ToString()
+        {
+            return $"Copyright:{Copyright}, CountryCodes:{CountryCodes}";
+        }
     }
 }

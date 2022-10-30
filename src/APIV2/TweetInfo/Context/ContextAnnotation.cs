@@ -1,21 +1,19 @@
 namespace BluebirdPS.APIV2.TweetInfo.Context {
-    public class ContextAnnotation : TwitterObject
+    public class ContextAnnotation
     {
         public Domain Domain { get; set; }
         public Entity Entity { get; set; }
 
-        ContextAnnotation() { }
-        ContextAnnotation(dynamic input) {
-            OriginalObject = input;
-            if (Helpers.HasProperty(input, "domain"))
-            {
-                Domain = new Domain(input.domain);
-            }
-            if (Helpers.HasProperty(input, "entity"))
-            {
-                Entity = new Entity(input.entity);
-            }
+        public ContextAnnotation() { }
+        public ContextAnnotation(dynamic input)
+        {
+            Domain = new Domain(input.domain);
+            Entity = new Entity(input.entity);
         }
 
+        public override string ToString()
+        {
+            return $"{Domain}:{Entity}";
+        }
     }
 }

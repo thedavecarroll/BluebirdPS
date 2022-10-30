@@ -5,7 +5,7 @@ function Remove-TwitterListMember {
         [ValidatePattern('^[0-9]{1,19}$', ErrorMessage = "The List Id '{0}' is not valid.")]
         [string]$Id,
 
-        [Parameter(Mandatory,ParameterSetName='ByList')]
+        [Parameter(Mandatory,ParameterSetName='ByList',ValueFromPipeline)]
         [ValidateObjectNotNullOrEmpty()]
         [BluebirdPS.APIV2.ListInfo.List]$List,
 
@@ -31,9 +31,14 @@ function Remove-TwitterListMember {
                 Endpoint ='https://api.twitter.com/2/lists/{0}/members/{1}' -f $ListId,$RemoveMember.Id
             }
             $Request.SetCommandName('Remove-TwitterListMember')
-            $RemoveTwitterListMember = Invoke-TwitterRequest -RequestParameters $Request
-            $IsMember = $RemoveTwitterListMember ? 'is' : 'is not'
-            'User {0} {1} a member of list {2}' -f $RemoveMember.Name,$IsMember,$List.ToShortString()
+            try {
+                $RemoveTwitterListMember = Invoke-TwitterRequest -RequestParameters $Request
+                $IsMember = $RemoveTwitterListMember ? 'is' : 'is not'
+                'User {0} {1} a member of list {2}' -f $RemoveMember.Name,$IsMember,$List.ToShortString()
+            }
+            catch {
+                $PSCmdlet.ThrowTerminatingError($_)
+            }
         }
     }
 
