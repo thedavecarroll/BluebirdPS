@@ -1,5 +1,6 @@
 using BluebirdPS.APIV2.Objects;
 using BluebirdPS.APIV2.TweetInfo.Metrics;
+using BluebirdPS.APIV2.TweetInfo.Context;
 using System;
 using System.Collections.Generic;
 using System.Management.Automation;
@@ -35,48 +36,23 @@ namespace BluebirdPS.APIV2.TweetInfo
         public Tweet() { }
         public Tweet(dynamic input)
         {
-            try
-            {
-                OriginalObject = input;
+            OriginalObject = input;
 
-                if (Helpers.HasProperty(input, "id_str"))
-                {
-                    // API v1.1 return
-                    Id = input.id_str;
-                    AuthorId = input.user.id_str;
-                    CreatedAt = Helpers.ConvertFromV1Date(input.created_at);
-                    InReplyToUserId = input.in_reply_to_user_id_str;
-
-                } else
-                {
-                    Id = input.id;
-                    AuthorId = input.author_id;
-                    CreatedAt = input.created_at;
-                    ConversationId = input.conversation_id;
-                    PublicMetrics = new Public(input.public_metrics);
-                    InReplyToUserId = input.in_reply_to_user_id;
-                }
-
-                Text = input.text;
-                Entities = BaseEntity.GetEntities(input.entities);
-                Language = input.lang;
-                PossiblySensitive = input.possibly_sensitive;
-                Source = input.source;
-
-                if (Helpers.HasProperty(input, "attachments"))
-                {
-                    Attachments = new Attachments(input.attachments);
-                }
-
-                if (Helpers.HasProperty(input, "geo"))
-                {
-                    Geo = input.geo;
-                }
-
-                if (Helpers.HasProperty(input, "reply_settings"))
-                {
-                    ReplySettings = Helpers.ToTitleCase(input.reply_settings);
-                }
+            Id = input.id;
+            AuthorId = input.author_id;
+            CreatedAt = input.created_at;
+            ConversationId = input.conversation_id;
+            PublicMetrics = new Public(input.public_metrics);
+            InReplyToUserId = input.in_reply_to_user_id;
+            Text = input.text;
+            Entities = BaseEntity.GetEntities(input.entities);
+            Language = input.lang;
+            PossiblySensitive = input.possibly_sensitive;
+            Source = input.source;
+            Attachments = new Attachments(input.attachments);
+            Geo = input.geo;
+            ReplySettings = Helpers.ToTitleCase(input.reply_settings);
+            Withheld = new WithheldContent(input.withheld);
 
             EditControls = new EditControls(input.edit_controls);
             foreach (string editTweetIds in input.edit_history_tweet_ids)
@@ -84,41 +60,39 @@ namespace BluebirdPS.APIV2.TweetInfo
                 EditHistoryTweetIds.Add(editTweetIds);
             }
 
-                if (Helpers.HasProperty(input, "referenced_tweets"))
-                {
-                    List<ReferencedTweet> referencedTweets = new List<ReferencedTweet>();
-                    foreach (dynamic refTweet in input.referenced_tweets)
-                    {
-                        referencedTweets.Add(new ReferencedTweet(refTweet));
-                    }
-                    ReferencedTweets = referencedTweets;
-                }
-
-                if (Helpers.HasProperty(input, "context_annotations"))
-                {
-                    List<Context.ContextAnnotation> contextAnnotations = new List<Context.ContextAnnotation>();
-
-                }
-
-                if (Helpers.HasProperty(input, "non_public_metrics"))
-                {
-                    NonPublicMetrics = new NonPublic(input.non_public_metrics);
-                }
-                if (Helpers.HasProperty(input, "organic_metrics"))
-                {
-                    OrganicMetrics = new Organic(input.organic_metrics);
-                }
-                if (Helpers.HasProperty(input, "promoted_metrics"))
-                {
-                    PromotedMetrics = new Promoted(input.promoted_metrics);
-                }
-            }
-            catch
+            if (Helpers.HasProperty(input, "referenced_tweets"))
             {
-                // any missing properties that are not on the input object
-                // and not caught with Helpers.HasProperty if statement,
-                // do not fail (for now)
+                List<ReferencedTweet> referencedTweets = new List<ReferencedTweet>();
+                foreach (dynamic refTweet in input.referenced_tweets)
+                {
+                    referencedTweets.Add(new ReferencedTweet(refTweet));
+                }
+                ReferencedTweets = referencedTweets;
             }
+
+            if (Helpers.HasProperty(input, "context_annotations"))
+            {
+                List<ContextAnnotation> contextAnnotations = new List<ContextAnnotation>();
+                foreach (dynamic contextAnnotation in input.context_annotations)
+                {
+                    contextAnnotations.Add(new ContextAnnotation(contextAnnotation));
+                }
+                ContextAnnotations = contextAnnotations;
+            }
+
+            if (Helpers.HasProperty(input, "non_public_metrics"))
+            {
+                NonPublicMetrics = new NonPublic(input.non_public_metrics);
+            }
+            if (Helpers.HasProperty(input, "organic_metrics"))
+            {
+                OrganicMetrics = new Organic(input.organic_metrics);
+            }
+            if (Helpers.HasProperty(input, "promoted_metrics"))
+            {
+                PromotedMetrics = new Promoted(input.promoted_metrics);
+            }
+
         }
 
         public override string ToString()
