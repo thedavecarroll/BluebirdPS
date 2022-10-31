@@ -18,8 +18,11 @@ namespace BluebirdPS.APIV2.TweetInfo.Metrics
             LikeCount = input.like_count;
             ReplyCount = input.reply_count;
             RetweetCount = input.retweet_count;
-            UrlLinkClicks = input.url_link_clicks;
             UserProfileClicks = input.user_profile_clicks;
+
+            if (Helpers.HasProperty(input, "url_link_clicks")) {
+                UrlLinkClicks = input.url_link_clicks;
+            }
         }
 
     }
