@@ -12,8 +12,11 @@ namespace BluebirdPS.APIV2.TweetInfo.Metrics
         public NonPublic(dynamic input)
         {
             ImpressionCount = input.impression_count;
-            UrlLinkClicks = input.url_link_clicks;
             UserProfileClicks = input.user_profile_clicks;
+
+            if (Helpers.HasProperty(input, "url_link_clicks")) {
+                UrlLinkClicks = input.url_link_clicks;
+            }
         }
 
     }
