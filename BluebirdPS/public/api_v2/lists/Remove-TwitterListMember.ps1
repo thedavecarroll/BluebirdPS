@@ -5,7 +5,7 @@ function Remove-TwitterListMember {
         [ValidatePattern('^[0-9]{1,19}$', ErrorMessage = "The List Id '{0}' is not valid.")]
         [string]$Id,
 
-        [Parameter(Mandatory,ParameterSetName='ByList',ValueFromPipeline)]
+        [Parameter(Mandatory,ParameterSetName='ByList')]
         [ValidateObjectNotNullOrEmpty()]
         [BluebirdPS.APIV2.ListInfo.List]$List,
 

@@ -10,7 +10,7 @@ function Add-TwitterListMember {
         [ValidateObjectNotNullOrEmpty()]
         [BluebirdPS.APIV2.ListInfo.List]$List,
 
-        [Parameter(ValueFromPipeline)]
+        [Parameter(Mandatory,ValueFromPipeline)]
         [ValidateObjectNotNullOrEmpty()]
         [ValidateCount(1,100)]
         [BluebirdPS.APIV2.UserInfo.User[]]$User
