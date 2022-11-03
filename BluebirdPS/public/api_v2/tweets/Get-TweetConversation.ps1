@@ -27,6 +27,7 @@ function Get-TweetConversation {
         [switch]$OrganicMetrics
     )
 
+    # The initial Get-Tweet needs to include the switch parameters that are present
     if ($PSCmdlet.ParameterSetName -eq 'ById') {
         $Tweet = Get-Tweet -Id $Id
     }

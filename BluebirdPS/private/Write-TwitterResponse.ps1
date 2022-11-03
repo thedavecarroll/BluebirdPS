@@ -74,7 +74,7 @@ function Write-TwitterResponse {
                         }
                         break
                     } else {
-                        if ($LastStatusCode -eq 403) {
+                        if ($LastStatusCode -in 403,404) {
                             New-TwitterErrorRecord -ResponseData $ResponseData
                         }
                     }
