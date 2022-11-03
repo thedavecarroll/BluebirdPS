@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Get-TwitterTimeline
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Get-TwitterTimeline
 schema: 2.0.0
 ---
 
@@ -16,13 +16,17 @@ Returns Tweets composed by the specified user or that mention the specified user
 ### User (Default)
 
 ```powershell
-Get-TwitterTimeline -User <User> [-EndTime <DateTime>] [-Exclude <String[]>] [-IncludeExpansions] [-NonPublicMetrics] [-OrganicMetrics] [-PromotedMetrics] [-SinceId <String>] [-StartTime <DateTime>] [-UntilId <String>] [<CommonParameters>]
+Get-TwitterTimeline -User <User> [-Exclude <String[]>] [-StartTime <DateTime>] [-EndTime <DateTime>]
+ [-SinceId <String>] [-UntilId <String>] [-IncludeExpansions] [-NonPublicMetrics] [-PromotedMetrics]
+ [-OrganicMetrics] [-MaxResultsPerPage <Int32>] [-NoPagination] [<CommonParameters>]
 ```
 
 ### Mentions
 
 ```powershell
-Get-TwitterTimeline -Mentions -User <User> [-EndTime <DateTime>] [-IncludeExpansions] [-NonPublicMetrics] [-OrganicMetrics] [-PromotedMetrics] [-SinceId <String>] [-StartTime <DateTime>] [-UntilId <String>] [<CommonParameters>]
+Get-TwitterTimeline -User <User> [-Mentions] [-StartTime <DateTime>] [-EndTime <DateTime>] [-SinceId <String>]
+ [-UntilId <String>] [-IncludeExpansions] [-NonPublicMetrics] [-PromotedMetrics] [-OrganicMetrics]
+ [-MaxResultsPerPage <Int32>] [-NoPagination] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -72,14 +76,14 @@ Return the Tweet timeline for the specified user for Tweets composed after the s
 The user object, returned by Get-TwitterUser, to retrieve the Tweet timeline or mention timeline.
 
 ```yaml
-Type: User
+Type: BluebirdPS.APIV2.UserInfo.User
 Parameter Sets: (All)
 Aliases:
 
-Required: True (All) False (None)
+Required: True
 Position: Named
-Default value:
-Accept pipeline input: True
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -90,7 +94,7 @@ Exclude Retweets, Replies, or both from the results.
 NOTE: If you exclude Replies, only the most recent 800 Tweets are returned.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: User
 Aliases:
 Accepted values: Retweets, Replies
@@ -107,13 +111,13 @@ Accept wildcard characters: False
 Include additional data objects, such as the Tweet author's user, mentioned users, media, poll, and more.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -123,7 +127,7 @@ Accept wildcard characters: False
 Specifies to retrieve Tweets that mention the specified user.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: Mentions
 Aliases:
 
@@ -141,13 +145,13 @@ Include non-public engagement metrics for the Tweet at the time of the request.
 NonPublicMetrics include ImpressionCount, UrlLinkClicks, and UserProfileClicks.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -159,13 +163,13 @@ Include engagement metrics, tracked in an organic context, for the Tweet at the 
 OrganicMetrics include ImpressionCount, LikeCount, ReplyCount, RetweetCount, UrlLinkClicks, and UserProfileClicks.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -177,13 +181,13 @@ Include engagement metrics, tracked in a promoted context, for the Tweet at the 
 PromotedMetrics include ImpressionCount, LikeCount, ReplyCount, RetweetCount, UrlLinkClicks, and UserProfileClicks.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -193,7 +197,7 @@ Accept wildcard characters: False
 The oldest or earliest timestamp from which the Tweets will be provided.
 
 ```yaml
-Type: DateTime
+Type: System.DateTime
 Parameter Sets: (All)
 Aliases:
 
@@ -209,7 +213,7 @@ Accept wildcard characters: False
 The newest or most recent timestamp from which the Tweets will be provided.
 
 ```yaml
-Type: DateTime
+Type: System.DateTime
 Parameter Sets: (All)
 Aliases:
 
@@ -225,7 +229,7 @@ Accept wildcard characters: False
 Returns results with a Tweet Id greater than (that is, more recent than) the specified SinceId.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -241,7 +245,47 @@ Accept wildcard characters: False
 Returns results with a Tweet ID less less than (that is, older than) the specified UntilId.
 
 ```yaml
-Type: String
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MaxResultsPerPage
+
+The maximum number of results to be return by each page of the request.
+
+Note:
+By default, this command will request all available pages of data with each page request counting against the rate limit threshold.
+
+You can force the command only return a single page with the NoPagination switch.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NoPagination
+
+Only return the first page of data for the request.
+
+Note:
+By default, this command will request all available pages of data with each page request counting against the rate limit threshold.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -268,9 +312,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Get-TwitterTimeline)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Get-TwitterTimeline)
 
-[Get-TwitterUser](https://docs.bluebirdps.dev/en/v0.7.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser)
+[Get-TwitterUser](https://docs.bluebirdps.dev/en/v0.8.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser)
 
 [Api Reference - GET /2/users/:id/tweets](https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-reference/get-users-id-tweets)
 

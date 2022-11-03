@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Set-Retweet
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Set-Retweet
 schema: 2.0.0
 ---
 
@@ -56,7 +56,7 @@ Unretweets the specified Tweet.
 The id of the Tweet.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -72,7 +72,7 @@ Accept wildcard characters: False
 Instructs the command to retweet the specified Tweet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: Retweet
 Aliases:
 
@@ -88,7 +88,7 @@ Accept wildcard characters: False
 Instructs the command to unretweet the specified Tweet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: Unretweet
 Aliases:
 
@@ -115,9 +115,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Set-Retweet)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Set-Retweet)
 
-[Get-Tweet](https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Get-Tweet)
+[Get-Tweet](https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Get-Tweet)
 
 [API Documentation - POST statuses/retweet/:id](https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-retweet-id)
 

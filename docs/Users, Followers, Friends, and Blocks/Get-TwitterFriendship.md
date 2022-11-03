@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFriendship
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFriendship
 schema: 2.0.0
 ---
 
@@ -149,7 +149,7 @@ One or more user names to return the connection details.
 Connections can be: Following, FollowingRequested, FollowedBy, Blocking, Muting, or None.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: Lookup
 Aliases:
 
@@ -165,7 +165,7 @@ Accept wildcard characters: False
 Specifies the source user to return detailed information about the relationship with the target user.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: Show
 Aliases:
 
@@ -181,7 +181,7 @@ Accept wildcard characters: False
 Specifies the target user to return detailed information about the relationship with the source user.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: Show
 Aliases:
 
@@ -197,7 +197,7 @@ Accept wildcard characters: False
 Returns an array of user ids for every user who has requested to follow the authenticating user, if their Tweets are private.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: Incoming
 Aliases:
 
@@ -213,7 +213,7 @@ Accept wildcard characters: False
 Returns an array of user ids for every protected user for whom the authenticating user has a pending follow request.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: Pending
 Aliases:
 
@@ -229,7 +229,7 @@ Accept wildcard characters: False
 Returns an array of user ids that the authenticating user does not want to receive retweets from.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: NoRetweets
 Aliases:
 
@@ -260,7 +260,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFriendship)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFriendship)
 
 [Api Reference - GET friendships/lookup](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-lookup)
 

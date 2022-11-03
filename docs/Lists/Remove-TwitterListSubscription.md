@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Lists/Remove-TwitterListSubscription
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Lists/Remove-TwitterListSubscription
 schema: 2.0.0
 ---
 
@@ -54,7 +54,7 @@ Get the list specified by the slug and ower name, then unsubscribe from it.
 The id of the list.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ById
 Aliases:
 
@@ -86,7 +86,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -103,7 +103,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -132,14 +132,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Remove-TwitterListSubscription)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Remove-TwitterListSubscription)
 
-[Add-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Add-TwitterListSubscription)
+[Add-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Add-TwitterListSubscription)
 
-[Get-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterListSubscription)
+[Get-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterListSubscription)
 
-[Test-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Test-TwitterListSubscription)
+[Test-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Test-TwitterListSubscription)
 
-[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterList)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterList)
 
 [Api Reference - POST lists/subscribers/destroy](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-destroy)

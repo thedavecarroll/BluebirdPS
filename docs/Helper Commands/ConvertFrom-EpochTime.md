@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Helper%20Commands/ConvertFrom-EpochTime
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Helper%20Commands/ConvertFrom-EpochTime
 schema: 2.0.0
 ---
 
@@ -56,7 +56,7 @@ Convert from epoch time.
 The UNIX epoch time, either seconds or milliseconds.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -83,6 +83,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Helper%20Commands/ConvertFrom-EpochTime)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Helper%20Commands/ConvertFrom-EpochTime)
 
-[ConvertFrom-TwitterV1Date](https://docs.bluebirdps.dev/en/v0.7.0/Helper%20Commands/ConvertFrom-TwitterV1Date)
+[ConvertFrom-TwitterV1Date](https://docs.bluebirdps.dev/en/v0.8.0/Helper%20Commands/ConvertFrom-TwitterV1Date)

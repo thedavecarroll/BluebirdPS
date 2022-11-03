@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Lists/Remove-TwitterListMember
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Lists/Remove-TwitterListMember
 schema: 2.0.0
 ---
 
@@ -16,13 +16,13 @@ Removes one or more users from a list.
 ### ById (Default)
 
 ```powershell
-Remove-TwitterListMember -Id <String> -UserName <String[]> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-TwitterListMember -Id <String> [-User <User[]>] [<CommonParameters>]
 ```
 
 ### ByList
 
 ```powershell
-Remove-TwitterListMember -List <List> -UserName <String[]> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-TwitterListMember -List <List> [-User <User[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -39,87 +39,16 @@ Take care when using these methods such that you are not too rapidly switching b
 ### Example 1
 
 ```powershell
-
-PS > Remove-TwitterListMember -Id 1397040831777984512 -UserName thedavecarroll
+PS > $MyUser = Get-TwitterUser -User BluebirdPS
+PS > Get-TwitterList -Id 1587300786052243459 | Remove-TwitterListMember -User $MyUser
 ```
 
 ```text
-Id              : 1397040831777984512
-CreatedAt       : 5/24/2021 11:04:24 PM
-Slug            : sample-list-10878
-Name            : Updated-List-Name
-FullName        : @thedavecarroll/sample-list-10878
-Description     : New description for this list.
-Uri             : https://twitter.com/thedavecarroll/lists/sample-list-10878
-Mode            : Private
-MemberCount     : 3
-SubscriberCount : 0
-UserId          : 292670084
-UserName        : thedavecarroll
-Following       : True
+User BluebirdPS is not a member of list Id: 1587300786052243459, Name: Sample-List, Members: 0
 ```
 
-Remove the user thedavecarroll from the specified list.
+Remove the specified user from the specified list.
 
-### Example 2
-
-```powershell
-PS > Remove-TwitterListMember -Id 1397040831777984512 -UserName TwitterDev,TwitterAPI
-```
-
-```text
-Confirm
-Are you sure you want to perform this action?
-Performing the operation "Remove users from list" on target "Id: 1397040831777984512 - UserNames:
-TwitterDev,TwitterAPI, Total Users: 2".
-[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"): y
-
-Id              : 1397040831777984512
-CreatedAt       : 5/24/2021 11:04:24 PM
-Slug            : sample-list-10878
-Name            : Updated-List-Name
-FullName        : @thedavecarroll/sample-list-10878
-Description     : New description for this list.
-Uri             : https://twitter.com/thedavecarroll/lists/sample-list-10878
-Mode            : Private
-MemberCount     : 1
-SubscriberCount : 0
-UserId          : 292670084
-UserName        : thedavecarroll
-Following       : True
-```
-
-Remove the users TwitterDev and TwitterAPI from the specified list.
-
-### Example 3
-
-```powershell
-PS > Get-TwitterList -Id 1397040831777984512 | Remove-TwitterListMember -UserName BluebirdPS
-```
-
-```text
-Confirm
-Are you sure you want to perform this action?
-Performing the operation "Remove users from list" on target "Id: 1397040831777984512, Name: Updated-List-Name -
-UserName: BluebirdPS".
-[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"): y
-
-Id              : 1397040831777984512
-CreatedAt       : 5/24/2021 11:04:24 PM
-Slug            : sample-list-10878
-Name            : Updated-List-Name
-FullName        : @thedavecarroll/sample-list-10878
-Description     : New description for this list.
-Uri             : https://twitter.com/thedavecarroll/lists/sample-list-10878
-Mode            : Private
-MemberCount     : 0
-SubscriberCount : 0
-UserId          : 292670084
-UserName        : thedavecarroll
-Following       : True
-```
-
-Remove the user BluebirdPS from the specified list.
 
 ## PARAMETERS
 
@@ -128,7 +57,7 @@ Remove the user BluebirdPS from the specified list.
 The id of the list.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ById
 Aliases:
 
@@ -160,7 +89,7 @@ Accept wildcard characters: False
 One or more usernames to remove from the list, up to a maximum of 100 per request.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -176,7 +105,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -192,7 +121,7 @@ Accept wildcard characters: False
 Shows what would happen if the cmdlet runs. The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -221,13 +150,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Remove-TwitterListMember)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Remove-TwitterListMember)
 
-[Get-TwitterListMember](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterListMember)
+[Get-TwitterListMember](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterListMember)
 
-[Add-TwitterListMember](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Add-TwitterListMember)
+[Add-TwitterListMember](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Add-TwitterListMember)
 
-[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterList)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterList)
 
 [Api Reference - POST lists/members/destroy](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-members-destroy)
 

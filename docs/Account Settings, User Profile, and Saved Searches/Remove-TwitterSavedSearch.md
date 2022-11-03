@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Account%20Settings%2C%20User%20Profile%2C%20and%20Saved%20Searches/Remove-TwitterSavedSearch
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Account%20Settings%2C%20User%20Profile%2C%20and%20Saved%20Searches/Remove-TwitterSavedSearch
 schema: 2.0.0
 ---
 
@@ -68,14 +68,30 @@ Gets the specified saved search then deletes it, if belonging to the authenticat
 The id of the saved search.
 
 ```yaml
-Type: String[]
-Parameter Sets: (All)
+Type: System.String
+Parameter Sets: ById
 Aliases:
 
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -SavedSearch
+
+A SavedSearch object returned from Get-TwitterSavedSearch.
+
+```yaml
+Type: BluebirdPS.APIV1.SavedSearch
+Parameter Sets: BySavedSearch
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -84,7 +100,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -101,7 +117,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -128,10 +144,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Account%20Settings%2C%20User%20Profile%2C%20and%20Saved%20Searches/Remove-TwitterSavedSearch)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Account%20Settings%2C%20User%20Profile%2C%20and%20Saved%20Searches/Remove-TwitterSavedSearch)
 
-[Get-TwitterSavedSearch](https://docs.bluebirdps.dev/en/v0.7.0/Account%20Settings%2C%20User%20Profile%2C%20and%20Saved%20Searches/Get-TwitterSavedSearch)
+[Get-TwitterSavedSearch](https://docs.bluebirdps.dev/en/v0.8.0/Account%20Settings%2C%20User%20Profile%2C%20and%20Saved%20Searches/Get-TwitterSavedSearch)
 
-[Add-TwitterSavedSearch](https://docs.bluebirdps.dev/en/v0.7.0/Account%20Settings%2C%20User%20Profile%2C%20and%20Saved%20Searches/Add-TwitterSavedSearch)
+[Add-TwitterSavedSearch](https://docs.bluebirdps.dev/en/v0.8.0/Account%20Settings%2C%20User%20Profile%2C%20and%20Saved%20Searches/Add-TwitterSavedSearch)
 
 [Api Reference - POST saved_searches/destroy/:id](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-destroy-id)

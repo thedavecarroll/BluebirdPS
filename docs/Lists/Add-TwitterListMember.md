@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Lists/Add-TwitterListMember
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Lists/Add-TwitterListMember
 schema: 2.0.0
 ---
 
@@ -16,13 +16,13 @@ Add one or more users to a list.
 ### ById (Default)
 
 ```powershell
-Add-TwitterListMember -Id <String> [-UserName <String[]>] [<CommonParameters>]
+Add-TwitterListMember -Id <String> [-User <User[]>] [<CommonParameters>]
 ```
 
 ### ByList
 
 ```powershell
-Add-TwitterListMember -List <List> [-UserName <String[]>] [<CommonParameters>]
+Add-TwitterListMember -List <List> [-User <User[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -117,14 +117,14 @@ Add the user BluebirdPS to the specified list.
 The id of the list.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ById
-Aliases:
+Aliases: ListId
 
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -133,30 +133,30 @@ Accept wildcard characters: False
 A list object retrieved from Get-TwitterList.
 
 ```yaml
-Type: List
+Type: BluebirdPS.APIV2.ListInfo.List
 Parameter Sets: ByList
 Aliases:
 
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -UserName
+### -User
 
-One or more usernames to add to the list, up to a maximum of 100 per request.
+One or more user objects, returned by Get-TwitterUser, to follow.
 
 ```yaml
-Type: String[]
+Type: BluebirdPS.APIV2.UserInfo.User[]
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -178,13 +178,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Add-TwitterListMember)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Add-TwitterListMember)
 
-[Get-TwitterListMember](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterListMember)
+[Get-TwitterListMember](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterListMember)
 
-[Remove-TwitterListMember](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Remove-TwitterListMember)
+[Remove-TwitterListMember](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Remove-TwitterListMember)
 
-[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterList)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterList)
 
 [Api Reference - POST lists/members/create](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-members-create)
 

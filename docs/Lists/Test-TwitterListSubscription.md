@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Lists/Test-TwitterListSubscription
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Lists/Test-TwitterListSubscription
 schema: 2.0.0
 ---
 
@@ -62,7 +62,7 @@ Checks if the authenticating user is subscribed to the specified list.
 The id of the list.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ById
 Aliases:
 
@@ -94,7 +94,7 @@ Accept wildcard characters: False
 The username to verify if they subscribe to the specified list.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -123,14 +123,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Test-TwitterListSubscription)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Test-TwitterListSubscription)
 
-[Get-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterListSubscription)
+[Get-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterListSubscription)
 
-[Add-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Add-TwitterListSubscription)
+[Add-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Add-TwitterListSubscription)
 
-[Remove-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Remove-TwitterListSubscription)
+[Remove-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Remove-TwitterListSubscription)
 
-[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterList)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterList)
 
 [Api Reference - GET lists/subscribers/show](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-subscribers-show)

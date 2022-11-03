@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Lists/Set-TwitterList
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Lists/Set-TwitterList
 schema: 2.0.0
 ---
 
@@ -87,7 +87,7 @@ Note: The list slug does not change when you rename the list, therefore neither 
 The id of the list.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ById
 Aliases:
 
@@ -119,7 +119,7 @@ Accept wildcard characters: False
 The new name for the list.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -135,7 +135,7 @@ Accept wildcard characters: False
 The new description for the list.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -151,7 +151,7 @@ Accept wildcard characters: False
 The new mode for the list.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Private, Public
@@ -168,7 +168,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -185,7 +185,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -214,12 +214,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Set-TwitterList)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Set-TwitterList)
 
-[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterList)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterList)
 
-[Add-TwitterList](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Add-TwitterList)
+[Add-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Add-TwitterList)
 
-[Remove-TwitterList](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Remove-TwitterList)
+[Remove-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Remove-TwitterList)
 
 [Api Reference - POST lists/update](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-update)

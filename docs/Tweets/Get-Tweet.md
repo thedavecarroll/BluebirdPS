@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Get-Tweet
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Get-Tweet
 schema: 2.0.0
 ---
 
@@ -9,20 +9,13 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Returns one or more Tweets, or a Tweet conversation.
+Returns one or more Tweets.
 
 ## SYNTAX
 
-### Tweet (Default)
-
 ```powershell
-Get-Tweet [-Id] <String[]> [-NonPublicMetrics] [-PromotedMetrics] [-OrganicMetrics] [-IncludeExpansions] [<CommonParameters>]
-```
-
-### Conversation
-
-```powershell
-Get-Tweet [-ConversationId] <String> [-NonPublicMetrics] [-PromotedMetrics] [-OrganicMetrics] [-IncludeExpansions] [<CommonParameters>]
+Get-Tweet [-Id] <String[]> [-IncludeExpansions] [-MaxResultsPerPage <Int32>] [-NoPagination]
+ [-NonPublicMetrics] [-PromotedMetrics] [-OrganicMetrics] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -131,124 +124,6 @@ Withheld        :
 
 Returns the Tweet specified by the Id and include any expansions.
 
-### Example 3
-
-```powershell
-PS >  Get-Tweet -ConversationId 1398279333823791104
-```
-
-```text
-Id                 : 1398279333823791104
-Text               : For today's #PowerShell #PSFollowFriday, I've pulled a random sample from @adouwes's Twitter List, Powershell.
-                     https://t.co/vda8MBo2wi
-
-                     @Steve_MSFT @JeremyMurrah @BrettMiller_IT @Jaap_Brasser @sydneysmithreal @PowerShellMag @devblackops @thenextdotnet @MikeShepard70 @nohwnd
-Attachments        :
-AuthorId           : 292670084
-ContextAnnotations :
-ConversationId     : 1398279333823791104
-CreatedAt          : 5/28/2021 2:05:46 PM
-Entities           : {Product: Twitter, #PowerShell, #PSFollowFriday, @adouwes…}
-Geo                :
-InReplyToUserId    :
-Language           : en
-NonPublicMetrics   :
-OrganicMetrics     :
-PossiblySensitive  : False
-PromotedMetrics    :
-PublicMetrics      : RetweetCount: 4, ReplyCount: 1, LikeCount: 6, QuoteCount: 0
-ReferencedTweets   :
-ReplySettings      : Everyone
-Source             : BluebirdPS
-Withheld           :
-
-Id                 : 1398314780088180737
-Text               : @thedavecarroll @adouwes @Steve_MSFT @JeremyMurrah @BrettMiller_IT @Jaap_Brasser @sydneysmithreal @PowerShellMag @devblackops @thenextdotnet @MikeShepard70 @nohwnd @TwitterAPI @juneb_get_help That is great guidance. I also like having the last one of them be my copy/paste ready example for how I use it most.
-Attachments        :
-AuthorId           : 22186737
-ContextAnnotations :
-ConversationId     : 1398279333823791104
-CreatedAt          : 5/28/2021 4:26:37 PM
-Entities           : {@thedavecarroll, @adouwes, @Steve_MSFT, @JeremyMurrah…}
-Geo                :
-InReplyToUserId    : 292670084
-Language           : en
-NonPublicMetrics   :
-OrganicMetrics     :
-PossiblySensitive  : False
-PromotedMetrics    :
-PublicMetrics      : RetweetCount: 0, ReplyCount: 0, LikeCount: 1, QuoteCount: 0
-ReferencedTweets   : {1398295097490477059}
-ReplySettings      : Everyone
-Source             : Twitter for Android
-Withheld           :
-
-Id                 : 1398298293839532036
-Text               : @thedavecarroll @adouwes @Steve_MSFT @JeremyMurrah @BrettMiller_IT @Jaap_Brasser @sydneysmithreal @PowerShellMag @devblackops @thenextdotnet @MikeShepard70 @nohwnd @TwitterAPI @juneb_get_help St June's advice is always good.
-Attachments        :
-AuthorId           : 14150382
-ContextAnnotations :
-ConversationId     : 1398279333823791104
-CreatedAt          : 5/28/2021 3:21:07 PM
-Entities           : {@thedavecarroll, @adouwes, @Steve_MSFT, @JeremyMurrah…}
-Geo                :
-InReplyToUserId    : 292670084
-Language           : en
-NonPublicMetrics   :
-OrganicMetrics     :
-PossiblySensitive  : False
-PromotedMetrics    :
-PublicMetrics      : RetweetCount: 0, ReplyCount: 0, LikeCount: 1, QuoteCount: 0
-ReferencedTweets   : {1398295097490477059}
-ReplySettings      : Everyone
-Source             : TweetDeck
-Withheld           :
-
-Id                 : 1398295097490477059
-Text               : @adouwes @Steve_MSFT @JeremyMurrah @BrettMiller_IT @Jaap_Brasser @sydneysmithreal @PowerShellMag @devblackops @thenextdotnet @MikeShepard70 @nohwnd @TwitterAPI When writing #PowerShell command documenation, I try to follow @juneb_get_help's suggestions (see  https://t.co/VTtQoodH0t). This has the benefit of validating the commands, and I've had to track down some bugs discovered.
-Attachments        :
-AuthorId           : 292670084
-ContextAnnotations :
-ConversationId     : 1398279333823791104
-CreatedAt          : 5/28/2021 3:08:24 PM
-Entities           : {#PowerShell, @adouwes, @Steve_MSFT, @JeremyMurrah…}
-Geo                :
-InReplyToUserId    : 292670084
-Language           : en
-NonPublicMetrics   :
-OrganicMetrics     :
-PossiblySensitive  : False
-PromotedMetrics    :
-PublicMetrics      : RetweetCount: 2, ReplyCount: 2, LikeCount: 7, QuoteCount: 1
-ReferencedTweets   : {1398284726721564679}
-ReplySettings      : Everyone
-Source             : BluebirdPS
-Withheld           :
-
-Id                 : 1398284726721564679
-Text               : @adouwes @Steve_MSFT @JeremyMurrah @BrettMiller_IT @Jaap_Brasser @sydneysmithreal @PowerShellMag @devblackops @thenextdotnet @MikeShepard70 @nohwnd Here is the function that I'm using to generate the #PSFollowFriday list, https://t.co/3t20xEAGIi. It requires the upcoming #BluebirdPS 0.5.0 release. I'm finalizing the documentation; with 62 public commands and support for the @TwitterAPI V2, there's a lot to write!
-Attachments        :
-AuthorId           : 292670084
-ContextAnnotations :
-ConversationId     : 1398279333823791104
-CreatedAt          : 5/28/2021 2:27:12 PM
-Entities           : {#PSFollowFriday, #BluebirdPS, @adouwes, @Steve_MSFT…}
-Geo                :
-InReplyToUserId    : 292670084
-Language           : en
-NonPublicMetrics   :
-OrganicMetrics     :
-PossiblySensitive  : False
-PromotedMetrics    :
-PublicMetrics      : RetweetCount: 0, ReplyCount: 1, LikeCount: 1, QuoteCount: 0
-ReferencedTweets   : {1398279333823791104}
-ReplySettings      : Everyone
-Source             : BluebirdPS
-Withheld           :
-```
-
-Searches for Tweets with the specified ConversationId.
-
 ## PARAMETERS
 
 ### -Id
@@ -256,26 +131,8 @@ Searches for Tweets with the specified ConversationId.
 One or more Tweet id's to return.
 
 ```yaml
-Type: String[]
-Parameter Sets: Tweet
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ConversationId
-
-The id of the Tweet that initiated the conversation you wish to retrieve.
-
-You will be notified if you attempt to retrieve a conversation that started more than 7 days ago.
-
-```yaml
-Type: String
-Parameter Sets: Conversation
+Type: System.String[]
+Parameter Sets: (All)
 Aliases:
 
 Required: True
@@ -290,13 +147,13 @@ Accept wildcard characters: False
 Include additional data objects, such as the Tweet author's user, mentioned users, media, poll, and more.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -308,13 +165,13 @@ Include non-public engagement metrics for the Tweet at the time of the request.
 NonPublic metrics include ImpressionCount, UrlLinkClicks, and UserProfileClicks.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -326,13 +183,13 @@ Include engagement metrics, tracked in an organic context, for the Tweet at the 
 OrganicMetrics include ImpressionCount, LikeCount, ReplyCount, RetweetCount, UrlLinkClicks, and UserProfileClicks.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -344,7 +201,47 @@ Include engagement metrics, tracked in a promoted context, for the Tweet at the 
 PromotedMetrics include ImpressionCount, LikeCount, ReplyCount, RetweetCount, UrlLinkClicks, and UserProfileClicks.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MaxResultsPerPage
+
+The maximum number of results to be return by each page of the request.
+
+Note:
+By default, this command will request all available pages of data with each page request counting against the rate limit threshold.
+
+You can force the command only return a single page with the NoPagination switch.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NoPagination
+
+Only return the first page of data for the request.
+
+Note:
+By default, this command will request all available pages of data with each page request counting against the rate limit threshold.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -373,7 +270,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Get-Tweet)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Get-Tweet)
 
 [Api Reference - Conversation Id](https://developer.twitter.com/en/docs/twitter-api/conversation-id)
 

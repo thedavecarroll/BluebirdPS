@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Direct%20Message/Unpublish-TwitterDM
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Direct%20Message/Unpublish-TwitterDM
 schema: 2.0.0
 ---
 
@@ -13,8 +13,16 @@ Deletes the direct message specified by the DirectMessageId parameter.
 
 ## SYNTAX
 
+### ById (Default)
+
 ```powershell
 Unpublish-TwitterDM -Id <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### ByDM
+
+```powershell
+Unpublish-TwitterDM -TwitterDM <DirectMessage> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -37,35 +45,51 @@ Deletes the direct message specified by the DirectMessageId parameter.
 
 ## PARAMETERS
 
-### -Confirm
-
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Id
 
 The ID of the direct message.
 
 ```yaml
-Type: String
-Parameter Sets: (All)
+Type: System.String
+Parameter Sets: ById
 Aliases:
 
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: True (ByPropertyName)
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -TwitterDM
+
+A DirectMessage object retrieved from Get-TwitterDM.
+
+```yaml
+Type: BluebirdPS.APIV1.DirectMessage
+Parameter Sets: ByDM
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Confirm
+
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -75,13 +99,13 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -104,10 +128,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Direct%20Message/Unpublish-TwitterDM)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Direct%20Message/Unpublish-TwitterDM)
 
-[Get-TwitterDM](https://docs.bluebirdps.dev/en/v0.7.0/Direct%20Message/Get-TwitterDM)
+[Get-TwitterDM](https://docs.bluebirdps.dev/en/v0.8.0/Direct%20Message/Get-TwitterDM)
 
-[Publish-TwitterDM](https://docs.bluebirdps.dev/en/v0.7.0/Direct%20Message/Publish-TwitterDM)
+[Publish-TwitterDM](https://docs.bluebirdps.dev/en/v0.8.0/Direct%20Message/Publish-TwitterDM)
 
 [Api Reference - DELETE direct_messages/events/destroy](https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/delete-message-event)

@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Supporting%20Commands/Get-TwitterRateLimitStatus
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Supporting%20Commands/Get-TwitterRateLimitStatus
 schema: 2.0.0
 ---
 
@@ -61,7 +61,7 @@ For best performance, only specify the resource families pertinent to your appli
 See API Rate Limiting for more information.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 Accepted values: lists, application, mutes, live_video_stream, friendships, guide, auth, blocks, geo, users, teams, followers, collections, statuses, custom_profiles, webhooks, contacts, labs, i, tweet_prompts, moments, limiter_scalding_report_creation, fleets, help, feedback, business_experience, graphql&POST, friends, sandbox, drafts, direct_messages, media, traffic, account_activity, account, safety, favorites, device, tweets, saved_searches, oauth, search, trends, live_pipeline, graphql
@@ -89,6 +89,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Supporting%20Commands/Get-TwitterRateLimitStatus)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Supporting%20Commands/Get-TwitterRateLimitStatus)
 
 [Api Reference - GET application/rate_limit_status](https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/rate-limit-status/api-reference/get-application-rate_limit_status)

@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Lists/Add-TwitterListSubscription
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Lists/Add-TwitterListSubscription
 schema: 2.0.0
 ---
 
@@ -54,14 +54,14 @@ Subscribe to the list with slug PowerShell owned by user adouwes.
 The id of the list.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ById
-Aliases:
+Aliases: ListId
 
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -70,7 +70,7 @@ Accept wildcard characters: False
 A list object retrieved from Get-TwitterList.
 
 ```yaml
-Type: List
+Type: BluebirdPS.APIV2.ListInfo.List
 Parameter Sets: ByList
 Aliases:
 
@@ -99,14 +99,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Add-TwitterListSubscription)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Add-TwitterListSubscription)
 
-[Get-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterListSubscription)
+[Get-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterListSubscription)
 
-[Remove-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Remove-TwitterListSubscription)
+[Remove-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Remove-TwitterListSubscription)
 
-[Test-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Test-TwitterListSubscription)
+[Test-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Test-TwitterListSubscription)
 
-[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterList)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterList)
 
 [Api Reference - POST lists/subscribers/create](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-create)

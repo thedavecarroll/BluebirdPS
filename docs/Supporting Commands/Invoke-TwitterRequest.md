@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Supporting%20Commands/Invoke-TwitterRequest
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Supporting%20Commands/Invoke-TwitterRequest
 schema: 2.0.0
 ---
 
@@ -137,14 +137,14 @@ A TwitterRequest object instance providing the HTTP method, endpoint, query, OAu
 See about_TwitterRequest for details on using [BluebirdPS.TwitterRequest] class.
 
 ```yaml
-Type: TwitterRequest
+Type: BluebirdPS.TwitterRequest
 Parameter Sets: (All)
 Aliases:
 
 Required: True
 Position: 0
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -164,4 +164,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Supporting%20Commands/Invoke-TwitterRequest)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Supporting%20Commands/Invoke-TwitterRequest)

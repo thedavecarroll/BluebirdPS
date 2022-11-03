@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Set-TweetLike
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Set-TweetLike
 schema: 2.0.0
 ---
 
@@ -13,16 +13,28 @@ Likes or un-likes the specified Tweet as the authenticating user.
 
 ## SYNTAX
 
-### Like (Default)
+### LikeById (Default)
 
 ```powershell
 Set-TweetLike -Id <String> [-Like] [<CommonParameters>]
 ```
 
-### Unlike
+### UnlikeById
 
 ```powershell
 Set-TweetLike -Id <String> [-Unlike] [<CommonParameters>]
+```
+
+### UnlikeByTweet
+
+```powershell
+Set-TweetLike -Tweet <Tweet> [-Unlike] [<CommonParameters>]
+```
+
+### LikeByTweet
+
+```powershell
+Set-TweetLike -Tweet <Tweet> [-Like] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -56,14 +68,30 @@ Un-like the specified Tweet.
 The id of the Tweet.
 
 ```yaml
-Type: String
-Parameter Sets: (All)
+Type: System.String
+Parameter Sets: LikeById, UnlikeById
 Aliases:
 
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Tweet
+
+A Tweet object returned by a command directly or as part of the included objects of a User object.
+
+```yaml
+Type: BluebirdPS.APIV2.TweetInfo.Tweet
+Parameter Sets: UnlikeByTweet, LikeByTweet
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -72,8 +100,8 @@ Accept wildcard characters: False
 Like the specified Tweet.
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: Like
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: LikeById, LikeByTweet
 Aliases:
 
 Required: False
@@ -88,11 +116,11 @@ Accept wildcard characters: False
 Un-like the specified Tweet.
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: Unlike
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: UnlikeById, UnlikeByTweet
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: False
 Accept pipeline input: False
@@ -115,9 +143,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Set-TweetLike)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Set-TweetLike)
 
-[Get-TweetLike](https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Get-TweetLike)
+[Get-TweetLike](https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Get-TweetLike)
 
 [API Documentation - POST /2/users/:id/likes](https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/post-users-id-likes)
 

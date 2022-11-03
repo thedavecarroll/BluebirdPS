@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Get-TweetCount
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Get-TweetCount
 schema: 2.0.0
 ---
 
@@ -112,7 +112,7 @@ Returns only the total Tweets matching the search string for the last 7 days.
 The search string consisting of text and Twitter search operators.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -128,7 +128,7 @@ Accept wildcard characters: False
 Specifies the granularity that you want the time series count data to be grouped by.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Minute, Hour, Day
@@ -145,7 +145,7 @@ Accept wildcard characters: False
 The oldest or earliest timestamp from which the Tweet counts will be provided.
 
 ```yaml
-Type: DateTime
+Type: System.DateTime
 Parameter Sets: (All)
 Aliases:
 
@@ -161,7 +161,7 @@ Accept wildcard characters: False
 The newest or most recent timestamp from which the Tweet counts will be provided.
 
 ```yaml
-Type: DateTime
+Type: System.DateTime
 Parameter Sets: (All)
 Aliases:
 
@@ -179,7 +179,7 @@ Returns results with a Tweet Id greater than (that is, more recent than) the spe
 The Id is exclusive and responses will not include it.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -197,7 +197,7 @@ Returns results with a Tweet ID less less than (that is, older than) the specifi
 The Id is exclusive and responses will not include it.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -213,13 +213,13 @@ Accept wildcard characters: False
 Returns only the count of Tweets for the search query.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: CountOnly
 Aliases:
 
 Required: True
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -231,13 +231,13 @@ Returns a summary of the search query.
 This summary includes the search string, granularity used in the call, the start and end times that bound the search results, and the total Tweet count.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: Summary
 Aliases:
 
 Required: True
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -258,8 +258,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Get-TweetCount)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Get-TweetCount)
 
-[Get-Tweet](https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Get-Tweet)
+[Get-Tweet](https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Get-Tweet)
 
 [Api Reference - GET /tweets/count/recent](https://developer.twitter.com/en/docs/twitter-api/tweets/counts/api-reference/get-tweets-counts-recent)

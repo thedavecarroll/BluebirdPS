@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Authentication/Set-TwitterAuthentication
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Authentication/Set-TwitterAuthentication
 schema: 2.0.0
 ---
 
@@ -52,7 +52,7 @@ Set the credentials and save to an encrypted file.
 The API key, also sometimes called the consumer key.
 
 ```yaml
-Type: SecureString
+Type: System.Security.SecureString
 Parameter Sets: (All)
 Aliases:
 
@@ -68,7 +68,7 @@ Accept wildcard characters: False
 The API secret, also sometimes called the consumer secret.
 
 ```yaml
-Type: SecureString
+Type: System.Security.SecureString
 Parameter Sets: (All)
 Aliases:
 
@@ -84,7 +84,7 @@ Accept wildcard characters: False
 The access token for the user.
 
 ```yaml
-Type: SecureString
+Type: System.Security.SecureString
 Parameter Sets: (All)
 Aliases:
 
@@ -100,7 +100,7 @@ Accept wildcard characters: False
 The access token secret for the user.
 
 ```yaml
-Type: SecureString
+Type: System.Security.SecureString
 Parameter Sets: (All)
 Aliases:
 
@@ -127,12 +127,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Authentication/Set-TwitterAuthentication)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Authentication/Set-TwitterAuthentication)
 
-[Test-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.7.0/Authentication/Test-TwitterAuthentication)
+[Test-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.8.0/Authentication/Test-TwitterAuthentication)
 
-[Import-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.7.0/Authentication/Import-TwitterAuthentication)
+[Import-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.8.0/Authentication/Import-TwitterAuthentication)
 
-[Export-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.7.0/Authentication/Export-TwitterAuthentication)
+[Export-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.8.0/Authentication/Export-TwitterAuthentication)
 
 [Api Reference - Authentication Overview](https://developer.twitter.com/en/docs/authentication/overview)

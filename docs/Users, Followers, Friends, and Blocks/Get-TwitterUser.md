@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser
 schema: 2.0.0
 ---
 
@@ -13,10 +13,8 @@ Returns a variety of information about the specified user.
 
 ## SYNTAX
 
-### __AllParameterSets
-
 ```powershell
-Get-TwitterUser [[-User <String[]>]] [-IncludeExpansions] [<CommonParameters>]
+Get-TwitterUser [[-User] <String[]>] [-IncludeExpansions] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,14 +36,15 @@ Id              : 292670084
 Name            : Dave Carroll
 UserName        : thedavecarroll
 CreatedAt       : 5/4/2011 1:22:46 AM
-Description     : Married to an amazing woman. #PowerShell #Blogger #RushTheBand #RetroComputing #Puns #Doggos #Tech #StarTrek #INTJ https://t.co/fLbRHoxt39
-Entities        : {https://powershell.anovelidea.org/, https://pronoun.is/he}
+Description     : #PowerShell #Blogger #RushTheBand #TTRPG #RetroComputing #Puns #Doggos #Tech #StarTrek #INTJ #9w1
+                  https://t.co/fLbRHoxt39
+Entities        : {https://thedavecarroll.com/, https://pronoun.is/he}
 Location        : Nashville, TN
-PinnedTweetId   : 1385709814890864648
-ProfileImageUrl : https://pbs.twimg.com/profile_images/1332944757186760704/s4AjaIMg_normal.jpg
+PinnedTweetId   : 1564616680000688137
+ProfileImageUrl : https://pbs.twimg.com/profile_images/1509519500219146242/LV6Du2YA_normal.jpg
 Protected       : False
-PublicMetrics   : FollowersCount: 947, FollowingCount: 1654, ListedCount: 27, TweetCount: 6475
-Url             : https://t.co/G5ojwP677I
+PublicMetrics   : FollowersCount: 1138, FollowingCount: 1792, ListedCount: 36, TweetCount: 8457
+Url             : https://t.co/CulYKwYNG4
 Verified        : False
 Withheld        :
 ```
@@ -76,14 +75,14 @@ One or more identifiers for a Twitter user.
 You can provide UserName, Id, or a combination of both as this command will send the appropriate request to the Twitter API.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
-Required: True (None) False (All)
+Required: False
 Position: 0
-Default value:
-Accept pipeline input: True
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -92,13 +91,13 @@ Accept wildcard characters: False
 Include the pinned Tweet for the returned user(s).
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -121,7 +120,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser)
 
 [Api Reference - GET /2/users/by](https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users-by)
 

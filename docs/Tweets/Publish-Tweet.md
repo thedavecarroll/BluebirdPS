@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Publish-Tweet
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Publish-Tweet
 schema: 2.0.0
 ---
 
@@ -16,13 +16,15 @@ Publishes a Tweet for the authenticating user.
 ### Tweet (Default)
 
 ```powershell
-Publish-Tweet [-TweetText] <String> [[-ReplyToTweet] <String>] [[-MediaId] <String[]>] [<CommonParameters>]
+Publish-Tweet [-TweetText] <String> [[-ReplyToTweet] <String>] [-QuoteTweet <String>] [[-MediaId] <String[]>]
+ [<CommonParameters>]
 ```
 
 ### TweetWithMedia
 
 ```powershell
-Publish-Tweet [-TweetText] <String> [[-ReplyToTweet] <String>] -Path <String> -Category <String> [-AltImageText <String>] [<CommonParameters>]
+Publish-Tweet [-TweetText] <String> [[-ReplyToTweet] <String>] [-QuoteTweet <String>] -Path <String>
+ -Category <String> [-AltImageText <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -80,7 +82,7 @@ Publishes the provided text as a reply to the specified Tweet sfor the authentic
 The text of the Tweet.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -96,7 +98,7 @@ Accept wildcard characters: False
 The MediaId returned from the Send-TwitterMedia command.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: Tweet
 Aliases:
 
@@ -112,7 +114,7 @@ Accept wildcard characters: False
 The id of an existing Tweet to which the authenticating user wants to reply.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -128,7 +130,7 @@ Accept wildcard characters: False
 Specify the full path to the media file.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: TweetWithMedia
 Aliases:
 
@@ -144,7 +146,7 @@ Accept wildcard characters: False
 Specifies the type and use for the uploaded media.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: TweetWithMedia
 Aliases:
 Accepted values: TweetImage, TweetVideo, TweetGif
@@ -161,8 +163,24 @@ Accept wildcard characters: False
 Provide additional information about the images or GIFs.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: TweetWithMedia
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -QuoteTweet
+
+Sets the tweet that is being quoted.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
 Aliases:
 
 Required: False
@@ -188,8 +206,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Publish-Tweet)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Publish-Tweet)
 
-[Get-Tweet](https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Get-Tweet)
+[Get-Tweet](https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Get-Tweet)
 
 [API Documentation - POST statuses/update](https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-update)

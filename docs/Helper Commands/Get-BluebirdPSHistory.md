@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Helper%20Commands/Get-BluebirdPSHistory
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Helper%20Commands/Get-BluebirdPSHistory
 schema: 2.0.0
 ---
 
@@ -128,13 +128,13 @@ There may be more than one error returned from the API, as shown in this example
 Returns the command name, status, and any errors that were returned in the API response.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -144,7 +144,7 @@ Accept wildcard characters: False
 Specifies the number of objects to select from the beginning of an array of input objects.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -160,7 +160,7 @@ Accept wildcard characters: False
 Specifies the number of objects to select from the end of an array of input objects.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -173,10 +173,12 @@ Accept wildcard characters: False
 
 ### -Skip
 
-Skips (does not select) the specified number of items. By default, the Skip parameter counts from the beginning of the array or list of objects, but if the command uses the Last parameter, it counts from the end of the list or array.
+Skips (does not select) the specified number of items.
+
+By default, the Skip parameter counts from the beginning of the array or list of objects, but if the command uses the Last parameter, it counts from the end of the list or array.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -189,10 +191,12 @@ Accept wildcard characters: False
 
 ### -SkipLast
 
-Skips (does not select) the specified number of items from the end of the list or array. Works in the same way as using Skip together with Last parameter.
+Skips (does not select) the specified number of items from the end of the list or array.
+
+Works in the same way as using Skip together with Last parameter.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -221,4 +225,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Helper%20Commands/Get-BluebirdPSHistory)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Helper%20Commands/Get-BluebirdPSHistory)

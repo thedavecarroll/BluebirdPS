@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Media/Send-TwitterMedia
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Media/Send-TwitterMedia
 schema: 2.0.0
 ---
 
@@ -60,7 +60,7 @@ Upload the specified media file and set the ALT text for the media.
 Specify the full path to the media file.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -76,7 +76,7 @@ Accept wildcard characters: False
 Specifies the type and use for the uploaded media.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: TweetImage, TweetVideo, TweetGif, DMImage, DMVideo, DMGif
@@ -93,7 +93,7 @@ Accept wildcard characters: False
 Provide additional information about the images or GIFs.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -120,7 +120,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Media/Send-TwitterMedia)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Media/Send-TwitterMedia)
 
 [Api Reference - POST media/upload (INIT)](https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-init)
 
