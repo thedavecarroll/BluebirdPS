@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Searches/Search-Tweet
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Searches/Search-Tweet
 schema: 2.0.0
 ---
 
@@ -9,17 +9,18 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Returns a collection of relevant Tweets matching a specified query.
+Returns a collection of relevant Tweets from the last 7 days matching a specified query.
 
 ## SYNTAX
 
 ```powershell
-Search-Tweet [-SearchString] <String> [-IncludeExpansions] [<CommonParameters>]
+Search-Tweet [-SearchString] <String> [-IncludeExpansions] [-MaxResultsPerPage <Int32>] [-NoPagination]
+ [-NonPublicMetrics] [-PromotedMetrics] [-OrganicMetrics] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Returns a collection of relevant Tweets matching a specified query.
+Returns a collection of relevant Tweets from the last 7 days matching a specified query.
 
 ## EXAMPLES
 
@@ -61,7 +62,7 @@ Returns a collection of relevant Tweets matching a specified query.
 The search string consisting of text and Twitter search operators.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -77,7 +78,104 @@ Accept wildcard characters: False
 Include additional data objects, such as the Tweet author's user, mentioned users, media, poll, and more.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MaxResultsPerPage
+
+The maximum number of results to be return by each page of the request.
+
+Note:
+By default, this command will request all available pages of data with each page request counting against the rate limit threshold.
+
+You can force the command only return a single page with the NoPagination switch.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: 100
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NoPagination
+
+Only return the first page of data for the request.
+
+Note:
+By default, this command will request all available pages of data with each page request counting against the rate limit threshold.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NonPublicMetrics
+
+Include this parameter to display the non-public metrics for returned data.
+
+Note:
+Only the authenticating user can request for non-public metrics.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -OrganicMetrics
+
+Include this parameter to display the grouping of public and non-public metrics attributed to an organic context (posted and viewed in a regular manner).
+
+Note:
+Only the authenticating user can request for organic metrics.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PromotedMetrics
+
+Include this parameter to display the grouping of public and non-public metrics attributed to a promoted context (posted or viewed as part of an Ads campaign).
+
+Note:
+Only the authenticating user can request for promoted metrics.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -109,7 +207,7 @@ To learn how to use Twitter Search effectively, please see the Standard search o
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Searches/Search-Tweet)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Searches/Search-Tweet)
 
 [Api Reference - Search Standard Operators](https://developer.twitter.com/en/docs/twitter-api/v1/rules-and-filtering/overview/standard-operators)
 
