@@ -67,6 +67,34 @@ namespace BluebirdPS.APIV2.Objects
                             entities.Add(new UrlTag(url));
                         }
                     }
+                    if (Helpers.HasProperty(input.description, "annotations"))
+                    {
+                        foreach (dynamic annotation in input.description.annotations)
+                        {
+                            entities.Add(new Annotation(annotation));
+                        }
+                    }
+                    if (Helpers.HasProperty(input.description, "cashtags"))
+                    {
+                        foreach (dynamic cashtag in input.description.cashtags)
+                        {
+                            entities.Add(new CashTag(cashtag));
+                        }
+                    }
+                    if (Helpers.HasProperty(input.description, "hashtags"))
+                    {
+                        foreach (dynamic hashtag in input.description.hashtags)
+                        {
+                            entities.Add(new HashTag(hashtag));
+                        }
+                    }
+                    if (Helpers.HasProperty(input.description, "mentions"))
+                    {
+                        foreach (dynamic mention in input.description.mentions)
+                        {
+                            entities.Add(new Mention(mention));
+                        }
+                    }
                 }
             }
             catch
