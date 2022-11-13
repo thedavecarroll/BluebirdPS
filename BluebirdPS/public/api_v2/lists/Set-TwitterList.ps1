@@ -17,7 +17,7 @@ function Set-TwitterList {
         [ValidateLength(0,100)]
         [string]$Description,
 
-        [switch]$Private
+        [boolean]$Private
     )
 
     if ($PSCmdlet.ParameterSetName -eq 'ById') {
@@ -30,8 +30,7 @@ function Set-TwitterList {
     $Body = @{}
     'Name','Description','Private' | ForEach-Object {
         if ($PSBoundParameters.ContainsKey($_)) {
-            $Value = $_ -eq 'Private' ? $Private.IsPresent : $PSBoundParameters[$_]
-            $Body.Add($_.ToLower(), $Value)
+            $Body.Add($_.ToLower(), $PSBoundParameters[$_])
         }
     }
 
