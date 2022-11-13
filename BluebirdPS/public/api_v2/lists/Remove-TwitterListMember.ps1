@@ -22,22 +22,32 @@ function Remove-TwitterListMember {
         } else {
             $ListId = $List.Id
         }
+        if ($List.OwnerId -ne $BluebirdPSConfiguration.AuthUserId) {
+            'You must be the owner of a list to remove members.' | Write-Error -ErrorAction Stop
+        }
     }
 
     process {
         foreach ($RemoveMember in $User) {
-            $Request = [TwitterRequest]@{
-                HttpMethod = 'DELETE'
-                Endpoint ='https://api.twitter.com/2/lists/{0}/members/{1}' -f $ListId,$RemoveMember.Id
-            }
-            $Request.SetCommandName('Remove-TwitterListMember')
-            try {
-                $RemoveTwitterListMember = Invoke-TwitterRequest -RequestParameters $Request
-                $IsMember = $RemoveTwitterListMember ? 'is' : 'is not'
-                'User {0} {1} a member of list {2}' -f $RemoveMember.Name,$IsMember,$List.ToShortString()
-            }
-            catch {
-                $PSCmdlet.ThrowTerminatingError($_)
+            if (Test-TwitterListMembership -List $List -User $RemoveMember) {
+                $Request = [TwitterRequest]@{
+                    HttpMethod = 'DELETE'
+                    Endpoint ='https://api.twitter.com/2/lists/{0}/members/{1}' -f $ListId,$RemoveMember.Id
+                }
+                $Request.SetCommandName('Remove-TwitterListMember')
+                try {
+                    $RemoveTwitterListMember = Invoke-TwitterRequest -RequestParameters $Request
+                    if ($RemoveTwitterListMember) {
+                        'User {0} removed from list {1}' -f $RemoveMember.Name,$List.ToShortString()
+                    } else {
+                        'User {0} was not removed from list {1}' -f $RemoveMember.Name,$List.ToShortString()
+                    }
+                }
+                catch {
+                    $PSCmdlet.ThrowTerminatingError($_)
+                }
+            } else {
+                'User {0} is not a member of list {1}' -f $RemoveMember.Name,$List.ToShortString()
             }
         }
     }

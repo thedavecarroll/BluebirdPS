@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Displays the lists of which the specified user is a member.
+Displays the public lists, or any lists owned by the authenticating user, of which the specified user is a member.
 
 ## SYNTAX
 
@@ -19,7 +19,7 @@ Get-TwitterListMembership [-User <User>] [-IncludeExpansions] [-MaxResultsPerPag
 
 ## DESCRIPTION
 
-Displays the lists of which the specified user is a member.
+Displays the public lists, or any lists owned by the authenticating user, of which the specified user is a member.
 
 ## EXAMPLES
 
@@ -29,7 +29,7 @@ Displays the lists of which the specified user is a member.
 PS > Get-TwitterListMembership
 ```
 
-Display lists whose membership includes the authenticating user.
+Display public lists whose membership includes the authenticating user.
 
 ### Example 2
 
@@ -37,7 +37,7 @@ Display lists whose membership includes the authenticating user.
 PS > Get-TwitterUser -User windosnz | Get-TwitterListMembership
 ```
 
-Display lists whose membership includes the user WindosNZ.
+Display public lists whose membership includes the user WindosNZ.
 
 ## PARAMETERS
 
@@ -46,7 +46,7 @@ Display lists whose membership includes the user WindosNZ.
 A user object, returned by Get-TwitterUser, for which to return lists of which they are a member.
 
 ```yaml
-Type: BluebirdPS.APIV2.UserInfo.User[]
+Type: BluebirdPS.APIV2.UserInfo.User
 Parameter Sets: (All)
 Aliases:
 
@@ -131,4 +131,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 [Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterListMembership)
 
-[Api Reference - GET lists/memberships](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-memberships)
+[Api Reference - GET /2/users/:id/list_memberships](https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-reference/get-users-id-list_memberships)

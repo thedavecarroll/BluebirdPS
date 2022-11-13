@@ -41,7 +41,7 @@ namespace BluebirdPS.APIV2.ListInfo
 
         public string ToShortString()
         {
-            return $"Id: {Id}, Name: {Name}, Members: {MemberCount}";
+            return $"Id: {Id}, Name: {Name}";
         }
     }
 }

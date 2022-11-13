@@ -2,12 +2,11 @@ function Test-TwitterListMembership {
     [OutputType('System.Boolean')]
     [CmdletBinding()]
     param(
-        [Parameter(ValueFromPipeline)]
-        [BluebirdPS.APIV2.UserInfo.User]$User,
-
-        [Parameter(Mandatory)]
+        [Parameter(Mandatory,ValueFromPipeline)]
         [ValidateObjectNotNullOrEmpty()]
-        [BluebirdPS.APIV2.ListInfo.List]$List
+        [BluebirdPS.APIV2.ListInfo.List]$List,
+
+        [BluebirdPS.APIV2.UserInfo.User]$User
     )
 
     if (-Not $PSBoundParameters.ContainsKey('User')) {

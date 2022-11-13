@@ -1,43 +1,65 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.0/Lists/Set-TwitterPinnedList/
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Lists/Set-TwitterPinnedList
 schema: 2.0.0
 ---
 
 # Set-TwitterPinnedList
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Allows the authenticating user to pin or unpin a List.
 
 ## SYNTAX
 
 ### PinList (Default)
-```
+
+```powershell
 Set-TwitterPinnedList -List <List> [-PinList] [<CommonParameters>]
 ```
 
 ### UnpinList
-```
+
+```powershell
 Set-TwitterPinnedList -List <List> [-UnpinList] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+Allows the authenticating user to pin or unpin a List.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-TwitterList -Id 1400680326754615296 | Set-TwitterPinnedList
 ```
 
-{{ Add example description here }}
+```text
+List Id: 1400680326754615296, Name: PSFollowFriday-ListOwners is pinned
+```
+
+Pin the list PSFollowFriday-ListOwners.
+
+### Example 2
+
+```powershell
+PS C:\> Get-TwitterPinnedList | Select-Object -Last 1 | Set-TwitterPinnedList -UnpinList
+```
+
+```text
+List Id: 1400680326754615296, Name: PSFollowFriday-ListOwners is not pinned
+```
+
+Unpin the last pinned list.
 
 ## PARAMETERS
 
 ### -List
-{{ Fill List Description }}
+
+A list object retrieved from Get-TwitterList.
 
 ```yaml
 Type: BluebirdPS.APIV2.ListInfo.List
@@ -52,7 +74,8 @@ Accept wildcard characters: False
 ```
 
 ### -PinList
-{{ Fill PinList Description }}
+
+Allows the authenticating user to pin a list.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -67,7 +90,8 @@ Accept wildcard characters: False
 ```
 
 ### -UnpinList
-{{ Fill UnpinList Description }}
+
+Allows the authenticating user to unpin a list.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -82,6 +106,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -91,7 +116,17 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### System.Object
+
 ## NOTES
 
 ## RELATED LINKS
 
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Set-TwitterPinnedList)
+
+[Get-TwitterPinnedLis](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterPinnedList)
+
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterList)
+
+[Api Reference - POST /2/users/:id/pinned_lists](https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/post-users-id-pinned-lists)
+
+[Api Reference - DELETE /2/users/:id/pinned_lists/:list_id](https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/delete-users-id-pinned-lists-list_id)

@@ -1,12 +1,12 @@
 function Remove-TwitterListSubscription {
     [CmdletBinding(DefaultParameterSetName='ById')]
     param(
-        [Parameter(Mandatory,ParameterSetName='ById')]
+        [Parameter(ParameterSetName='ById',Mandatory,ValueFromPipeline)]
         [ValidatePattern('^[0-9]{1,19}$', ErrorMessage = "The List Id '{0}' is not valid.")]
         [Alias('ListId')]
         [string]$Id,
 
-        [Parameter(Mandatory,ParameterSetName='ByList')]
+        [Parameter(ParameterSetName='ByList',Mandatory,ValueFromPipeline)]
         [ValidateObjectNotNullOrEmpty()]
         [BluebirdPS.APIV2.ListInfo.List]$List
     )

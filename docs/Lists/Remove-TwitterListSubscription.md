@@ -16,13 +16,13 @@ Unsubscribes the authenticating user from the specified list.
 ### ById (Default)
 
 ```powershell
-Remove-TwitterListSubscription -Id <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-TwitterListSubscription -Id <String> [<CommonParameters>]
 ```
 
 ### ByList
 
 ```powershell
-Remove-TwitterListSubscription -List <List> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-TwitterListSubscription -List <List> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -42,7 +42,7 @@ Unsubscribe from the specified list.
 ### Example 2
 
 ```powershell
-PS > Get-TwitterList -Slug ps7now-blog-week -OwnerUserName WindosNZ | Remove-TwitterListSubscription
+PS > Get-TwitterList -Id 749356646665629696 | Remove-TwitterListSubscription
 ```
 
 Get the list specified by the slug and ower name, then unsubscribe from it.
@@ -56,7 +56,7 @@ The id of the list.
 ```yaml
 Type: System.String
 Parameter Sets: ById
-Aliases:
+Aliases: ListId
 
 Required: True
 Position: Named
@@ -70,44 +70,11 @@ Accept wildcard characters: False
 A list object retrieved from Get-TwitterList.
 
 ```yaml
-Type: List
+Type: BluebirdPS.APIV2.ListInfo.List
 Parameter Sets: ByList
 Aliases:
 
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -Confirm
-
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WhatIf
-
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -142,4 +109,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 [Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterList)
 
-[Api Reference - POST lists/subscribers/destroy](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-destroy)
+[Api Reference - DELETE /2/users/:id/followed_lists/:list_id](https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-reference/delete-users-id-followed-lists-list_id)
