@@ -126,4 +126,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 [Set-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Set-TwitterList)
 
-[Api Reference - POST lists/create](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-create)
+[Api Reference - POST /2/lists](https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/post-lists)

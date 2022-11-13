@@ -272,8 +272,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 [Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Get-Tweet)
 
-[Api Reference - Conversation Id](https://developer.twitter.com/en/docs/twitter-api/conversation-id)
-
 [Api Reference - GET /2/tweets/:id](https://developer.twitter.com/en/docs/twitter-api/tweets/lookup/api-reference/get-tweets-id)
 
 [Api Reference - GET /2/tweets](https://developer.twitter.com/en/docs/twitter-api/tweets/lookup/api-reference/get-tweets)

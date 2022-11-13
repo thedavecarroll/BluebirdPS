@@ -51,7 +51,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 [Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterPinnedList)
 
-[Set-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Set-TwitterList)
+[Set-TwitterPinnedList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Set-TwitterPinnedList)
 
 [Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterList)
 
+[Api Reference - GET /2/users/:id/pinned_lists](https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/get-users-id-pinned_lists)
