@@ -34,18 +34,10 @@ Unsubscribes the authenticating user from the specified list.
 ### Example 1
 
 ```powershell
-PS > Remove-TwitterListSubscription -Id 1236361374567026688
+PS > Get-TwitterList -Id 1236361374567026688 | Remove-TwitterListSubscription
 ```
 
-Unsubscribe from the specified list.
-
-### Example 2
-
-```powershell
-PS > Get-TwitterList -Id 749356646665629696 | Remove-TwitterListSubscription
-```
-
-Get the list specified by the slug and ower name, then unsubscribe from it.
+Get the Twitter list specified by the Id, then unsubscribe from it.
 
 ## PARAMETERS
 
@@ -56,7 +48,7 @@ The id of the list.
 ```yaml
 Type: System.String
 Parameter Sets: ById
-Aliases: ListId
+Aliases:
 
 Required: True
 Position: Named

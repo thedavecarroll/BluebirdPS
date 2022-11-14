@@ -7,6 +7,8 @@ using namespace Microsoft.PowerShell.Commands
 using namespace BluebirdPS
 using namespace BluebirdPS.APIV1
 using namespace BluebirdPS.APIV2
+using namespace BluebirdPS.APIV2.TweetInfo
+using namespace BluebirdPS.APIV2.UserInfo
 using namespace BluebirdPS.Exceptions
 using namespace BluebirdPS.Validation
 

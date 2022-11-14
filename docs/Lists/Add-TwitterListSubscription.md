@@ -42,10 +42,10 @@ Subscribe to the list with the specified id.
 ### Example 2
 
 ```powershell
-PS > Get-TwitterList -Slug PowerShell -OwnerUserName adouwes | Add-TwitterListSubscription
+PS > Get-TwitterUser -User windosnz | Get-TwitterList -SearchName blog | Add-TwitterListSubscription
 ```
 
-Subscribe to the list with slug PowerShell owned by user adouwes.
+Get the user windosnz, then get all public lists he owns that have 'blog' in the name, then subscribe to the list.
 
 ## PARAMETERS
 
@@ -56,7 +56,7 @@ The id of the list.
 ```yaml
 Type: System.String
 Parameter Sets: ById
-Aliases: ListId
+Aliases:
 
 Required: True
 Position: Named

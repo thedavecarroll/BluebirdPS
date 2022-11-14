@@ -44,11 +44,26 @@ PS > Get-TwitterList -Id 1587300786052243459 | Remove-TwitterListMember -User $M
 ```
 
 ```text
+Id              : 1397040831777984512
+CreatedAt       : 5/24/2021 11:04:24 PM
+Slug            : sample-list-10878
+Name            : Updated-List-Name
+FullName        : @thedavecarroll/sample-list-10878
+Description     : New description for this list.
+Uri             : https://twitter.com/thedavecarroll/lists/sample-list-10878
+Mode            : Private
+MemberCount     : 3
+SubscriberCount : 0
+UserId          : 292670084
+UserName        : thedavecarroll
+Following       : True
+```
+
+```text
 User BluebirdPS is not a member of list Id: 1587300786052243459, Name: Sample-List, Members: 0
 ```
 
 Remove the specified user from the specified list.
-
 
 ## PARAMETERS
 
@@ -64,7 +79,7 @@ Aliases:
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -73,7 +88,7 @@ Accept wildcard characters: False
 A list object retrieved from Get-TwitterList.
 
 ```yaml
-Type: List
+Type: BluebirdPS.APIV2.ListInfo.List
 Parameter Sets: ByList
 Aliases:
 
@@ -84,9 +99,9 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -UserName
+### -User
 
-One or more usernames to remove from the list, up to a maximum of 100 per request.
+One or more Twitter user objects to remove from the list, up to a maximum of 100 per request.
 
 ```yaml
 Type: System.String[]
@@ -158,6 +173,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 [Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterList)
 
-[Api Reference - POST lists/members/destroy](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-members-destroy)
-
-[Api Reference - POST lists/members/destroy_all](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-members-destroy_all)
+[Api Reference - DELETE /2/lists/:id/members/:user_id](https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-reference/delete-lists-id-members-user_id)

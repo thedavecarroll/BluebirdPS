@@ -13,16 +13,8 @@ Tests if a specified user is a member of the specified list.
 
 ## SYNTAX
 
-### Id (Default)
-
 ```powershell
-Test-TwitterListMembership -Id <String> [-UserName <String>] [<CommonParameters>]
-```
-
-### ByList
-
-```powershell
-Test-TwitterListMembership -List <List> [-UserName <String>] [<CommonParameters>]
+Test-TwitterListMembership [-List] <List> [-User] <User> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -36,72 +28,67 @@ If the specified user is a member of the specified list, returns true, otherwise
 ### Example 1
 
 ```powershell
-PS > Test-TwitterListMembership -Id 1015226053856546816 -UserName thetommymaynard
+PS > $List = Get-TwitterList -Id 92000812
+PS > $List
+PS > $List | Test-TwitterListMembership
 ```
 
 ```text
-True
-```
+Id            : 92000812
+Name          : ps1
+CreatedAt     : 6/27/2013 7:42:03 PM
+FollowerCount : 360
+MemberCount   : 57
+Description   : Powershell bloggers, trainers, authors - additions, recommendations welcome.
+Private       : False
+OwnerId       : 16177793
 
-Checks if user thetommymaynard is a member of the specified list.
-
-### Example 2
-
-```powershell
-PS > Get-TwitterList -Slug ps7now-blog-week -OwnerUserName WindosNZ | Test-TwitterListMembership
-```
-
-```text
 True
 ```
 
 Checks if the authenticating user is a member of the specified list.
 
-## PARAMETERS
+### Example 2
 
-### -Id
-
-The id of the list.
-
-```yaml
-Type: System.String
-Parameter Sets: Id
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+```powershell
+PS > $List | Test-TwitterListMembership -User (Get-TwitterUser -User joeyaiello)
 ```
+
+```text
+True
+```
+
+Checks if joeyaiello is a member of the specified list.
+
+## PARAMETERS
 
 ### -List
 
 A list object retrieved from Get-TwitterList.
 
 ```yaml
-Type: List
-Parameter Sets: ByList
+Type: BluebirdPS.APIV2.ListInfo.List
+Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: Named
+Position: 0
 Default value: None
 Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -UserName
+### -User
 
-The username to verify if they are a member of the specified list.
+The Twitter user object to verify if they are a member of the specified list.
 
 ```yaml
-Type: System.String
+Type: BluebirdPS.APIV2.UserInfo.User
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -113,9 +100,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.String
-
-### BluebirdPS.APIV1.List
+### BluebirdPS.APIV2.ListInfo.List
 
 ## OUTPUTS
 
@@ -128,5 +113,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 [Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Test-TwitterListMembership)
 
 [Get-TwitterListMembership](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterListMembership)
-
-[Api Reference - GET lists/members/show](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-members-show)

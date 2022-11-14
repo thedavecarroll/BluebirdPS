@@ -9,36 +9,39 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Tests whether the authenticating user subscribes to the specified list.
+Tests whether the authenticating or specified user subscribes to the specified public list.
 
 ## SYNTAX
 
-### ById (Default)
-
 ```powershell
-Test-TwitterListSubscription -Id <String> [-UserName <String>] [<CommonParameters>]
-```
-
-### ByList
-
-```powershell
-Test-TwitterListSubscription -List <List> [-UserName <String>] [<CommonParameters>]
+Test-TwitterListSubscription [-List] <List> [[-User] <User>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Tests whether the authenticating user subscribes to the specified list.
+Tests whether the authenticating or specified user subscribes to the specified public list.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS > Test-TwitterListSubscription -Id 1236361374567026688
+PS > $List = Get-TwitterList -Id 92000812
+PS > $List
+PS > $List | Test-TwitterListSubscription
 ```
 
 ```text
-False
+Id            : 92000812
+Name          : ps1
+CreatedAt     : 6/27/2013 7:42:03 PM
+FollowerCount : 360
+MemberCount   : 57
+Description   : Powershell bloggers, trainers, authors - additions, recommendations welcome.
+Private       : False
+OwnerId       : 16177793
+
+True
 ```
 
 Checks if the authenticating user is subscribed to the specified list.
@@ -46,60 +49,45 @@ Checks if the authenticating user is subscribed to the specified list.
 ### Example 2
 
 ```powershell
-PS > Get-TwitterList -Slug ps7now-blog-week -OwnerUserName WindosNZ | Test-TwitterListSubscription
+PS > $User = Get-TwitterUser -User mikefrobbins
+PS > $List | Test-TwitterListSubscription -User $User
 ```
 
 ```text
-True
+False
 ```
 
-Checks if the authenticating user is subscribed to the specified list.
+Checks if the specified user is subscribed to the specified public list.
 
 ## PARAMETERS
-
-### -Id
-
-The id of the list.
-
-```yaml
-Type: System.String
-Parameter Sets: ById
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -List
 
 A list object retrieved from Get-TwitterList.
 
 ```yaml
-Type: List
-Parameter Sets: ByList
+Type: BluebirdPS.APIV2.ListInfo.List
+Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: Named
+Position: 0
 Default value: None
 Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -UserName
+### -User
 
-The username to verify if they subscribe to the specified list.
+A Twitter user object returned by Get-TwitterUser.
 
 ```yaml
-Type: System.String
+Type: BluebirdPS.APIV2.UserInfo.User
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -111,9 +99,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.String
-
-### BluebirdPS.APIV1.List
+### BluebirdPS.APIV2.ListInfo.List
 
 ## OUTPUTS
 
@@ -132,5 +118,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 [Remove-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Remove-TwitterListSubscription)
 
 [Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterList)
-
-[Api Reference - GET lists/subscribers/show](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-subscribers-show)

@@ -41,74 +41,17 @@ Take care when using these methods such that you are not too rapidly switching b
 ### Example 1
 
 ```powershell
-PS > Add-TwitterListMember -Id 1397040831777984512 -UserName thedavecarroll
+PS > $Users = Get-TwitterUser -User thedavecarroll,BluebirdPS
+PS > $List = Get-TwitterList -Id 1587300786052243459
+PS > $Users | Add-TwitterListMember -List $List
 ```
 
 ```text
-Id              : 1397040831777984512
-CreatedAt       : 5/24/2021 11:04:24 PM
-Slug            : sample-list-10878
-Name            : Updated-List-Name
-FullName        : @thedavecarroll/sample-list-10878
-Description     : New description for this list.
-Uri             : https://twitter.com/thedavecarroll/lists/sample-list-10878
-Mode            : Private
-MemberCount     : 1
-SubscriberCount : 0
-UserId          : 292670084
-UserName        : thedavecarroll
-Following       : True
+User Dave Carroll added to list Id: 1587300786052243459, Name: TestAdditionRemoval
+User BluebirdPS added to list Id: 1587300786052243459, Name: TestAdditionRemoval
 ```
 
-Add the user thedavecarroll to the specified list.
-
-### Example 2
-
-```powershell
-PS > Add-TwitterListMember -Id 1397040831777984512 -UserName TwitterDev,TwitterAPI
-```
-
-```text
-Id              : 1397040831777984512
-CreatedAt       : 5/24/2021 11:04:24 PM
-Slug            : sample-list-10878
-Name            : Updated-List-Name
-FullName        : @thedavecarroll/sample-list-10878
-Description     : New description for this list.
-Uri             : https://twitter.com/thedavecarroll/lists/sample-list-10878
-Mode            : Private
-MemberCount     : 3
-SubscriberCount : 0
-UserId          : 292670084
-UserName        : thedavecarroll
-Following       : True
-```
-
-Add the users TwitterDev and TwitterAPI to the specified list.
-
-### Example 3
-
-```powershell
-PS > Get-TwitterList -Id 1397040831777984512 | Add-TwitterListMember -UserName BluebirdPS
-```
-
-```text
-Id              : 1397040831777984512
-CreatedAt       : 5/24/2021 11:04:24 PM
-Slug            : sample-list-10878
-Name            : Updated-List-Name
-FullName        : @thedavecarroll/sample-list-10878
-Description     : New description for this list.
-Uri             : https://twitter.com/thedavecarroll/lists/sample-list-10878
-Mode            : Private
-MemberCount     : 4
-SubscriberCount : 0
-UserId          : 292670084
-UserName        : thedavecarroll
-Following       : True
-```
-
-Add the user BluebirdPS to the specified list.
+Get the users thedavecarroll and BluebirdPS, then add them to the specified list.
 
 ## PARAMETERS
 
@@ -119,7 +62,7 @@ The id of the list.
 ```yaml
 Type: System.String
 Parameter Sets: ById
-Aliases: ListId
+Aliases:
 
 Required: True
 Position: Named
