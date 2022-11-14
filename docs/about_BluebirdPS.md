@@ -100,124 +100,142 @@ Twitter
 
 TwitterAPI
 
-Import-BluebirdPSConfiguration
+TwitterAPIv2
 
-Set-BluebirdPSConfiguration
+Add-TwitterFriend
+
+Add-TwitterList
+
+Add-TwitterListMember
+
+Add-TwitterListSubscription
+
+Add-TwitterSavedSearch
+
+ConvertFrom-EpochTime
+
+ConvertFrom-TwitterV1Date
 
 Export-BluebirdPSConfiguration
+
+Export-TwitterAuthentication
+
+Find-TwitterMastodonLinks
+
+Get-BluebirdPSAssemblyDetails
 
 Get-BluebirdPSConfiguration
 
 Get-BluebirdPSHistory
 
-ConvertFrom-EpochTime
-
-Set-Retweet
-
-Publish-Tweet
-
-Search-Tweet
+Get-BluebirdPSVersion
 
 Get-Tweet
 
-Set-TweetLike
+Get-TweetConversation
+
+Get-TweetCount
 
 Get-TweetLikes
 
 Get-TweetPoll
 
-Set-TweetReply
-
 Get-TwitterAccountSettings
 
 Get-TwitterApiEndpoint
 
-Import-TwitterAuthentication
-
-Set-TwitterAuthentication
-
-Test-TwitterAuthentication
-
-Export-TwitterAuthentication
-
-Set-TwitterBearerToken
-
 Get-TwitterBlockedUser
-
-Set-TwitterBlockedUser
 
 Get-TwitterDM
 
-Publish-TwitterDM
-
-Unpublish-TwitterDM
-
 Get-TwitterFollowers
-
-Remove-TwitterFriend
-
-Add-TwitterFriend
 
 Get-TwitterFriends
 
 Get-TwitterFriendship
 
-Add-TwitterList
-
 Get-TwitterList
-
-Set-TwitterList
-
-Remove-TwitterList
-
-Get-TwitterListByOwner
-
-Add-TwitterListMember
 
 Get-TwitterListMember
 
-Remove-TwitterListMember
-
 Get-TwitterListMembership
 
-Test-TwitterListMembership
-
 Get-TwitterListSubscriber
-
-Remove-TwitterListSubscription
-
-Add-TwitterListSubscription
-
-Test-TwitterListSubscription
 
 Get-TwitterListSubscription
 
 Get-TwitterListTweets
 
-Send-TwitterMedia
-
 Get-TwitterMutedUser
-
-Set-TwitterMutedUser
 
 Get-TwitterPermissions
 
+Get-TwitterPinnedList
+
 Get-TwitterRateLimitStatus
 
-Invoke-TwitterRequest
-
 Get-TwitterSavedSearch
-
-Add-TwitterSavedSearch
-
-Remove-TwitterSavedSearch
 
 Get-TwitterTimeline
 
 Get-TwitterUser
 
-Submit-TwitterUserAsSpam
-
 Get-TwitterUserProfileBanner
 
-ConvertFrom-TwitterV1Date
+Import-BluebirdPSConfiguration
+
+Import-TwitterAuthentication
+
+Invoke-TwitterRequest
+
+Publish-Tweet
+
+Publish-TwitterDM
+
+Remove-TwitterFriend
+
+Remove-TwitterList
+
+Remove-TwitterListMember
+
+Remove-TwitterListSubscription
+
+Remove-TwitterSavedSearch
+
+Search-Tweet
+
+Send-TwitterMedia
+
+Set-BluebirdPSConfiguration
+
+Set-Retweet
+
+Set-TweetLike
+
+Set-TweetReply
+
+Set-TwitterAuthentication
+
+Set-TwitterBearerToken
+
+Set-TwitterBlockedUser
+
+Set-TwitterList
+
+Set-TwitterMutedUser
+
+Set-TwitterPinnedList
+
+Show-TwitterAuthentication
+
+Submit-TwitterUserAsSpam
+
+Test-TwitterAuthentication
+
+Test-TwitterListMembership
+
+Test-TwitterListSubscription
+
+Unpublish-Tweet
+
+Unpublish-TwitterDM
