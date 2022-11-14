@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Direct%20Message/Get-TwitterDM
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Direct%20Message/Get-TwitterDM
 schema: 2.0.0
 ---
 
@@ -14,14 +14,14 @@ Returns one or more direct messages.
 ## SYNTAX
 
 ```powershell
-Get-TwitterDM [-Id <String>] [[-Count] <Int32>] [<CommonParameters>]
+Get-TwitterDM [-Id <String>] [[-MessageCount] <Int32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
 Returns one or more direct messages.
 
-If the DirectMessageId is omitted, all DMs from the last 30 days will be returned in reverse chronological order.
+If the Id is omitted, all DMs from the last 30 days will be returned in reverse chronological order.
 
 NOTE: The direct_messages/events/list endpoint has a low rate limit (15) and most likely you will reach this when not specifying a direct message id.
 
@@ -60,7 +60,7 @@ Returns the direct message specified.
 The ID of the direct message.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -73,16 +73,16 @@ Accept wildcard characters: False
 
 ### -MessageCount
 
-The number of message to retrieve.
+The number of messages to retrieve.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
-Required: True (None) False (All)
+Required: False
 Position: 1
-Default value:
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -105,11 +105,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Direct%20Message/Get-TwitterDM)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Direct%20Message/Get-TwitterDM)
 
-[Publish-TwitterDM](https://docs.bluebirdps.dev/en/v0.7.0/Direct%20Message/Publish-TwitterDM)
+[Publish-TwitterDM](https://docs.bluebirdps.dev/en/v0.8.0/Direct%20Message/Publish-TwitterDM)
 
-[Unpublish-TwitterDM](https://docs.bluebirdps.dev/en/v0.7.0/Direct%20Message/Unpublish-TwitterDM)
+[Unpublish-TwitterDM](https://docs.bluebirdps.dev/en/v0.8.0/Direct%20Message/Unpublish-TwitterDM)
 
 [Api Reference - GET direct_messages/events/list](https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/list-events)
 

@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterListTweets
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterListTweets
 schema: 2.0.0
 ---
 
@@ -13,16 +13,9 @@ Returns a timeline of Tweets authored by members of the specified list.
 
 ## SYNTAX
 
-### ById (Default)
-
 ```powershell
-Get-TwitterListTweets -Id <String> [-SinceId <String>] [-MaxId <String>] [-ExcludeRetweets] [<CommonParameters>]
-```
-
-### ByList
-
-```powershell
-Get-TwitterListTweets -List <List> [-SinceId <String>] [-MaxId <String>] [-ExcludeRetweets] [<CommonParameters>]
+Get-TwitterListTweets -List <List> [-IncludeExpansions] [-NonPublicMetrics] [-PromotedMetrics]
+ [-OrganicMetrics] [-MaxResultsPerPage <Int32>] [-NoPagination] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -34,101 +27,144 @@ Returns a timeline of Tweets authored by members of the specified list.
 ### Example 1
 
 ```powershell
-PS > Get-TwitterListTweets -Id 79064151
+PS > Get-TwitterList -SearchName Retro | Get-TwitterListTweets -NoPagination -MaxResultsPerPage 10 -IncludeExpansions
 ```
 
-Return the Tweets from members of the specified list.
+Return the 10 latest Tweets from members of the specified list, including author user objects and any attachments.
 
 ### Example 2
 
 ```powershell
-PS > Get-TwitterList -Slug psconfbook -OwnerUserName mikefrobbins | Get-TwitterListTweets
+PS > Get-TwitterList -Id 749356646665629696 | Get-TwitterListTweets -NoPagination -MaxResultsPerPage 10
 ```
 
 Return the Tweets from members of the specified list.
 
 ## PARAMETERS
 
-### -SinceId
-
-Returns Tweets with an id equal or greater than the value provided.
-Tweet id values roughly correlate to a date time.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -MaxId
-
-Returns Tweets with an id less than the value provided.
-Tweet id values roughly correlate to a date time.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ExcludeRetweets
-
-By default, retweets are included.
-Use the ExcludeRetweets switch to omit retweets from the results.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Id
-
-The id of the list.
-
-```yaml
-Type: String
-Parameter Sets: ById
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -List
 
 A list object retrieved from Get-TwitterList.
 
 ```yaml
-Type: List
-Parameter Sets: ByList
+Type: BluebirdPS.APIV2.ListInfo.List
+Parameter Sets: (All)
 Aliases:
 
 Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -IncludeExpansions
+
+Returns the Tweet author user object and any attachments.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MaxResultsPerPage
+
+The maximum number of results to be return by each page of the request.
+
+Note:
+By default, this command will request all available pages of data with each page request counting against the rate limit threshold.
+
+You can force the command only return a single page with the NoPagination switch.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NoPagination
+
+Only return the first page of data for the request.
+
+Note:
+By default, this command will request all available pages of data with each page request counting against the rate limit threshold.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NonPublicMetrics
+
+Include non-public engagement metrics for the Tweet at the time of the request.
+
+NonPublic metrics include ImpressionCount, UrlLinkClicks, and UserProfileClicks.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -OrganicMetrics
+
+Include engagement metrics, tracked in an organic context, for the Tweet at the time of the request.
+
+OrganicMetrics include ImpressionCount, LikeCount, ReplyCount, RetweetCount, UrlLinkClicks, and UserProfileClicks.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PromotedMetrics
+
+Include engagement metrics, tracked in a promoted context, for the Tweet at the time of the request.
+
+PromotedMetrics include ImpressionCount, LikeCount, ReplyCount, RetweetCount, UrlLinkClicks, and UserProfileClicks.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -150,10 +186,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterListTweets)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterListTweets)
 
-[Get-TwitterListMember](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterListMember)
+[Get-TwitterListMember](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterListMember)
 
-[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterList)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterList)
 
-[Api Reference - GET lists/statuses](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-statuses)
+[Api Reference - GET /2/lists/:id/tweets](https://developer.twitter.com/en/docs/twitter-api/lists/list-tweets/api-reference/get-lists-id-tweets)

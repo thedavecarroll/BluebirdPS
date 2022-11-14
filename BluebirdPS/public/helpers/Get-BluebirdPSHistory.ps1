@@ -1,4 +1,5 @@
 function Get-BluebirdPSHistory {
+    [OutputType('BluebirdPS.ResponseData')]
     [CmdletBinding()]
     param(
         [ValidateRange(1,[int]::MaxValue)]

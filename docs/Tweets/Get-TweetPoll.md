@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Get-TweetPoll
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Get-TweetPoll
 schema: 2.0.0
 ---
 
@@ -63,7 +63,7 @@ The results are the same from example 1.
 The id of Tweet object which has a poll.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ById
 Aliases:
 
@@ -79,7 +79,7 @@ Accept wildcard characters: False
 A Tweet object which has a poll.
 
 ```yaml
-Type: Tweet
+Type: BluebirdPS.APIV2.TweetInfo.Tweet
 Parameter Sets: ByTweet
 Aliases:
 
@@ -108,6 +108,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Get-TweetPoll)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Get-TweetPoll)
 
-[Get-Tweet](https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Get-Tweet)
+[Get-Tweet](https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Get-Tweet)

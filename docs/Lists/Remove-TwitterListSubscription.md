@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Lists/Remove-TwitterListSubscription
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Lists/Remove-TwitterListSubscription
 schema: 2.0.0
 ---
 
@@ -16,13 +16,13 @@ Unsubscribes the authenticating user from the specified list.
 ### ById (Default)
 
 ```powershell
-Remove-TwitterListSubscription -Id <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-TwitterListSubscription -Id <String> [<CommonParameters>]
 ```
 
 ### ByList
 
 ```powershell
-Remove-TwitterListSubscription -List <List> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-TwitterListSubscription -List <List> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -34,18 +34,10 @@ Unsubscribes the authenticating user from the specified list.
 ### Example 1
 
 ```powershell
-PS > Remove-TwitterListSubscription -Id 1236361374567026688
+PS > Get-TwitterList -Id 1236361374567026688 | Remove-TwitterListSubscription
 ```
 
-Unsubscribe from the specified list.
-
-### Example 2
-
-```powershell
-PS > Get-TwitterList -Slug ps7now-blog-week -OwnerUserName WindosNZ | Remove-TwitterListSubscription
-```
-
-Get the list specified by the slug and ower name, then unsubscribe from it.
+Get the Twitter list specified by the Id, then unsubscribe from it.
 
 ## PARAMETERS
 
@@ -54,7 +46,7 @@ Get the list specified by the slug and ower name, then unsubscribe from it.
 The id of the list.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ById
 Aliases:
 
@@ -70,44 +62,11 @@ Accept wildcard characters: False
 A list object retrieved from Get-TwitterList.
 
 ```yaml
-Type: List
+Type: BluebirdPS.APIV2.ListInfo.List
 Parameter Sets: ByList
 Aliases:
 
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -Confirm
-
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WhatIf
-
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -132,14 +91,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Remove-TwitterListSubscription)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Remove-TwitterListSubscription)
 
-[Add-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Add-TwitterListSubscription)
+[Add-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Add-TwitterListSubscription)
 
-[Get-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterListSubscription)
+[Get-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterListSubscription)
 
-[Test-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Test-TwitterListSubscription)
+[Test-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Test-TwitterListSubscription)
 
-[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterList)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterList)
 
-[Api Reference - POST lists/subscribers/destroy](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-destroy)
+[Api Reference - DELETE /2/users/:id/followed_lists/:list_id](https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-reference/delete-users-id-followed-lists-list_id)

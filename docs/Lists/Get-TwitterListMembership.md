@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterListMembership
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterListMembership
 schema: 2.0.0
 ---
 
@@ -9,17 +9,17 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Displays the lists of which the specified user is a member.
+Displays the public lists, or any lists owned by the authenticating user, of which the specified user is a member.
 
 ## SYNTAX
 
 ```powershell
-Get-TwitterListMembership [[-UserName] <String>] [-OwnedLists] [<CommonParameters>]
+Get-TwitterListMembership [-User <User>] [-IncludeExpansions] [-MaxResultsPerPage <Int32>] [-NoPagination]
 ```
 
 ## DESCRIPTION
 
-Displays the lists of which the specified user is a member.
+Displays the public lists, or any lists owned by the authenticating user, of which the specified user is a member.
 
 ## EXAMPLES
 
@@ -29,40 +29,80 @@ Displays the lists of which the specified user is a member.
 PS > Get-TwitterListMembership
 ```
 
-Display lists whose membership includes the authenticating user.
+Display public lists whose membership includes the authenticating user.
 
 ### Example 2
 
 ```powershell
-PS > Get-TwitterListMembership -UserName WindosNZ
+PS > Get-TwitterUser -User windosnz | Get-TwitterListMembership
 ```
 
-Display lists whose membership includes the user WindosNZ.
+Display public lists whose membership includes the user WindosNZ.
 
 ## PARAMETERS
 
-### -UserName
+### -User
 
-Specifies the user for whom to return lists of which they are a member.
+A user object, returned by Get-TwitterUser, for which to return lists of which they are a member.
 
 ```yaml
-Type: String
+Type: BluebirdPS.APIV2.UserInfo.User
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -IncludeExpansions
+
+Include the list owner.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -OwnedLists
+### -MaxResultsPerPage
 
-Only display lists owned by the authenticating user which contains the specified user as a member.
+The maximum number of results to be return by each page of the request.
+
+Note:
+By default, this command will request all available pages of data with each page request counting against the rate limit threshold.
+
+You can force the command only return a single page with the NoPagination switch.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NoPagination
+
+Only return the first page of data for the request.
+
+Note:
+By default, this command will request all available pages of data with each page request counting against the rate limit threshold.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -89,6 +129,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterListMembership)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterListMembership)
 
-[Api Reference - GET lists/memberships](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-memberships)
+[Api Reference - GET /2/users/:id/list_memberships](https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-reference/get-users-id-list_memberships)

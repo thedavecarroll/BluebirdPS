@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Account%20Settings%2C%20User%20Profile%2C%20and%20Saved%20Searches/Get-TwitterUserProfileBanner
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Account%20Settings%2C%20User%20Profile%2C%20and%20Saved%20Searches/Get-TwitterUserProfileBanner
 schema: 2.0.0
 ---
 
@@ -57,8 +57,9 @@ The user name of the Twitter user for which you want to retrieve profile banner 
 If you do not specify a UserName, it will return the profile banner details for the authenticating user.
 
 ```yaml
-Type: String
-Parameter Sets: UserName
+Type: System.String
+Parameter Sets: (All)
+Aliases:
 
 Required: False
 Position: Named
@@ -83,6 +84,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Account%20Settings%2C%20User%20Profile%2C%20and%20Saved%20Searches/Get-TwitterUserProfileBanner)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Account%20Settings%2C%20User%20Profile%2C%20and%20Saved%20Searches/Get-TwitterUserProfileBanner)
 
 [Api Reference - GET users/profile_banner](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-users-profile_banner)

@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterListSubscription
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterListSubscription
 schema: 2.0.0
 ---
 
@@ -14,7 +14,8 @@ Returns a collection of lists to which the specified user is subscribed.
 ## SYNTAX
 
 ```powershell
-Get-TwitterListSubscription [-UserName <String>] [<CommonParameters>]
+Get-TwitterListSubscription [-User <User>] [-IncludeExpansions] [-MaxResultsPerPage <Int32>] [-NoPagination]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -36,7 +37,7 @@ Returns a collection of lists to which the authenticating user is subscribed.
 ### Example 2
 
 ```powershell
-PS > Get-TwitterListSubscription -UserName BlueBirdPS
+PS > Get-TwitterUser -User BluebirdPS | Get-TwitterListSubscription
 ```
 
 ```text
@@ -59,12 +60,28 @@ Returns a collection of lists to which the specified user is subscribed.
 
 ## PARAMETERS
 
-### -UserName
+### -User
 
-Specifies the user for which you want to obtain a collection of the lists to which they subscribe.
+A Twitter user object, returned by Get-TwitterUser.
 
 ```yaml
-Type: String
+Type: BluebirdPS.APIV2.UserInfo.User
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -IncludeExpansions
+
+Include the subscribed list owners.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -74,6 +91,47 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
+
+### -MaxResultsPerPage
+
+The maximum number of results to be return by each page of the request.
+
+Note:
+By default, this command will request all available pages of data with each page request counting against the rate limit threshold.
+
+You can force the command only return a single page with the NoPagination switch.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NoPagination
+
+Only return the first page of data for the request.
+
+Note:
+By default, this command will request all available pages of data with each page request counting against the rate limit threshold.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 
 ### CommonParameters
 
@@ -93,14 +151,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterListSubscription)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterListSubscription)
 
-[Add-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Add-TwitterListSubscription)
+[Add-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Add-TwitterListSubscription)
 
-[Remove-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Remove-TwitterListSubscription)
+[Remove-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Remove-TwitterListSubscription)
 
-[Test-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Test-TwitterListSubscription)
+[Test-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Test-TwitterListSubscription)
 
-[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterList)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterList)
 
-[Api Reference - GET lists/subscriptions](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-subscriptions)
+[Api Reference - GET /2/users/:id/followed_lists](https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-reference/get-users-id-followed_lists)

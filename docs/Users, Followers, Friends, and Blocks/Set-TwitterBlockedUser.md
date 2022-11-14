@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Set-TwitterBlockedUser
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Set-TwitterBlockedUser
 schema: 2.0.0
 ---
 
@@ -22,7 +22,7 @@ Set-TwitterBlockedUser -User <User> [-Block] [<CommonParameters>]
 ### Unblock
 
 ```powershell
-Set-TwitterBlockedUser -Unblock -User <User> [<CommonParameters>]
+Set-TwitterBlockedUser -User <User> [-Unblock] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -62,8 +62,8 @@ Unblock the specified user.
 The user object, returned by Get-TwitterUser, to be blocked or unblocked.
 
 ```yaml
-Type: User
-Parameter Sets: UnblockByUser, BlockByUser
+Type: BluebirdPS.APIV2.UserInfo.User
+Parameter Sets: (All)
 Aliases:
 
 Required: True
@@ -78,13 +78,13 @@ Accept wildcard characters: False
 Block the specified user.
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: BlockByUserId, BlockByUser
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: Block
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -94,13 +94,13 @@ Accept wildcard characters: False
 Unblock the specified user.
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: UnblockByUserId, UnblockByUser
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: Unblock
 Aliases:
 
 Required: True
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -123,11 +123,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Set-TwitterBlockedUser)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Set-TwitterBlockedUser)
 
-[Get-TwitterBlockedUser](https://docs.bluebirdps.dev/en/v0.7.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterBlockedUser)
+[Get-TwitterBlockedUser](https://docs.bluebirdps.dev/en/v0.8.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterBlockedUser)
 
-[Get-TwitterUser](https://docs.bluebirdps.dev/en/v0.7.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser)
+[Get-TwitterUser](https://docs.bluebirdps.dev/en/v0.8.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser)
 
 [Api Reference - POST /2/users/:id/blocking](https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-reference/post-users-user_id-blocking)
 

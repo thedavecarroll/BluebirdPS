@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Direct%20Message/Publish-TwitterDM
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Direct%20Message/Publish-TwitterDM
 schema: 2.0.0
 ---
 
@@ -13,22 +13,28 @@ Publishes a new direct message to a specified user from the authenticating user.
 
 ## SYNTAX
 
-### DM (Default)
+### DMUserId (Default)
 
 ```powershell
-Publish-TwitterDM [-Message] <String> -Id <String> [[-MediaId] <String>] [<CommonParameters>]
+Publish-TwitterDM -Id <string> [-Message <string>] [-MediaId <string>] [<CommonParameters>]
 ```
 
-### DMWithMedia
+### DMUserIdWithMedia
 
 ```powershell
-Publish-TwitterDM [-Message] <String> -Id <String> -TwitterUser <User> -Path <String> -Category <String> [-AltImageText <String>] [<CommonParameters>]
+Publish-TwitterDM -Id <string> -Path <string> -Category <string> [-Message <string>] [-AltImageText <string>] [<CommonParameters>]
+```
+
+### DMUserObjectWithMedia
+
+```powershell
+Publish-TwitterDM -User <User> -Path <string> -Category <string> [-Message <string>] [-AltImageText <string>] [<CommonParameters>]
 ```
 
 ### DMUserObject
 
 ```powershell
-Publish-TwitterDM [-Message] <String> -User <User> [[-MediaId] <String>] [<CommonParameters>]
+Publish-TwitterDM -User <User> [-Message <string>] [-MediaId <string>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -70,11 +76,11 @@ Send the string message to the specified user as a direct message.
 The text of your Direct Message.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 1
 Default value: None
 Accept pipeline input: False
@@ -86,8 +92,8 @@ Accept wildcard characters: False
 Specifies the direct message recipient by Twitter user id.
 
 ```yaml
-Type: String
-Parameter Sets: DM, DMWithMedia
+Type: System.String
+Parameter Sets: DMUserId, DMUserIdWithMedia
 Aliases:
 
 Required: True
@@ -102,8 +108,8 @@ Accept wildcard characters: False
 Specifies the direct message recipient by Twitter user object, returned by Get-TwitterUser.
 
 ```yaml
-Type: User
-Parameter Sets: DMWithMedia
+Type: BluebirdPS.APIV2.UserInfo.User
+Parameter Sets: DMUserObjectWithMedia, DMUserObject
 Aliases:
 
 Required: True
@@ -130,8 +136,8 @@ Accept wildcard characters: False
 The MediaId returned from the Send-TwitterMedia command.
 
 ```yaml
-Type: String
-Parameter Sets: DM, DMUserObject
+Type: System.String
+Parameter Sets: DMUserId, DMUserObject
 Aliases:
 
 Required: False
@@ -146,8 +152,8 @@ Accept wildcard characters: False
 Specify the full path to the media file.
 
 ```yaml
-Type: String
-Parameter Sets: DMWithMedia
+Type: System.String
+Parameter Sets: DMUserIdWithMedia, DMUserObjectWithMedia
 Aliases:
 
 Required: True
@@ -162,8 +168,8 @@ Accept wildcard characters: False
 Specifies the type and use for the uploaded media.
 
 ```yaml
-Type: String
-Parameter Sets: DMWithMedia
+Type: System.String
+Parameter Sets: DMUserIdWithMedia, DMUserObjectWithMedia
 Aliases:
 Accepted values: DMImage, DMVideo, DMGif
 
@@ -179,8 +185,8 @@ Accept wildcard characters: False
 Provide additional information about the images or GIFs.
 
 ```yaml
-Type: String
-Parameter Sets: DMWithMedia
+Type: System.String
+Parameter Sets: DMUserIdWithMedia, DMUserObjectWithMedia
 Aliases:
 
 Required: False
@@ -206,10 +212,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Direct%20Message/Publish-TwitterDM)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Direct%20Message/Publish-TwitterDM)
 
-[Get-TwitterDM](https://docs.bluebirdps.dev/en/v0.7.0/Direct%20Message/Get-TwitterDM)
+[Get-TwitterDM](https://docs.bluebirdps.dev/en/v0.8.0/Direct%20Message/Get-TwitterDM)
 
-[Unpublish-TwitterDM](https://docs.bluebirdps.dev/en/v0.7.0/Direct%20Message/Unpublish-TwitterDM)
+[Unpublish-TwitterDM](https://docs.bluebirdps.dev/en/v0.8.0/Direct%20Message/Unpublish-TwitterDM)
 
 [Api Reference - GET direct_messages/events/list](https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/new-event)

@@ -1,4 +1,8 @@
 function Get-TwitterUser {
+    [OutputType(
+        'BluebirdPS.APIV2.UserInfo.User',
+        'BluebirdPS.APIV2.TweetInfo.Tweet'
+    )]
     [CmdletBinding()]
     param(
         [Parameter(ValueFromPipeline)]
@@ -29,7 +33,7 @@ function Get-TwitterUser {
             $Request = [TwitterRequest]@{
                 ExpansionType     = 'User'
                 IncludeExpansions = $IncludeExpansions
-                Endpoint = 'https://api.twitter.com/2/users/by/username/{0}' -f $BluebirdPSConfiguration.AuthUserName
+                Endpoint = 'https://api.twitter.com/2/users/me'
             }
             $Request.SetCommandName('Get-TwitterUser')
             Invoke-TwitterRequest -RequestParameters $Request

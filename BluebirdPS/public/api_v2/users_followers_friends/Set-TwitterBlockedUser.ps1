@@ -25,5 +25,13 @@ function Set-TwitterBlockedUser {
         }
     }
 
-    Invoke-TwitterRequest -RequestParameters $Request
+    try{
+        $SetTwitterBlockedUser = Invoke-TwitterRequest -RequestParameters $Request
+        $Blocking = $SetTwitterBlockedUser ? 'blocking' : 'not blocking'
+        'You are {0} user {1}' -f $Blocking,$User.ToString()
+    }
+    catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
+
 }

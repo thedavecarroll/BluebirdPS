@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Lists/Set-TwitterList
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Lists/Set-TwitterList
 schema: 2.0.0
 ---
 
@@ -16,13 +16,13 @@ Updates the specified list.
 ### ById (Default)
 
 ```powershell
-Set-TwitterList -Id <String> [-Name <String>] [-Description <String>] [-Mode <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Set-TwitterList -Id <String> [-Name <String>] [-Description <String>] [-Private <Boolean>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### ByList
 
 ```powershell
-Set-TwitterList -List <List> [-Name <String>] [-Description <String>] [-Mode <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Set-TwitterList -List <List> [-Name <String>] [-Description <String>] [-Private <Boolean>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -36,44 +36,32 @@ The authenticated user must own the list to be able to update it.
 ### Example 1
 
 ```powershell
-PS > Get-TwitterList -Id 1397040831777984512
-PS > Get-TwitterList -Id 1397040831777984512 | Set-TwitterList -Name 'Updated-List-Name' -Description 'New description for this list.'
+PS > Get-TwitterList -Id 1587297863276679169 | Set-TwitterList -Name 'List Example' -Description 'This is a Set-TwitterList example'
 ```
 
 ```text
-Id              : 1397040831777984512
-CreatedAt       : 5/24/2021 11:04:24 PM
-Slug            : sample-list-10878
-Name            : Sample-List
-FullName        : @thedavecarroll/sample-list-10878
-Description     : A sample list
-Uri             : https://twitter.com/thedavecarroll/lists/sample-list-10878
-Mode            : Private
-MemberCount     : 0
-SubscriberCount : 0
-UserId          : 292670084
-UserName        : thedavecarroll
-Following       : True
+Id            : 1587297863276679169
+Name          : Sample List
+CreatedAt     : 11/1/2022 4:17:55 AM
+FollowerCount : 0
+MemberCount   : 0
+Description   : test description
+Private       : True
+OwnerId       : 292670084
 
 Confirm
 Are you sure you want to perform this action?
-Performing the operation "Updating list Id: 1397040831777984512, Name: Sample-List properties" on target "Name,
-Description".
+Performing the operation "Update list" on target "Id: 1587297863276679169, Name: Sample List, Members: 0, Followers: 0, Created: 11/1/2022 4:17:55 AM, Description: test description".
 [Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"): y
 
-Id              : 1397040831777984512
-CreatedAt       : 1/19/1970 12:31:55 PM
-Slug            : sample-list-10878
-Name            : Updated-List-Name
-FullName        : @thedavecarroll/sample-list-10878
-Description     : New description for this list.
-Uri             : https://twitter.com/thedavecarroll/lists/sample-list-10878
-Mode            : Private
-MemberCount     : 0
-SubscriberCount : 0
-UserId          : 292670084
-UserName        : thedavecarroll
-Following       : False
+Id            : 1587297863276679169
+Name          : List Example
+CreatedAt     : 11/1/2022 4:17:55 AM
+FollowerCount : 0
+MemberCount   : 0
+Description   : This is a Set-TwitterList example
+Private       : True
+OwnerId       : 292670084
 ```
 
 Update the Name and Description for the list.
@@ -87,7 +75,7 @@ Note: The list slug does not change when you rename the list, therefore neither 
 The id of the list.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ById
 Aliases:
 
@@ -103,7 +91,7 @@ Accept wildcard characters: False
 A list object retrieved from Get-TwitterList.
 
 ```yaml
-Type: List
+Type: BluebirdPS.APIV2.ListInfo.List
 Parameter Sets: ByList
 Aliases:
 
@@ -119,7 +107,7 @@ Accept wildcard characters: False
 The new name for the list.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -135,7 +123,7 @@ Accept wildcard characters: False
 The new description for the list.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -146,15 +134,14 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Mode
+### -Private
 
-The new mode for the list.
+Specifies whether the list will be private.
 
 ```yaml
-Type: String
+Type: System.Boolean
 Parameter Sets: (All)
 Aliases:
-Accepted values: Private, Public
 
 Required: False
 Position: Named
@@ -168,7 +155,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -185,7 +172,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -202,24 +189,22 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.String
-
-### BluebirdPS.APIV1.List
+### BluebirdPS.APIV2.ListInfo.List
 
 ## OUTPUTS
 
-### BluebirdPS.APIV1.List
+### BluebirdPS.APIV2.ListInfo.List
 
 ## NOTES
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Set-TwitterList)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Set-TwitterList)
 
-[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterList)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterList)
 
-[Add-TwitterList](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Add-TwitterList)
+[Add-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Add-TwitterList)
 
-[Remove-TwitterList](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Remove-TwitterList)
+[Remove-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Remove-TwitterList)
 
-[Api Reference - POST lists/update](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-update)
+[Api Reference - PUT /2/lists/:id](https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/put-lists-id)

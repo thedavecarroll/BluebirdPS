@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Lists/Add-TwitterListMember
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Lists/Add-TwitterListMember
 schema: 2.0.0
 ---
 
@@ -16,13 +16,13 @@ Add one or more users to a list.
 ### ById (Default)
 
 ```powershell
-Add-TwitterListMember -Id <String> [-UserName <String[]>] [<CommonParameters>]
+Add-TwitterListMember -Id <String> [-User <User[]>] [<CommonParameters>]
 ```
 
 ### ByList
 
 ```powershell
-Add-TwitterListMember -List <List> [-UserName <String[]>] [<CommonParameters>]
+Add-TwitterListMember -List <List> [-User <User[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -41,74 +41,17 @@ Take care when using these methods such that you are not too rapidly switching b
 ### Example 1
 
 ```powershell
-PS > Add-TwitterListMember -Id 1397040831777984512 -UserName thedavecarroll
+PS > $Users = Get-TwitterUser -User thedavecarroll,BluebirdPS
+PS > $List = Get-TwitterList -Id 1587300786052243459
+PS > $Users | Add-TwitterListMember -List $List
 ```
 
 ```text
-Id              : 1397040831777984512
-CreatedAt       : 5/24/2021 11:04:24 PM
-Slug            : sample-list-10878
-Name            : Updated-List-Name
-FullName        : @thedavecarroll/sample-list-10878
-Description     : New description for this list.
-Uri             : https://twitter.com/thedavecarroll/lists/sample-list-10878
-Mode            : Private
-MemberCount     : 1
-SubscriberCount : 0
-UserId          : 292670084
-UserName        : thedavecarroll
-Following       : True
+User Dave Carroll added to list Id: 1587300786052243459, Name: TestAdditionRemoval
+User BluebirdPS added to list Id: 1587300786052243459, Name: TestAdditionRemoval
 ```
 
-Add the user thedavecarroll to the specified list.
-
-### Example 2
-
-```powershell
-PS > Add-TwitterListMember -Id 1397040831777984512 -UserName TwitterDev,TwitterAPI
-```
-
-```text
-Id              : 1397040831777984512
-CreatedAt       : 5/24/2021 11:04:24 PM
-Slug            : sample-list-10878
-Name            : Updated-List-Name
-FullName        : @thedavecarroll/sample-list-10878
-Description     : New description for this list.
-Uri             : https://twitter.com/thedavecarroll/lists/sample-list-10878
-Mode            : Private
-MemberCount     : 3
-SubscriberCount : 0
-UserId          : 292670084
-UserName        : thedavecarroll
-Following       : True
-```
-
-Add the users TwitterDev and TwitterAPI to the specified list.
-
-### Example 3
-
-```powershell
-PS > Get-TwitterList -Id 1397040831777984512 | Add-TwitterListMember -UserName BluebirdPS
-```
-
-```text
-Id              : 1397040831777984512
-CreatedAt       : 5/24/2021 11:04:24 PM
-Slug            : sample-list-10878
-Name            : Updated-List-Name
-FullName        : @thedavecarroll/sample-list-10878
-Description     : New description for this list.
-Uri             : https://twitter.com/thedavecarroll/lists/sample-list-10878
-Mode            : Private
-MemberCount     : 4
-SubscriberCount : 0
-UserId          : 292670084
-UserName        : thedavecarroll
-Following       : True
-```
-
-Add the user BluebirdPS to the specified list.
+Get the users thedavecarroll and BluebirdPS, then add them to the specified list.
 
 ## PARAMETERS
 
@@ -117,14 +60,14 @@ Add the user BluebirdPS to the specified list.
 The id of the list.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ById
 Aliases:
 
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -133,30 +76,30 @@ Accept wildcard characters: False
 A list object retrieved from Get-TwitterList.
 
 ```yaml
-Type: List
+Type: BluebirdPS.APIV2.ListInfo.List
 Parameter Sets: ByList
 Aliases:
 
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -UserName
+### -User
 
-One or more usernames to add to the list, up to a maximum of 100 per request.
+One or more user objects, returned by Get-TwitterUser, to follow.
 
 ```yaml
-Type: String[]
+Type: BluebirdPS.APIV2.UserInfo.User[]
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -178,14 +121,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Add-TwitterListMember)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Add-TwitterListMember)
 
-[Get-TwitterListMember](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterListMember)
+[Get-TwitterListMember](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterListMember)
 
-[Remove-TwitterListMember](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Remove-TwitterListMember)
+[Remove-TwitterListMember](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Remove-TwitterListMember)
 
-[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterList)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterList)
 
-[Api Reference - POST lists/members/create](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-members-create)
-
-[Api Reference - POST lists/members/create_all](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-members-create_all)
+[Api Reference - POST /2/lists/:id/members](https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-reference/post-lists-id-members)

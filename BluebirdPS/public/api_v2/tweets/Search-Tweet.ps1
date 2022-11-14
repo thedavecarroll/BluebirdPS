@@ -5,26 +5,33 @@ function Search-Tweet {
         [ValidateNotNullOrEmpty()]
         [string]$SearchString,
 
+        [switch]$IncludeExpansions,
+
         [ValidateRange(10,100)]
-        [int]$MaxResults=100,
+        [int]$MaxResultsPerPage=100,
+        [switch]$NoPagination,
 
         [switch]$NonPublicMetrics,
         [switch]$PromotedMetrics,
-        [switch]$OrganicMetrics,
-        [switch]$IncludeExpansions
+        [switch]$OrganicMetrics
     )
 
+    if ($MaxResultsPerPage -lt 100) {
+        $NoPagination = $true
+    }
+
     $Request = [TwitterRequest]@{
-        ExpansionType = 'Tweet'
         Endpoint = 'https://api.twitter.com/2/tweets/search/recent'
         Query =  @{
             'query' = $SearchString
-            'max_results' = $MaxResults
+            'max_results' = $MaxResultsPerPage
         }
+        ExpansionType = 'Tweet'
+        IncludeExpansions = $IncludeExpansions
+        NoPagination = $NoPagination
         NonPublicMetrics = $NonPublicMetrics
         PromotedMetrics = $PromotedMetrics
         OrganicMetrics = $OrganicMetrics
-        IncludeExpansions = $IncludeExpansions
     }
 
     Invoke-TwitterRequest -RequestParameters $Request

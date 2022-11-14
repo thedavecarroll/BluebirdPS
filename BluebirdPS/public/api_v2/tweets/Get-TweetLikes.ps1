@@ -1,4 +1,7 @@
 function Get-TweetLikes {
+    [OutputType(
+        'BluebirdPS.APIV2.UserInfo.User'
+    )]
     [CmdLetBinding(DefaultParameterSetName='ById')]
     [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "")]
     param(

@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterListMember
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterListMember
 schema: 2.0.0
 ---
 
@@ -9,25 +9,27 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Returns the username for members of the specified list.
+Returns the user objects for members of the specified list.
 
 ## SYNTAX
 
 ### ById (Default)
 
 ```powershell
-Get-TwitterListMember -Id <String> [<CommonParameters>]
+Get-TwitterListMember -Id <String> [-IncludeExpansions] [-MaxResultsPerPage <Int32>] [-NoPagination]
+ [<CommonParameters>]
 ```
 
 ### ByList
 
 ```powershell
-Get-TwitterListMember -List <List> [<CommonParameters>]
+Get-TwitterListMember -List <List> [-IncludeExpansions] [-MaxResultsPerPage <Int32>] [-NoPagination]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Returns the username for members of the specified list.
+Returns the user objects for members of the specified list.
 
 Private list members will only be shown if the authenticated user owns the specified list.
 
@@ -44,7 +46,7 @@ Returns the members of the specified list.
 ### Example 2
 
 ```powershell
-PS > Get-TwitterListMember -Slug powershell-team -OwnerUserName powershell_team
+PS > Get-TwitterList -SearchName PSFollowFriday-ListOwners | Get-TwitterListMember | Format-Table -Property UserName,Name
 ```
 
 Returns the members of the specified list.
@@ -56,7 +58,7 @@ Returns the members of the specified list.
 The id of the list.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ById
 Aliases:
 
@@ -72,7 +74,7 @@ Accept wildcard characters: False
 A list object retrieved from Get-TwitterList.
 
 ```yaml
-Type: List
+Type: BluebirdPS.APIV2.ListInfo.List
 Parameter Sets: ByList
 Aliases:
 
@@ -80,6 +82,62 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -IncludeExpansions
+
+Include the list members pinned tweet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MaxResultsPerPage
+
+The maximum number of results to be return by each page of the request.
+
+Note:
+By default, this command will request all available pages of data with each page request counting against the rate limit threshold.
+
+You can force the command only return a single page with the NoPagination switch.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NoPagination
+
+Only return the first page of data for the request.
+
+Note:
+By default, this command will request all available pages of data with each page request counting against the rate limit threshold.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -101,12 +159,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterListMember)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterListMember)
 
-[Add-TwitterListMember](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Add-TwitterListMember)
+[Add-TwitterListMember](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Add-TwitterListMember)
 
-[Remove-TwitterListMember](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Remove-TwitterListMember)
+[Remove-TwitterListMember](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Remove-TwitterListMember)
 
-[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterList)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterList)
 
-[Api Reference - GET lists/members](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-members)
+[Api Reference - GET /2/lists/:id/members](https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-reference/get-lists-id-members)

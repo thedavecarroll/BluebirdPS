@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFriends
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFriends
 schema: 2.0.0
 ---
 
@@ -16,13 +16,14 @@ Returns a collection of Twitter users that e specified user follows.
 ### ById (Default)
 
 ```powershell
-Get-TwitterFriends [-Id <String>] [-IncludeExpansions] [<CommonParameters>]
+Get-TwitterFriends [-Id <String>] [-IncludeExpansions] [-MaxResultsPerPage <Int32>] [-NoPagination]
 ```
 
 ### ByUser
 
 ```powershell
-Get-TwitterFriends -User <User> [-IncludeExpansions] [<CommonParameters>]
+Get-TwitterFriends -User <User> [-IncludeExpansions] [-MaxResultsPerPage <Int32>] [-NoPagination]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -62,7 +63,7 @@ Returns the users followed by the user returned by Get-TwitterUser.
 Return a list of users followed by the user, as specified by the id.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ById
 Aliases:
 
@@ -78,7 +79,7 @@ Accept wildcard characters: False
 Return a list of users followed by the user, as specified by the user object returned by Get-TwitterUser.
 
 ```yaml
-Type: User
+Type: BluebirdPS.APIV2.UserInfo.User
 Parameter Sets: ByUser
 Aliases:
 
@@ -94,7 +95,48 @@ Accept wildcard characters: False
 Include the pinned Tweet for the returned user(s).
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+
+### -MaxResultsPerPage
+
+The maximum number of results to be return by each page of the request.
+
+Note:
+By default, this command will request all available pages of data with each page request counting against the rate limit threshold.
+
+You can force the command only return a single page with the NoPagination switch.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NoPagination
+
+Only return the first page of data for the request.
+
+Note:
+By default, this command will request all available pages of data with each page request counting against the rate limit threshold.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -123,12 +165,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFriends)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterFriends)
 
-[Add-TwitterFriend](https://docs.bluebirdps.dev/en/v0.7.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Add-TwitterFriend)
+[Add-TwitterFriend](https://docs.bluebirdps.dev/en/v0.8.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Add-TwitterFriend)
 
-[Remove-TwitterFriend](https://docs.bluebirdps.dev/en/v0.7.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Remove-TwitterFriend)
+[Remove-TwitterFriend](https://docs.bluebirdps.dev/en/v0.8.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Remove-TwitterFriend)
 
-[Get-TwitterUser](https://docs.bluebirdps.dev/en/v0.7.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser)
+[Get-TwitterUser](https://docs.bluebirdps.dev/en/v0.8.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser)
 
 [Api Reference - GET /2/users/:id/following](https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/get-users-id-following)

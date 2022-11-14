@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Helper%20Commands/ConvertFrom-TwitterV1Date
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Helper%20Commands/ConvertFrom-TwitterV1Date
 schema: 2.0.0
 ---
 
@@ -44,7 +44,7 @@ Convert a Twitter V1 date from the pipeline.
 A Twitter API v1.1 date string, in the format of '%a %b %d %H:%M:%S +0000 %Y'.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -71,6 +71,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Helper%20Commands/ConvertFrom-TwitterV1Date)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Helper%20Commands/ConvertFrom-TwitterV1Date)
 
-[ConvertFrom-EpochTime](https://docs.bluebirdps.dev/en/v0.7.0/Helper%20Commands/ConvertFrom-EpochTime)
+[ConvertFrom-EpochTime](https://docs.bluebirdps.dev/en/v0.8.0/Helper%20Commands/ConvertFrom-EpochTime)

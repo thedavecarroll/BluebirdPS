@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterListSubscriber
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterListSubscriber
 schema: 2.0.0
 ---
 
@@ -9,25 +9,17 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Returns a collection of subscriber usernames of the specified list.
+Returns a collection of subscriber user objects of the specified list.
 
 ## SYNTAX
 
-### ById (Default)
-
 ```powershell
-Get-TwitterListSubscriber -Id <String> [<CommonParameters>]
-```
-
-### ByList
-
-```powershell
-Get-TwitterListSubscriber -List <List> [<CommonParameters>]
+Get-TwitterListSubscriber -List <List> [-IncludeExpansions] [-MaxResultsPerPage <Int32>] [-NoPagination]
 ```
 
 ## DESCRIPTION
 
-Returns a collection of subscriber usernames of the specified list.
+Returns a collection of subscriber user objects of the specified list.
 
 Private list subscribers will only be shown if the authenticated user owns the specified list.
 
@@ -36,50 +28,84 @@ Private list subscribers will only be shown if the authenticated user owns the s
 ### Example 1
 
 ```powershell
-PS > Get-TwitterListSubscriber -ListId 857199747848957957
+PS > Get-TwitterList -SearchName PSFollowFriday-ListOwners | Get-TwitterListSubscriber
 ```
 
 Returns the users that subscribe to the list specified.
 
-### Example 2
-
-```powershell
-PS > Get-TwitterList -Slug microsoft-evangelicals -OwnerUserName thedavecarroll | Get-TwitterListSubscriber
-```
-
 Returns the users that are subscribe to the list specified.
 
 ## PARAMETERS
-
-### -Id
-
-The id of the list.
-
-```yaml
-Type: String
-Parameter Sets: ById
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -List
 
 A list object retrieved from Get-TwitterList.
 
 ```yaml
-Type: List
-Parameter Sets: ByList
+Type: BluebirdPS.APIV2.ListInfo.List
+Parameter Sets: (All)
 Aliases:
 
 Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -IncludeExpansions
+
+Include the list subscribers pinned tweet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MaxResultsPerPage
+
+The maximum number of results to be return by each page of the request.
+
+Note:
+By default, this command will request all available pages of data with each page request counting against the rate limit threshold.
+
+You can force the command only return a single page with the NoPagination switch.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NoPagination
+
+Only return the first page of data for the request.
+
+Note:
+By default, this command will request all available pages of data with each page request counting against the rate limit threshold.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -99,8 +125,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterListSubscriber)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterListSubscriber)
 
-[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.7.0/Lists/Get-TwitterList)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterList)
 
-[Api Reference - GET lists/subscribers](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-subscribers)
+[Api Reference - GET /2/lists/:id/followers](https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-reference/get-lists-id-followers)

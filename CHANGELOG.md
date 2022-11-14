@@ -1,5 +1,53 @@
 # Changelog
 
+## [0.8.0] - 2022-11-13
+
+Bugfix, Feature, and Maintenance; Update Strongly Recommended
+
+### Removed
+
+- [Issue #146](https://github.com/thedavecarroll/BluebirdPS/issues/146) - Remove Base Class of TwitterObject from Context and BaseMetrics
+- [Issue #170](https://github.com/thedavecarroll/BluebirdPS/issues/170) - Remove ListId Alias from List Commands
+
+### Fixed
+
+- [Issue #101](https://github.com/thedavecarroll/BluebirdPS/issues/101) - Search-Tweet - MaxResults not honored
+- [Issue #105](https://github.com/thedavecarroll/BluebirdPS/issues/105) - Documentation - Update documentation for commands using /2/tweets/search/recent endpoint
+- [Issue #110](https://github.com/thedavecarroll/BluebirdPS/issues/110) - Publish-Tweet - Cannot index into a null array
+- [Issue #121](https://github.com/thedavecarroll/BluebirdPS/issues/121) - Media class is missing Url and AltText properties
+- [Issue #153](https://github.com/thedavecarroll/BluebirdPS/issues/153) - Various error handling
+- [Issue #154](https://github.com/thedavecarroll/BluebirdPS/issues/154) - Cleanup Tweet Class
+- [Issue #159](https://github.com/thedavecarroll/BluebirdPS/issues/159) - Tweet Metrics UrlLinkClicks Only Available for Tweets with Links
+- [Issue #167](https://github.com/thedavecarroll/BluebirdPS/issues/167) - BaseEntity GetEntities() Does Not Instantiate Annotations, CashTags, HashTags, and Mentions Correctly
+
+### Changed
+
+- [Issue #129](https://github.com/thedavecarroll/BluebirdPS/issues/129) - Convert List Commands to Twitter API v2 Endpoints
+- [Issue #135](https://github.com/thedavecarroll/BluebirdPS/issues/135) - Convert Muted User Commands to Twitter API v2 Endpoints
+- [Issue #145](https://github.com/thedavecarroll/BluebirdPS/issues/145) - Get-TwitterUser: Change to auth user only endpoint
+
+### Added
+
+- [Issue #102](https://github.com/thedavecarroll/BluebirdPS/issues/102) - Add NoPagination Switch to Invoke-TwitterRequest
+- [Issue #103](https://github.com/thedavecarroll/BluebirdPS/issues/103) - Add Verbose switch to Invoke-TwitterRequest
+- [Issue #127](https://github.com/thedavecarroll/BluebirdPS/issues/127) - Provide Classes and Updates to Enable API v2 Lists Endpoints
+- [Issue #130](https://github.com/thedavecarroll/BluebirdPS/issues/130) - Add OutputType to Commands
+- [Issue #132](https://github.com/thedavecarroll/BluebirdPS/issues/132) - Add Commands for Pinned List Endpoints
+- [Issue #140](https://github.com/thedavecarroll/BluebirdPS/issues/140) - Add new command Show-TwitterAuthentication
+- [Issue #141](https://github.com/thedavecarroll/BluebirdPS/issues/141) - Add new command Get-BluebirdPSAssemblyDetails
+- [Issue #144](https://github.com/thedavecarroll/BluebirdPS/issues/144) - Get-BluebirdPSVersion - Add new command to display version of BluebirdPS
+- [Issue #147](https://github.com/thedavecarroll/BluebirdPS/issues/147) - Add ToString() Override for Context and WithheldContent Classes
+- [Issue #148](https://github.com/thedavecarroll/BluebirdPS/issues/148) - Add Support for Edit Controls and Edit History
+- [Issue #150](https://github.com/thedavecarroll/BluebirdPS/issues/150) - Add New Metrics Exception
+- [Issue #156](https://github.com/thedavecarroll/BluebirdPS/issues/156) - Add Authenticated User to ResponseData
+- [Issue #165](https://github.com/thedavecarroll/BluebirdPS/issues/165) - Add Functionality to Parse User and Pinned Tweets to Find Mastodon Account References
+
+### Maintenance
+
+- [Issue #124](https://github.com/thedavecarroll/BluebirdPS/issues/124) - C# Folder Structure - Ensure best practices for C# project older structure
+- [Issue #136](https://github.com/thedavecarroll/BluebirdPS/issues/136) - C# Additional Code Cleanup
+- [Issue #163](https://github.com/thedavecarroll/BluebirdPS/issues/163) - Update documentation
+
 ## [0.7.0] - 2021-06-26
 
 Bugfix and Feature; Update Strongly Recommended
@@ -157,6 +205,7 @@ Initial release
 [0.6.1]: https://github.com/thedavecarroll/BluebirdPS/tree/12acb1ab9d988bd27c10ebdb37ad5b012cf5a4ab
 [0.6.2]: https://github.com/thedavecarroll/BluebirdPS/tree/ba829bae4735df569e48f93bf32ea56252695783
 [0.7.0]: https://github.com/thedavecarroll/BluebirdPS/tree/a1a963635037d73d9574bd9d202ab8811ce8d4e6
+[0.8.0]: https://github.com/thedavecarroll/BluebirdPS/tree/1c1f1b214df9d13f22d4859c80a741328da9fbb6
 
 ## Keep a Changelog
 

@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Set-TwitterMutedUser
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Set-TwitterMutedUser
 schema: 2.0.0
 ---
 
@@ -22,7 +22,7 @@ Set-TwitterMutedUser -User <User> [-Mute] [<CommonParameters>]
 ### Unmute
 
 ```powershell
-Set-TwitterMutedUser -Unmute -User <User> [<CommonParameters>]
+Set-TwitterMutedUser -User <User> [-Unmute] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -56,8 +56,8 @@ NOTE: If you are not muting the user, an attempt to unmute will result in an err
 The user object, returned by Get-TwitterUser, to be muted or unmuted.
 
 ```yaml
-Type: User
-Parameter Sets: UnmuteByUser, MuteByUser
+Type: BluebirdPS.APIV2.UserInfo.User
+Parameter Sets: (All)
 Aliases:
 
 Required: True
@@ -72,13 +72,13 @@ Accept wildcard characters: False
 Mute the specified user.
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: MuteByUserName, MuteByUser
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: Mute
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -88,13 +88,13 @@ Accept wildcard characters: False
 Unmute the specified user.
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: UnmuteByUserName, UnmuteByUser
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: Unmute
 Aliases:
 
 Required: True
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -115,12 +115,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Set-TwitterMutedUser)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Set-TwitterMutedUser)
 
-[Get-TwitterMutedUser](https://docs.bluebirdps.dev/en/v0.7.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterMutedUser)
+[Get-TwitterMutedUser](https://docs.bluebirdps.dev/en/v0.8.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterMutedUser)
 
-[Get-TwitterUser](https://docs.bluebirdps.dev/en/v0.7.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser)
+[Get-TwitterUser](https://docs.bluebirdps.dev/en/v0.8.0/Users%2C%20Followers%2C%20Friends%2C%20and%20Blocks/Get-TwitterUser)
 
-[Api Reference - POST mutes/users/create](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-mutes-users-create)
+[Api Reference - POST /2/users/:id/muting](https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-reference/post-users-user_id-muting)
 
-[Api Reference - POST mutes/users/destroy](https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-mutes-users-destroy)
+[Api Reference - DELETE /2/users/:source_user_id/muting/:target_user_id](https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-reference/delete-users-user_id-muting)

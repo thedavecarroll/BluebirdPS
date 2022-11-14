@@ -118,7 +118,7 @@ function Get-ChangeLogUpdate {
         [ValidateSet('Bugfix','Security','Feature','Maintenance')]
         [string[]]$ReleaseType,
         [Parameter(Mandatory)]
-        [ValidateSet('No Required','Recommended','Strongly Recommended')]
+        [ValidateSet('Not Required','Recommended','Strongly Recommended')]
         [string]$UpdateRequired,
         [Parameter(Mandatory)]
         [string]$ProjectOwner,
@@ -185,8 +185,13 @@ function Get-ChangeLogUpdate {
             }
 
             $GitHubIssue = Get-GitHubIssue -OwnerName $ProjectOwner -RepositoryName $Project -Issue $IssueNumber |
-                Select-Object -Property number,html_url,title |
+                Select-Object -Property number,html_url,title,labels |
                 Sort-Object -Property number
+
+            $IssuesWithChangeLogLabels = $GitHubIssue.labels.Where{$_.Description -match 'CHANGELOG'} | Select-Object -First 1
+            if ($IssuesWithChangeLogLabels) {
+                $EntryType =  [ChangeLogEntryType]$IssuesWithChangeLogLabels.LabelName
+            }
         }
 
         [PSCustomObject]@{
@@ -197,19 +202,31 @@ function Get-ChangeLogUpdate {
             GitHubIssue = $GitHubIssue
         }
     }
-    $ChangeLogCommits | Out-String | Write-Verbose
+    #$ChangeLogCommits | Out-String | Write-Verbose
 
     foreach ($EntryType in [ChangeLogEntryType].GetEnumNames()) {
-        $SectionCommits = $ChangeLogCommits.Where({$_.EntryType -match $EntryType -and $_.GitHubIssue}) | Sort-Object -Property GitHubIssue.created_at,CommitterDate,CommitMessage
+        #$SectionCommits = $ChangeLogCommits.Where({$_.EntryType -match $EntryType -and $_.GitHubIssue}) | Sort-Object -Property GitHubIssue.created_at,CommitterDate,CommitMessage
+        $SectionCommits = $ChangeLogCommits.Where({$_.EntryType -match $EntryType}) | Sort-Object -Property GitHubIssue.created_at,CommitterDate,CommitMessage
 
         if ($SectionCommits) {
             $SectionHeader = '### {0}' -f $EntryType
+            $SectionHeader | Write-Verbose
             [void]$NewChangeLogEntry.AppendLine($SectionHeader)
             [void]$NewChangeLogEntry.AppendLine()
 
             foreach ($Entry in $SectionCommits) {
-                if ($Entry.GitHubIssue) {
-                    $EntryText = '- [Issue #{0}]({1}) - {2}' -f $Entry.GitHubIssue.number,$Entry.GitHubIssue.html_url,$Entry.GitHubIssue.title
+                if ($EntryType -eq 'Maintenance') {
+                    if ($Entry.GitHubIssue -And $Entry.GitHubIssue.html_url -notmatch 'pull') {
+                        $EntryText = '- [Issue #{0}]({1}) - {2}' -f $Entry.GitHubIssue.number,$Entry.GitHubIssue.html_url,$Entry.GitHubIssue.title
+                    }
+                } else {
+                    if ($Entry.GitHubIssue) {
+                        $EntryText = '- [Issue #{0}]({1}) - {2}' -f $Entry.GitHubIssue.number,$Entry.GitHubIssue.html_url,$Entry.GitHubIssue.title
+                    } else {
+                        if ($Entry.CommitMessage -notmatch 'release') {
+                            $EntryText = '- No Issue - {0}' -f $Entry.CommitMessage
+                        }
+                    }
                 }
                 if (-Not $NewChangeLogEntry.ToString().Contains($EntryText)) {
                     $EntryText | Write-Verbose
@@ -226,4 +243,233 @@ function Get-ChangeLogUpdate {
     }
 
     $NewChangeLogEntry.ToString()
+}
+
+function Get-MilestoneByReleaseVersion {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [string]$OwnerName,
+        [Parameter(Mandatory)]
+        [string]$RepositoryName,
+        [Parameter(Mandatory)]
+        [string]$ReleaseVersion
+    )
+    $Format = 'RepositoryUrl','MilestoneNumber',@{l='ReleaseVersion';e={$_.title}},
+        @{l='Description';e={$_.description}},@{l='State';e={$_.state}},
+        @{l='Created';e={$_.created_at}},@{l='Closed';e={$_.closed_at}},@{l='Due';e={$_.due_on}},
+        @{l='OpenIssues';e={$_.open_issues}},@{l='ClosedIssues';e={$_.closed_issues}}
+    try {
+        Get-GitHubMilestone -OwnerName $OwnerName -RepositoryName $RepositoryName |
+            Select-Object $Format |
+            Where-Object ReleaseVersion -match $ReleaseVersion
+    }
+    catch{
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
+}
+
+function Get-ChangeLogLabels {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [string]$OwnerName,
+        [Parameter(Mandatory)]
+        [string]$RepositoryName
+    )
+    $Format = 'LabelName',@{l='EntryType';e={$_.LabelName.Split('.')[-1]}},@{l='Description';e={$_.description}}
+    try {
+        Get-GitHubLabel -OwnerName $OwnerName -RepositoryName $RepositoryName |
+            Where-Object LabelName -match '^CHANGELOG' |
+            Sort-Object LabelName |
+            Select-Object $Format
+    }
+    catch{
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
+}
+
+function Join-OxfordComma {
+    [Alias('jox')]
+    param(
+        [Parameter(Mandatory,ValueFromPipeline)]
+        [string[]]$JoinList,
+        [ValidateSet('and','or')]
+        [string]$Type = 'and'
+    )
+    begin {
+        $List = [System.Collections.Generic.List[string]]::new()
+    }
+    process {
+        foreach ($Item in $JoinList) {
+            $List.Add($Item)
+        }
+    }
+    end {
+        if ($List.count -gt 2) {
+            '{0}, {1} {2}' -f ($List[0..($List.count-2)] -join ', '),$Type,$List[-1]
+        } else {
+            '{0} {1} {2}' -f $List[0],$Type,$List[1]
+        }
+    }
+}
+
+function Get-ChangeLogUpdateForMilestone {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [string]$OwnerName,
+        [Parameter(Mandatory)]
+        [string]$RepositoryName,
+        [Parameter(Mandatory)]
+        [string]$TargetRelease,
+        [Parameter()]
+        [uri]$ReleaseLink
+    )
+
+    function GetEntryText {
+        param($Issue)
+        if ($Issue.State -eq 'open') {
+            '- OPEN [Issue #{0}]({1}) - {2}' -f $Issue.IssueNumber,$Issue.Url,$Issue.Title
+        } elseif ($Issue.StateReason -ne 'not_planned') {
+            '- [Issue #{0}]({1}) - {2}' -f $Issue.IssueNumber,$Issue.Url,$Issue.Title
+        } elseif ($Issue.StateReason -eq 'not_planned') {
+            'NOT PLANNED - Issue #{0} - {1} ' -f $Issue.IssueNumber,$Issue.Title | Write-Warning
+        }
+    }
+
+    $LabelFormat = 'LabelName',@{l='EntryType';e={$_.LabelName.Split('.')[-1]}},@{l='Description';e={$_.description}}
+    $Format = 'IssueNumber',@{l='Title';e={$_.title}},@{l='Created';e={$_.created_at}},@{l='Closed';e={$_.closed_at}},
+        @{l='State';e={$_.state}},@{l='StateReason';e={$_.state_reason}},
+        @{l='EntryType';e={($_.labels | Where-Object LabelName -match 'CHANGELOG' | Select-Object $LabelFormat).LabelName}},
+        @{l='Url';e={$_.html_url}}
+    $GeneralParameters = @{
+        OwnerName = $OwnerName
+        RepositoryName = $RepositoryName
+    }
+    $LatestRelease = Get-GitHubRelease @GeneralParameters | Sort-Object Published | Select-Object -First 1
+    $MilestoneRelease = Get-MilestoneByReleaseVersion -ReleaseVersion $TargetRelease @GeneralParameters
+    $MilestoneIssues = Get-GitHubIssue -MilestoneNumber $MilestoneRelease.MilestoneNumber -State All @GeneralParameters |
+        Select-Object $Format |
+        Sort-Object EntryType,IssueNumber
+
+    $NewChangeLogEntry = [System.Text.StringBuilder]::new()
+    [void]$NewChangeLogEntry.AppendLine()
+
+    #region Target Release
+    if ($MilestoneRelease.Due) {
+        $TargetReleaseDate = $MilestoneRelease.Due.ToString("yyyy-MM-dd")
+    } else {
+        $TargetReleaseDate = 'Pending'
+    }
+    if ($ReleaseLink) {
+        $TargetReleaseText = '## [{0}] - {1}' -f $TargetRelease,$TargetReleaseDate
+    } else {
+        $TargetReleaseText = '## {0} - {1}' -f $TargetRelease,$TargetReleaseDate
+    }
+    [void]$NewChangeLogEntry.AppendLine($TargetReleaseText)
+    [void]$NewChangeLogEntry.AppendLine()
+    #endregion
+
+    #region Release Type and Update Type
+    $ReleaseType = [System.Collections.Generic.List[string]]::new()
+    $UpdateType = $null
+    if ($MilestoneIssues.EntryType -match 'Security') {
+        $ReleaseType.Add('Security')
+        if ($null -eq $UpdateType) { $UpdateType = 'Strongly Recommended' }
+    }
+    if ($MilestoneIssues.EntryType -match 'Fixed|Deprecated|Removed') {
+        $ReleaseType.Add('Bugfix')
+        if ($null -eq $UpdateType) { $UpdateType = 'Strongly Recommended' }
+    }
+    if ($MilestoneIssues.EntryType -match 'Added|Changed') {
+        $ReleaseType.Add('Feature')
+        if ($null -eq $UpdateType) { $UpdateType = 'Recommended' }
+    }
+    if ($MilestoneIssues.EntryType -match 'Maintenance') {
+        $ReleaseType.Add('Maintenance')
+        if ($null -eq $UpdateType) { $UpdateType = 'Not Required' }
+    }
+    $ReleaseTypeText = '{0}; Update {1}' -f ($ReleaseType | Join-OxfordComma),$UpdateType
+    [void]$NewChangeLogEntry.AppendLine($ReleaseTypeText)
+    [void]$NewChangeLogEntry.AppendLine()
+    #endregion
+
+    $EntryTypeInRelease = $MilestoneIssues.EntryType | Sort-Object -Unique
+    foreach ($Entry in ($EntryTypeInRelease)) {
+        $EntryType = $Entry.Split('.')[-1]
+        $SectionHeader = '### {0}' -f $EntryType
+        [void]$NewChangeLogEntry.AppendLine($SectionHeader)
+        [void]$NewChangeLogEntry.AppendLine()
+
+        foreach ($Issue in ($MilestoneIssues | Where-Object EntryType -match $EntryType)) {
+            $EntryText = GetEntryText -Issue $Issue
+            if ($EntryText) {
+                [void]$NewChangeLogEntry.AppendLine($EntryText)
+            }
+        }
+        [void]$NewChangeLogEntry.AppendLine()
+    }
+
+    if ($MilestoneIssues | Where-Object EntryType -eq $null) {
+        [void]$NewChangeLogEntry.AppendLine('### No ChangeLog Entry Type')
+
+        foreach ($Issue in ($MilestoneIssues | Where-Object EntryType -eq $null)) {
+            $EntryText = GetEntryText -Issue $Issue
+            if ($EntryText) {
+                [void]$NewChangeLogEntry.AppendLine($EntryText)
+            }
+        }
+        [void]$NewChangeLogEntry.AppendLine()
+    }
+
+    if ($ReleaseLink) {
+        $ReleaseLinkText = '[{0}]: {1}' -f $TargetRelease.ToString(),$ReleaseLink.AbsoluteUri
+        [void]$NewChangeLogEntry.AppendLine($ReleaseLinkText)
+    }
+
+    $NewChangeLogEntry.ToString()
+
+}
+
+function Set-ChangeLog {
+    [CmdletBinding()]
+    param(
+        [ValidateScript({Test-Path $_})]
+        [string]$ChangeLogPath,
+        [Parameter(Mandatory)]
+        [string]$ChangeLogUpdate
+    )
+
+    $ChangeLog = [System.Text.StringBuilder]::new()
+    $Lines = Get-Content -Path $ChangeLogPath
+    $Count = 0
+    foreach ($Line in $Lines) {
+        if ($Line -match '^## \[\d\.|^## \d\.') {
+            if ($null -eq $LastReleaseBegin) {
+                $LastReleaseBegin = $Count
+            } elseif ($null -eq $LastReleaseEnd) {
+                $LastReleaseEnd = $Count - 1
+                break
+            }
+        }
+        $Count++
+    }
+
+    if ($Lines[$LastReleaseBegin] -ne $ChangeLogUpdate.Split([System.Environment]::NewLine)[2]) {
+
+        # use original heading
+        [void]$ChangeLog.Append($Lines[0..($LastReleaseBegin-1)] -join [System.Environment]::NewLine)
+
+        # add updated entry
+        [void]$ChangeLog.Append($ChangeLogUpdate)
+
+        # use original remainer
+        [void]$ChangeLog.Append($Lines[($LastReleaseBegin)..($Lines.Count)] -join [System.Environment]::NewLine)
+
+        Set-Content -Path $ChangeLogPath -Value $ChangeLog.ToString() -Force
+
+    } else {
+        ' No changes made to {0}' -f $ChangeLogPath | Write-Warning
+    }
 }

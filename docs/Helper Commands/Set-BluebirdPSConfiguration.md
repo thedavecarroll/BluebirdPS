@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Helper%20Commands/Set-BluebirdPSConfiguration
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Helper%20Commands/Set-BluebirdPSConfiguration
 schema: 2.0.0
 ---
 
@@ -14,7 +14,8 @@ Set one or more BluebirdPS configuration values.
 ## SYNTAX
 
 ```powershell
-Set-BluebirdPSConfiguration [[-RateLimitAction] <RateLimitAction>] [[-RateLimitThreshold] <Int32>] [[-RawOutput] <Boolean>] [-Export] [<CommonParameters>]
+Set-BluebirdPSConfiguration [[-RateLimitAction] <RateLimitAction>] [[-RateLimitThreshold] <Int32>]
+ [-OutputType <OutputType>] [-Export] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,7 +39,7 @@ Save the configuration to disk to be used for future sessions.
 ### Example 2
 
 ```powershell
-PS > Set-BluebirdPSConfiguration -RawOutput $true
+PS > Set-BluebirdPSConfiguration -OutputType JSON
 ```
 
 Set the configuration value specifying that no output will be parsed into rich objects.
@@ -50,13 +51,13 @@ Set the configuration value specifying that no output will be parsed into rich o
 Export the configuration using Export-BluebirdPSConfiguration.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -68,7 +69,7 @@ Specify what action should be performed when the RateLimitThreshold is reached f
 This defaults to Verbose.
 
 ```yaml
-Type: RateLimitAction
+Type: BluebirdPS.RateLimitAction
 Parameter Sets: (All)
 Aliases:
 Accepted values: Verbose, Warning, Error
@@ -89,7 +90,7 @@ The RateLimitThreshold does not effect any rate limit for any Twitter endpoint.
 This defaults to 5.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -100,19 +101,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -RawOutput
+### -OutputType
 
-Specify that the raw response should be presented to the user.
+Specify the output type of all commands that connect to the Twitter API.
 
-The JSON response from the API is converted to a [PSCustomObject]. If you want actual JSON, you will need to use `ConvertTo-Json -Depth 10`.
+CustomClasses - This is the default selection which output response as classes defined in the BluebirdPS assembly.
+JSON - The raw response as returned by the Twitter API.
+PSCustomObject - Invoke-TwitterRequest uses Invoke-RestMethod which converts JSON into a PSCustomObject.
 
 ```yaml
-Type: Boolean
+Type: BluebirdPS.OutputType
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -134,13 +137,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Helper%20Commands/Export-BluebirdPSConfiguration)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Helper%20Commands/Export-BluebirdPSConfiguration)
 
-[Import-BluebirdPSConfiguration](https://docs.bluebirdps.dev/en/v0.7.0/Helper%20Commands/Import-BluebirdPSConfiguration)
+[Import-BluebirdPSConfiguration](https://docs.bluebirdps.dev/en/v0.8.0/Helper%20Commands/Import-BluebirdPSConfiguration)
 
-[Get-BluebirdPSConfiguration](https://docs.bluebirdps.dev/en/v0.7.0/Helper%20Commands/Get-BluebirdPSConfiguration)
+[Get-BluebirdPSConfiguration](https://docs.bluebirdps.dev/en/v0.8.0/Helper%20Commands/Get-BluebirdPSConfiguration)
 
-[Set-BluebirdPSConfiguration](https://docs.bluebirdps.dev/en/v0.7.0/Helper%20Commands/Set-BluebirdPSConfiguration)
+[Set-BluebirdPSConfiguration](https://docs.bluebirdps.dev/en/v0.8.0/Helper%20Commands/Set-BluebirdPSConfiguration)
 
 [Api Reference - V2 Fields](https://developer.twitter.com/en/docs/twitter-api/fields)
 

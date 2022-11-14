@@ -1,6 +1,4 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BluebirdPS.APIV2
 {
@@ -10,12 +8,17 @@ namespace BluebirdPS.APIV2
         {
             "author_id","referenced_tweets.id","referenced_tweets.id.author_id",
             "entities.mentions.username","attachments.poll_ids","attachments.media_keys",
-            "in_reply_to_user_id","geo.place_id"
+            "in_reply_to_user_id","geo.place_id","edit_history_tweet_ids"
         };
 
         public static List<string> User => new List<string>()
         {
             "pinned_tweet_id"
+        };
+
+        public static List<string> List => new List<string>()
+        {
+            "owner_id"
         };
 
         public static string GetExpansionFields(ExpansionTypes type)
@@ -29,9 +32,12 @@ namespace BluebirdPS.APIV2
                 case ExpansionTypes.User:
                     expansionFields = string.Join(",", User);
                     break;
+               case ExpansionTypes.List:
+                    expansionFields = string.Join(",", List);
+                    break;
             }
             return expansionFields;
         }
-    }
 
+    }
 }

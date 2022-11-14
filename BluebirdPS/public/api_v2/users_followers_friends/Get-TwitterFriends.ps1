@@ -1,4 +1,5 @@
 function Get-TwitterFriends {
+    [OutputType('BluebirdPS.APIV2.UserInfo.User')]
     [CmdletBinding(DefaultParameterSetName='ById')]
     [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "")]
     param(
@@ -9,7 +10,11 @@ function Get-TwitterFriends {
         [ValidateObjectNotNullOrEmpty()]
         [BluebirdPS.APIV2.UserInfo.User]$User,
 
-        [switch]$IncludeExpansions
+        [switch]$IncludeExpansions,
+
+        [ValidateRange(1,1000)]
+        [int]$MaxResultsPerPage=1000,
+        [switch]$NoPagination
     )
 
     switch ($PSCmdlet.ParameterSetName) {
@@ -24,12 +29,16 @@ function Get-TwitterFriends {
             $Endpoint = 'https://api.twitter.com/2/users/{0}/following' -f $User.Id
         }
     }
+    if ($MaxResultsPerPage -lt 1000) {
+        $NoPagination = $true
+    }
 
     $Request = [TwitterRequest]@{
-        ExpansionType = 'User'
         Endpoint = $Endpoint
-        Query = @{'max_results' = 1000 }
+        Query = @{'max_results' = $MaxResultsPerPage }
+        ExpansionType = 'User'
         IncludeExpansions = $IncludeExpansions
+        NoPagination = $NoPagination
     }
 
     Invoke-TwitterRequest -RequestParameters $Request

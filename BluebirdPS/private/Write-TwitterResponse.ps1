@@ -23,15 +23,16 @@ function Write-TwitterResponse {
 
         $BluebirdPSHistoryList.Add($ResponseData)
         Write-Information -MessageData $ResponseData
+        $script:LastResponseData = $ResponseData
 
         switch ($BluebirdPSConfiguration.OutputType) {
             'PSCustomObject' {
                 $ResponseData.ApiResponse
-                return
+                break
             }
             'JSON' {
                 $ResponseData.ApiResponse | ConvertTo-Json -Depth 25
-                return
+                break
             }
         }
 
@@ -50,21 +51,33 @@ function Write-TwitterResponse {
                         # an error will still be returned if an attempt to unmute a user that hasn't been muted
                         continue
                     } else {
-                        [Helpers]::ParseApiV1Response($ResponseData.ApiResponse)
+                        [ResponseInfo]::ParseApiV1Response($ResponseData.ApiResponse)
                     }
                     break
                 }
                 '2' {
-                    if ($ResponseData.ApiResponse.data.psobject.Properties.Name -contains 'following') {
-                        [ResponseInfo]::GetUpdateFriendshipStatus($ResponseData)
-                    } elseif ($ResponseData.ApiResponse.data.psobject.Properties.Name -contains 'blocking') {
-                        [ResponseInfo]::GetUserBlockStatus($ResponseData)
-                    } elseif ($ResponseData.ApiResponse.data.psobject.Properties.Name -contains 'liked') {
-                        [ResponseInfo]::GetTweetLikeStatus($ResponseData)
+                    if ($ResponseData.ApiResponse.data) {
+                        switch ($ResponseData.Command) {
+                            'Add-TwitterFriend'             { [ResponseInfo]::UsersFollowingCreateResponse($ResponseData); break }
+                            'Remove-TwitterFriend'          { [ResponseInfo]::UsersFollowingDeleteResponse($ResponseData); break }
+                            'Set-TwitterBlockedUser'        { [ResponseInfo]::BlockUserMutationResponse($ResponseData); break }
+                            'Set-TwitterMutedUser'          { [ResponseInfo]::MuteUserMutationResponse($ResponseData); break }
+                            'Set-TweetLike'                 { [ResponseInfo]::SetTweetLikeStatus($ResponseData); break }
+                            'Add-TwitterList'               { [ResponseInfo]::ListCreateResponse($ResponseData); break }
+                            'Set-TwitterList'               { [ResponseInfo]::ListUpdateResponse($ResponseData); break }
+                            'Remove-TwitterList'            { break }
+                            'Add-TwitterListMember'         { [ResponseInfo]::ListMutateResponse($ResponseData); break }
+                            'Remove-TwitterListMember'      { [ResponseInfo]::ListMutateResponse($ResponseData); break }
+                            'Get-TwitterListSubscription'   { [ResponseInfo]::Get2UsersIdFollowedListsResponse($ResponseData); break }
+                            'Set-TwitterPinnedList'         { [ResponseInfo]::ListPinnedResponse($ResponseData); break }
+                            default                         { [ResponseInfo]::ParseApiV2Response($ResponseData.ApiResponse); break }
+                        }
+                        break
                     } else {
-                        [Helpers]::ParseApiV2Response($ResponseData.ApiResponse)
+                        if ($LastStatusCode -in 403,404) {
+                            New-TwitterErrorRecord -ResponseData $ResponseData
+                        }
                     }
-                    break
                 }
             }
         }
@@ -77,4 +90,5 @@ function Write-TwitterResponse {
     if ($ResponseData.ApiResponse.psobject.Properties.Name -contains 'errors') {
         New-TwitterErrorRecord -ResponseData $ResponseData
     }
+
 }

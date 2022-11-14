@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Helper%20Commands/Get-TwitterApiEndpoint
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Helper%20Commands/Get-TwitterApiEndpoint
 schema: 2.0.0
 ---
 
@@ -74,7 +74,7 @@ Specifies the name of the BluebirdPS command.
 Tab completion is enabled for this parameter for public functions.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -95,7 +95,7 @@ The user may still be able to access endpoints, which are currently not supporte
 See the contextual help about_BluebirdPS_TwitterRequest for more details.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -122,6 +122,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Helper%20Commands/Get-TwitterApiEndpoint)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Helper%20Commands/Get-TwitterApiEndpoint)
 
-[Invoke-TwitterRequest](https://docs.bluebirdps.dev/en/v0.7.0/Supporting%20Commands/Invoke-TwitterRequest)
+[Invoke-TwitterRequest](https://docs.bluebirdps.dev/en/v0.8.0/Supporting%20Commands/Invoke-TwitterRequest)

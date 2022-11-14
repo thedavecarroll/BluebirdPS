@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Unpublish-Tweet
+online version: https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Unpublish-Tweet
 schema: 2.0.0
 ---
 
@@ -70,14 +70,14 @@ Delete the specified Tweet.
 The id of the Tweet.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ById
 Aliases:
 
-Required: True (ById) False (None)
+Required: True
 Position: Named
-Default value:
-Accept pipeline input: True
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -86,14 +86,14 @@ Accept wildcard characters: False
 The Tweet object to delete.
 
 ```yaml
-Type: Tweet
+Type: BluebirdPS.APIV2.TweetInfo.Tweet
 Parameter Sets: ByTweet
 Aliases:
 
-Required: True (ByTweet) False (None)
+Required: True
 Position: Named
-Default value:
-Accept pipeline input: True
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -102,13 +102,13 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
-Required: True (None) False (All)
+Required: False
 Position: Named
-Default value:
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -119,7 +119,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -148,10 +148,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Unpublish-Tweet)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Unpublish-Tweet)
 
-[Get-Tweet](https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Get-Tweet)
+[Get-Tweet](https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Get-Tweet)
 
-[Publish-Tweet](https://docs.bluebirdps.dev/en/v0.7.0/Tweets/Publish-Tweet)
+[Publish-Tweet](https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Publish-Tweet)
 
-[API Documentation - POST statuses/destroy/:id](https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-destroy-id)
+[API Documentation - DELETE /2/tweets/:id](https://developer.twitter.com/en/docs/twitter-api/tweets/manage-tweets/api-reference/delete-tweets-id)

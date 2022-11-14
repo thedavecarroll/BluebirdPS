@@ -1,43 +1,40 @@
 ﻿using System;
 using System.Text;
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 
 namespace BluebirdPS
 {
-    public enum OAuthVersion
-    {
-        OAuth1a, OAuth2Bearer, Basic
-    }
 
     public class Authentication
-    {        
-        // Properties for Invoke-RestMethod        
+    {
+        #region Properties for Invoke-RestMethod
         public string HttpMethod { get; private set; }
         public Uri Uri { get; private set; }
         public string AuthHeader { get; private set; }
-
         public string Endpoint { get; private set; }
+        #endregion
 
-        // Properties to validate OAuth 1.0a request authentication
+        #region Properties to validate OAuth 1.0a request authentication
         public string ParameterString { get; private set; }
         public string SignatureBaseString { get; private set; }
         public string SigningKey { get; private set; }
         public string OAuthSignature { get; private set; }
         public string Nonce { get; private set; }
         public string Timestamp { get; private set; }
+        #endregion
 
-        // Prrivate properties       
+        #region Private properties
         private string _apiKey { get; set; }
         private string _apiSecret { get; set; }
         private string _accessToken { get; set; }
         private string _accessTokenSecret { get; set; }
+        #endregion
 
-        // ----------------------------------------------------------------------------------------
-        // Constructors
-        // OAuth 1.0a
+        // -----------------------------------------------------------------------------------------
+        #region Constructors
+        #region OAuth 1.0a
         public Authentication (
             TwitterRequest request,
             string apiKey, string apiSecret,
@@ -51,7 +48,7 @@ namespace BluebirdPS
 
             Nonce = nonce ?? GetNonce();
             Timestamp = timestamp ?? GetUnixTime();
-            
+
             SigningKey = $"{Uri.EscapeDataString(_apiSecret)}&{Uri.EscapeDataString(_accessTokenSecret)}";
 
             HttpMethod = request.HttpMethod.ToString();
@@ -62,12 +59,13 @@ namespace BluebirdPS
             SetParameterString();
 
             SignatureBaseString = $"{HttpMethod}&{Uri.EscapeDataString(Endpoint)}&{Uri.EscapeDataString(ParameterString)}";
-                        
+
             SetOAuthSignature();
             SetOAuthHeaderString();
         }
+        #endregion
 
-        // OAuth 2.0 Bearer Token
+        #region OAuth 2.0 Bearer Token
         public Authentication (
             TwitterRequest request,
             string bearerToken
@@ -78,8 +76,9 @@ namespace BluebirdPS
             Endpoint = Uri.Query != string.Empty ? Uri.AbsoluteUri.Replace(Uri.Query, null) : Uri.AbsoluteUri;
             AuthHeader = $"Bearer {bearerToken}";
         }
+        #endregion
 
-        // Basic Authentication
+        #region Basic Authentication
         public Authentication(
             TwitterRequest request,
             string apiKey, string apiSecret
@@ -91,9 +90,10 @@ namespace BluebirdPS
             string basicAuth = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{Uri.EscapeDataString(apiKey)}:{Uri.EscapeDataString(apiSecret)}"));
             AuthHeader = $"Basic {basicAuth}";
         }
-
-        // ----------------------------------------------------------------------------------------
-        // Private methods        
+        #endregion
+        #endregion
+        // -----------------------------------------------------------------------------------------
+        #region Private methods
         private string GetNonce()
         {
             byte[] numberBytes = new byte[32];
@@ -146,7 +146,7 @@ namespace BluebirdPS
             parameterString.AddRange(from OAuthParameter parameter in allOAuthParameters
                                         select parameter.ToString());
 
-            ParameterString = string.Join("&", parameterString);            
+            ParameterString = string.Join("&", parameterString);
         }
 
         private void SetOAuthSignature()
@@ -158,7 +158,7 @@ namespace BluebirdPS
 
             OAuthSignature = Convert.ToBase64String(signatureMethod.ComputeHash(Encoding.ASCII.GetBytes(SignatureBaseString)));
         }
-        
+
         private void SetOAuthHeaderString()
         {
             List<OAuthParameter> oauthHeaderParameters = GetOAuthHeaderParameters();
@@ -170,50 +170,7 @@ namespace BluebirdPS
             AuthHeader = $"OAuth {string.Join(", ", oauthHeaderString)}";
         }
 
-    }
-
-    internal class OAuthParameter : IComparable<OAuthParameter>
-    {
-        public OAuthParameter(string name,
-                              string value,
-                              bool isEncoded)
-        {
-            if (!isEncoded)
-            {
-                EncodedName = Uri.EscapeDataString(name);
-                EncodedValue = Uri.EscapeDataString(value);
-            }
-            else
-            {
-                EncodedName = name;
-                EncodedValue = value;
-            }
-        }
-
-        public string EncodedName { get; }
-        public string EncodedValue { get; }
-
-        public int CompareTo(OAuthParameter other)
-        {
-            var nameComparison = string.CompareOrdinal(EncodedName, other.EncodedName);
-
-            if (nameComparison == 0)
-            {
-                return string.CompareOrdinal(EncodedValue, other.EncodedValue);
-            }
-
-            return nameComparison;
-        }
-
-        public override string ToString()
-        {
-            return $"{EncodedName}={EncodedValue}";
-        }
-
-        public string ToHeaderString()
-        {
-            return $"{EncodedName}=\"{EncodedValue}\"";
-        }
+        #endregion
     }
 
 }

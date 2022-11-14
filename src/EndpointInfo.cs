@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BluebirdPS
 {
@@ -11,11 +9,11 @@ namespace BluebirdPS
         public List<string> ApiEndpoint { get; private set; }
         public List<string> ApiDocumentation { get; private set; }
 
-        public EndpointInfo(string commandName, string[] apiEndpoint, string[] apiDocumenation)
+        public EndpointInfo(string commandName, string[] apiEndpoint, string[] apiDocumentation)
         {
             CommandName = commandName;
             ApiEndpoint = apiEndpoint.ToList();
-            ApiDocumentation = apiDocumenation.ToList();
+            ApiDocumentation = apiDocumentation.ToList();
         }
     }
 }
