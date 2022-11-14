@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Returns the username for members of the specified list.
+Returns the user objects for members of the specified list.
 
 ## SYNTAX
 
@@ -29,7 +29,7 @@ Get-TwitterListMember -List <List> [-IncludeExpansions] [-MaxResultsPerPage <Int
 
 ## DESCRIPTION
 
-Returns the username for members of the specified list.
+Returns the user objects for members of the specified list.
 
 Private list members will only be shown if the authenticated user owns the specified list.
 

@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Returns a collection of subscriber usernames of the specified list.
+Returns a collection of subscriber user objects of the specified list.
 
 ## SYNTAX
 
@@ -19,7 +19,7 @@ Get-TwitterListSubscriber -List <List> [-IncludeExpansions] [-MaxResultsPerPage 
 
 ## DESCRIPTION
 
-Returns a collection of subscriber usernames of the specified list.
+Returns a collection of subscriber user objects of the specified list.
 
 Private list subscribers will only be shown if the authenticated user owns the specified list.
 
