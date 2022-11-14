@@ -33,8 +33,9 @@ function Import-BluebirdPSConfiguration {
                     continue
                 }
 
+                # Deprecated configuration properties that were not moved to BluebirdPS Profile
                 if ($ConfigValue -in 'RawOutput') {
-                    'Configuration value {0} has been removed. Please see documentation for further details.' -f $ConfigValue | Write-Warning
+                    'Configuration property {0} has been removed. Please see documentation for further details.' -f $ConfigValue | Write-Warning
                     continue
                 }
 
