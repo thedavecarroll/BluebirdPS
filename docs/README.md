@@ -20,6 +20,21 @@ PowerShell best practices.
 
 ## What's New
 
+The v0.8.0 release of BluebirdPS includes the following:
+
+- **Converts List commands to Twitter API v2 endpoints.**
+- **Converts Muted User commands to Twitter API v2 endpoints.**
+- **Adds commands for Pinned List endpoints.**
+- **Adds Edit Controls and Edit History to Tweet object classes.**
+- **Fixes Media class to include Url and AltText properties.**
+
+- Removes `GetOriginalObject()` from Context and BaseMetrics.
+- Adds OutputType to most commands.
+- Add Metrics exception class.
+- Add `Get-BluebirdPSVersion` to display the imported version of BluebirdPS.
+- Add `Get-BluebirdPSAssemblyDetails` to assist with class discovery.
+- Add `Show-TwitterAuthentication` to assist with authentication validation.
+
 The v0.7.0 release of BluebirdPS includes the following:
 
 - **Adds new command, `Get-TweetCount`, which corresponds to the recently released `GET /tweets/count/recent` endpoint.**

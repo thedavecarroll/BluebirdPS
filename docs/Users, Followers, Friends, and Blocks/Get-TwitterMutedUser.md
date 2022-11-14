@@ -85,7 +85,6 @@ Only return the first page of data for the request.
 Note:
 By default, this command will request all available pages of data with each page request counting against the rate limit threshold.
 
-
 ```yaml
 Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)

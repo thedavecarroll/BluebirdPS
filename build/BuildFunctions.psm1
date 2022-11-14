@@ -404,7 +404,9 @@ function Get-ChangeLogUpdateForMilestone {
 
         foreach ($Issue in ($MilestoneIssues | Where-Object EntryType -match $EntryType)) {
             $EntryText = GetEntryText -Issue $Issue
-            [void]$NewChangeLogEntry.AppendLine($EntryText)
+            if ($EntryText) {
+                [void]$NewChangeLogEntry.AppendLine($EntryText)
+            }
         }
         [void]$NewChangeLogEntry.AppendLine()
     }
@@ -414,7 +416,9 @@ function Get-ChangeLogUpdateForMilestone {
 
         foreach ($Issue in ($MilestoneIssues | Where-Object EntryType -eq $null)) {
             $EntryText = GetEntryText -Issue $Issue
-            [void]$NewChangeLogEntry.AppendLine($EntryText)
+            if ($EntryText) {
+                [void]$NewChangeLogEntry.AppendLine($EntryText)
+            }
         }
         [void]$NewChangeLogEntry.AppendLine()
     }

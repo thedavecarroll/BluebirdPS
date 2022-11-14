@@ -2,7 +2,7 @@
 
 MIT License
 
-Copyright (c) 2020-2021 Dave Carroll
+Copyright (c) 2020-2022 Dave Carroll
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
