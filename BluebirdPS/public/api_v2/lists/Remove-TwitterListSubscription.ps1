@@ -3,7 +3,6 @@ function Remove-TwitterListSubscription {
     param(
         [Parameter(ParameterSetName='ById',Mandatory,ValueFromPipeline)]
         [ValidatePattern('^[0-9]{1,19}$', ErrorMessage = "The List Id '{0}' is not valid.")]
-        [Alias('ListId')]
         [string]$Id,
 
         [Parameter(ParameterSetName='ByList',Mandatory,ValueFromPipeline)]

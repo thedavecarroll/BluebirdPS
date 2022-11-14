@@ -3,7 +3,6 @@ function Add-TwitterListSubscription {
     param(
         [Parameter(Mandatory,ParameterSetName='ById')]
         [ValidatePattern('^[0-9]{1,19}$', ErrorMessage = "The List Id '{0}' is not valid.")]
-        [Alias('ListId')]
         [string]$Id,
 
         [Parameter(Mandatory,ParameterSetName='ByList',ValueFromPipeline)]
