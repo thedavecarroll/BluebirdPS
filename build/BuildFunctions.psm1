@@ -358,7 +358,7 @@ function Get-ChangeLogUpdateForMilestone {
 
     #region Target Release
     if ($MilestoneRelease.Due) {
-        $TargetReleaseDate = $MilestoneRelease.Due
+        $TargetReleaseDate = $MilestoneRelease.Due.ToString("yyyy-MM-dd")
     } else {
         $TargetReleaseDate = 'Pending'
     }
