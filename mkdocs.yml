@@ -20,7 +20,7 @@ google_analytics:
 theme:
   name: material
   language: en
-  logo: images/bluebirdps-icon.png
+  logo: images/bluebirdps-icon.jpg
   # icon:
   #   logo: fontawesome/regular/comments
   palette:
