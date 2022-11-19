@@ -1,6 +1,6 @@
 # BluebirdPS: A Twitter Automation Client for PowerShell 7
 
-<img align="left" src="docs/images/bluebirdps-logo.jpg" alt="BluebirdPS" height="115" width="115"/> Welcome to the online documentation for BluebirdPS, a Twitter automation client for PowerShell 7.
+<img align="left" src="images/bluebirdps-logo.jpg" alt="BluebirdPS" height="115" width="115"/> Welcome to the online documentation for BluebirdPS, a Twitter automation client for PowerShell 7.
 
 ![PowerShell Gallery Downloads](https://img.shields.io/powershellgallery/dt/bluebirdps?label=PowerShell%20Gallery%20Downloads&logo=PowerShell&style=for-the-badge)
 ![PowerShell Gallery Version (including pre-releases)](https://img.shields.io/powershellgallery/v/bluebirdps?color=blue&include_prereleases&label=PowerShell%20Gallery&logo=PowerShell&style=for-the-badge)
