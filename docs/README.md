@@ -24,6 +24,10 @@ PowerShell best practices.
 
 ## What's New
 
+The v0.8.1 release of BluebirdPS includes the following:
+
+- **Fixes Publish-Tweet fails to render response**
+
 The v0.8.0 release of BluebirdPS includes the following:
 
 - **Converts List commands to Twitter API v2 endpoints.**
