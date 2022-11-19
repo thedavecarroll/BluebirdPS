@@ -290,15 +290,19 @@ function Get-ChangeLogLabels {
 }
 
 function Join-OxfordComma {
+    [CmdletBinding(DefaultParameterSetName='And')]
     [Alias('jox')]
     param(
         [Parameter(Mandatory,ValueFromPipeline)]
         [string[]]$JoinList,
-        [ValidateSet('and','or')]
-        [string]$Type = 'and'
+        [Parameter(ParameterSetName='And')]
+        [switch]$And,
+        [Parameter(ParameterSetName='Or')]
+        [switch]$Or
     )
     begin {
         $List = [System.Collections.Generic.List[string]]::new()
+        $Type = if ($PSCmdlet.ParameterSetName -eq 'And') { 'and' } else { 'or' }
     }
     process {
         foreach ($Item in $JoinList) {
@@ -306,10 +310,12 @@ function Join-OxfordComma {
         }
     }
     end {
-        if ($List.count -gt 2) {
-            '{0}, {1} {2}' -f ($List[0..($List.count-2)] -join ', '),$Type,$List[-1]
-        } else {
-            '{0} {1} {2}' -f $List[0],$Type,$List[1]
+        switch ($List.Count) {
+            1 { $List }
+            2 { '{0} {1} {2}' -f $List[0],$Type,$List[1]}
+            default {
+                '{0}, {1} {2}' -f ($List[0..($List.count-2)] -join ', '),$Type,$List[-1]
+            }
         }
     }
 }

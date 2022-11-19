@@ -4,7 +4,7 @@
   PowerShellVersion = '7.0'
   RootModule = 'BluebirdPS.psm1'
   CompanyName = 'thedavecarroll'
-  ModuleVersion = '0.8.0'
+  ModuleVersion = '0.8.1'
   Author = 'Dave Carroll'
   CompatiblePSEditions = 'Core'
   FileList = @()
@@ -12,6 +12,14 @@
     PSData = @{
       Tags = @('Twitter-Client','Twitter-API','Twitter-API-V2','Twitter','Tweet','Automation','Social-Media')
       ReleaseNotes = '
+      ## 0.8.1 - 2022-11-18
+
+      Bugfix; Update Strongly Recommended
+
+      ### Fixed
+
+      - [Issue #174](https://github.com/thedavecarroll/BluebirdPS/issues/174) - Publish-Tweet - Fails to render API response
+
       ## 0.8.0 - 2022-11-13
 
       Bugfix, Feature, and Maintenance; Update Strongly Recommended
@@ -66,7 +74,7 @@
       ProjectUri = 'https://github.com/thedavecarroll/BluebirdPS'
     }
   }
-  CmdletsToExport = @()
+  CmdletsToExport = @('ConvertFrom-OpenApiJson')
   VariablesToExport = @()
   Description = 'A Twitter Automation Client for PowerShell 7. Tweet, retweet, send direct messages, manage lists, and more.'
   FunctionsToExport = @()
