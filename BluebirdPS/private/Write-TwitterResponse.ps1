@@ -70,6 +70,7 @@ function Write-TwitterResponse {
                             'Remove-TwitterListMember'      { [ResponseInfo]::ListMutateResponse($ResponseData); break }
                             'Get-TwitterListSubscription'   { [ResponseInfo]::Get2UsersIdFollowedListsResponse($ResponseData); break }
                             'Set-TwitterPinnedList'         { [ResponseInfo]::ListPinnedResponse($ResponseData); break }
+                            'Publish-Tweet'                 { $ResponseData.ApiResponse.data; break }
                             default                         { [ResponseInfo]::ParseApiV2Response($ResponseData.ApiResponse); break }
                         }
                         break
