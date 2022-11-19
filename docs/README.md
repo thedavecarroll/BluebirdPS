@@ -1,21 +1,14 @@
 # BluebirdPS: A Twitter Automation Client for PowerShell 7
 
-<table align="center">
-    <tr>
-        <td align="right"><img align="left" src="images/bluebirdps-logo.jpg" alt="BluebirdPS" height="120" width="120"/></td>
-        <td align="left">
-          Welcome to the online documentation for BluebirdPS, a Twitter automation client for PowerShell 7.
-          <br/>
-          <br/>
-          ![PowerShell Gallery Downloads](https://img.shields.io/powershellgallery/dt/bluebirdps?label=PowerShell%20Gallery%20Downloads&logo=PowerShell&style=for-the-badge)
-          ![PowerShell Gallery Version (including pre-releases)](https://img.shields.io/powershellgallery/v/bluebirdps?color=blue&include_prereleases&label=PowerShell%20Gallery&logo=PowerShell&style=for-the-badge)
-          <br/>
-          <br/>
-          [![Standard](https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fstandard)](https://developer.twitter.com/en/docs/twitter-api)
-          [![v2](https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fv2)](https://developer.twitter.com/en/docs/twitter-api)
-        </td>
-    </tr>
-</table>
+|&nbsp;|&nbsp;|
+|<img align="left" src="images/bluebirdps-logo.jpg" alt="BluebirdPS" height="120" width="120"/>|
+Welcome to the online documentation for BluebirdPS, a Twitter automation client for PowerShell 7.
+
+![PowerShell Gallery Downloads](https://img.shields.io/powershellgallery/dt/bluebirdps?label=PowerShell%20Gallery%20Downloads&logo=PowerShell&style=for-the-badge)
+![PowerShell Gallery Version (including pre-releases)](https://img.shields.io/powershellgallery/v/bluebirdps?color=blue&include_prereleases&label=PowerShell%20Gallery&logo=PowerShell&style=for-the-badge)
+
+[![Standard](https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fstandard)](https://developer.twitter.com/en/docs/twitter-api)
+[![v2](https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fv2)](https://developer.twitter.com/en/docs/twitter-api) |
 
 ## Work in Progress
 
