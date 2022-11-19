@@ -74,7 +74,7 @@
       ProjectUri = 'https://github.com/thedavecarroll/BluebirdPS'
     }
   }
-  CmdletsToExport = @('ConvertFrom-OpenApiJson')
+  CmdletsToExport = @()
   VariablesToExport = @()
   Description = 'A Twitter Automation Client for PowerShell 7. Tweet, retweet, send direct messages, manage lists, and more.'
   FunctionsToExport = @()
