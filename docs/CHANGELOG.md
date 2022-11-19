@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.8.1] - 2022-11-18
+
+Bugfix; Update Strongly Recommended
+
+### Fixed
+
+- [Issue #174](https://github.com/thedavecarroll/BluebirdPS/issues/174) - Publish-Tweet - Fails to render API response
+
 ## [0.8.0] - 2022-11-13
 
 Bugfix, Feature, and Maintenance; Update Strongly Recommended
@@ -206,6 +214,7 @@ Initial release
 [0.6.2]: https://github.com/thedavecarroll/BluebirdPS/tree/ba829bae4735df569e48f93bf32ea56252695783
 [0.7.0]: https://github.com/thedavecarroll/BluebirdPS/tree/a1a963635037d73d9574bd9d202ab8811ce8d4e6
 [0.8.0]: https://github.com/thedavecarroll/BluebirdPS/tree/1c1f1b214df9d13f22d4859c80a741328da9fbb6
+[0.8.1]: https://github.com/thedavecarroll/BluebirdPS/tree/3329fbdbf4d05d149db0e052df9b0ba428a4228a
 
 ## Keep a Changelog
 
