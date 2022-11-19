@@ -20,8 +20,9 @@ google_analytics:
 theme:
   name: material
   language: en
-  icon:
-    logo: fontawesome/regular/comments
+  logo: images/bluebirdps-icon.png
+  # icon:
+  #   logo: fontawesome/regular/comments
   palette:
       scheme: preference
       primary: blue
@@ -41,10 +42,12 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/thedavecarroll/
-    - icon: fontawesome/brands/twitter
-      link: https://twitter.com/thedavecarroll
+    - icon: fontawesome/brands/mastodon
+      link: https://fosstodon.org/@thedavecarroll
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/thedavecarroll/
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/thedavecarroll
 
 # Navigation
 nav:
