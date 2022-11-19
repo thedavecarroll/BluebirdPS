@@ -37,6 +37,9 @@ plugins:
   - search
   - awesome-pages
 
+markdown_extensions:
+  - tables
+
 # Customization
 extra:
   social:
