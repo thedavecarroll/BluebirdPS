@@ -6,6 +6,7 @@
 [![Standard](https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fstandard)](https://developer.twitter.com/en/docs/twitter-api)
 [![v2](https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fv2)](https://developer.twitter.com/en/docs/twitter-api)
 
+<img src="https://github.com/thedavecarroll/BluebirdPS/blob/main/docs/images/bluebirdps-logo.png" alt="BluebirdPS" />
 This is the project repo for BluebirdPS, a Twitter automation client for PowerShell 7.
 
 ## Work in Progress
