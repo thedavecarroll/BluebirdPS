@@ -74,49 +74,95 @@ function Invoke-TwitterRequest {
     $script:LastHeaders = $ResponseHeaders
 
     $ResponseData = [ResponseData]::new($RequestParameters,$Authentication,$ResponseHeaders,$LastStatusCode,$ApiResponse,$BluebirdPSConfiguration.AuthUserName)
+
+    $ShouldResume = $false
+    if ($ResponseData.RateLimitRemaining -eq 0) {
+        $WaitUntil = New-TimeSpan -End $ResponseData.RateLimitReset
+        $RateLimitReached = 'Rate limit of {0} has been reached.' -f $ResponseData.RateLimit,$ResponseData.RateLimitReset
+        $RateLimitStop = 'Please wait until {0} before making another attempt for this resource.' -f $ResponseData.RateLimitReset
+        $RateLimitWait = 'Waiting until {0} before resuming attempts for this resource.' -f $ResponseData.RateLimitReset
+
+        if ($BluebirdPSConfiguration.RateLimitAction -eq [RateLimitAction]::Resume) {
+            $RateLimitReached,$RateLimitWait | Write-Warning
+            $SleepSeconds = 60
+            $WriteProgress = @{
+                Activity = 'Waiting for RateLimitReset time'
+                Status = 'Waiting {0} seconds...' -f $SleepSeconds
+            }
+            while ($ResponseData.RateLimitReset -gt [datetime]::Now) {
+                $SecondsLeft = $ResponseData.RateLimitReset.Subtract([datetime]::Now).TotalSeconds
+                if ($SecondsLeft -le $SleepSeconds) {
+                    $SleepSeconds = $SecondsLeft
+                }
+                $Percent = ($WaitUntil.TotalSeconds - $SecondsLeft) / $WaitUntil.TotalSeconds * 100
+                if ([System.Environment]::UserInteractive) {
+                    Write-Progress @WriteProgress -SecondsRemaining $SecondsLeft -PercentComplete $Percent
+                } else {
+                    'Waiting {0} seconds with {1} seconds remaining.' -f $SleepSeconds,$SecondsLeft | Write-Verbose -Verbose
+                }
+                Start-Sleep -Seconds $SleepSeconds
+            }
+            Write-Progress @WriteProgress -SecondsRemaining 0 -Completed
+            $ShouldResume = $true
+        } else {
+            $RateLimitReached,$RateLimitStop | Write-Error -ErrorAction Stop
+        }
+    }
+
+    if (($ResponseData.RateLimitRemaining -le $BluebirdPSConfiguration.RateLimitThreshold -and $null -ne $ResponseData.RateLimitRemaining)) {
+        $RateLimitMessage = 'The rate limit for this resource is {0}. There are {1} remaining calls to this resource until {2}. ' -f $ResponseData.RateLimit, $ResponseData.RateLimitRemaining, $ResponseData.RateLimitReset
+        switch ($BluebirdPSConfiguration.RateLimitAction) {
+            [RateLimitAction]::Verbose { $RateLimitMessage | Write-Verbose -Verbose; break}
+            [RateLimitAction]::Warning { $RateLimitMessage | Write-Warning -Warning; break}
+            [RateLimitAction]::Error { $RateLimitMessage | Write-Error ; break}
+            [RateLimitAction]::Resume {
+                @($RateLimitMessage,
+                    'The RateLimitAction is set to Resume. When the rate limit has been reached, the command will wait until the time above before continuing.'
+                ) | Write-Verbose -Verbose
+                break
+            }
+        }
+    }
+
     Write-TwitterResponse -ResponseData $ResponseData
 
-    if ($ResponseData.ApiResponse.psobject.Properties.Name -match 'meta|next_cursor' -and -Not $RequestParameters.NoPagination) {
+    if ($RequestParameters.NoPagination) {
+        return
 
-        $Progress = @{
-            Activity = 'Retrieving paged results from Twitter API'
-        }
-
-        if ($RequestParameters.Endpoint -match '\/2\/' -and $null -ne $ResponseData.ApiResponse.meta.next_token) {
-
-            # Twitter API V2 pagination
-            if ($ResponseData.ApiResponse.meta.result_count) {
-                'Returned {0} objects' -f $ResponseData.ApiResponse.meta.result_count | Write-Verbose
-            }
-
-            # The endpoint /2/tweets/search/recent uses a different token for pagination
-            # https://twittercommunity.com/t/why-does-timeline-use-pagination-token-while-search-uses-next-token/150963/2
-            if ($RequestParameters.Endpoint -match 'tweets\/search\/recent') {
-                if ($RequestParameters.Query.Keys -match 'next_token') {
-                    $RequestParameters.Query.Remove('next_token')
-                }
-                $NextPageKey = 'next_token'
-            } else {
-                if ($RequestParameters.Query.Keys -match 'pagination_token') {
-                    $RequestParameters.Query.Remove('pagination_token')
-                }
-                $NextPageKey = 'pagination_token'
-            }
-            $RequestParameters.Query.Add($NextPageKey,$ResponseData.ApiResponse.meta.next_token)
-
-        } elseif ($null -ne $ResponseData.ApiResponse.next_cursor -and $ResponseData.ApiResponse.next_cursor -ne 0) {
-
-            # Twitter API V1.1 cursoring, calls to endpoints will assume starting cursor of -1
-            if ($RequestParameters.Query.Keys -match 'cursor') {
-                $RequestParameters.Query.Remove('cursor')
-            }
-            $RequestParameters.Query.Add('cursor',$ResponseData.ApiResponse.next_cursor)
-        } else {
-            return
-        }
-
-        Write-Progress @Progress
-        Start-Sleep -Milliseconds (Get-Random -Minimum 300 -Maximum 600)
+    } elseif ($ShouldResume) {
+        $RequestParameters.Paginate('next_token',$BluebirdPSLastResponse.ApiResponse.meta.next_token)
         Invoke-TwitterRequest -RequestParameters $RequestParameters
+
+    } else {
+        if ($ResponseData.ApiResponse.psobject.Properties.Name -match 'meta|next_cursor') {
+
+            $Progress = @{
+                Activity = 'Retrieving paged results from Twitter API'
+            }
+
+            if ($RequestParameters.Endpoint -match '\/2\/' -and $null -ne $ResponseData.ApiResponse.meta.next_token) {
+                # Twitter API V2 pagination
+                if ($ResponseData.ApiResponse.meta.result_count) {
+                    'Returned {0} objects' -f $ResponseData.ApiResponse.meta.result_count | Write-Verbose
+                }
+                if ($RequestParameters.Endpoint -match 'tweets\/search\/recent') {
+                    $NextPageKey = 'next_token'
+                } else {
+                    $NextPageKey = 'pagination_token'
+                }
+                $RequestParameters.Paginate($NextPageKey,$ResponseData.ApiResponse.meta.next_token)
+
+            } elseif ($null -ne $ResponseData.ApiResponse.next_cursor -and $ResponseData.ApiResponse.next_cursor -ne 0) {
+                # Twitter API V1.1 cursoring, calls to endpoints will assume starting cursor of -1
+                $RequestParameters.Paginate('next_cursor',$ResponseData.ApiResponse.next_cursor)
+
+            } else {
+                return
+            }
+
+            Write-Progress @Progress
+            Start-Sleep -Milliseconds (Get-Random -Minimum 300 -Maximum 600)
+            Invoke-TwitterRequest -RequestParameters $RequestParameters
+        }
     }
 }
