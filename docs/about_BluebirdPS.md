@@ -58,11 +58,15 @@ Set-TwitterAuthentication
 
 # Information Stream and History
 
-The execution results of commands that connect to the Twitter API are written to PowerShell's information stream.
+The execution results of commands that connect to the Twitter API are written to PowerShell's information stream for each API call.
 These results contains the command name, HTTP method, URL, OAuth Version, HTTP Status, API response, endpoint rate limit details, and more.
 
-The same data is also written to the a history record that is only maintained for the current session.
-Reimporting the module will reset the command history.
+The same data available via `$BluebirdPSLastResponse` for the current session.
+Each result is also added to a list, likewise available for the current session.
+
+### Example
+
+$BluebirdPSLastResponse
 
 ### Example (Last 5 commands sent to Twitter)
 

@@ -132,7 +132,8 @@ The returned response, including response headers, the status code, and the requ
 The response data object is sent to the `Write-TwitterResponse` command.
 This command performs the rate limit action when the threshold is reached, both based on configuration values.
 
-Next, the command adds the response data to the module's session history table and writes the same data to the *Information Stream*.
+Next, the command adds the response data to the module's session history list, writes the same data to the *Information Stream*,
+and stores the last response in the session variable `$BluebirdPSLastResponse`.
 
 With possible values of 'CustomClasses', 'PsCustomObject', or 'JSON', the configuration value for OutputType determines the format that the API response will be presented to the user.
 
