@@ -23,7 +23,9 @@ function Write-TwitterResponse {
 
         $BluebirdPSHistoryList.Add($ResponseData)
         Write-Information -MessageData $ResponseData
-        $script:LastResponseData = $ResponseData
+
+        [SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
+        $global:BluebirdPSLastResponse = $ResponseData
 
         switch ($BluebirdPSConfiguration.OutputType) {
             'PSCustomObject' {
