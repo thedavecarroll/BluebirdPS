@@ -9,7 +9,7 @@ namespace BluebirdPS
         public string AuthUserName { get; set; }
         public DateTime? AuthValidationDate { get; set; }
         public DateTime? AuthLastExportDate { get; set; }
-        public RateLimitAction RateLimitAction { get; set; } = RateLimitAction.Warning;
+        public RateLimitAction RateLimitAction { get; set; }
         public int RateLimitThreshold { get; set; } = 5;
         public string ConfigurationPath { get; set; }
         public string CredentialsPath { get; set; }
