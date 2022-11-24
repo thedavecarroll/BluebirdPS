@@ -129,5 +129,17 @@ namespace BluebirdPS
              _hasExpansionsIncluded = true;
         }
 
+        public void Paginate(string key, string paginationToken)
+        {
+            if (Query.ContainsKey(key))
+            {
+                Query.Remove(key);
+                Query.Add(key, paginationToken);
+            } 
+            else 
+            {
+                Query.Add(key, paginationToken);
+            }
+        }
     }
 }
