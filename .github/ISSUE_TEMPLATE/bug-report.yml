@@ -1,6 +1,5 @@
 name: Bug Report
 description: Create an issue to fix a bug/problem with the module.
-title: "[Bug]: "
 labels:
   - bug
   - CHANGELOG.4.Fixed
@@ -10,7 +9,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thank you for taking the time to fill out this bug report!
+        Thank you for using BluebirdPS and for taking the time to fill out this bug report!
   - type: textarea
     id: what-happened
     attributes:
@@ -27,6 +26,8 @@ body:
         Also, include the version of BluebirdPS. If running on v0.8.0 or later, you can run `Get-BluebirdPSVersion` and use that output.
         This will be automatically formatted into code, so no need for backticks.
       render: shell
+    validations:
+      required: true
   - type: textarea
     id: how-to-reproduce-issue
     attributes:

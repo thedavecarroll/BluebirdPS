@@ -1,0 +1,28 @@
+name: Update a Command, Class, or Configuration Request
+description: Create an issue to request a change in a current command's input, output, or how it processes. Also, this can be used to request an update to an existing class.
+labels:
+  - enhancement
+  - CHANGELOG.5.Changed
+assignees:
+  - thedavecarroll
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for using BluebirdPS and for taking the time to submit your change request!
+  - type: textarea
+    id: what-to-add
+    attributes:
+      label: What existing command or class would you like to change in BluebirdPS?
+      description: Please use the New Feature Request if you want to add a new command or new behavior.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Anything else?
+      description: |
+        Links? References? Anything that will give us more context about the new feature you are requesting.
+
+        Tip: You can attach images or log files by clicking this area to highlight it and then dragging files in.
+    validations:
+      required: false
