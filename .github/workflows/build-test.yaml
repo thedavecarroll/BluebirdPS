@@ -9,6 +9,8 @@ on:
       - src/**
       - BluebirdPS/**
       - build/**
+      - psakeBuild.ps1
+      - build.ps1
 
 defaults:
   run:
