@@ -1,13 +1,15 @@
 function Find-TwitterMastodonLinks {
+    [OutputType('BluebirdPS.TwitterMastodonReference')]
     [CmdletBinding()]
     param(
         [Parameter(Mandatory,ValueFromPipeline)]
         [BluebirdPS.TwitterObject[]]$TwitterObject,
-        [string[]]$IgnoreUrl = 'youtube.com'
+        [string[]]$IgnoreUrl = @('youtube.com','twitter.com','withkoji.com')
     )
     begin {
-        $MastodonUserAccountRegex = '(^|\s|\()(?<MastodonUser>@\w+)@(?<MastodonInstance>\w+.[\w+]+)'
-        $MastodonUserUrlRegex = '(?<MastodonInstance>[\w+.]+(/web)*)/(?<MastodonUser>@[\w+]+)'
+        $MastodonUserAccountRegex = '(?<MastodonUser>@\S+)@(?<MastodonInstance>[\w+.]+)'
+        $MastodonUserUrlRegex = '(?<MastodonInstance>[\w-.]+\w+(\/web)*)\/(?<MastodonUser>@[\w+]+)'
+
         $MastodonUsers = [System.Collections.Generic.List[TwitterMastodonReference]]::new()
         $TwitterUsers =  [System.Collections.Generic.List[User]]::new()
         $Tweets =  [System.Collections.Generic.List[Tweet]]::new()
