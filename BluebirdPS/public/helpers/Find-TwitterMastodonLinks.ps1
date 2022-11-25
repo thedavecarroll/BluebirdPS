@@ -4,7 +4,7 @@ function Find-TwitterMastodonLinks {
     param(
         [Parameter(Mandatory,ValueFromPipeline)]
         [BluebirdPS.TwitterObject[]]$TwitterObject,
-        [Alias(IgnoreUrl)]
+        [Alias('IgnoreUrl')]
         [string[]]$IgnoreDomain
     )
     begin {
