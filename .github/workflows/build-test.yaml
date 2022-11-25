@@ -34,12 +34,8 @@ jobs:
         repo: psmodulecache
         excludes: prerelease, draft
 
-    - name: Output Test
-      run: |
-        ${{ steps.psmodulecache.outputs.release }} | Write-Output
-
     - name: Install and cache psake, BuildHelpers and PowerShellBuild
-      uses: potatoqualitee/psmodulecache@v5.1
+      uses: potatoqualitee/psmodulecache@${{ steps.psmodulecache.outputs.release }}
       with:
         modules-to-cache: psake, BuildHelpers, PowerShellBuild
 
