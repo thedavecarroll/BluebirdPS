@@ -43,7 +43,20 @@ function Import-BluebirdPSConfiguration {
                     'Importing value {0} into {1}' -f $ConfigFromDisk.$ConfigValue,$ConfigValue | Write-Verbose
                     $BluebirdPSConfiguration.$ConfigValue = $ConfigFromDisk.$ConfigValue
                 }
+            }
 
+            $BluebirdPSRateLimitAction = 'env:BLUEBIRDPS_RATE_LIMIT_ACTION'
+            if (Test-Path -Path $BluebirdPSRateLimitAction) {
+                if ($env:BLUEBIRDPS_RATE_LIMIT_ACTION -in [enum]::GetNames([BluebirdPS.RateLimitAction])) {
+                    if ($BluebirdPSConfiguration.RateLimitAction -eq $env:BLUEBIRDPS_RATE_LIMIT_ACTION) {
+                        'Discovered environment variable BLUEBIRDPS_RATE_LIMIT_ACTION. The value {0} is the same as the currently saved value.' -f $BluebirdPSConfiguration.RateLimitAction  | Write-Verbose
+                    } else {
+                        'Discovered environment variable BLUEBIRDPS_RATE_LIMIT_ACTION. Overriding RateLimitAction value: {0} (current), {1} (override).' -f $BluebirdPSConfiguration.RateLimitAction,$env:BLUEBIRDPS_RATE_LIMIT_ACTION  | Write-Verbose
+                        $BluebirdPSConfiguration.RateLimitAction = $env:BLUEBIRDPS_RATE_LIMIT_ACTION
+                    }
+                } else {
+                    'Discovered environment variable BLUEBIRDPS_RATE_LIMIT_ACTION. The value {0} is not valid.' -f $env:BLUEBIRDPS_RATE_LIMIT_ACTION | Write-Warning
+                }
             }
 
             '{0} imported.' -f $FileDescription | Write-Verbose
