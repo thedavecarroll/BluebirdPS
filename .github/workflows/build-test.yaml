@@ -26,16 +26,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Get Latest PSModuleCache Release
-      uses: pozetroninc/github-action-get-latest-release@master
-      id: psmodulecache
-      with:
-        owner: potatoqualitee
-        repo: psmodulecache
-        excludes: prerelease, draft
-
     - name: Install and cache psake, BuildHelpers and PowerShellBuild
-      uses: potatoqualitee/psmodulecache@${{ steps.psmodulecache.outputs.release }}
+      uses: potatoqualitee/psmodulecache@v5.1
       with:
         modules-to-cache: psake, BuildHelpers, PowerShellBuild
 
