@@ -1,14 +1,22 @@
-name: platyPS
+name: Build Test for BluebirdPS
 
 on:
   push:
     branches:
       - main
 
-jobs:
-  build:
+defaults:
+  run:
+    shell: pwsh
 
-    runs-on: ubuntu-latest
+jobs:
+  test-all-platforms:
+    name: Test all platforms/versions
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
 
     steps:
     - uses: actions/checkout@v3
@@ -18,7 +26,6 @@ jobs:
       with:
         modules-to-cache: psake, BuildHelpers, PowerShellBuild
 
-    - name: Build BlueBirdPS
-      shell: pwsh
+    - name: Build BluebirdPS
       run: |
         ./build.ps1
