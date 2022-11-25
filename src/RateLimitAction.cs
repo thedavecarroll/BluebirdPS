@@ -7,7 +7,8 @@ namespace BluebirdPS
 
         Verbose,
         Warning,
-        Error
+        Error,
+        Resume
     }
 
 }
