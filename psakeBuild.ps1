@@ -55,7 +55,7 @@ task DotNetBuild -Depends 'StageFiles' {
     $OutputLibFolder = [IO.Path]::Combine($PSBPreference.Build.ModuleOutDir,'lib')
     $DotNetSrcFolder = [IO.Path]::Combine($env:BHProjectPath,'src')
 
-    dotnet build $DotNetSrcFolder -o $OutputLibFolder
+    dotnet build $DotNetSrcFolder -o $OutputLibFolder --nologo
     if ($LASTEXITCODE -ne 0) {
         'DotNetBuild task failed' | Write-Error -ErrorAction Stop
     }

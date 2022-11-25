@@ -32,5 +32,7 @@ jobs:
         modules-to-cache: psake, BuildHelpers, PowerShellBuild
 
     - name: Build BluebirdPS
+      env:
+        DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
       run: |
         ./build.ps1
