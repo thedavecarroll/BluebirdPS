@@ -1,0 +1,37 @@
+name: Bug Report
+description: Create an issue to fix a bug/problem with the module.
+title: "[Bug]: "
+labels:
+  - bug
+  - CHANGELOG.4.Fixed
+assignees:
+  - thedavecarroll
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to fill out this bug report!
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What is broken or not working?
+      description: What were the expectations?
+      value: "A bug happened!"
+    validations:
+      required: true
+  - type: textarea
+    id: how-to-reproduce-issue
+    attributes:
+      label: What steps will reproduce the behavior?
+      description: In order to resolve the issue, we need to know how to reproduce it.
+    validations:
+      required: true
+  - type: textarea
+    id: console-output
+    attributes:
+      label: Relevant console output
+      description: Please copy and paste any relevant console output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+  - type: markdown
+    attributes:
+      value: If applicable, add screenshots to help explain your problem.
