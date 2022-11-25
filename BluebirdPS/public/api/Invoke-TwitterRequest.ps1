@@ -84,12 +84,13 @@ function Invoke-TwitterRequest {
 
         if ($BluebirdPSConfiguration.RateLimitAction -eq [RateLimitAction]::Resume) {
             $RateLimitReached,$RateLimitWait | Write-Warning
+            $ResumeTimeout = $ResponseData.RateLimitReset.AddHours(1)
             $SleepSeconds = 60
             $WriteProgress = @{
                 Activity = 'Waiting for RateLimitReset time'
                 Status = 'Waiting {0} seconds...' -f $SleepSeconds
             }
-            while ($ResponseData.RateLimitReset -gt [datetime]::Now) {
+            while ($ResponseData.RateLimitReset -gt [datetime]::Now -and [datetime]::Now -lt $ResumeTimeout) {
                 $SecondsLeft = $ResponseData.RateLimitReset.Subtract([datetime]::Now).TotalSeconds
                 if ($SecondsLeft -le $SleepSeconds) {
                     $SleepSeconds = $SecondsLeft
@@ -130,7 +131,7 @@ function Invoke-TwitterRequest {
         return
 
     } elseif ($ShouldResume) {
-        $RequestParameters.Paginate('next_token',$BluebirdPSLastResponse.ApiResponse.meta.next_token)
+        $RequestParameters.Paginate($BluebirdPSLastResponse.ApiResponse.meta.next_token)
         Invoke-TwitterRequest -RequestParameters $RequestParameters
 
     } else {
@@ -145,16 +146,10 @@ function Invoke-TwitterRequest {
                 if ($ResponseData.ApiResponse.meta.result_count) {
                     'Returned {0} objects' -f $ResponseData.ApiResponse.meta.result_count | Write-Verbose
                 }
-                if ($RequestParameters.Endpoint -match 'tweets\/search\/recent') {
-                    $NextPageKey = 'next_token'
-                } else {
-                    $NextPageKey = 'pagination_token'
-                }
-                $RequestParameters.Paginate($NextPageKey,$ResponseData.ApiResponse.meta.next_token)
-
+                $RequestParameters.Paginate($ResponseData.ApiResponse.meta.next_token)
             } elseif ($null -ne $ResponseData.ApiResponse.next_cursor -and $ResponseData.ApiResponse.next_cursor -ne 0) {
                 # Twitter API V1.1 cursoring, calls to endpoints will assume starting cursor of -1
-                $RequestParameters.Paginate('next_cursor',$ResponseData.ApiResponse.next_cursor)
+                $RequestParameters.Paginate($ResponseData.ApiResponse.next_cursor)
 
             } else {
                 return

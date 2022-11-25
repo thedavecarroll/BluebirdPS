@@ -5,6 +5,7 @@ using System.Management.Automation;
 using BluebirdPS.APIV2;
 using System.Linq;
 using System.Management.Automation.Runspaces;
+using System.Text.RegularExpressions;
 
 namespace BluebirdPS
 {
@@ -129,16 +130,35 @@ namespace BluebirdPS
              _hasExpansionsIncluded = true;
         }
 
-        public void Paginate(string key, string paginationToken)
+        public void Paginate(string paginationToken)
         {
-            if (Query.ContainsKey(key))
+            Regex searchTweetRegex = new Regex("tweets/search/recent");
+            string paginationKey = null;
+
+            if (searchTweetRegex.IsMatch(Endpoint.AbsolutePath))
             {
-                Query.Remove(key);
-                Query.Add(key, paginationToken);
+                paginationKey = "next_token";
+            }
+            else
+            {
+                if (Endpoint.AbsolutePath.Contains("/1.1/"))
+                {
+                    paginationKey = "next_cursor";
+                }
+                else
+                {
+                    paginationKey = "pagination_token";
+                }
+            }
+            
+            if (Query.ContainsKey(paginationKey))
+            {
+                Query.Remove(paginationKey);
+                Query.Add(paginationKey, paginationToken);
             } 
             else 
             {
-                Query.Add(key, paginationToken);
+                Query.Add(paginationKey, paginationToken);
             }
         }
     }
