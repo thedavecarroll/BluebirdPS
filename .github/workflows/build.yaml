@@ -1,0 +1,24 @@
+name: platyPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install and cache psake, BuildHelpers and PowerShellBuild
+      uses: potatoqualitee/psmodulecache@v4.5
+      with:
+        modules-to-cache: psake, BuildHelpers, PowerShellBuild
+
+    - name: Build BlueBirdPS
+      shell: pwsh
+      run: |
+        ./build.ps1
