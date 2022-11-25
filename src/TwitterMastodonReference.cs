@@ -25,7 +25,7 @@ namespace BluebirdPS
             TwitterElement = element;
             MastodonUser = mastodonMatch["MastodonUser"].ToString();
             MastodonInstance = mastodonMatch["MastodonInstance"].ToString().Replace("/web", "");
-            MastodonAccountAddress = $"{mastodonMatch["MastodonUser"]}@{mastodonMatch["MastodonInstance"]}";
+            MastodonAccountAddress = $"{mastodonMatch["MastodonUser"]}@{mastodonMatch["MastodonInstance"].ToString().Replace("/web", "")}";
             if (!mastodonMatch["MastodonInstance"].ToString().Contains("counter.social"))
             {
                 MastodonUrl = $"https://{mastodonMatch["MastodonInstance"]}/{mastodonMatch["MastodonUser"]}";
