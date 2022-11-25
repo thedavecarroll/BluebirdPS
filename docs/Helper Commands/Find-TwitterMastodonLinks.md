@@ -14,7 +14,7 @@ This command will search through a list of Twitter User objects and Tweet object
 ## SYNTAX
 
 ```powershell
-Find-TwitterMastodonLinks [-TwitterObject] <TwitterObject[]> [[-IgnoreUrl] <String[]>] [<CommonParameters>]
+Find-TwitterMastodonLinks [-TwitterObject] <TwitterObject[]> [-IgnoreDomain <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,20 +38,12 @@ PS C:\> Get-TwitterUser | Find-TwitterMastodonLinks
 TwitterUserName        : thedavecarroll
 TwitterUser            : Dave Carroll
 TwitterUrl             : https://twitter.com/thedavecarroll
-TwitterElement         : Description
-MastodonUser           : @thedavecarroll
-MastodonInstance       : counter.social
-MastodonAccountAddress : @thedavecarroll@counter.social
-MastodonUrl            :
-
-TwitterUserName        : thedavecarroll
-TwitterUser            : Dave Carroll
-TwitterUrl             : https://twitter.com/thedavecarroll
 TwitterElement         : UrlEntity
 MastodonUser           : @thedavecarroll
 MastodonInstance       : fosstodon.org
 MastodonAccountAddress : @thedavecarroll@fosstodon.org
 MastodonUrl            : https://fosstodon.org/@thedavecarroll
+IsValidDomain          : True
 ```
 
 Retrieve the authenticated user and search for Mastodon account references.
@@ -65,24 +57,6 @@ PS C:\> Get-TwitterFriends | Find-TwitterMastodonLinks | Select-Object @{l='Acco
 Retrieves the following list of the authenticated user, searches for Mastodon account references, formats the output to what is required for Mastodon import, and saves the output to a CSV file.
 
 ## PARAMETERS
-
-### -IgnoreUrl
-
-Some Urls are similar to Mastodon account references. You can use this parameter to include a list of domains to ignore.
-
-The default value is 'youtube.com', as the new handles for YouTube creators are in the format of youtube.com/@handle.
-
-```yaml
-Type: System.String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: 'youtube.com'
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -TwitterObject
 
@@ -99,6 +73,22 @@ Required: True
 Position: 0
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -IgnoreDomain
+
+Some Urls are similar to Mastodon account references. You can use this parameter to include a list of domains to ignore.
+
+```yaml
+Type: System.String[]
+Parameter Sets: (All)
+Aliases: IgnoreUrl
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
