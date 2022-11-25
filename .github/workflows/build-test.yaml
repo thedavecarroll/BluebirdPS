@@ -35,7 +35,7 @@ jobs:
     #     excludes: prerelease, draft
 
     - name: Install and cache psake, BuildHelpers and PowerShellBuild
-      uses: potatoqualitee/psmodulecache@5.1
+      uses: potatoqualitee/psmodulecache@v5.1
       with:
         modules-to-cache: psake, BuildHelpers, PowerShellBuild
 
