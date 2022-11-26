@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.0/Authentication/Show-TwitterAuthentication/
+online version: https://docs.bluebirdps.dev/en/v0.8.2/Authentication/Show-TwitterAuthentication/
 schema: 2.0.0
 ---
 
@@ -28,7 +28,7 @@ This allows you to verify the values entered.
 ### Example 1
 
 ```powershell
-PS C:\> Show-TwitterAuthentication
+PS > Show-TwitterAuthentication
 ```
 
 ```text
@@ -99,10 +99,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Authentication/Show-TwitterAuthentication)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.2/Authentication/Show-TwitterAuthentication)
 
-[Set-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.8.0/Authentication/Set-TwitterAuthentication)
+[Set-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.8.2/Authentication/Set-TwitterAuthentication)
 
-[Import-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.8.0/Authentication/Import-TwitterAuthentication)
+[Import-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.8.2/Authentication/Import-TwitterAuthentication)
 
-[Export-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.8.0/Authentication/Export-TwitterAuthentication)
+[Export-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.8.2/Authentication/Export-TwitterAuthentication)

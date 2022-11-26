@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterPinnedList/
+online version: https://docs.bluebirdps.dev/en/v0.8.2/Lists/Get-TwitterPinnedList/
 schema: 2.0.0
 ---
 
@@ -26,7 +26,7 @@ Returns the Lists pinned by the authenticating user.
 ### Example 1
 
 ```powershell
-PS C:\> Get-TwitterPinnedList
+PS > Get-TwitterPinnedList
 ```
 
 Returns the Lists pinned by the authenticating user.
@@ -49,10 +49,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterPinnedList)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.2/Lists/Get-TwitterPinnedList)
 
-[Set-TwitterPinnedList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Set-TwitterPinnedList)
+[Set-TwitterPinnedList](https://docs.bluebirdps.dev/en/v0.8.2/Lists/Set-TwitterPinnedList)
 
-[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterList)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.2/Lists/Get-TwitterList)
 
 [Api Reference - GET /2/users/:id/pinned_lists](https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/get-users-id-pinned_lists)

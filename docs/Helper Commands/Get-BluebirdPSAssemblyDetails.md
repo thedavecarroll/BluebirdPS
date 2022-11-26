@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.0/Helper%20Commands/Get-BluebirdPSAssemblyDetails/
+online version: https://docs.bluebirdps.dev/en/v0.8.2/Helper%20Commands/Get-BluebirdPSAssemblyDetails/
 schema: 2.0.0
 ---
 
@@ -26,7 +26,7 @@ Provides information on the enums and classes contained in the BluebirdPS.dll.
 ### Example 1
 
 ```powershell
-PS C:\> Get-BluebirdPSAssemblyDetails | Format-Table -Property Namespace,Name,BaseType,IsEnum
+PS > Get-BluebirdPSAssemblyDetails | Format-Table -Property Namespace,Name,BaseType,IsEnum
 ```
 
 ```text
@@ -74,4 +74,4 @@ Display the requested properties for the assembly.
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Helper%20Commands/Get-BluebirdPSAssemblyDetails)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.2/Helper%20Commands/Get-BluebirdPSAssemblyDetails)

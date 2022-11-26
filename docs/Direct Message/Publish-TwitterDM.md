@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.0/Direct%20Message/Publish-TwitterDM
+online version: https://docs.bluebirdps.dev/en/v0.8.2/Direct%20Message/Publish-TwitterDM
 schema: 2.0.0
 ---
 
@@ -212,10 +212,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Direct%20Message/Publish-TwitterDM)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.2/Direct%20Message/Publish-TwitterDM)
 
-[Get-TwitterDM](https://docs.bluebirdps.dev/en/v0.8.0/Direct%20Message/Get-TwitterDM)
+[Get-TwitterDM](https://docs.bluebirdps.dev/en/v0.8.2/Direct%20Message/Get-TwitterDM)
 
-[Unpublish-TwitterDM](https://docs.bluebirdps.dev/en/v0.8.0/Direct%20Message/Unpublish-TwitterDM)
+[Unpublish-TwitterDM](https://docs.bluebirdps.dev/en/v0.8.2/Direct%20Message/Unpublish-TwitterDM)
 
 [Api Reference - GET direct_messages/events/list](https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/new-event)

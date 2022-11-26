@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterList
+online version: https://docs.bluebirdps.dev/en/v0.8.2/Lists/Get-TwitterList
 schema: 2.0.0
 ---
 
@@ -141,7 +141,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterList)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.2/Lists/Get-TwitterList)
 
 [Api Reference - GET /2/lists/:id](https://developer.twitter.com/en/docs/twitter-api/lists/list-lookup/api-reference/get-lists-id)
 
