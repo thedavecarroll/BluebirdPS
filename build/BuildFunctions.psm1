@@ -464,7 +464,7 @@ function Set-ChangeLog {
         $Count++
     }
 
-    if ($Lines[$LastReleaseBegin] -ne $ChangeLogUpdate.Split([System.Environment]::NewLine)[2]) {
+    if ($Lines[$LastReleaseBegin] -ne $ChangeLogUpdate.Split([System.Environment]::NewLine)[1]) {
 
         # use original heading
         [void]$ChangeLog.Append($Lines[0..($LastReleaseBegin-1)] -join [System.Environment]::NewLine)
@@ -478,7 +478,7 @@ function Set-ChangeLog {
         Set-Content -Path $ChangeLogPath -Value $ChangeLog.ToString() -Force
 
     } else {
-        ' No changes made to {0}' -f $ChangeLogPath | Write-Warning
+        ' No changes made to {0}' -f $ChangeLogPath | Write-Verbose
     }
 }
 
