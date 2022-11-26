@@ -70,22 +70,41 @@ task DotNetBuild -Depends 'StageFiles' {
             $Retry = $true
         }
     } while ($Retry)
-} -Description 'Compile .Net Library'
+} -Description 'Compile .Net library'
 
 task CopyLicense -Depends StageFiles {
     $LicenseFile = [IO.Path]::Combine($env:BHProjectPath,'LICENSE')
     Copy-Item -Path $LicenseFile -Destination $PSBPreference.Build.ModuleOutDir -Force
-} -Description 'Copy LICENSE File'
+} -Description 'Copy LICENSE file'
+
+task UpdateChangeLog {
+    $script:ManifestPath = [IO.Path]::Combine($PSBPreference.Build.ModuleOutDir,"$env:BHProjectName.psd1")
+    $script:ChangeLogPath = [IO.Path]::Combine($env:BHProjectPath,'CHANGELOG.md')
+    $GitHubParams = @{
+        OwnerName = 'thedavecarroll'
+        RepositoryName = 'BluebirdPS'
+    }
+
+    $script:ModuleVersion = (Import-PowerShellDataFile -Path $ManifestPath).ModuleVersion
+    $ChangeLogUpdate = Get-ChangeLogUpdateForMilestone @GitHubParams -TargetRelease $ModuleVersion
+    Set-ChangeLog -ChangeLogPath $ChangeLogPath -ChangeLogUpdate $ChangeLogUpdate
+} -Description 'Update CHANGELOG'
+
+task UpdateReleaseNotes -Depends UpdateChangeLog {
+    $ReleaseNotes = Get-ReleaseNotes -ChangeLogPath $ChangeLogPath -ChangeLogUri 'https://bluebirdps.dev/latest/CHANGELOG'
+    Update-ModuleManifest -Path $ManifestPath -ReleaseNotes ('',$ReleaseNotes -join [System.Environment]::NewLine)
+} -Description 'Update releases notes for module'
+
+task CreateReleaseAsset -Depends UpdateReleaseNotes {
+    $DestinationZip = Join-Path -Path (Split-Path -Path $env:BHBuildOutput) -ChildPath ('BluebirdPS-v{0}.zip' -f $ModuleVersion)
+    Compress-Archive -Path $env:BHBuildOutput -DestinationPath $DestinationZip -Force
+}
 <#
 New Tasks
 
 task GenerateMarkdownHelp
 task TestHelp
 
-task UpdateChangeLog
-task UpdateReleaseNotes -Depends UpdateChangeLog
-
-task CreateReleaseAsset
 task PublishReleaseToGitHub -Depends CreateReleaseAsset
 
 task PublishModuleToGallery
@@ -94,6 +113,9 @@ https://github.com/microsoft/PowerShellForGitHub
 
 #>
 
-task Build -FromModule PowerShellBuild -depends @('DotNetBuild','CopyLicense','GenerateExternalHelp','AddFileListToManifest')
+task Build -FromModule PowerShellBuild -depends @(
+    'DotNetBuild','CopyLicense','GenerateExternalHelp','AddFileListToManifest',
+    'UpdateChangeLog','UpdateReleaseNotes','CreateReleaseAsset'
+)
 
 task default -depends Build
