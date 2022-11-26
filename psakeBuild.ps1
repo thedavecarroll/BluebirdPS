@@ -88,6 +88,8 @@ task UpdateChangeLog {
     $script:ModuleVersion = (Import-PowerShellDataFile -Path $ManifestPath).ModuleVersion
     $ChangeLogUpdate = Get-ChangeLogUpdateForMilestone @GitHubParams -TargetRelease $ModuleVersion
     Set-ChangeLog -ChangeLogPath $ChangeLogPath -ChangeLogUpdate $ChangeLogUpdate
+
+    Copy-Item -Path $ChangeLogPath -Destination $PSBPreference.Docs.RootDir -Force
 } -Description 'Update CHANGELOG'
 
 task UpdateReleaseNotes -Depends UpdateChangeLog {
