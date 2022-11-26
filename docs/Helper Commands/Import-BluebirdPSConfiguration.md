@@ -25,6 +25,9 @@ This will override the current session's configuration variable.
 
 This command is called when the module is imported.
 
+Beginning with v0.8.2, the value for RateLimitAction can be set with the environment variable BLUEBIRDPS_RATE_LIMIT_ACTION.
+If the environment variable exists and the value is one of the allowed types, the Configuration value will be overridden for the session.
+
 ## EXAMPLES
 
 ### Example 1

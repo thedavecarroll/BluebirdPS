@@ -27,6 +27,11 @@ The API response is parsed based on the endpoint version, returning rich objects
 
 This command handles API v2 pagination and v1.1 cursoring. Specifically, it will recurse when the raw API output includes meta.next_token or next_cursor.
 
+Beginning with v0.8.2, this command supports the waiting and resuming of API calls when the rate limit has been reached.
+With the BluebirdPS Configuration value for RateLimitAction set to `Resume`, the command will wait until the rate limit is reset and resume the current request.
+It will only resume up to an hour (60 minutes) after the initial rate limit breach.
+For most endpoints, this will allow another 4 API calls.
+
 See the contextual help about_BluebirdPS_TwitterRequest for details on using [BluebirdPS.TwitterRequest] class.
 
 NOTE: This command does not handle any Twitter API streams and has only been tested against Standard v1.1 and v2 endpoints.
