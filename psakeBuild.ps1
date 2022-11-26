@@ -6,7 +6,6 @@ properties {
 }
 
 task GenerateExternalHelp {
-    if ($env:GITHUB_ACTIONS) { '::group::Generate External Help' }
     $ExternalHelpPath = [IO.Path]::Combine($PSBPreference.Build.ModuleOutDir,(Get-UICulture).Name)
 
     $NewExternalHelpParams = @{
@@ -25,11 +24,9 @@ task GenerateExternalHelp {
         }
         New-ExternalHelp @NewAboutHelpParams | Out-Null
     }
-    if ($env:GITHUB_ACTIONS) { '::endgroup::' }
 } -Description 'Generates MAML-based help from PlatyPS markdown files'
 
 task AddFileListToManifest {
-    if ($env:GITHUB_ACTIONS) { '::group::Add File to Manifest' }
     $FileListParentFolder = '{0}{1}' -f $PSBPreference.Build.ModuleOutDir,[IO.Path]::DirectorySeparatorChar
 
     $UpdateManifestParams = @{
@@ -47,11 +44,9 @@ task AddFileListToManifest {
             $Retry = $true
         }
     } while ($Retry)
-    if ($env:GITHUB_ACTIONS) { '::endgroup::' }
 } -Description 'Add files list to module manifest'
 
 task DotNetBuild -Depends 'StageFiles' {
-    if ($env:GITHUB_ACTIONS) { '::group::dotnet build' }
     $ManifestPath = [IO.Path]::Combine($PSBPreference.Build.ModuleOutDir,"$env:BHProjectName.psd1")
     $FileListParentFolder = '{0}{1}' -f $PSBPreference.Build.ModuleOutDir,[IO.Path]::DirectorySeparatorChar
     $OutputLibFolder = [IO.Path]::Combine($PSBPreference.Build.ModuleOutDir,'lib')
@@ -75,14 +70,11 @@ task DotNetBuild -Depends 'StageFiles' {
             $Retry = $true
         }
     } while ($Retry)
-    if ($env:GITHUB_ACTIONS) { '::endgroup::' }
 } -Description 'Compile .Net Library'
 
 task CopyLicense -Depends StageFiles {
-    if ($env:GITHUB_ACTIONS) { '::group::Copy LICENSE' }
     $LicenseFile = [IO.Path]::Combine($env:BHProjectPath,'LICENSE')
     Copy-Item -Path $LicenseFile -Destination $PSBPreference.Build.ModuleOutDir -Force
-    if ($env:GITHUB_ACTIONS) { '::endgroup::' }
 } -Description 'Copy LICENSE File'
 <#
 New Tasks
