@@ -28,11 +28,15 @@ if ($Bootstrap.IsPresent) {
 
 # Execute psake task(s)
 $psakeBuild = [IO.Path]::Combine($PSScriptRoot,'psakeBuild.ps1')
+$BuildFunctions = [IO.Path]::Combine($PSScriptRoot,'build','BuildFunctions.psm1')
 if ($PSCmdlet.ParameterSetName -eq 'Help') {
     Get-PSakeScriptTasks -buildFile $psakeBuild  |
         Format-Table -Property Name, Description, Alias, DependsOn
 } else {
     Set-BuildEnvironment -Force
+    if (-Not (Get-Command -Name Get-MilestoneByReleaseVersion -ErrorAction SilentlyContinue)) {
+        Import-Module $BuildFunctions
+    }
     Invoke-psake -buildFile $psakeBuild -taskList $Task -nologo
     exit ( [int]( -not $psake.build_success ) )
 }
