@@ -129,9 +129,6 @@ Get-TwitterList -Id 1397040831777984512 | Add-TwitterListMember -UserName thedav
 
 ## Things to Do
 
-* Rate limit based waiting period per endpoint
-  * Once a rate limit has been reached for a given endpoint, validate current time against rate limit reset time before making the call.
-  * Configuration value to enable/disable.
 * Expand build scripts
 * Pester tests
 * TweetText processor (currently there no check for length)
