@@ -96,11 +96,7 @@ function Invoke-TwitterRequest {
                     $SleepSeconds = $SecondsLeft
                 }
                 $Percent = ($WaitUntil.TotalSeconds - $SecondsLeft) / $WaitUntil.TotalSeconds * 100
-                if ([System.Environment]::UserInteractive) {
-                    Write-Progress @WriteProgress -SecondsRemaining $SecondsLeft -PercentComplete $Percent
-                } else {
-                    'Waiting {0} seconds with {1} seconds remaining.' -f $SleepSeconds,$SecondsLeft | Write-Verbose -Verbose
-                }
+                Write-Progress @WriteProgress -SecondsRemaining $SecondsLeft -PercentComplete $Percent
                 Start-Sleep -Seconds $SleepSeconds
             }
             Write-Progress @WriteProgress -SecondsRemaining 0 -Completed
