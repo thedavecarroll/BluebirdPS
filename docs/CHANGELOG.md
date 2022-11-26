@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.8.2 - 2022-11-26
+
+Bugfix and Feature; Update Strongly Recommended
+
+### Fixed
+
+- [Issue #188](https://github.com/thedavecarroll/BluebirdPS/issues/188) - [BUG] Find-TwitterMastodonLinks - Matching criteria incorrectly matches on some Mastodon instance hostnames
+
+### Changed
+
+- [Issue #184](https://github.com/thedavecarroll/BluebirdPS/issues/184) - Add capability for users to opt-in to waiting until rate limit reset time
+
+### Added
+
+- [Issue #185](https://github.com/thedavecarroll/BluebirdPS/issues/185) - Add $BluebirdPSLastResponse session variable
+- [Issue #191](https://github.com/thedavecarroll/BluebirdPS/issues/191) - Add capability to set BluebirdPS Configuration RateLimitAction value via environment variables
+
 ## [0.8.1] - 2022-11-18
 
 Bugfix; Update Strongly Recommended
