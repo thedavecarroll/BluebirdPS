@@ -6,6 +6,7 @@ properties {
 }
 
 task GenerateExternalHelp {
+    if ($env:GITHUB_ACTIONS) { '::group::Generate External Help'}
     $ExternalHelpPath = [IO.Path]::Combine($PSBPreference.Build.ModuleOutDir,(Get-UICulture).Name)
 
     $NewExternalHelpParams = @{
@@ -24,7 +25,7 @@ task GenerateExternalHelp {
         }
         New-ExternalHelp @NewAboutHelpParams | Out-Null
     }
-
+    if ($env:GITHUB_ACTIONS) { '::endgroup::' }
 } -Description 'Generates MAML-based help from PlatyPS markdown files'
 
 task AddFileListToManifest {
