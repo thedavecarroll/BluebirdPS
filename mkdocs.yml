@@ -54,10 +54,10 @@ extra:
 
 # Navigation
 nav:
-  - Home: README.md
-    - Getting Started:
-      - Pre-requisites: prerequisites.md
-      - How to Install: install.md
+  - Home:
+    - BluebirdPS: README.md
+    - Pre-requisites: prerequisites.md
+    - How to Install: install.md
   - Change Log: CHANGELOG.md
   - License: LICENSE.md
   - Commands:
