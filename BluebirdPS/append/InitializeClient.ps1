@@ -43,7 +43,8 @@ $script:TwitterEndpoints = foreach ($Command in $BluebirdPSCommands) {
 #endregion
 
 #region BluebirdPS Version
+$ModuleManifestPath = Join-Path -Path $PSScriptRoot -ChildPath 'BluebirdPS.psd1'
 [SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
-$BluebirdPSVersion = (Get-Module -Name BluebirdPS).Version.ToString(3)
+$BluebirdPSVersion = (Import-PowerShellDataFile -Path $ModuleManifestPath).ModuleVersion
 #endregion
 
