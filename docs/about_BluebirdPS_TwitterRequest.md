@@ -11,10 +11,8 @@ The BluebirdPS module includes a class called [BluebirdPS.TwitterRequest] which 
 Using [BluebirdPS.TwitterRequest] will allow the user to craft requests for the Twitter API.
 The Invoke-TwitterRequest command performs all of the processing.
 
-```text
 Any API response that matches existing definitions will return rich objects specific
 to the data returned. Otherwise, the raw API response will be returned.
-```
 
 # Academic Research Track
 

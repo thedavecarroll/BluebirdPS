@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
+using System.Text.RegularExpressions;
 
 namespace BluebirdPS
 {
@@ -16,6 +17,7 @@ namespace BluebirdPS
         public string MastodonInstance { get; set; }
         public string MastodonAccountAddress { get; set; }
         public string MastodonUrl { get; set; }
+        public bool IsValidDomain { get; set; }
 
         public TwitterMastodonReference(User twitterUser, Hashtable mastodonMatch, string element)
         {
@@ -23,13 +25,21 @@ namespace BluebirdPS
             TwitterUser = twitterUser.Name;
             TwitterUrl = $"https://twitter.com/{twitterUser.UserName}";
             TwitterElement = element;
-            MastodonUser = mastodonMatch["MastodonUser"].ToString();
-            MastodonInstance = mastodonMatch["MastodonInstance"].ToString().Replace("/web", "");
-            MastodonAccountAddress = $"{mastodonMatch["MastodonUser"]}@{mastodonMatch["MastodonInstance"]}";
-            if (!mastodonMatch["MastodonInstance"].ToString().Contains("counter.social"))
+
+            Regex validDomainName = new Regex("^(([a-zA-Z]{1})|([a-zA-Z]{1}[a-zA-Z]{1})|([a-zA-Z]{1}[0-9]{1})|([0-9]{1}[a-zA-Z]{1})|([a-zA-Z0-9][a-zA-Z0-9-_]{1,61}[a-zA-Z0-9]))\\.([a-zA-Z]{2,6}|[a-zA-Z0-9-]{2,30}\\.[a-zA-Z]{2,3})");
+
+            string mastodonUser = mastodonMatch["MastodonUser"].ToString();
+            string mastodonInstance = mastodonMatch["MastodonInstance"].ToString().Replace("/web", "");
+
+            MastodonUser = mastodonUser;
+            MastodonInstance = mastodonInstance;
+            MastodonAccountAddress = $"{mastodonUser}@{mastodonInstance}";
+            IsValidDomain = validDomainName.IsMatch(mastodonInstance);
+            if (IsValidDomain)
             {
-                MastodonUrl = $"https://{mastodonMatch["MastodonInstance"]}/{mastodonMatch["MastodonUser"]}";
+                MastodonUrl = $"https://{mastodonInstance}/{mastodonUser}";
             }
+
         }
 
         public bool Equals([AllowNull] TwitterMastodonReference other)
@@ -39,5 +49,6 @@ namespace BluebirdPS
                 && MastodonUser == other.MastodonUser
                 && MastodonInstance == other.MastodonInstance;
         }
+
     }
 }

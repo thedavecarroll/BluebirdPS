@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.0/Helper%20Commands/Find-TwitterMastodonLinks
+online version: https://docs.bluebirdps.dev/en/v0.8.2/Helper%20Commands/Find-TwitterMastodonLinks
 schema: 2.0.0
 ---
 
@@ -14,7 +14,7 @@ This command will search through a list of Twitter User objects and Tweet object
 ## SYNTAX
 
 ```powershell
-Find-TwitterMastodonLinks [-TwitterObject] <TwitterObject[]> [[-IgnoreUrl] <String[]>] [<CommonParameters>]
+Find-TwitterMastodonLinks [-TwitterObject] <TwitterObject[]> [-IgnoreDomain <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,19 +31,10 @@ The output of this command can be saved to a CSV that can be used to import disc
 ### Example 1
 
 ```powershell
-PS C:\> Get-TwitterUser | Find-TwitterMastodonLinks
+PS > Get-TwitterUser | Find-TwitterMastodonLinks
 ```
 
 ```text
-TwitterUserName        : thedavecarroll
-TwitterUser            : Dave Carroll
-TwitterUrl             : https://twitter.com/thedavecarroll
-TwitterElement         : Description
-MastodonUser           : @thedavecarroll
-MastodonInstance       : counter.social
-MastodonAccountAddress : @thedavecarroll@counter.social
-MastodonUrl            :
-
 TwitterUserName        : thedavecarroll
 TwitterUser            : Dave Carroll
 TwitterUrl             : https://twitter.com/thedavecarroll
@@ -52,6 +43,7 @@ MastodonUser           : @thedavecarroll
 MastodonInstance       : fosstodon.org
 MastodonAccountAddress : @thedavecarroll@fosstodon.org
 MastodonUrl            : https://fosstodon.org/@thedavecarroll
+IsValidDomain          : True
 ```
 
 Retrieve the authenticated user and search for Mastodon account references.
@@ -59,30 +51,15 @@ Retrieve the authenticated user and search for Mastodon account references.
 ### Example 2
 
 ```powershell
-PS C:\> Get-TwitterFriends | Find-TwitterMastodonLinks | Select-Object @{l='Account address';e={$_.MastodonAccountAddress}},@{l='Show boosts';e={$true}} | Export-Csv -NoTypeInformation -Path .\MastodonImport.csv
+PS > Get-TwitterFriends |
+    Find-TwitterMastodonLinks -IgnoreDomain @('youtube.com','medium.com','withkoji.com','twitter.com','counter.social') |
+    Select-Object @{l='Account address';e={$_.MastodonAccountAddress}},@{l='Show boosts';e={$true}} |
+    Export-Csv -NoTypeInformation -Path .\MastodonImport.csv
 ```
 
 Retrieves the following list of the authenticated user, searches for Mastodon account references, formats the output to what is required for Mastodon import, and saves the output to a CSV file.
 
 ## PARAMETERS
-
-### -IgnoreUrl
-
-Some Urls are similar to Mastodon account references. You can use this parameter to include a list of domains to ignore.
-
-The default value is 'youtube.com', as the new handles for YouTube creators are in the format of youtube.com/@handle.
-
-```yaml
-Type: System.String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: 'youtube.com'
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -TwitterObject
 
@@ -102,6 +79,29 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -IgnoreDomain
+
+Some Urls are similar to Mastodon account references. You can use this parameter to include a list of domains to ignore.
+
+This parameter is often used to ignore domains that use a similarly structured URI as a Mastodon URL.
+If the following domains are not ignored, you will receive errors when you import them into your Mastodon account.
+
+'youtube.com','medium.com','withkoji.com','twitter.com'
+
+Additionally, you may want to ignore valid Mastodon instances that are not part of the Fediverse, such as counter.social, or those that have been defederated.
+
+```yaml
+Type: System.String[]
+Parameter Sets: (All)
+Aliases: IgnoreUrl
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -118,4 +118,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Helper%20Commands/Find-TwitterMastodonLinks)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.2/Helper%20Commands/Find-TwitterMastodonLinks)

@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Unpublish-Tweet
+online version: https://docs.bluebirdps.dev/en/v0.8.2/Tweets/Unpublish-Tweet
 schema: 2.0.0
 ---
 
@@ -148,10 +148,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Unpublish-Tweet)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.2/Tweets/Unpublish-Tweet)
 
-[Get-Tweet](https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Get-Tweet)
+[Get-Tweet](https://docs.bluebirdps.dev/en/v0.8.2/Tweets/Get-Tweet)
 
-[Publish-Tweet](https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Publish-Tweet)
+[Publish-Tweet](https://docs.bluebirdps.dev/en/v0.8.2/Tweets/Publish-Tweet)
 
 [API Documentation - DELETE /2/tweets/:id](https://developer.twitter.com/en/docs/twitter-api/tweets/manage-tweets/api-reference/delete-tweets-id)

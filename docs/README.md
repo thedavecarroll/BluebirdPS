@@ -24,6 +24,14 @@ PowerShell best practices.
 
 ## What's New
 
+The v0.8.2 release of BluebirdPS includes the following:
+
+- **Fixes Find-TwitterMastodonLinks erroneous matching criteria.**
+
+- Adds new RateLimitAction item Resume that allows Invoke-TwitterRequest to resume after rate limit is reached.
+- Adds capability to set RateLimitAction via environment values.
+- Adds $BluebirdPSLastResponse session variable.
+
 The v0.8.1 release of BluebirdPS includes the following:
 
 - **Fixes Publish-Tweet fails to render response**
@@ -132,7 +140,8 @@ The returned response, including response headers, the status code, and the requ
 The response data object is sent to the `Write-TwitterResponse` command.
 This command performs the rate limit action when the threshold is reached, both based on configuration values.
 
-Next, the command adds the response data to the module's session history table and writes the same data to the *Information Stream*.
+Next, the command adds the response data to the module's session history list, writes the same data to the *Information Stream*,
+and stores the last response in the session variable `$BluebirdPSLastResponse`.
 
 With possible values of 'CustomClasses', 'PsCustomObject', or 'JSON', the configuration value for OutputType determines the format that the API response will be presented to the user.
 

@@ -24,7 +24,6 @@ task GenerateExternalHelp {
         }
         New-ExternalHelp @NewAboutHelpParams | Out-Null
     }
-
 } -Description 'Generates MAML-based help from PlatyPS markdown files'
 
 task AddFileListToManifest {
@@ -45,8 +44,6 @@ task AddFileListToManifest {
             $Retry = $true
         }
     } while ($Retry)
-
-
 } -Description 'Add files list to module manifest'
 
 task DotNetBuild -Depends 'StageFiles' {
@@ -55,7 +52,7 @@ task DotNetBuild -Depends 'StageFiles' {
     $OutputLibFolder = [IO.Path]::Combine($PSBPreference.Build.ModuleOutDir,'lib')
     $DotNetSrcFolder = [IO.Path]::Combine($env:BHProjectPath,'src')
 
-    dotnet build $DotNetSrcFolder -o $OutputLibFolder
+    dotnet build $DotNetSrcFolder -o $OutputLibFolder --nologo
     if ($LASTEXITCODE -ne 0) {
         'DotNetBuild task failed' | Write-Error -ErrorAction Stop
     }
@@ -73,23 +70,45 @@ task DotNetBuild -Depends 'StageFiles' {
             $Retry = $true
         }
     } while ($Retry)
-
-} -Description 'Compile .Net Library'
+} -Description 'Compile .Net library'
 
 task CopyLicense -Depends StageFiles {
     $LicenseFile = [IO.Path]::Combine($env:BHProjectPath,'LICENSE')
     Copy-Item -Path $LicenseFile -Destination $PSBPreference.Build.ModuleOutDir -Force
-} -Description 'Copy LICENSE File'
+} -Description 'Copy LICENSE file'
+
+task UpdateChangeLog {
+    $script:ManifestPath = [IO.Path]::Combine($PSBPreference.Build.ModuleOutDir,"$env:BHProjectName.psd1")
+    $script:ChangeLogPath = [IO.Path]::Combine($env:BHProjectPath,'CHANGELOG.md')
+    $GitHubParams = @{
+        OwnerName = 'thedavecarroll'
+        RepositoryName = 'BluebirdPS'
+    }
+
+    Set-GitHubConfiguration -DisableTelemetry
+    $script:ModuleVersion = (Import-PowerShellDataFile -Path $ManifestPath).ModuleVersion
+    $ChangeLogUpdate = Get-ChangeLogUpdateForMilestone @GitHubParams -TargetRelease $ModuleVersion
+    Set-ChangeLog -ChangeLogPath $ChangeLogPath -ChangeLogUpdate $ChangeLogUpdate
+
+    Copy-Item -Path $ChangeLogPath -Destination $PSBPreference.Docs.RootDir -Force
+} -Description 'Update CHANGELOG'
+
+task UpdateReleaseNotes -Depends UpdateChangeLog {
+    $ReleaseNotes = Get-ReleaseNotes -ChangeLogPath $ChangeLogPath -ChangeLogUri 'https://bluebirdps.dev/latest/CHANGELOG'
+    Update-ModuleManifest -Path $ManifestPath -ReleaseNotes ('',$ReleaseNotes -join [System.Environment]::NewLine)
+} -Description 'Update releases notes for module'
+
+task CreateReleaseAsset -Depends UpdateReleaseNotes {
+    $DestinationZip = Join-Path -Path (Split-Path -Path $env:BHBuildOutput) -ChildPath ('BluebirdPS-v{0}.zip' -f $ModuleVersion)
+    $CompressFolder = $env:BHBuildOutput + [System.IO.Path]::DirectorySeparatorChar + '*'
+    Compress-Archive -Path $CompressFolder -DestinationPath $DestinationZip -Force
+}
 <#
 New Tasks
 
 task GenerateMarkdownHelp
 task TestHelp
 
-task UpdateChangeLog
-task UpdateReleaseNotes -Depends UpdateChangeLog
-
-task CreateReleaseAsset
 task PublishReleaseToGitHub -Depends CreateReleaseAsset
 
 task PublishModuleToGallery
@@ -98,6 +117,9 @@ https://github.com/microsoft/PowerShellForGitHub
 
 #>
 
-task Build -FromModule PowerShellBuild -depends @('DotNetBuild','CopyLicense','GenerateExternalHelp','AddFileListToManifest')
+task Build -FromModule PowerShellBuild -depends @(
+    'DotNetBuild','CopyLicense','GenerateExternalHelp','AddFileListToManifest',
+    'UpdateChangeLog','UpdateReleaseNotes','CreateReleaseAsset'
+)
 
 task default -depends Build

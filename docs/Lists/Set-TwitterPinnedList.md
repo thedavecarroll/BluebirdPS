@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.0/Lists/Set-TwitterPinnedList
+online version: https://docs.bluebirdps.dev/en/v0.8.2/Lists/Set-TwitterPinnedList
 schema: 2.0.0
 ---
 
@@ -34,7 +34,7 @@ Allows the authenticating user to pin or unpin a List.
 ### Example 1
 
 ```powershell
-PS C:\> Get-TwitterList -Id 1400680326754615296 | Set-TwitterPinnedList
+PS > Get-TwitterList -Id 1400680326754615296 | Set-TwitterPinnedList
 ```
 
 ```text
@@ -46,7 +46,7 @@ Pin the list PSFollowFriday-ListOwners.
 ### Example 2
 
 ```powershell
-PS C:\> Get-TwitterPinnedList | Select-Object -Last 1 | Set-TwitterPinnedList -UnpinList
+PS > Get-TwitterPinnedList | Select-Object -Last 1 | Set-TwitterPinnedList -UnpinList
 ```
 
 ```text
@@ -121,11 +121,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Set-TwitterPinnedList)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.2/Lists/Set-TwitterPinnedList)
 
-[Get-TwitterPinnedLis](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterPinnedList)
+[Get-TwitterPinnedLis](https://docs.bluebirdps.dev/en/v0.8.2/Lists/Get-TwitterPinnedList)
 
-[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.0/Lists/Get-TwitterList)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.2/Lists/Get-TwitterList)
 
 [Api Reference - POST /2/users/:id/pinned_lists](https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/post-users-id-pinned-lists)
 

@@ -260,7 +260,7 @@ function Get-MilestoneByReleaseVersion {
         @{l='Created';e={$_.created_at}},@{l='Closed';e={$_.closed_at}},@{l='Due';e={$_.due_on}},
         @{l='OpenIssues';e={$_.open_issues}},@{l='ClosedIssues';e={$_.closed_issues}}
     try {
-        Get-GitHubMilestone -OwnerName $OwnerName -RepositoryName $RepositoryName |
+        Get-GitHubMilestone -OwnerName $OwnerName -RepositoryName $RepositoryName -WarningAction SilentlyContinue |
             Select-Object $Format |
             Where-Object ReleaseVersion -match $ReleaseVersion
     }
@@ -279,7 +279,7 @@ function Get-ChangeLogLabels {
     )
     $Format = 'LabelName',@{l='EntryType';e={$_.LabelName.Split('.')[-1]}},@{l='Description';e={$_.description}}
     try {
-        Get-GitHubLabel -OwnerName $OwnerName -RepositoryName $RepositoryName |
+        Get-GitHubLabel -OwnerName $OwnerName -RepositoryName $RepositoryName -WarningAction SilentlyContinue |
             Where-Object LabelName -match '^CHANGELOG' |
             Sort-Object LabelName |
             Select-Object $Format
@@ -330,7 +330,8 @@ function Get-ChangeLogUpdateForMilestone {
         [Parameter(Mandatory)]
         [string]$TargetRelease,
         [Parameter()]
-        [uri]$ReleaseLink
+        [uri]$ReleaseLink,
+        [switch]$Pending
     )
 
     function GetEntryText {
@@ -352,6 +353,7 @@ function Get-ChangeLogUpdateForMilestone {
     $GeneralParameters = @{
         OwnerName = $OwnerName
         RepositoryName = $RepositoryName
+        WarningAction = 'SilentlyContinue'
     }
     $LatestRelease = Get-GitHubRelease @GeneralParameters | Sort-Object Published | Select-Object -First 1
     $MilestoneRelease = Get-MilestoneByReleaseVersion -ReleaseVersion $TargetRelease @GeneralParameters
@@ -363,10 +365,10 @@ function Get-ChangeLogUpdateForMilestone {
     [void]$NewChangeLogEntry.AppendLine()
 
     #region Target Release
-    if ($MilestoneRelease.Due) {
-        $TargetReleaseDate = $MilestoneRelease.Due.ToString("yyyy-MM-dd")
-    } else {
+    if ($Pending.IsPresent -or $null -eq $MilestoneRelease.Due) {
         $TargetReleaseDate = 'Pending'
+    } else {
+        $TargetReleaseDate = $MilestoneRelease.Due.ToString("yyyy-MM-dd")
     }
     if ($ReleaseLink) {
         $TargetReleaseText = '## [{0}] - {1}' -f $TargetRelease,$TargetReleaseDate
@@ -462,7 +464,7 @@ function Set-ChangeLog {
         $Count++
     }
 
-    if ($Lines[$LastReleaseBegin] -ne $ChangeLogUpdate.Split([System.Environment]::NewLine)[2]) {
+    if ($Lines[$LastReleaseBegin] -ne $ChangeLogUpdate.Split([System.Environment]::NewLine)[1]) {
 
         # use original heading
         [void]$ChangeLog.Append($Lines[0..($LastReleaseBegin-1)] -join [System.Environment]::NewLine)
@@ -476,6 +478,43 @@ function Set-ChangeLog {
         Set-Content -Path $ChangeLogPath -Value $ChangeLog.ToString() -Force
 
     } else {
-        ' No changes made to {0}' -f $ChangeLogPath | Write-Warning
+        ' No changes made to {0}' -f $ChangeLogPath | Write-Verbose
     }
+}
+
+function Add-ModuleAboutHelpKeyword {
+    [OutputType('System.String')]
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [ValidateNotNullOrEmpty()]
+        [string]$Path,
+        [ValidateNotNullOrEmpty()]
+        [string[]]$KeywordList,
+        [ValidateNotNullOrEmpty()]
+        [string[]]$CommandList
+    )
+    $AboutHelp = [System.Text.StringBuilder]::new()
+    foreach ($Line in (Get-Content -Path $Path)) {
+        if ($Line -eq '# Keywords') {
+            [void]$AboutHelp.AppendLine($Line)
+            break
+        } else {
+            [void]$AboutHelp.AppendLine($Line)
+        }
+    }
+    [void]$AboutHelp.AppendLine()
+    if ($PSBoundParameters.ContainsKey('KeywordList')) {
+        foreach ($Keyword in $KeywordList) {
+            [void]$AboutHelp.AppendLine($Keyword)
+            [void]$AboutHelp.AppendLine()
+        }
+    }
+    if ($PSBoundParameters.ContainsKey('CommandList')) {
+        foreach ($Command in $CommandList) {
+            [void]$AboutHelp.AppendLine($Command)
+            [void]$AboutHelp.AppendLine()
+        }
+    }
+    $AboutHelp.ToString()
 }

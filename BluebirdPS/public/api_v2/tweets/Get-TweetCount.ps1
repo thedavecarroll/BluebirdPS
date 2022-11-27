@@ -49,7 +49,7 @@ function Get-TweetCount {
     }
 
     $TweetCount = Invoke-TwitterRequest -RequestParameters $Request
-    $TotalCount = $script:LastResponseData.ApiResponse.meta.total_tweet_count
+    $TotalCount = $global:BluebirdPSLastResponse.ApiResponse.meta.total_tweet_count
     $TweetCountSummary = [TweetInfo.TweetCountSummary]@{
         SearchString = $SearchString
         Granularity = $Granularity

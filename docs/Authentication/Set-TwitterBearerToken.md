@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.0/Authentication/Set-TwitterBearerToken
+online version: https://docs.bluebirdps.dev/en/v0.8.2/Authentication/Set-TwitterBearerToken
 schema: 2.0.0
 ---
 
@@ -54,12 +54,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Authentication/Set-TwitterBearerToken)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.2/Authentication/Set-TwitterBearerToken)
 
-[Import-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.8.0/Authentication/Import-TwitterAuthentication)
+[Import-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.8.2/Authentication/Import-TwitterAuthentication)
 
-[Export-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.8.0/Authentication/Export-TwitterAuthentication)
+[Export-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.8.2/Authentication/Export-TwitterAuthentication)
 
-[Test-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.8.0/Authentication/Test-TwitterAuthentication)
+[Test-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.8.2/Authentication/Test-TwitterAuthentication)
 
 [Api Reference - Authentication Overview](https://developer.twitter.com/en/docs/authentication/overview)

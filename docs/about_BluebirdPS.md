@@ -56,13 +56,20 @@ If your credentials are validated, the bearer token will be requested and set in
 
 Set-TwitterAuthentication
 
-# Information Stream and History
+# Information Stream and Response History
 
-The execution results of commands that connect to the Twitter API are written to PowerShell's information stream.
-These results contains the command name, HTTP method, URL, OAuth Version, HTTP Status, API response, endpoint rate limit details, and more.
+The execution results of commands that connect to the Twitter API are written to PowerShell's information stream for each API call.
+These results contains the command name, HTTP method, URL, OAuth Version, HTTP Status, API response, endpoint rate limit details, and other details.
+Each result is also added to a list that can be obtained using the command `Get-BluebirdPSHistory`.
 
-The same data is also written to the a history record that is only maintained for the current session.
-Reimporting the module will reset the command history.
+```text
+Beginning with v0.8.2, the same data is available in the session variable
+$BluebirdPSLastResponse.
+```
+
+### Example
+
+$BluebirdPSLastResponse
 
 ### Example (Last 5 commands sent to Twitter)
 

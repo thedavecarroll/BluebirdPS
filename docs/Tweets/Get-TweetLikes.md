@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Get-TweetLikes
+online version: https://docs.bluebirdps.dev/en/v0.8.2/Tweets/Get-TweetLikes
 schema: 2.0.0
 ---
 
@@ -113,6 +113,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Get-TweetLikes)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.2/Tweets/Get-TweetLikes)
 
 [Api Reference - GET /2/tweets/:id/liking_users](https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/get-tweets-id-liking_users)

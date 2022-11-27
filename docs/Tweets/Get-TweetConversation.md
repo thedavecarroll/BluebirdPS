@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Get-TweetConversation
+online version: https://docs.bluebirdps.dev/en/v0.8.2/Tweets/Get-TweetConversation
 schema: 2.0.0
 ---
 
@@ -36,7 +36,7 @@ This command returns the original Tweet and any Tweets that were part of the con
 ### Example 1
 
 ```powershell
-PS C:\> Get-TweetConversation -Id 1587370017565429760 | Format-Table -Property Id,CreatedAt,AuthorId -AutoSize
+PS > Get-TweetConversation -Id 1587370017565429760 | Format-Table -Property Id,CreatedAt,AuthorId -AutoSize
 ```
 
 ```text
@@ -231,7 +231,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Tweets/Get-TweetConversation)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.2/Tweets/Get-TweetConversation)
 
 [Api Reference - GET /2/tweets/search/recent](https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-recent)
 

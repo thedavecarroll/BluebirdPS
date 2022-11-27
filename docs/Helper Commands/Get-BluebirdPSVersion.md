@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.0/Helper%20Commands/Get-BluebirdPSVersion/
+online version: https://docs.bluebirdps.dev/en/v0.8.2/Helper%20Commands/Get-BluebirdPSVersion/
 schema: 2.0.0
 ---
 
@@ -26,7 +26,7 @@ Display the version of BluebirdPS imported into the current session.
 ### Example 1
 
 ```powershell
-PS C:\> Get-BluebirdPSVersion
+PS > Get-BluebirdPSVersion
 ```
 
 ```text
@@ -53,4 +53,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.8.0/Helper%20Commands/Get-BluebirdPSVersion)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.2/Helper%20Commands/Get-BluebirdPSVersion)

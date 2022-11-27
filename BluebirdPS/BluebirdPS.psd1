@@ -4,7 +4,7 @@
   PowerShellVersion = '7.0'
   RootModule = 'BluebirdPS.psm1'
   CompanyName = 'thedavecarroll'
-  ModuleVersion = '0.8.1'
+  ModuleVersion = '0.8.2'
   Author = 'Dave Carroll'
   CompatiblePSEditions = 'Core'
   FileList = @()

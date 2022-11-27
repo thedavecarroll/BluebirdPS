@@ -44,4 +44,13 @@ $BluebirdPSConfiguration = [Configuration]@{
 #region other variables
 [SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
 $BluebirdPSHistoryList = [List[ResponseData]]::new()
+$global:BluebirdPSLastResponse = [ResponseData]::new()
 #endregion
+
+#region Handle Module Removal
+$OnRemoveScript = {
+    Remove-Variable -Name BluebirdPSLastResponse -Scope Global -Force
+}
+$ExecutionContext.SessionState.Module.OnRemove += $OnRemoveScript
+Register-EngineEvent -SourceIdentifier ([System.Management.Automation.PsEngineEvent]::Exiting) -Action $OnRemoveScript
+#endregion Handle Module Removal
