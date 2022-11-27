@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.8.2 - 2022-11-26
+## [0.8.2] - 2022-11-26
 
 Bugfix and Feature; Update Strongly Recommended
 
@@ -232,6 +232,7 @@ Initial release
 [0.7.0]: https://github.com/thedavecarroll/BluebirdPS/tree/a1a963635037d73d9574bd9d202ab8811ce8d4e6
 [0.8.0]: https://github.com/thedavecarroll/BluebirdPS/tree/1c1f1b214df9d13f22d4859c80a741328da9fbb6
 [0.8.1]: https://github.com/thedavecarroll/BluebirdPS/tree/3329fbdbf4d05d149db0e052df9b0ba428a4228a
+[0.8.2]: https://github.com/thedavecarroll/BluebirdPS/tree/v0.8.2
 
 ## Keep a Changelog
 
