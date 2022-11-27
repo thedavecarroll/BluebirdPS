@@ -29,7 +29,7 @@ The v0.8.2 release of BluebirdPS includes the following:
 - **Fixes Find-TwitterMastodonLinks erroneous matching criteria.**
 
 - Adds new RateLimitAction item Resume that allows Invoke-TwitterRequest to resume after rate limit is reached.
-- Adds capability to set RateLimitAction via environment values.
+- Adds capability to set RateLimitAction via environment variables.
 - Adds $BluebirdPSLastResponse session variable.
 
 The v0.8.1 release of BluebirdPS includes the following:
