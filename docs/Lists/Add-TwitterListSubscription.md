@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.2/Lists/Add-TwitterListSubscription
+online version: https://docs.bluebirdps.dev/en/v0.8.3/Lists/Add-TwitterListSubscription
 schema: 2.0.0
 ---
 
@@ -99,14 +99,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.8.2/Lists/Add-TwitterListSubscription)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.3/Lists/Add-TwitterListSubscription)
 
-[Get-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.8.2/Lists/Get-TwitterListSubscription)
+[Get-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.8.3/Lists/Get-TwitterListSubscription)
 
-[Remove-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.8.2/Lists/Remove-TwitterListSubscription)
+[Remove-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.8.3/Lists/Remove-TwitterListSubscription)
 
-[Test-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.8.2/Lists/Test-TwitterListSubscription)
+[Test-TwitterListSubscription](https://docs.bluebirdps.dev/en/v0.8.3/Lists/Test-TwitterListSubscription)
 
-[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.2/Lists/Get-TwitterList)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.3/Lists/Get-TwitterList)
 
 [Api Reference - POST /2/users/:id/followed_lists](https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-reference/post-users-id-followed-lists)

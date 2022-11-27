@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.2/Tweets/Get-TweetCount
+online version: https://docs.bluebirdps.dev/en/v0.8.3/Tweets/Get-TweetCount
 schema: 2.0.0
 ---
 
@@ -258,8 +258,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.8.2/Tweets/Get-TweetCount)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.3/Tweets/Get-TweetCount)
 
-[Get-Tweet](https://docs.bluebirdps.dev/en/v0.8.2/Tweets/Get-Tweet)
+[Get-Tweet](https://docs.bluebirdps.dev/en/v0.8.3/Tweets/Get-Tweet)
 
 [Api Reference - GET /2/tweets/counts/recent](https://developer.twitter.com/en/docs/twitter-api/tweets/counts/api-reference/get-tweets-counts-recent)

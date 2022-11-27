@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.2/Tweets/Set-Retweet
+online version: https://docs.bluebirdps.dev/en/v0.8.3/Tweets/Set-Retweet
 schema: 2.0.0
 ---
 
@@ -115,9 +115,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.8.2/Tweets/Set-Retweet)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.3/Tweets/Set-Retweet)
 
-[Get-Tweet](https://docs.bluebirdps.dev/en/v0.8.2/Tweets/Get-Tweet)
+[Get-Tweet](https://docs.bluebirdps.dev/en/v0.8.3/Tweets/Get-Tweet)
 
 [API Documentation - POST /2/users/:id/retweets](https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-reference/post-users-id-retweets)
 

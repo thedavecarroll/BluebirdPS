@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.2/Supporting%20Commands/Invoke-TwitterRequest
+online version: https://docs.bluebirdps.dev/en/v0.8.3/Supporting%20Commands/Invoke-TwitterRequest
 schema: 2.0.0
 ---
 
@@ -169,4 +169,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.8.2/Supporting%20Commands/Invoke-TwitterRequest)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.3/Supporting%20Commands/Invoke-TwitterRequest)

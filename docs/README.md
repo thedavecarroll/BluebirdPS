@@ -24,6 +24,10 @@ PowerShell best practices.
 
 ## What's New
 
+The v0.8.3 release of BluebirdPS includes the following:
+
+- **Fixes Find-TwitterMastodonLinks IgnoreDomain filtering.**
+
 The v0.8.2 release of BluebirdPS includes the following:
 
 - **Fixes Find-TwitterMastodonLinks erroneous matching criteria.**

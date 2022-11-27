@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.2/Tweets/Get-TweetConversation
+online version: https://docs.bluebirdps.dev/en/v0.8.3/Tweets/Get-TweetConversation
 schema: 2.0.0
 ---
 
@@ -231,7 +231,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.8.2/Tweets/Get-TweetConversation)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.3/Tweets/Get-TweetConversation)
 
 [Api Reference - GET /2/tweets/search/recent](https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-recent)
 
