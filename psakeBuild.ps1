@@ -90,7 +90,7 @@ task UpdateChangeLog {
     $ChangeLogUpdate = Get-ChangeLogUpdateForMilestone @GitHubParams -TargetRelease $ModuleVersion
     Set-ChangeLog -ChangeLogPath $ChangeLogPath -ChangeLogUpdate $ChangeLogUpdate
 
-    Copy-Item -Path $ChangeLogPath -Destination $PSBPreference.Docs.RootDir -Force -PassThru
+    Copy-Item -Path $ChangeLogPath -Destination $PSBPreference.Docs.RootDir -Force
 } -Description 'Update CHANGELOG'
 
 task UpdateReleaseNotes -Depends UpdateChangeLog {
@@ -100,7 +100,8 @@ task UpdateReleaseNotes -Depends UpdateChangeLog {
 
 task CreateReleaseAsset -Depends UpdateReleaseNotes {
     $DestinationZip = Join-Path -Path (Split-Path -Path $env:BHBuildOutput) -ChildPath ('BluebirdPS-v{0}.zip' -f $ModuleVersion)
-    Compress-Archive -Path $env:BHBuildOutput -DestinationPath $DestinationZip -Force -PassThru
+    $CompressFolder = $env:BHBuildOutput + [System.IO.Path]::DirectorySeparatorChar + '*'
+    Compress-Archive -Path $CompressFolder -DestinationPath $DestinationZip -Force
 }
 <#
 New Tasks
