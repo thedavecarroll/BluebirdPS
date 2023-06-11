@@ -2,7 +2,7 @@
 param(
     # Build task(s) to execute
     [Parameter(ParameterSetName = 'task', position = 0)]
-    [ValidateSet('default','Build','Analyze','Test','Init','UpdateMarkdownHelp')]
+    [ValidateSet('default','Build','Analyze','Test','Init','UpdateMarkdownHelp','PrepareToPublish')]
     [string[]]$Task = 'default',
 
     # Bootstrap dependencies
@@ -34,9 +34,7 @@ if ($PSCmdlet.ParameterSetName -eq 'Help') {
         Format-Table -Property Name, Description, Alias, DependsOn
 } else {
     Set-BuildEnvironment -Force
-    if (-Not (Get-Command -Name Get-MilestoneByReleaseVersion -ErrorAction SilentlyContinue)) {
-        Import-Module $BuildFunctions
-    }
+    Import-Module $BuildFunctions -Force
     Invoke-psake -buildFile $psakeBuild -taskList $Task -nologo
     exit ( [int]( -not $psake.build_success ) )
 }

@@ -90,7 +90,7 @@ function Get-ReleaseNotes {
     $Lines = Get-Content -Path $ChangeLogPath
     $Count = 0
     foreach ($Line in $Lines) {
-        if ($Line -match '^## \[\d\.|^## \d\.') {
+        if ($Line -match '^## \[?(?<Version>(\d+.)+\S)') {
             if ($null -eq $LastReleaseBegin) {
                 $LastReleaseBegin = $Count
             } elseif ($null -eq $LastReleaseEnd) {
@@ -259,8 +259,15 @@ function Get-MilestoneByReleaseVersion {
         @{l='Description';e={$_.description}},@{l='State';e={$_.state}},
         @{l='Created';e={$_.created_at}},@{l='Closed';e={$_.closed_at}},@{l='Due';e={$_.due_on}},
         @{l='OpenIssues';e={$_.open_issues}},@{l='ClosedIssues';e={$_.closed_issues}}
+
+    $GitHubMilestoneParameters = @{
+        OwnerName = $OwnerName
+        RepositoryName = $RepositoryName
+        State = 'All'
+        WarningAction = 'SilentlyContinue'
+    }
     try {
-        Get-GitHubMilestone -OwnerName $OwnerName -RepositoryName $RepositoryName -WarningAction SilentlyContinue |
+        Get-GitHubMilestone @GitHubMilestoneParameters |
             Select-Object $Format |
             Where-Object ReleaseVersion -match $ReleaseVersion
     }
@@ -355,8 +362,11 @@ function Get-ChangeLogUpdateForMilestone {
         RepositoryName = $RepositoryName
         WarningAction = 'SilentlyContinue'
     }
-    $LatestRelease = Get-GitHubRelease @GeneralParameters | Sort-Object Published | Select-Object -First 1
     $MilestoneRelease = Get-MilestoneByReleaseVersion -ReleaseVersion $TargetRelease @GeneralParameters
+    if ($null -eq $MilestoneRelease) {
+        'No milestone for release {0} found.' | Write-Warning
+        return
+    }
     $MilestoneIssues = Get-GitHubIssue -MilestoneNumber $MilestoneRelease.MilestoneNumber -State All @GeneralParameters |
         Select-Object $Format |
         Sort-Object EntryType,IssueNumber
@@ -446,14 +456,16 @@ function Set-ChangeLog {
         [ValidateScript({Test-Path $_})]
         [string]$ChangeLogPath,
         [Parameter(Mandatory)]
-        [string]$ChangeLogUpdate
+        [string]$ReleaseNotes,
+        [switch]$Replace
     )
 
     $ChangeLog = [System.Text.StringBuilder]::new()
     $Lines = Get-Content -Path $ChangeLogPath
     $Count = 0
     foreach ($Line in $Lines) {
-        if ($Line -match '^## \[\d\.|^## \d\.') {
+        if ($Line -match '^## \[?(?<Version>(\d+.)+\S)') {
+            $LastChangeLogVersion = $Matches['Version']
             if ($null -eq $LastReleaseBegin) {
                 $LastReleaseBegin = $Count
             } elseif ($null -eq $LastReleaseEnd) {
@@ -463,22 +475,34 @@ function Set-ChangeLog {
         }
         $Count++
     }
+#(?<Entry>^## \[?(?<Version>(\d+.)+[\S\s]*))(?=^## \[?(\d+.)+)
+# - (?<Date>(\d{4}(-\d{1,2}){1,2})|Pending)
 
-    if ($Lines[$LastReleaseBegin] -ne $ChangeLogUpdate.Split([System.Environment]::NewLine)[1]) {
+# GOOD ONE
+# ^## \[?(?<Version>\d+(\.\d+)+)\]? - (?<Date>(\d{4}(-\d{1,2}){1,2})|Pending)
+    if ($ReleaseNotes.Split([System.Environment]::NewLine)[1] -match '^## \[?(?<Version>(\d+.)+\S)') {
+        $ReleaseNotesVersion = $Matches['Version']
+    }
+    if ($LastChangeLogVersion -eq $ReleaseNotesVersion -and -Not $Replace.IsPresent) {
+        'Latest CHANGELOG version entry matches ReleaseNotes. Use Replace switch for a replacement.' | Write-Warning
+        'No changes made to {0}' -f $ChangeLogPath | Write-Verbose
+    } else {
+        '$ReleaseNotesVersion: {0}' -f $ReleaseNotesVersion
+        '$LastChangeLogVersion: {0}' -f $LastChangeLogVersion
+    # }
+    # if ($Lines[$LastReleaseBegin] -ne $ReleaseNotes.Split([System.Environment]::NewLine)[1]) {
 
         # use original heading
         [void]$ChangeLog.Append($Lines[0..($LastReleaseBegin-1)] -join [System.Environment]::NewLine)
 
         # add updated entry
-        [void]$ChangeLog.Append($ChangeLogUpdate)
+        [void]$ChangeLog.Append($ReleaseNotes)
 
-        # use original remainer
+        # use original remainder
         [void]$ChangeLog.Append($Lines[($LastReleaseBegin)..($Lines.Count)] -join [System.Environment]::NewLine)
 
         Set-Content -Path $ChangeLogPath -Value $ChangeLog.ToString() -Force
 
-    } else {
-        ' No changes made to {0}' -f $ChangeLogPath | Write-Verbose
     }
 }
 
