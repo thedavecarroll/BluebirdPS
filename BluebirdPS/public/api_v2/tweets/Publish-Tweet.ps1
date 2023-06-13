@@ -75,8 +75,13 @@ function Publish-Tweet {
     }
 
     try {
-        $Tweet = Invoke-TwitterRequest -RequestParameters $Request
-        Get-Tweet -Id $Tweet.id
+        $NewTweet = Invoke-TwitterRequest -RequestParameters $Request
+        # Do not attempt to get the tweet if the rate limit is 50 (Free Tier)
+        if ($script:IsFreeTier) {
+            $NewTweet
+        } else {
+            Get-Tweet -Id $Tweet.id
+        }
     }
     catch {
         $PSCmdlet.ThrowTerminatingError($_)

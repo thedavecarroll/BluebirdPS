@@ -6,9 +6,14 @@ function Invoke-TwitterVerifyCredentials {
     )
 
     if ($BearerToken.IsPresent) {
-        $Request = [TwitterRequest]@{
-            OAuthVersion = 'OAuth2Bearer'
-            Endpoint = 'https://api.twitter.com/2/users/{0}' -f $BluebirdPSConfiguration.AuthUserId
+        if ($script:IsFreeTier) {
+            'It appears that you have only Free Tier access to the Twitter API.','You will not be able to use any endpoint that requires OAuth2 BearerToken authentication.' | Write-Verbose
+            return
+        } else {
+            $Request = [TwitterRequest]@{
+                OAuthVersion = 'OAuth2Bearer'
+                Endpoint = 'https://api.twitter.com/2/users/{0}' -f $BluebirdPSConfiguration.AuthUserId
+            }
         }
     } else {
         $Request = [TwitterRequest]@{
@@ -29,4 +34,7 @@ function Invoke-TwitterVerifyCredentials {
         $PSCmdlet.ThrowTerminatingError($_)
     }
 
+    if ($script:BluebirdPSHistoryList.Count -eq 1) {
+        $script:IsFreeTier = $script:LastHeaders['x-rate-limit-limit'] -eq 25 ? $true : $false
+    }
 }

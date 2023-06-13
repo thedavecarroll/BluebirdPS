@@ -135,7 +135,14 @@ namespace BluebirdPS
                     }
                     else if (Helpers.HasProperty(input.data, "text"))
                     {
-                        twitterResponse.Add(new APIV2.TweetInfo.Tweet(input.data));
+                        if (Helpers.HasProperty(input.data, "author_id"))
+                        {
+                            twitterResponse.Add(new APIV2.TweetInfo.Tweet(input.data));
+                        }
+                        else
+                        {
+                            twitterResponse.Add(new APIV2.TweetInfo.NewTweet(input.data));
+                        }
                     }
                     else if (Helpers.HasProperty(input.data, "text"))
                     {

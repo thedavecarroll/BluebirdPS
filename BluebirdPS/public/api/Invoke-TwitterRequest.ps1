@@ -76,7 +76,7 @@ function Invoke-TwitterRequest {
     $ResponseData = [ResponseData]::new($RequestParameters,$Authentication,$ResponseHeaders,$LastStatusCode,$ApiResponse,$BluebirdPSConfiguration.AuthUserName)
 
     $ShouldResume = $false
-    if ($ResponseData.RateLimitRemaining -eq 0) {
+    if ($ResponseData.RateLimitRemaining -eq 0 -and -Not $script:IsFreeTier) {
         $WaitUntil = New-TimeSpan -End $ResponseData.RateLimitReset
         $RateLimitReached = 'Rate limit of {0} has been reached.' -f $ResponseData.RateLimit,$ResponseData.RateLimitReset
         $RateLimitStop = 'Please wait until {0} before making another attempt for this resource.' -f $ResponseData.RateLimitReset
@@ -106,7 +106,7 @@ function Invoke-TwitterRequest {
         }
     }
 
-    if (($ResponseData.RateLimitRemaining -le $BluebirdPSConfiguration.RateLimitThreshold -and $null -ne $ResponseData.RateLimitRemaining)) {
+    if (($ResponseData.RateLimitRemaining -le $BluebirdPSConfiguration.RateLimitThreshold -and $null -ne $ResponseData.RateLimitRemaining -and -Not $script:IsFreeTier)) {
         $RateLimitMessage = 'The rate limit for this resource is {0}. There are {1} remaining calls to this resource until {2}. ' -f $ResponseData.RateLimit, $ResponseData.RateLimitRemaining, $ResponseData.RateLimitReset
         switch ($BluebirdPSConfiguration.RateLimitAction) {
             [RateLimitAction]::Verbose { $RateLimitMessage | Write-Verbose -Verbose; break}
