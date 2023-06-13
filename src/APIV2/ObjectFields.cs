@@ -27,7 +27,7 @@ namespace BluebirdPS.APIV2
 
             // additional fields
             "created_at","description","entities","location","pinned_tweet_id",
-            "profile_image_url","protected","public_metrics","url","verified","withheld"
+            "profile_image_url","protected","public_metrics","url","verified","verified_type","withheld"
         };
 
         public static List<string> MediaFields => new List<string>()

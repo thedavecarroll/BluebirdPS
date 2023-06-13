@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.3/Helper%20Commands/Get-BluebirdPSAssemblyDetails/
+online version: https://docs.bluebirdps.dev/en/v0.8.4/Helper%20Commands/Get-BluebirdPSAssemblyDetails/
 schema: 2.0.0
 ---
 
@@ -74,4 +74,4 @@ Display the requested properties for the assembly.
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.8.3/Helper%20Commands/Get-BluebirdPSAssemblyDetails)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.4/Helper%20Commands/Get-BluebirdPSAssemblyDetails)

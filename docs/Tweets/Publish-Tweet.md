@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.3/Tweets/Publish-Tweet
+online version: https://docs.bluebirdps.dev/en/v0.8.4/Tweets/Publish-Tweet
 schema: 2.0.0
 ---
 
@@ -32,6 +32,8 @@ Publish-Tweet [-TweetText] <String> [[-ReplyToTweet] <String>] [-QuoteTweet <Str
 Publishes a Tweet for the authenticating user.
 
 Duplicate Tweets are not allowed, that is to say, a user cannot post the same Tweet twice in a row.
+
+NOTE: `Publish-Tweet` will output a NewTweet object if the Twitter project is in the Free Tier or a Tweet object for any other tier.
 
 ## EXAMPLES
 
@@ -73,7 +75,7 @@ Source             : BluebirdPS
 Withheld           :
 ```
 
-Publishes the provided text as a reply to the specified Tweet sfor the authenticating user.
+Publishes the provided text as a reply to the specified Tweets for the authenticating user.
 
 ## PARAMETERS
 
@@ -202,12 +204,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### BluebirdPS.APIV2.TweetInfo.Tweet
 
+### BluebirdPS.APIV2.TweetInfo.NewTweet
+
 ## NOTES
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.8.3/Tweets/Publish-Tweet)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.4/Tweets/Publish-Tweet)
 
-[Get-Tweet](https://docs.bluebirdps.dev/en/v0.8.3/Tweets/Get-Tweet)
+[Get-Tweet](https://docs.bluebirdps.dev/en/v0.8.4/Tweets/Get-Tweet)
 
 [API Documentation - POST /2/tweets](https://developer.twitter.com/en/docs/twitter-api/tweets/manage-tweets/api-reference/post-tweets)

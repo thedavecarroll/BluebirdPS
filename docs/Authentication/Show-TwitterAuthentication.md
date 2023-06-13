@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.3/Authentication/Show-TwitterAuthentication/
+online version: https://docs.bluebirdps.dev/en/v0.8.4/Authentication/Show-TwitterAuthentication/
 schema: 2.0.0
 ---
 
@@ -99,10 +99,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.8.3/Authentication/Show-TwitterAuthentication)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.4/Authentication/Show-TwitterAuthentication)
 
-[Set-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.8.3/Authentication/Set-TwitterAuthentication)
+[Set-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.8.4/Authentication/Set-TwitterAuthentication)
 
-[Import-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.8.3/Authentication/Import-TwitterAuthentication)
+[Import-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.8.4/Authentication/Import-TwitterAuthentication)
 
-[Export-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.8.3/Authentication/Export-TwitterAuthentication)
+[Export-TwitterAuthentication](https://docs.bluebirdps.dev/en/v0.8.4/Authentication/Export-TwitterAuthentication)

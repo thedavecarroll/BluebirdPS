@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.3/Helper%20Commands/Find-TwitterMastodonLinks
+online version: https://docs.bluebirdps.dev/en/v0.8.4/Helper%20Commands/Find-TwitterMastodonLinks
 schema: 2.0.0
 ---
 
@@ -118,4 +118,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.8.3/Helper%20Commands/Find-TwitterMastodonLinks)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.4/Helper%20Commands/Find-TwitterMastodonLinks)

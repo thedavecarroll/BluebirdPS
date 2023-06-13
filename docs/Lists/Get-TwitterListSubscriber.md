@@ -1,7 +1,7 @@
 ---
 external help file: BluebirdPS-help.xml
 Module Name: BluebirdPS
-online version: https://docs.bluebirdps.dev/en/v0.8.3/Lists/Get-TwitterListSubscriber
+online version: https://docs.bluebirdps.dev/en/v0.8.4/Lists/Get-TwitterListSubscriber
 schema: 2.0.0
 ---
 
@@ -125,8 +125,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Online Version](https://docs.bluebirdps.dev/en/v0.8.3/Lists/Get-TwitterListSubscriber)
+[Online Version](https://docs.bluebirdps.dev/en/v0.8.4/Lists/Get-TwitterListSubscriber)
 
-[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.3/Lists/Get-TwitterList)
+[Get-TwitterList](https://docs.bluebirdps.dev/en/v0.8.4/Lists/Get-TwitterList)
 
 [Api Reference - GET /2/lists/:id/followers](https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-reference/get-lists-id-followers)

@@ -21,6 +21,7 @@ namespace BluebirdPS.APIV2.UserInfo
         public Metrics.Public PublicMetrics { get; set; }
         public Uri Url { get; set; }
         public bool Verified { get; set; }
+        public object VerifiedType { get; set; }
         public WithheldContent Withheld { get; set; }
 
         public User() { }
@@ -53,6 +54,7 @@ namespace BluebirdPS.APIV2.UserInfo
                 Protected = input.@protected ?? null;
                 Url = new Uri(input.url);
                 Verified = input.verified ?? null;
+                VerifiedType = input.verified_type ?? null;
 
                 if (Helpers.HasProperty(input, "withheld"))
                 {
