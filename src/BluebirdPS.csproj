@@ -1,19 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Company>thedavecarroll</Company>
     <Authors>Dave Carroll</Authors>
     <Title>BluebirdPS</Title>
     <Description>A Twitter Automation Client for PowerShell 7. Tweet, retweet, send direct messages, manage lists, and more.</Description>
-    <Copyright>Copyright © 2020-2022</Copyright>
-    <Version>0.8.0</Version>
+    <Copyright>Copyright © 2020-2023</Copyright>
+    <Version>0.8.4</Version>
     <PackageProjectUrl>https://docs.bluebirdps.dev/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/thedavecarroll/BluebirdPS/</RepositoryUrl>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="System.Management.Automation" Version="7.0.0" />
   </ItemGroup>
-
 </Project>

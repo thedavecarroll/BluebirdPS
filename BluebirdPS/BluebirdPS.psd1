@@ -1,10 +1,10 @@
 
 @{
-  Copyright = '2020-2022'
+  Copyright = '2020-2023'
   PowerShellVersion = '7.0'
   RootModule = 'BluebirdPS.psm1'
   CompanyName = 'thedavecarroll'
-  ModuleVersion = '0.8.3'
+  ModuleVersion = '0.8.4'
   Author = 'Dave Carroll'
   CompatiblePSEditions = 'Core'
   FileList = @()
@@ -18,7 +18,7 @@
   }
   CmdletsToExport = @()
   VariablesToExport = @()
-  Description = 'A Twitter Automation Client for PowerShell 7. Tweet, retweet, send direct messages, manage lists, and more.'
+  Description = 'A Twitter Automation Client for PowerShell 7. Functionality dependent on the tier of your Twitter Project. Please see README for more information.'
   FunctionsToExport = @()
   AliasesToExport = @()
   GUID = 'b46904d8-98f5-430e-893a-5ad77ceed8bd'
