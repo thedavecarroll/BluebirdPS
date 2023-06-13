@@ -8,19 +8,20 @@
 [![Standard](https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fstandard)](https://developer.twitter.com/en/docs/twitter-api)
 [![v2](https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fv2)](https://developer.twitter.com/en/docs/twitter-api)
 
-## Work in Progress
+## No Longer Active
 
-Please consider this a work in progress.
-At this point, anything and everything could be changed.
+Due to the recent changes with the Twitter API primarily regarding the new tiers, I will no longer continue developing this project.
+It should be considered stale and no new versions will be released.
+The latest version, v0.8.4, seeks to correct an issue in the Free Tier with `Publish-Tweet`.
 
-Though I have tried to keep errors at minimum, the user may encounter some.
-Please report any bugs in the [BluebirdPS repo](https://bit.ly/BluebirdPSBugReport).
+This module will allow you to tweet, retweet, send direct messages, manage lists, and more, if you pay for the Basic or Pro Tiers.
+Otherwise, you should be able to tweet and delete tweets if using the Free Tier.
+
+See [Twitter API Documentation](https://developer.twitter.com/en/docs/twitter-api) for details.
 
 ## Community Module
 
-This module is still very much developed for the community and will gladly accept feedback from the
-community to make this module do what you need it to do, while adhering to the Twitter API design and
-PowerShell best practices.
+This module was developed for the community and accepted feedback from the community to make it what it had become.
 
 ## Pre-requisites
 
@@ -126,10 +127,3 @@ Publish-Tweet -TweetText "A new release of #BluebirdPS will soon be released. Bl
 
 Get-TwitterList -Id 1397040831777984512 | Add-TwitterListMember -UserName thedavecarroll,BluebirdPS
 ```
-
-## Things to Do
-
-* Expand build scripts
-* Pester tests
-* TweetText processor (currently there no check for length)
-* Exploration of PIN-OAuth
